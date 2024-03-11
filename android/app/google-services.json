@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "365614083643",
+    "project_id": "cloneapp-3bfa4",
+    "storage_bucket": "cloneapp-3bfa4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:365614083643:android:763f58fedb36f38808b61e",
+        "android_client_info": {
+          "package_name": "com.example.clone_app_amazon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "365614083643-ik8j27c71k68irra1amsspluu103ak74.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.clone_app_amazon",
+            "certificate_hash": "58ec7c21fba87270f2349583f2ca3dd1f2d78621"
+          }
+        },
+        {
+          "client_id": "365614083643-m1f6d9ojm2aag8g9miell4quh72n9ar3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1dR3tr_P-qKWpmi1pjcBDmESP1nHj23A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "365614083643-hj0nf19i1ukp1j4nsuetbfkgjkhj3s7u.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "365614083643-bdrnkp26sgrnu5sbe6mb6t2tbqvpdul1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.cloneAppAmazon.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:365614083643:android:28ff7ced1f46810108b61e",
+        "android_client_info": {
+          "package_name": "com.example.clone_shoppe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "365614083643-m1f6d9ojm2aag8g9miell4quh72n9ar3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1dR3tr_P-qKWpmi1pjcBDmESP1nHj23A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "365614083643-hj0nf19i1ukp1j4nsuetbfkgjkhj3s7u.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "365614083643-bdrnkp26sgrnu5sbe6mb6t2tbqvpdul1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.cloneAppAmazon.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

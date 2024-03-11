@@ -1,0 +1,184 @@
+import 'package:clone_shoppe/constants/global_variables.dart';
+import 'package:clone_shoppe/features/page/cartScreen/widget/checkbox.dart';
+import 'package:clone_shoppe/models/cartModel.dart';
+import 'package:flutter/material.dart';
+
+class ContentDetailShoppingCart extends StatefulWidget {
+  final CartModel cartModel;
+  bool isChecked;
+  ContentDetailShoppingCart(
+      {super.key, required this.cartModel, required this.isChecked});
+
+  @override
+  State<ContentDetailShoppingCart> createState() =>
+      _ContentDetailShoppingCartState();
+}
+
+class _ContentDetailShoppingCartState extends State<ContentDetailShoppingCart> {
+  int count = 0;
+  @override
+  void initState() {
+    count = widget.cartModel.numberOfProducts;
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(0, 12, 0, 12),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              CheckBox(isChecked: widget.isChecked, model: widget.cartModel),
+              const SizedBox(width: 5),
+              Image.asset(
+                widget.cartModel.image[0],
+                width: 100,
+                height: 100,
+                fit: BoxFit.fill,
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      widget.cartModel.nameProduct,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        decoration: TextDecoration.none,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    widget.cartModel.classify.isEmpty
+                        ? Container()
+                        : GestureDetector(
+                            onTap: null,
+                            child: Container(
+                              padding: const EdgeInsets.all(3),
+                              decoration: BoxDecoration(
+                                color: Colors.black12,
+                                borderRadius: BorderRadius.circular(3),
+                              ),
+                              constraints: const BoxConstraints(
+                                minWidth: 100,
+                                maxWidth: 230,
+                                minHeight: 25,
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    ' Phân loại: ${widget.cartModel.classify.keys.first}',
+                                    overflow: TextOverflow.ellipsis,
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                      fontSize: 12,
+                                      color: Colors.black45,
+                                      fontWeight: FontWeight.bold,
+                                      decoration: TextDecoration.none,
+                                    ),
+                                  ),
+                                  const Icon(
+                                    Icons.arrow_drop_down,
+                                    size: 20,
+                                    color: Colors.black26,
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                    const SizedBox(height: 12),
+                    Text(
+                      'đ${widget.cartModel.classify.values.first}',
+                      style: const TextStyle(
+                        fontSize: 18,
+                        color: GloblalVariable.hex_f94f2f,
+                        decoration: TextDecoration.none,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                  ],
+                ),
+              )
+            ],
+          ),
+          // add quantity of products
+          Container(
+            width: 100,
+            height: 28,
+            decoration:
+                BoxDecoration(border: Border.all(color: Colors.black12)),
+            child: Row(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    if (count != 1) {
+                      setState(() {
+                        count--;
+                      });
+                    }
+                  },
+                  child: Container(
+                    width: 30,
+                    decoration: const BoxDecoration(
+                        border:
+                            Border(right: BorderSide(color: Colors.black12))),
+                    alignment: Alignment.topCenter,
+                    child: const Text(
+                      '-',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black45,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Center(
+                    child: Text(
+                      '$count',
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black45,
+                      ),
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      count++;
+                    });
+                  },
+                  child: Container(
+                    width: 30,
+                    decoration: const BoxDecoration(
+                        border:
+                            Border(left: BorderSide(color: Colors.black12))),
+                    alignment: Alignment.topCenter,
+                    child: const Text(
+                      '+',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black45,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}

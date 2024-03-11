@@ -1,0 +1,149 @@
+[
+        {   "id":"sp001",
+            "name":"Dép nữ cute, xinh xắn mới nhất",
+            "productPortfolio":"giày",
+            "productType":"giày nữ",
+            "price":"88.000",
+            "image":"assets/products/sale/sp1.jpg",
+            "quantitySold":"1,2k",
+            "percentSale":"20"
+        },
+        
+        {   
+            "id":"sp002",
+            "name":"Balo cao cấp bền đẹp thời trang chính hãng",
+            "price":"250.000",
+            "image":"assets/products/sale/sp2.jfif",
+            "quantitySold":"80",
+            "productPortfolio":"balo",
+            "productType":"balo nữ",
+            "percentSale":"30"
+        },
+        {
+            "id":"sp003",
+            "name":"Kính thời trang chính hãng đẹp mê ly",
+            "price":"99.000",
+            "image":"assets/products/sale/sp3.jfif",
+            "quantitySold":"1k",
+            "productPortfolio":"kính mắt",
+            "productType":"kính giả cận",
+            "percentSale":"39"
+        },
+        {
+            "id":"sp004",
+            "name":"Loa bluetooth mini không dây,nghe nhạc,giá rẻ,công nghệ blutooth 5.0 BINTECH",
+            "price":"39.000",
+            "image":"assets/products/sale/sp4.jfif",
+            "quantitySold":"10,2k",
+            "productPortfolio":"loa",
+            "productType":"loa bluetooth",
+            "percentSale":"33"
+        },
+        
+        {
+            "id":"sp005",
+            "name":"BỘ ARSENAL - QUẦN ÁO THỂ THAO LONG THANH",
+            "price":"26.000",
+            "image":"assets/products/sale/sp5.jfif",
+            "quantitySold":"32,2k",
+            "productPortfolio":"thời trang nam",
+            "productType":"bộ quần áo",
+            "percentSale":"29"
+        }, 
+
+        {
+            "id":"sp006",
+            "name":"Thắt lưng nam Dabaraac da cao cấp khóa kim loại tự động không gỉ - Cam kết 1 đổi 1 bảo hành 12 tháng TL58",
+            "price":"15.000",
+            "image":"assets/products/sale/sp6.jfif",
+            "quantitySold":"3,1k",
+            "productPortfolio":"thắt lưng",
+            "productType":"thắt lưng nam",
+            "percentSale":"10"
+        }, 
+        
+        {
+            "id":"sp007",
+            "name":"Dép Sandal Đế Dày Mềm Đính Nơ Họa Tiết Hoạt Hình Dễ Thương Phong Cách Hàn Quốc Cho Nữ",
+            "price":"39.000",
+            "image":"assets/products/sale/sp7.jfif",
+            "quantitySold":"2k",
+            "productPortfolio":"dép",
+            "productType":"ldép sandal",
+            "percentSale":"9"
+        },
+        
+        {
+            "id":"sp008",
+            "name":"Xịt Thơm Miệng Hương Trái Cây Loại Bỏ Hơi Thở Có Mùi Dung Tích 22ml Chai Xịt Thơm Miệng Giúp Hơi Thở Thơm Mát",
+            "price":"2.400",
+            "image":"assets/products/sale/sp8.jfif",
+            "quantitySold":"15,2k",
+            "productPortfolio":"vệ sinh",
+            "productType":"Xịt thơm miệng",
+            "percentSale":"9"
+        }, 
+        
+        {
+            "id":"sp009",
+            "name":"BÁNH TRÁNG PHƠI SƯơNG MỀM DẺO KÈM MUỐI TÉP HÀNH + BƠ (250g bánh tráng)",
+            "price":"59.000",
+            "image":"assets/products/sale/sp9.jfif",
+            "quantitySold":"14,1k",
+            "productPortfolio":"đồ ăn",
+            "productType":"bánh tráng",
+            "percentSale":"15"
+        },
+
+        {
+            "id":"sp010",
+            "name":"Dép kiểu nữ đế cao 5cm hàng loại 1 siêu êm lên chân sang chảnh - VeoStore",
+            "price":"75.000",
+            "image":"assets/products/sale/sp10.jfif",
+            "quantitySold":"4,1k",
+            "productPortfolio":"dép",
+            "productType":"dép nữ",
+            "percentSale":"20"
+        },
+        {
+            "id":"sp011",
+            "name":"Sét 7 kẹp tóc mạ bạc siêu sang chảnh cho các nàng sniêu xinh siêu xị",
+            "price":"10.000",
+            "image":"assets/products/sale/sp11.jfif",
+            "quantitySold":"3,1k",
+            "productPortfolio":"kẹp tóc",
+            "productType":"dép nữ",
+            "percentSale":"21"
+        },
+        {
+            "id":"sp012",
+            "name":"💥BẢO HÀNH 1 ĐỔI 1💥 Máy Xay Thịt, Máy Xay Đa Năng Cối Inox 4 Lưỡi, Công Suất Lớn 300W",
+            "price":"105.000",
+            "image":"assets/products/sale/sp12.jfif",
+            "quantitySold":"4,1k",
+            "productPortfolio":"dép",
+            "productType":"dép nữ",
+            "percentSale":"23"
+        },
+        {
+            "id":"sp013",
+            "name":"Sanrio Vòng Tay Hoạt Hình Có Chuông Phong Cách Nhật Bản",
+            "price":"1.000",
+            "image":"assets/products/sale/sp13.jfif",
+            "quantitySold":"1,1k",
+            "productPortfolio":"dép",
+            "productType":"dép nữ",
+            "percentSale":"70"
+        },
+        {
+            "id":"sp014",
+            "name":"Áo khoác dù nike chính hãng nam nữ chất gió 2 lớp dày dặn có mũ có thể tháo rời form unisex chống nắng chống gió - COCA",
+            "price":"152.000",
+            "image":"assets/products/sale/sp14.jfif",
+            "quantitySold":"7,1k",
+            "productPortfolio":"dép",
+            "productType":"dép nữ",
+            "percentSale":"34"
+        }
+        
+]

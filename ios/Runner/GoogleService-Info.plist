@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>365614083643-439noddeb9g0o9k9krne29gvj8qid244.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.365614083643-439noddeb9g0o9k9krne29gvj8qid244</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>365614083643-ik8j27c71k68irra1amsspluu103ak74.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyASLVMdt2TPM8qKkT4lZBk_MqPRb7zEYhE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>365614083643</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.cloneShoppe</string>
+	<key>PROJECT_ID</key>
+	<string>cloneapp-3bfa4</string>
+	<key>STORAGE_BUCKET</key>
+	<string>cloneapp-3bfa4.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:365614083643:ios:06652143fc3f625c08b61e</string>
+</dict>
+</plist>

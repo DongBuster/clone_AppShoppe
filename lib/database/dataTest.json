@@ -1,0 +1,191 @@
+[
+   
+    {
+        "id":"sp008",
+        "name":"[Sexy Style] Nước Hoa Nam Mini Sexy Man 💖 Nước Hoa Nam Chính Hãng Thơm Lâu Phong Cách Sexy Nam Tính",
+        "nameShop":"SMARTSHOP1399",
+        
+        "productPortfolio":"phụ kiện",
+        "productType":"dây cáp",
+        "price":"35.000",
+        "quantitySold":"78",
+        "percentSale":"31"
+
+    },
+
+    {
+        "id":"sp009",
+        "name":"Bộ Chuyển Đổi Hub 4 / 6 / 8 / 11 trong 1 Type C Sang HDMI RJ45 USB 3.0 PD Type-C 6 in 1 / 8 in 1 hỗ trợ 4K thunderbolt 3",
+        "nameShop":"T-H-H MALL",
+        "classify":["3 in 1","4 in 1","6 in 1","6 in 1 LAN"],
+        
+        "productPortfolio":"phụ kiện",
+        "productType":"dây cáp",
+        "price":"149.000",
+        "quantitySold":"390",
+        "percentSale":"22"
+
+    },
+    {
+        "id":"sp010",
+        "name":"[Mã COSBAUXANH giảm 8% đơn 200K] Bộ dụng cụ bấm móng 18 món cao cấp ( mẫu mới)",
+        "nameShop":"TÙNG CHICHI SHOP",
+        "classify":[""],
+        
+        "productPortfolio":"phụ kiện",
+        "productType":"dây cáp",
+        "price":"55.000",
+        "quantitySold":"11,6k",
+        "percentSale":"27"
+
+    },
+    {
+        "id":"sp011",
+        "name":"Cân điện tử sức khỏe thông minh hình lợn hồng cute, cân tiểu ly mini nhà bếp dùng pin",
+        "nameShop":"Gia dụng anh H",
+        "classify":["Cân Heo Hồng cute","Cân tiểu ly 1g-10kg","Cân tiểu ly 1g-5kg"],
+        
+        "productPortfolio":"phụ kiện",
+        "productType":"dây cáp",
+        "price":"50.000",
+        "quantitySold":"55.5k",
+        "percentSale":"19"
+
+    },
+    {
+        "id":"sp012",
+        "name":"Bàn phím Jamesdonkey A3 mạch xuôi, Gasket mount, 3 mode kết nối, Led RGB, pin 3000mAh",
+        "nameShop":"MKShop clone",
+        
+        "productPortfolio":"phụ kiện",
+        "productType":"dây cáp",
+        "price":"979.000",
+        "quantitySold":"96",
+        "percentSale":"35"
+
+    },
+    {
+        "id":"sp013",
+        "name":"Điện thoại iphone 13 pr0 max , dung lượng 256gb , tặng phụ kiện, new 99, bảo hành 12 tháng",
+        "nameShop":"IPhone Global",
+        
+        "productPortfolio":"phụ kiện",
+        "productType":"dây cáp",
+        "price":"1.455.000",
+        "quantitySold":"22",
+        "percentSale":"15"
+
+    },
+    {
+        "id":"sp014",
+        "name":"Tai nghe nhét tai bluetooth 5.3 LENOVO DISNEY FX-951B/ Pro4 không dây TWS mini âm nhạc HIFI có micrô",
+        "nameShop":"Lenovo thinkplus Audio Storess",
+        
+        "productPortfolio":"phụ kiện",
+        "productType":"dây cáp",
+        "price":"99.000",
+        "quantitySold":"16.3k",
+        "percentSale":"23"
+
+    },
+    {
+        "id":"sp015",
+        "name":"SET 3 CUỘN TÚI ĐỰNG RÁC TỰ PHÂN HỦY Anh Lành",
+        "nameShop":"E-mart",
+        "classify":["Sét 3 Cuộn","Một cuộn"],
+        "image":[
+            "assets/products/recommend/sp15.jfif",
+            "assets/products/recommend/sp15-2.jfif"
+        ],
+        "productPortfolio":"phụ kiện",
+        "productType":"dây cáp",
+        "price":"15.900",
+        "quantitySold":"33,5k",
+        "percentSale":"36"
+
+    },
+    {
+        "id":"sp016",
+        "name":"Dép nam quai ngang off white chỉ dành cho các bạn dân chơi",
+        "nameShop":"Hoàngg0512",
+        "classify":["Chữ OFF quai đen","Chữ OFF quai trắng"],
+        "image":[
+            "assets/products/recommend/sp16.jfif",
+            "assets/products/recommend/sp16-1.jfif"
+        ],
+        "productPortfolio":"phụ kiện",
+        "productType":"dây cáp",
+        "price":"72.500",
+        "quantitySold":"1,3k",
+        "percentSale":"11"
+
+    },
+    {
+        "id":"sp017",
+        "name":"Lược trọng lực 3d cặp đôi trò chơi vui nhộn in 3d củ cải lược trọng lực đồ chơi sáng tạo",
+        "nameShop":"fancyhomecrit.vn",
+        "classify":["#1","#2","#3","#4"],
+        "image":[
+            "assets/products/recommend/sp17.jfif",
+            "assets/products/recommend/sp17-1.jfif",
+            "assets/products/recommend/sp17-2.jfif",
+            "assets/products/recommend/sp17-3.jfif"
+        ],
+        "productPortfolio":"phụ kiện",
+        "productType":"dây cáp",
+        "price":"7.200",
+        "quantitySold":"5,5k",
+        "percentSale":"33"
+
+    },
+    {
+        "id":"sp018",
+        "name":"(HÀNG NHẬP KHẨU) Nước giặt quần áo em bé Dnee 3000ml-Nước Giặt Xả Cho Trẻ Em an toàn, Chính hãng Công ty Đại Thịnh",
+        "nameShop":"THÁI CHÍNH HÃNG STORE",
+        "classify":["1 CAN","Túi 1400ml"],
+        "image":[
+            "assets/products/recommend/sp18.jfif",
+            "assets/products/recommend/sp18-2.jfif"
+        ],
+        "productPortfolio":"phụ kiện",
+        "productType":"dây cáp",
+        "price":"109.000",
+        "quantitySold":"2.3k",
+        "percentSale":"12"
+
+    },
+    {
+        "id":"sp019",
+        "name":"Ốp Lưng Điện Thoại Viền Cong Họa Tiết Quái Vật Hoạt Hình 3D Cho iPhone XR 11 14 12 13 Pro Max X 7 8 6s 6 Plus XS Max",
+        "nameShop":"Sỉ Ốp Phụ Kiện.VN",
+        "classify":[""],
+        "image":[
+            "assets/products/recommend/sp19.jfif"
+        ],
+        "productPortfolio":"phụ kiện",
+        "productType":"dây cáp",
+        "price":"3.999",
+        "quantitySold":"30k",
+        "percentSale":"3"
+
+    },
+
+    {
+        "id":"sp020",
+        "name":"Kính mắt nữ nhiều màu kính hai chấm giá rẻ tạo hiệu ứng má hồng dễ thương hai màu trong suốt gọng đen RYVN",
+        "classify":["Hồng đen & Gradient","Trong suốt & Gradient màu hồng","Đen"],
+        "image":[
+            "assets/products/recommend/sp20.png",
+            "assets/products/recommend/sp20-1.png",
+            "assets/products/recommend/sp20-2.png"
+        ],
+        "productPortfolio":"phụ kiện",
+        "productType":"dây cáp",
+        "price":"26.999",
+        "quantitySold":"34,8k",
+        "percentSale":"10"
+        
+
+    }
+
+]
