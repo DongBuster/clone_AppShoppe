@@ -1,13 +1,15 @@
-import 'dart:ffi';
-
 import 'package:clone_shoppe/constants/global_variables.dart';
 import 'package:clone_shoppe/models/cartModel.dart';
 import 'package:clone_shoppe/models/detailProduct.dart';
 import 'package:clone_shoppe/provider/checkboxCartScreen.dart';
 import 'package:clone_shoppe/provider/listProductCart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+
+import 'package:flutter_animate/flutter_animate.dart';
+import '../../../../provider/animation_add_to_cart.dart';
 
 class ModalBottomSheet extends StatefulWidget {
   final DetailProduct model;
@@ -19,12 +21,26 @@ class ModalBottomSheet extends StatefulWidget {
 
 class _ModalBottomSheetState extends State<ModalBottomSheet> {
   late CartModel productCart;
+  // //----  ----
+  // late final controller = AnimationController(vsync: this);
+  // late final cartController = AnimationController(vsync: this);
+  // late final manager = AddToCartMannager(controller);
+  // final productAnimation = 1.seconds;
 
+  //----- -----
   String valueSlected = '';
   late List<bool> isBorderList;
   late List<String> listKeyClassify;
   int count = 1;
   int indexImage = 0;
+
+  // @override
+  // void dispose() {
+  //   controller.dispose();
+  //   manager.dispose();
+  //   super.dispose();
+  // }
+
   @override
   void initState() {
     isBorderList = List.generate(widget.model.classify.length, (_) => false);
@@ -60,11 +76,15 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Image.asset(
-                      productCart.image[indexImage],
-                      width: 135,
-                      height: 135,
-                      fit: BoxFit.fill,
+                    Container(
+                      // key: manager.productKeys[indexImage],
+                      width: 100,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(productCart.image[indexImage]),
+                        ),
+                      ),
                     ),
                     const SizedBox(width: 14),
                     Column(
@@ -91,6 +111,7 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
                     ),
                   ],
                 ),
+                //--- buttom close modalbottomsheet ---
                 IconButton(
                   onPressed: () {
                     context.pop();
@@ -104,6 +125,57 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
               ],
             ),
           ),
+
+          // ListenableBuilder(
+          //   listenable: Listenable.merge(
+          //       [manager.productsize, manager.productPosition]),
+          //   builder: (context, _) {
+          //     return SizedBox(
+          //       width: manager.productsize.value.width,
+          //       height: manager.productsize.value.height,
+          //       child: Container(
+          //         decoration: BoxDecoration(
+          //           borderRadius: BorderRadius.circular(20),
+          //           color: Colors.indigo.shade400,
+          //           boxShadow: const [
+          //             BoxShadow(
+          //               offset: Offset(0, 7),
+          //               color: Colors.black26,
+          //               blurRadius: 29,
+          //             )
+          //           ],
+          //         ),
+          //       )
+          //           .animate(
+          //             autoPlay: false,
+          //             controller: controller,
+          //           )
+          //           .scale(
+          //             delay: productAnimation * 0.2,
+          //             duration: productAnimation * 0.8,
+          //             begin: const Offset(1, 1),
+          //             end: Offset.zero,
+          //             alignment: Alignment.bottomRight,
+          //           ),
+          //     )
+          //         .animate(
+          //           autoPlay: false,
+          //           controller: controller,
+          //           onComplete: (controller) {
+          //             controller.reset();
+          //             manager.reset();
+          //             cartController.forward();
+          //           },
+          //         )
+          //         .followPath(
+          //           duration: productAnimation,
+          //           path: manager.path,
+          //           curve: Curves.easeInOut,
+          //         );
+          //     // .scale(begin: Offset(1, 1), end: Offset(0, 0));
+          //   },
+          // ),
+
           productCart.classify.isEmpty
               ? Container()
               : Column(
@@ -120,14 +192,7 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
                       ),
                     ),
                     Wrap(
-                      children:
-
-                          // for (int index = 0; index < classifyEntries.length; index++) {
-                          //     MapEntry<String, String> entry = classifyEntries[index];
-                          //     String key = entry.key;
-                          //     String value = entry.value;
-                          // }
-                          listKeyClassify.asMap().entries.map((entry) {
+                      children: listKeyClassify.asMap().entries.map((entry) {
                         final index = entry.key;
                         final value = entry.value;
 
@@ -178,57 +243,6 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
                           ),
                         );
                       }).toList(),
-
-                      // widget.model.classify.map(
-                      //   (e) {
-                      // final index = entry.key;
-                      // final value = entry.value;
-
-                      // return GestureDetector(
-                      //   onTap: () => setState(() {
-                      //     for (int i = 0; i < isBorderList.length; i++) {
-                      //       isBorderList[i] =
-                      //           (i == index) ? !isBorderList[i] : false;
-                      //     }
-                      //     if (isBorderList[index]) {
-                      //       indexImage = index;
-                      //       valueSlected = value;
-                      //     } else {
-                      //       valueSlected = '';
-                      //     }
-                      //     productCart.classify = [valueSlected];
-
-                      //     // print(valueSlected);
-                      //   }),
-                      //   child: Container(
-                      //     margin: const EdgeInsets.all(12),
-                      //     height: 30,
-                      //     constraints: const BoxConstraints(
-                      //       minWidth: 60,
-                      //       maxWidth: 200,
-                      //     ),
-                      //     padding: const EdgeInsets.all(5),
-                      //     decoration: BoxDecoration(
-                      //         borderRadius: BorderRadius.circular(3),
-                      //         color: isBorderList[index]
-                      //             ? Colors.white
-                      //             : Colors.black.withOpacity(0.1),
-                      //         border: isBorderList[index]
-                      //             ? Border.all(
-                      //                 color: GloblalVariable.hex_f94f2f)
-                      //             : null),
-                      //     child: Text(
-                      //       value,
-                      //       textAlign: TextAlign.center,
-                      //       style: const TextStyle(
-                      //         fontSize: 15,
-                      //         decoration: TextDecoration.none,
-                      //       ),
-                      //     ),
-                      //   ),
-                      // );
-                      // },
-                      // ),
                     ),
                   ],
                 ),
@@ -351,9 +365,7 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
                   valueSlected: productCart.classify[valueSlected]
                 };
                 productCart.image = [productCart.image[indexImage]];
-                // if (productCart.classify.isNotEmpty) {
-                // }
-                // print(productCart.classify);
+
                 Provider.of<ListProductCart>(context, listen: false)
                     .addProductToCart(productCart);
                 var listsGroupsByNameShop =
@@ -362,7 +374,11 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
                 Provider.of<CheckBoxCartScreen>(context, listen: false)
                     .addItemsCheckbox(listsGroupsByNameShop);
 
-                // print(listsGroupsByNameShop);
+                //------- -------
+                // print(indexImage);
+                // manager.runAnimation(indexImage);
+
+                //----- -----
                 if (context.mounted) {
                   context.pop();
                 }

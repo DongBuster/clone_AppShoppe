@@ -4,17 +4,32 @@ import 'package:clone_shoppe/provider/checkboxCartScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../provider/selectedProductCart.dart';
+
 class CheckBox extends StatefulWidget {
-  CheckBox({super.key, required this.isChecked, required this.model});
-  bool isChecked;
+  // bool isChecked;
+  final String nameShop;
+
   final CartModel model;
+  CheckBox({
+    super.key,
+    // required this.isChecked,
+    required this.model,
+    required this.nameShop,
+  });
   @override
   State<CheckBox> createState() => _CheckBoxState();
 }
 
 class _CheckBoxState extends State<CheckBox> {
+  bool isChecked = false;
   @override
   Widget build(BuildContext context) {
+    var listsCheckBoxByShop =
+        Provider.of<CheckBoxCartScreen>(context, listen: true)
+            .listsCheckBoxByShop;
+    Map<String, bool> childCheckBox = listsCheckBoxByShop[widget.nameShop]!;
+
     // if (widget.isChecked && widget.model.classify.isNotEmpty) {
     //   Provider.of<CheckBoxCartScreen>(context, listen: false)
     //       .addItemSelected(widget.model);
@@ -36,12 +51,13 @@ class _CheckBoxState extends State<CheckBox> {
     return Checkbox(
       checkColor: Colors.white,
       activeColor: GloblalVariable.hex_f94f2f,
-      value: widget.isChecked,
+      value: childCheckBox[widget.model.classify.keys.first],
       onChanged: (bool? value) {
-        // print('A: ${widget.isChecked}');
         setState(() {
-          widget.isChecked = !widget.isChecked;
-          // print('B: ${widget.isChecked}');
+          childCheckBox[widget.model.classify.keys.first] = value!;
+          Provider.of<SelectedProductCart>(context, listen: false)
+              .setItemsSelected(widget.model,
+                  childCheckBox[widget.model.classify.keys.first]!);
         });
       },
     );

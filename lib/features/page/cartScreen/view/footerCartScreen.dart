@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../constants/global_variables.dart';
 import '../../../../provider/checkboxCartScreen.dart';
+import '../../../../provider/listProductCart.dart';
 import '../../../../provider/selectedProductCart.dart';
 
 class FooterCartScreen extends StatefulWidget {
@@ -15,20 +16,14 @@ class FooterCartScreen extends StatefulWidget {
 
 class _FooterCartScreenState extends State<FooterCartScreen> {
   bool isChecked = false;
-  String totalPayment = '';
-  int sum = 0;
-  int productChosed = 20;
+  int productChosed = 0;
   @override
   Widget build(BuildContext context) {
-    totalPayment = Provider.of<CheckBoxCartScreen>(context, listen: false)
-        .getTotalPrice
-        .toString();
-
-    // for (var e in listSelected) {
-    //   sum += int.parse(e.price);
-    //   print(int.parse(e.price));
-    // }
-    totalPayment = sum.toString();
+    String totalPayment =
+        Provider.of<SelectedProductCart>(context, listen: true).getTotalPrice;
+    productChosed = Provider.of<SelectedProductCart>(context, listen: true)
+        .getListSelected
+        .length;
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -58,6 +53,13 @@ class _FooterCartScreenState extends State<FooterCartScreen> {
                     });
                     Provider.of<CheckBoxCartScreen>(context, listen: false)
                         .setAllCheckBoxShop(isChecked);
+                    //---
+                    var listItems =
+                        Provider.of<ListProductCart>(context, listen: false)
+                            .getListItems;
+
+                    Provider.of<SelectedProductCart>(context, listen: false)
+                        .setListItemsSelected(listItems, isChecked);
                   },
                 ),
               ),
@@ -101,6 +103,7 @@ class _FooterCartScreenState extends State<FooterCartScreen> {
                 ),
               ),
               const SizedBox(width: 5),
+              //--- button buy product ---
               Container(
                 // width: 125,
                 height: 60,

@@ -19,11 +19,9 @@ class _RenderListProductCartState extends State<RenderListProductCart> {
     var listsGroupsByNameShop =
         Provider.of<ListProductCart>(context, listen: true)
             .listsGroupsByNameShop;
-    var listsCheckBoxByShop =
-        Provider.of<CheckBoxCartScreen>(context, listen: true)
-            .listsCheckBoxByShop;
-    var isCheck = Provider.of<CheckBoxCartScreen>(context, listen: true)
-        .listsCheckBoxShop;
+    // var listsCheckBoxByShop =
+    //     Provider.of<CheckBoxCartScreen>(context, listen: true)
+    //         .listsCheckBoxByShop;
 
     // print(listsGroupsByNameShop.values);
     // print('ccc${listsCheckBoxByShop.length}');
@@ -37,7 +35,7 @@ class _RenderListProductCartState extends State<RenderListProductCart> {
             children: listsGroupsByNameShop.entries.map((entry) {
             final shopName = entry.key;
             final items = entry.value;
-            Map<String, bool> childCheckBox = listsCheckBoxByShop[shopName]!;
+            // Map<String, bool> childCheckBox = listsCheckBoxByShop[shopName]!;
             // print(childCheckBox);
             // print(items.map((e) => childCheckBox[e.classify.values]));
             // print('child${items.first.nameShop}');
@@ -48,14 +46,15 @@ class _RenderListProductCartState extends State<RenderListProductCart> {
               children: [
                 HeaderDetailShoppingCart(
                   nameShop: shopName,
-                  isCheck: isCheck[shopName]!,
+                  // isCheck: isCheckShop[shopName]!,
                 ),
                 Column(
                   children: items.map((e) {
                     // print(e.classify.keys.first);
                     return ProductShoppingCart(
+                      nameShop: shopName,
                       model: e,
-                      isChecked: childCheckBox[e.classify.keys.first]!,
+                      // isChecked: childCheckBox[e.classify.keys.first]!,
                     );
                   }).toList(),
                 )

@@ -1,13 +1,21 @@
 import 'package:clone_shoppe/constants/global_variables.dart';
 import 'package:clone_shoppe/features/page/cartScreen/widget/checkbox.dart';
 import 'package:clone_shoppe/models/cartModel.dart';
+import 'package:clone_shoppe/provider/listProductCart.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ContentDetailShoppingCart extends StatefulWidget {
   final CartModel cartModel;
-  bool isChecked;
-  ContentDetailShoppingCart(
-      {super.key, required this.cartModel, required this.isChecked});
+  final String nameShop;
+
+  // bool isChecked;
+  const ContentDetailShoppingCart({
+    super.key,
+    required this.cartModel,
+    // required this.isChecked,
+    required this.nameShop,
+  });
 
   @override
   State<ContentDetailShoppingCart> createState() =>
@@ -18,12 +26,13 @@ class _ContentDetailShoppingCartState extends State<ContentDetailShoppingCart> {
   int count = 0;
   @override
   void initState() {
-    count = widget.cartModel.numberOfProducts;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    count = widget.cartModel.numberOfProducts;
+
     return Container(
       padding: const EdgeInsets.fromLTRB(0, 12, 0, 12),
       child: Column(
@@ -31,7 +40,11 @@ class _ContentDetailShoppingCartState extends State<ContentDetailShoppingCart> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              CheckBox(isChecked: widget.isChecked, model: widget.cartModel),
+              CheckBox(
+                // isChecked: widget.isChecked,
+                model: widget.cartModel,
+                nameShop: widget.nameShop,
+              ),
               const SizedBox(width: 5),
               Image.asset(
                 widget.cartModel.image[0],
@@ -122,6 +135,8 @@ class _ContentDetailShoppingCartState extends State<ContentDetailShoppingCart> {
                       setState(() {
                         count--;
                       });
+                      Provider.of<ListProductCart>(context, listen: false)
+                          .addQuantityProductCart(count, widget.cartModel);
                     }
                   },
                   child: Container(
@@ -157,6 +172,8 @@ class _ContentDetailShoppingCartState extends State<ContentDetailShoppingCart> {
                     setState(() {
                       count++;
                     });
+                    Provider.of<ListProductCart>(context, listen: false)
+                        .addQuantityProductCart(count, widget.cartModel);
                   },
                   child: Container(
                     width: 30,

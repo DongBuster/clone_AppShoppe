@@ -13,6 +13,8 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
+  final _focusNode = FocusNode();
+
   // handle fillColor textfield header when go route and route location == home
   Color fillColorTextfieldHeader(bool isActiveColorIcon) {
     if (GoRouter.of(context).location == '/mallScreen') {
@@ -25,13 +27,21 @@ class _SearchState extends State<Search> {
   }
 
   @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     bool isActiveColorIcon =
         Provider.of<StateActiveColorIconHeader>(context, listen: true)
             .isActiveColorIcon;
     return SizedBox(
-      height: 45,
+      height: 34,
       child: TextField(
+        onTapOutside: (event) => _focusNode.unfocus(),
+        focusNode: _focusNode,
         textAlignVertical: TextAlignVertical.center,
         cursorColor: const Color(0xff9c9c9c),
         cursorHeight: 22,

@@ -6,9 +6,14 @@ import '../widget/contentDetailShoppingCart.dart';
 
 class ProductShoppingCart extends StatefulWidget {
   final CartModel model;
-  bool isChecked;
-  ProductShoppingCart(
-      {super.key, required this.model, required this.isChecked});
+  final String nameShop;
+  // bool isChecked;
+  ProductShoppingCart({
+    super.key,
+    required this.model,
+    // required this.isChecked,
+    required this.nameShop,
+  });
 
   @override
   State<ProductShoppingCart> createState() => _ProductShoppingCartState();
@@ -28,7 +33,10 @@ class _ProductShoppingCartState extends State<ProductShoppingCart> {
           FixShoppingCart(
             model: widget.model,
             child: ContentDetailShoppingCart(
-                cartModel: widget.model, isChecked: widget.isChecked),
+              cartModel: widget.model,
+              // isChecked: widget.isChecked,
+              nameShop: widget.nameShop,
+            ),
           ),
         ],
       ),

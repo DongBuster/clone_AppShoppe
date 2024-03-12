@@ -1,13 +1,18 @@
 import 'package:clone_shoppe/constants/global_variables.dart';
 import 'package:clone_shoppe/provider/checkboxCartScreen.dart';
+import 'package:clone_shoppe/provider/listProductCart.dart';
+import 'package:clone_shoppe/provider/selectedProductCart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class HeaderDetailShoppingCart extends StatefulWidget {
   final String nameShop;
-  bool isCheck;
-  HeaderDetailShoppingCart(
-      {super.key, required this.nameShop, required this.isCheck});
+  // bool isCheck;
+  HeaderDetailShoppingCart({
+    super.key,
+    required this.nameShop,
+    // required this.isCheck,
+  });
   @override
   State<HeaderDetailShoppingCart> createState() =>
       _HeaderDetailShoppingCartState();
@@ -16,6 +21,8 @@ class HeaderDetailShoppingCart extends StatefulWidget {
 class _HeaderDetailShoppingCartState extends State<HeaderDetailShoppingCart> {
   @override
   Widget build(BuildContext context) {
+    var isCheckShop = Provider.of<CheckBoxCartScreen>(context, listen: true)
+        .listsCheckBoxShop;
     return Container(
       height: 50,
       padding: const EdgeInsets.only(left: 8, right: 12),
@@ -32,13 +39,20 @@ class _HeaderDetailShoppingCartState extends State<HeaderDetailShoppingCart> {
               Checkbox(
                 checkColor: Colors.white,
                 activeColor: GloblalVariable.hex_f94f2f,
-                value: widget.isCheck,
+                value: isCheckShop[widget.nameShop]!,
                 onChanged: (bool? value) {
                   setState(() {
                     Provider.of<CheckBoxCartScreen>(context, listen: false)
                         .setCheckBoxShop(widget.nameShop);
                     Provider.of<CheckBoxCartScreen>(context, listen: false)
                         .setCheckBoxByShop(widget.nameShop);
+                    var listsGroupsByNameShop =
+                        Provider.of<ListProductCart>(context, listen: false)
+                            .getlistsGroupsByNameShop;
+                    Provider.of<SelectedProductCart>(context, listen: false)
+                        .setListItemsSelected(
+                            listsGroupsByNameShop[widget.nameShop]!,
+                            isCheckShop[widget.nameShop]!);
                   });
                 },
               ),

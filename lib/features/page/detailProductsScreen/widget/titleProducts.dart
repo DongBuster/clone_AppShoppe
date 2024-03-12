@@ -29,7 +29,10 @@ class _TitleProductsState extends State<TitleProducts> {
     String title = widget.detailProduct.name;
     if (title.length > 33) {
       // when title have a long word
-      int spaceIndexLast = title.lastIndexOf(' ', 33);
+      int spaceIndexRow1 = title.lastIndexOf(' ', 33);
+      String remainingText = title.substring(spaceIndexRow1);
+      // int remainingCharacterCount = remainingText.length;
+      // int spaceIndexRow2 = title.lastIndexOf(' ', 33 + remainingCharacterCount);
 
       int hasLongWord = 0;
       List<String> words = title.split(' ');
@@ -40,10 +43,10 @@ class _TitleProductsState extends State<TitleProducts> {
         }
       }
       if (hasLongWord >= 1) {
-        spaceIndexLast = title.lastIndexOf(' ', spaceIndexLast - hasLongWord);
+        spaceIndexRow1 = title.lastIndexOf(' ', spaceIndexRow1 - hasLongWord);
       }
-      titleTooLong.add(title.substring(0, spaceIndexLast));
-      titleTooLong.add(title.substring(spaceIndexLast, 33));
+      titleTooLong.add(title.substring(0, spaceIndexRow1));
+      titleTooLong.add(title.substring(spaceIndexRow1));
     } else {
       titleTooLong.add(title);
     }
@@ -51,6 +54,8 @@ class _TitleProductsState extends State<TitleProducts> {
 
   @override
   Widget build(BuildContext context) {
+    List<String> words = widget.detailProduct.name.split(' ');
+
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(10),
@@ -96,17 +101,24 @@ class _TitleProductsState extends State<TitleProducts> {
                         const SizedBox(width: 4),
                         Text(
                           titleTooLong[0],
+                          overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
                             decoration: TextDecoration.none,
                           ),
                         ),
+                        // Wrap(
+                        //   direction: Axis.horizontal,
+                        //   children: List<Widget>.generate(
+                        //       widget.detailProduct.name.split(' ').length - 1,
+                        //       (index) => Text(" ${words[index]}")),
+                        // )
                       ],
                     ),
                     titleTooLong.length > 1
                         ? SizedBox(
-                            // width: 345,
+                            width: 280,
                             child: Text(
                               titleTooLong[1],
                               overflow: TextOverflow.ellipsis,
@@ -127,7 +139,12 @@ class _TitleProductsState extends State<TitleProducts> {
               ],
             ),
           ),
-
+          // Wrap(
+          //   direction: Axis.horizontal,
+          //   children: List<Widget>.generate(
+          //       widget.detailProduct.name.split(' ').length,
+          //       (index) => Text(" ${words[index]}")),
+          // ),
           // price product
           Container(
             margin: const EdgeInsets.fromLTRB(0, 10, 0, 5),

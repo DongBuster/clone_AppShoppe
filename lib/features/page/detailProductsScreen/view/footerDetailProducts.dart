@@ -20,7 +20,7 @@ class _FooterDetailProductsState extends State<FooterDetailProducts> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 60,
+      height: 55,
       child: Row(
         children: [
           GestureDetector(
@@ -31,7 +31,11 @@ class _FooterDetailProductsState extends State<FooterDetailProducts> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SvgPicture.string(stringSvgMessage),
+                  SvgPicture.string(
+                    stringSvgMessage,
+                    width: 18,
+                    height: 18,
+                  ),
                   const SizedBox(height: 5),
                   const Text(
                     'Chat ngay',
@@ -72,7 +76,7 @@ class _FooterDetailProductsState extends State<FooterDetailProducts> {
                       Icon(
                         Icons.add_shopping_cart,
                         color: Colors.white,
-                        size: 25,
+                        size: 20,
                       ),
                       SizedBox(height: 5),
                       Text(
@@ -97,7 +101,7 @@ class _FooterDetailProductsState extends State<FooterDetailProducts> {
                 child: const Text(
                   'Mua với voucher',
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 14,
                     color: Colors.white,
                     decoration: TextDecoration.none,
                   ),

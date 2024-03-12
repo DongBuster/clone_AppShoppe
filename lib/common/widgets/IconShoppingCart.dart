@@ -14,11 +14,12 @@ class IconShoppingCart extends StatefulWidget {
 }
 
 class _IconShoppingCartState extends State<IconShoppingCart> {
+  // final Key animate = AddToCartMannager;
+
   @override
   Widget build(BuildContext context) {
-    int numberCart = Provider.of<ListProductCart>(context, listen: true)
-        .getlistsGroupsByNameShop
-        .length;
+    int numberCart =
+        Provider.of<ListProductCart>(context, listen: true).getListItems.length;
     return badges.Badge(
       badgeStyle: const badges.BadgeStyle(
         borderSide: BorderSide(

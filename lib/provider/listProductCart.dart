@@ -6,7 +6,7 @@ class ListProductCart with ChangeNotifier {
   List<CartModel> listItems = [];
   Map<String, List<CartModel>> listsGroupsByNameShop = {};
 
-  List get getListItems => listItems;
+  List<CartModel> get getListItems => listItems;
   Map<String, List<CartModel>> get getlistsGroupsByNameShop =>
       listsGroupsByNameShop;
 
@@ -34,7 +34,16 @@ class ListProductCart with ChangeNotifier {
     );
     listsGroupsByNameShop =
         groupBy(listItems, (CartModel model) => model.nameShop);
+    notifyListeners();
+  }
 
+  void addQuantityProductCart(int quantity, CartModel model) {
+    for (var cartModel in listItems) {
+      if (cartModel.nameProduct == model.nameProduct &&
+          cartModel.classify.keys.first == model.classify.keys.first) {
+        cartModel.numberOfProducts = quantity;
+      }
+    }
     notifyListeners();
   }
 }

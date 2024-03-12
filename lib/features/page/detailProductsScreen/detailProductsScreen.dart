@@ -19,8 +19,9 @@ class DetailProductsScreen extends StatefulWidget {
 class _DetailProductsScreenState extends State<DetailProductsScreen> {
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Consumer<DetailProductModel>(
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: Consumer<DetailProductModel>(
         builder: (context, productModel, child) => Stack(
           children: [
             Container(

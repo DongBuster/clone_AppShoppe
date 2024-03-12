@@ -19,7 +19,7 @@ class _FooterAppState extends State<FooterApp> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 60,
+      height: 55,
       decoration: BoxDecoration(
         color: Colors.white,
         border: const Border(top: BorderSide(color: Colors.black12)),

@@ -3,9 +3,12 @@ import 'package:clone_shoppe/constants/global_variables.dart';
 import 'package:clone_shoppe/features/page/detailProductsScreen/widget/IconButtonHeader.dart';
 import 'package:clone_shoppe/provider/headerDetailProduct.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+
+import '../../../../provider/animation_add_to_cart.dart';
 
 class HeaderDetailProducts extends StatefulWidget {
   const HeaderDetailProducts({super.key});
@@ -15,6 +18,13 @@ class HeaderDetailProducts extends StatefulWidget {
 }
 
 class _HeaderDetailProductsState extends State<HeaderDetailProducts> {
+  final _focusNode = FocusNode();
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Provider.of<SateHeaderDetailProduct>(context, listen: true)
@@ -36,7 +46,7 @@ class _HeaderDetailProductsState extends State<HeaderDetailProducts> {
                   child: const IconButtonHeader(
                     child: Icon(
                       Icons.arrow_back,
-                      size: 25,
+                      size: 20,
                       color: Colors.white,
                     ),
                   ),
@@ -62,15 +72,14 @@ class _HeaderDetailProductsState extends State<HeaderDetailProducts> {
                         onTap: () {
                           context.pushNamed(GloblalVariable.cartScreen);
                         },
-                        child:
-                            const IconButtonHeader(child: IconShoppingCart()),
+                        child: IconButtonHeader(child: IconShoppingCart()),
                       ),
                       //button more
                       GestureDetector(
                         child: const IconButtonHeader(
                           child: Icon(
                             Icons.more_vert,
-                            size: 25,
+                            size: 22,
                             color: Colors.white,
                           ),
                         ),
@@ -108,15 +117,17 @@ class _HeaderDetailProductsState extends State<HeaderDetailProducts> {
                     width: 50,
                     child: const Icon(
                       Icons.arrow_back,
-                      size: 28,
+                      size: 22,
                       color: GloblalVariable.hex_f94f2f,
                     ),
                   ),
                 ),
                 Expanded(
                   child: SizedBox(
-                    height: 40,
+                    height: 35,
                     child: TextField(
+                      onTapOutside: (event) => _focusNode.unfocus(),
+                      focusNode: _focusNode,
                       textAlignVertical: TextAlignVertical.center,
                       cursorColor: const Color(0xff9c9c9c),
                       cursorHeight: 22,
@@ -162,11 +173,10 @@ class _HeaderDetailProductsState extends State<HeaderDetailProducts> {
                       ),
                       // button cart
                       GestureDetector(
-                        onTap: () {
-                          context.goNamed(GloblalVariable.cartScreen);
-                        },
-                        child: const IconShoppingCart(),
-                      ),
+                          onTap: () {
+                            context.goNamed(GloblalVariable.cartScreen);
+                          },
+                          child: IconShoppingCart()),
                       //button more
                       GestureDetector(
                         child: const Icon(
