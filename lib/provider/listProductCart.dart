@@ -11,18 +11,23 @@ class ListProductCart with ChangeNotifier {
       listsGroupsByNameShop;
 
   void addProductToCart(CartModel model) {
-    if (listItems.contains(model)) {
-      // print('cccc');
-      listItems[listItems.indexOf(model)].numberOfProducts++;
-    } else {
-      // print('here');
+    bool itemExists = false;
+
+    for (var cartModel in listItems) {
+      if (cartModel.nameProduct == model.nameProduct &&
+          cartModel.classify.keys.first == model.classify.keys.first) {
+        cartModel.numberOfProducts++;
+        itemExists = true;
+        break;
+      }
+    }
+
+    if (!itemExists) {
       listItems.add(model);
       listsGroupsByNameShop =
           groupBy(listItems, (CartModel model) => model.nameShop);
     }
 
-    // print('${model.nameProduct}:${model.classify.keys.first}');
-    // print(listItems.);
     notifyListeners();
   }
 

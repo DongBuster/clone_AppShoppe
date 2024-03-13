@@ -1,19 +1,19 @@
+import 'package:clone_shoppe/common/widgets/text.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:provider/provider.dart';
 
-import '../../layout/header/handle/colorHeader.dart';
-import '../../provider/listProductCart.dart';
-import 'text.dart';
+import '../../../provider/listProductCart.dart';
 
-class IconShoppingCart extends StatefulWidget {
-  const IconShoppingCart({super.key});
+class IconShoppingCartProfile extends StatefulWidget {
+  const IconShoppingCartProfile({super.key});
 
   @override
-  State<IconShoppingCart> createState() => _IconShoppingCartState();
+  State<IconShoppingCartProfile> createState() =>
+      _IconShoppingCartProfileState();
 }
 
-class _IconShoppingCartState extends State<IconShoppingCart> {
+class _IconShoppingCartProfileState extends State<IconShoppingCartProfile> {
   // final Key animate = AddToCartMannager;
 
   @override
@@ -26,17 +26,17 @@ class _IconShoppingCartState extends State<IconShoppingCart> {
           color: Colors.white,
         ),
       ),
-      position: badges.BadgePosition.topStart(top: -15, start: 14),
+      position: badges.BadgePosition.topStart(top: -12, start: 10),
       badgeContent: MyText(
         text: '$numberCart',
-        fontSize: 12,
+        fontSize: 10,
         fontWeight: FontWeight.normal,
         color: Colors.white,
       ),
-      child: Icon(
+      child: const Icon(
         Icons.shopping_cart_outlined,
-        size: 25,
-        color: colorIconHeader(context),
+        size: 20,
+        color: Colors.white,
       ),
     );
   }

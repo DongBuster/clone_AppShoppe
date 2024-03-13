@@ -53,8 +53,6 @@ class _FooterDetailProductsState extends State<FooterDetailProducts> {
           GestureDetector(
             onTap: () {
               showModalBottomSheet(
-                  isScrollControlled: true,
-                  backgroundColor: Colors.transparent,
                   context: context,
                   builder: (context) =>
                       ModalBottomSheet(model: widget.productModel));
