@@ -51,7 +51,7 @@ dependencies:
   collection: ^1.17.1
   gap: ^3.0.1
   flutter_animate: ^4.4.0
-
+  local_hero: ^0.3.0
 
 dev_dependencies:
   flutter_test:
