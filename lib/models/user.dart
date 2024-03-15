@@ -1,75 +1,36 @@
-import 'dart:convert';
+class AccoutUser {
+  AccoutUser({
+    required this.image,
+    required this.name,
+    required this.id,
+    required this.isOnline,
+    required this.email,
+    required this.about,
+  });
+  late String image;
+  late String name;
+  late String id;
+  late String isOnline;
+  late String email;
+  late String about;
 
-class User {
-  final String id;
-  final String name;
-  final String email;
-  final String password;
-  final String address;
-  final String type;
-  final String token;
-
-  User(
-      {required this.id,
-      required this.name,
-      required this.email,
-      required this.password,
-      required this.address,
-      required this.type,
-      required this.token});
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'name': name,
-      'email': email,
-      'password': password,
-      'address': address,
-      'type': type,
-      'token': token,
-      // 'cart': cart,
-    };
+  AccoutUser.fromJson(Map<String, dynamic> json) {
+    image = json['image'] ?? '';
+    name = json['name'] ?? '';
+    id = json['id'] ?? '';
+    isOnline = json['isOnline'] ?? '';
+    email = json['email'] ?? '';
+    about = json['about'] ?? '';
   }
 
-  factory User.fromMap(Map<String, dynamic> map) {
-    return User(
-      id: map['_id'] ?? '',
-      name: map['name'] ?? '',
-      email: map['email'] ?? '',
-      password: map['password'] ?? '',
-      address: map['address'] ?? '',
-      type: map['type'] ?? '',
-      token: map['token'] ?? '',
-      // cart: List<Map<String, dynamic>>.from(
-      //   map['cart']?.map(
-      //     (x) => Map<String, dynamic>.from(x),
-      //   ),
-      // ),
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory User.fromJson(String source) => User.fromMap(json.decode(source));
-
-  User copyWith({
-    String? id,
-    String? name,
-    String? email,
-    String? password,
-    String? address,
-    String? type,
-    String? token,
-    List<dynamic>? cart,
-  }) {
-    return User(
-      id: id ?? this.id,
-      name: name ?? this.name,
-      email: email ?? this.email,
-      password: password ?? this.password,
-      address: address ?? this.address,
-      type: type ?? this.type,
-      token: token ?? this.token,
-      // cart: cart ?? this.cart,
-    );
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['image'] = image;
+    data['name'] = name;
+    data['id'] = id;
+    data['isOnline'] = isOnline;
+    data['email'] = email;
+    data['about'] = about;
+    return data;
   }
 }

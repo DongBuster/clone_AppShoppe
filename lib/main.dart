@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'provider/checkboxCartScreen.dart';
+import 'provider/create_accout.dart';
 import 'provider/detailProductModel.dart';
 import 'provider/headerDetailProduct.dart';
 import 'provider/listProductCart.dart';
@@ -22,6 +23,9 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
+        ChangeNotifierProvider(
+          create: (_) => CreateAccout(),
+        ),
         ChangeNotifierProvider(
           create: (_) => StateActiveIconHome(),
         ),

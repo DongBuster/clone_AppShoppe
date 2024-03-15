@@ -2,15 +2,17 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:clone_shoppe/constants/SnackBar.dart';
 import 'package:clone_shoppe/constants/global_variables.dart';
 import 'package:clone_shoppe/features/page/profileScreen/feature_link.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutter/material.dart';
-import 'package:clone_shoppe/features/auth/services/service_loginWithAccout.dart';
-import 'package:clone_shoppe/features/auth/services/service_loginWithGoogle.dart';
 
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import '../../auth/services/auth.dart';
 import 'icon_shopping_cart.dart';
 
 GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
@@ -33,7 +35,29 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   Color primaryColor = GloblalVariable.hex_f94f2f;
-  String? username = getUsernameFromCurrentUser();
+  FirebaseAuth auth = FirebaseAuth.instance;
+
+  final snackBar = SnackBar(
+    elevation: 0,
+    behavior: SnackBarBehavior.floating,
+    backgroundColor: Colors.transparent,
+    content: AwesomeSnackbarContent(
+      title: 'Warning!',
+      message: 'Something error occurred, please try again !',
+      contentType: ContentType.warning,
+    ),
+  );
+
+  String getCurrentUser() {
+    User? user = auth.currentUser;
+
+    if (user != null) {
+      return user.displayName!;
+    } else {
+      return 'Unknow user';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -115,15 +139,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       children: [
                         //--- avatar ----
                         const Gap(12),
-
-                        Container(
-                          width: 50,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
+                        ClipOval(
                           child: CachedNetworkImage(
-                            imageUrl: 'rr',
+                            width: 50,
+                            height: 50,
+                            imageUrl: auth.currentUser?.photoURL ?? '',
                             // fit: BoxFit.fill,
                             errorWidget: (context, url, error) {
                               return ClipRRect(
@@ -138,14 +158,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             },
                           ),
                         ),
-
+                        //-- user name ---
                         const Gap(12),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              'dongbuster',
-                              style: TextStyle(
+                            Text(
+                              getCurrentUser(),
+                              style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,
@@ -266,7 +286,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               const Gap(8),
-
               Container(
                 padding: const EdgeInsets.all(10),
                 color: Colors.white,
@@ -335,57 +354,40 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
               GestureDetector(
                 onTap: () async {
-                  loginWithAccount.logOut();
-                  LoginWithGoogle.logOut();
-                  if (mounted) {
+                  final SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
+                  Auth.signOut().then((value) {
+                    prefs.setBool('islogin', false);
+                    prefs.setString('email', '');
                     context.goNamed(GloblalVariable.authScreen);
-                  } else {
-                    showSnackBar(
-                        context, 'Something went wrong, please try again');
-                  }
+                  }).catchError((error) {
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  });
+
+                  // else {
+                  //   showSnackBar(
+                  //       context, 'Something went wrong, please try again');
+                  // }
                 },
                 child: Container(
-                    alignment: Alignment.center,
-                    height: 30,
-                    width: 80,
-                    decoration: BoxDecoration(
+                  alignment: Alignment.center,
+                  height: 35,
+                  width: 200,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: const Text(
+                    'Sign Out',
+                    style: TextStyle(
+                      fontSize: 14,
                       color: GloblalVariable.hex_f94f2f,
-                      borderRadius: BorderRadius.circular(20),
+                      fontWeight: FontWeight.bold,
                     ),
-                    child: const Text(
-                      'Sign Out',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    )
-
-                    // TextButton(
-                    //   style: TextButton.styleFrom(
-                    //     backgroundColor: Colors.amber,
-                    //     foregroundColor: Colors.blue,
-                    //     padding: const EdgeInsets.all(16.0),
-                    //     textStyle: const TextStyle(fontSize: 20),
-                    //   ),
-                    //   onPressed: () async {
-                    //     loginWithAccount.logOut();
-                    //     LoginWithGoogle.logOut();
-                    //     if (mounted) {
-                    //       context.goNamed(GloblalVariable.authScreen);
-                    //     } else {
-                    //       showSnackBar(
-                    //           context, 'Something went wrong, please try again');
-                    //     }
-                    //   },
-                    //   child: const Text(
-                    //     'logout',
-                    //     style: TextStyle(color: Colors.red),
-                    //   ),
-                    // ),
-                    ),
+                  ),
+                ),
               ),
-              const Gap(60),
+              const Gap(63),
 
               // Text(
               //   username != null ? 'Username: $username' : 'error',
