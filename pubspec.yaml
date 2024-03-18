@@ -83,6 +83,9 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - assets/border.png
+    - assets/freeship.png
+    - assets/freereturn.png
     - assets/icon_twitter.svg
     - assets/icon_instagram.svg
     - assets/icon_google.svg

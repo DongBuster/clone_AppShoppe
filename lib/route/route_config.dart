@@ -14,6 +14,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../features/page/buyProductScreen/buy_product_screen.dart';
+
 final GlobalKey<NavigatorState> _rootNavigator = GlobalKey(debugLabel: 'root');
 // final GlobalKey<NavigatorState> _shellNavigatorLogin =
 //     GlobalKey(debugLabel: 'shell');
@@ -118,6 +120,17 @@ class Routes {
                 name: GloblalVariable.profileScreen,
                 pageBuilder: (context, state) => const NoTransitionPage(
                   child: Mainlayout(child: ProfileScreen()),
+                ),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: <RouteBase>[
+              GoRoute(
+                path: '/buyProductScreen',
+                name: GloblalVariable.buyProductScreen,
+                pageBuilder: (context, state) => const NoTransitionPage(
+                  child: BuyProductScreen(),
                 ),
               ),
             ],

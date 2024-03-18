@@ -206,7 +206,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       onPressed: () async {
                         AuthController.handleGoogleBtnClick(context).then(
-                          (value) => context.go('/home'),
+                          (_) => context.go('/home'),
                         );
                       },
                       icon: SvgPicture.asset(

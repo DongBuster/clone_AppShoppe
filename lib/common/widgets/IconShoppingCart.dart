@@ -26,16 +26,16 @@ class _IconShoppingCartState extends State<IconShoppingCart> {
           color: Colors.white,
         ),
       ),
-      position: badges.BadgePosition.topStart(top: -15, start: 14),
+      position: badges.BadgePosition.topStart(top: -12, start: 12),
       badgeContent: MyText(
         text: '$numberCart',
-        fontSize: 12,
+        fontSize: 10,
         fontWeight: FontWeight.normal,
         color: Colors.white,
       ),
       child: Icon(
         Icons.shopping_cart_outlined,
-        size: 25,
+        size: 22,
         color: colorIconHeader(context),
       ),
     );

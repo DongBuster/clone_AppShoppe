@@ -12,6 +12,7 @@ class GloblalVariable {
   static const String liveScreen = 'liveScreen';
   static const String notificationsScreen = 'notificationsScreen';
   static const String profileScreen = 'profileScreen';
+  static const String buyProductScreen = 'buyProductScreen';
   // define name child route
   static const String detailProducts = 'detailProducts';
   static const String cartScreen = 'cartScreen';

@@ -56,7 +56,7 @@ class _CountdownTimerState extends State<CountdownTimer> {
               color: Colors.black, borderRadius: BorderRadius.circular(3)),
           child: Text(hoursStr,
               style: const TextStyle(
-                  fontSize: 16,
+                  fontSize: 14,
                   color: Colors.white,
                   fontWeight: FontWeight.bold)),
         ),
@@ -76,7 +76,7 @@ class _CountdownTimerState extends State<CountdownTimer> {
               color: Colors.black, borderRadius: BorderRadius.circular(3)),
           child: Text(minutesStr,
               style: const TextStyle(
-                  fontSize: 16,
+                  fontSize: 14,
                   color: Colors.white,
                   fontWeight: FontWeight.bold)),
         ),
@@ -96,7 +96,7 @@ class _CountdownTimerState extends State<CountdownTimer> {
               color: Colors.black, borderRadius: BorderRadius.circular(3)),
           child: Text(secondsStr,
               style: const TextStyle(
-                  fontSize: 16,
+                  fontSize: 14,
                   color: Colors.white,
                   fontWeight: FontWeight.bold)),
         ),

@@ -46,7 +46,7 @@ class _FooterAppState extends State<FooterApp> {
             child: const SizedBox(
               width: 80,
               child: IconButtonHome(
-                size: 28,
+                size: 25,
                 pathRoute: '/home',
               ),
             ),
@@ -63,7 +63,7 @@ class _FooterAppState extends State<FooterApp> {
               width: 70,
               child: IconButtonFooter(
                 icon: Icons.shopping_bag_outlined,
-                size: 30,
+                size: 22,
                 text: 'Mall',
                 PathRoute: '/mallScreen',
               ),
@@ -81,7 +81,7 @@ class _FooterAppState extends State<FooterApp> {
               width: 70,
               child: IconButtonFooter(
                 icon: Icons.videocam_outlined,
-                size: 35,
+                size: 25,
                 text: 'Live',
                 PathRoute: '/liveScreen',
               ),
@@ -101,7 +101,7 @@ class _FooterAppState extends State<FooterApp> {
                 children: [
                   const IconButtonFooter(
                     icon: Icons.notifications_none_outlined,
-                    size: 34,
+                    size: 25,
                     text: 'Thông báo',
                     PathRoute: '/notificationsScreen',
                   ),
@@ -110,8 +110,8 @@ class _FooterAppState extends State<FooterApp> {
                     right: 17,
                     child: Container(
                       alignment: Alignment.center,
-                      width: 26,
-                      height: 18,
+                      width: 22,
+                      height: 15,
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.white),
                         borderRadius: BorderRadius.circular(10),
@@ -119,7 +119,7 @@ class _FooterAppState extends State<FooterApp> {
                       ),
                       child: const Text(
                         '99+',
-                        style: TextStyle(color: Colors.white, fontSize: 12),
+                        style: TextStyle(color: Colors.white, fontSize: 8),
                       ),
                     ),
                   ),
@@ -139,7 +139,7 @@ class _FooterAppState extends State<FooterApp> {
               width: 70,
               child: IconButtonFooter(
                 icon: Icons.person_2_outlined,
-                size: 30,
+                size: 25,
                 text: 'Tôi',
                 PathRoute: '/profileScreen',
               ),

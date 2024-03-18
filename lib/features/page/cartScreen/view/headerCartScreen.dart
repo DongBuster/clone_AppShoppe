@@ -20,7 +20,7 @@ class _HeaderCartScreenState extends State<HeaderCartScreen> {
     int coutCart =
         Provider.of<ListProductCart>(context, listen: true).getListItems.length;
     return Container(
-      height: 80,
+      height: 70,
       padding: const EdgeInsets.fromLTRB(10, 30, 0, 5),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -42,7 +42,7 @@ class _HeaderCartScreenState extends State<HeaderCartScreen> {
             },
             child: const Icon(
               Icons.arrow_back,
-              size: 30,
+              size: 25,
               color: GloblalVariable.hex_f94f2f,
             ),
           ),
@@ -53,16 +53,17 @@ class _HeaderCartScreenState extends State<HeaderCartScreen> {
               const Text(
                 'Giỏ hàng',
                 style: TextStyle(
-                    fontSize: 22,
+                    fontSize: 18,
                     color: Colors.black87,
                     decoration: TextDecoration.none),
               ),
               Text(
                 '($coutCart)',
                 style: const TextStyle(
-                    fontSize: 16,
-                    color: Colors.black54,
-                    decoration: TextDecoration.none),
+                  fontSize: 14,
+                  color: Colors.black54,
+                  decoration: TextDecoration.none,
+                ),
               )
             ],
           ),

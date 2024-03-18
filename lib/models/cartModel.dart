@@ -6,7 +6,7 @@ part 'cartModel.g.dart';
 class CartModel {
   late String nameProduct;
   late String nameShop;
-  late List<dynamic> image;
+  late String image;
   late Map<String, dynamic> classify;
   late int numberOfProducts;
 
@@ -23,7 +23,7 @@ class CartModel {
     return other is CartModel &&
         other.nameProduct == nameProduct &&
         other.nameShop == nameShop &&
-        listEquals(other.image, image) &&
+        other.image == image &&
         mapEquals(other.classify, classify) &&
         other.numberOfProducts == numberOfProducts;
   }

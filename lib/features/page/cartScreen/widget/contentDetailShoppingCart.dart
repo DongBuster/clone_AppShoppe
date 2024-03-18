@@ -47,9 +47,9 @@ class _ContentDetailShoppingCartState extends State<ContentDetailShoppingCart> {
               ),
               const SizedBox(width: 5),
               Image.asset(
-                widget.cartModel.image[0],
-                width: 100,
-                height: 100,
+                widget.cartModel.image,
+                width: 90,
+                height: 90,
                 fit: BoxFit.fill,
               ),
               const SizedBox(width: 12),
@@ -123,8 +123,8 @@ class _ContentDetailShoppingCartState extends State<ContentDetailShoppingCart> {
           ),
           // add quantity of products
           Container(
-            width: 100,
-            height: 28,
+            width: 90,
+            height: 25,
             decoration:
                 BoxDecoration(border: Border.all(color: Colors.black12)),
             child: Row(
@@ -148,9 +148,9 @@ class _ContentDetailShoppingCartState extends State<ContentDetailShoppingCart> {
                     child: const Text(
                       '-',
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black45,
+                        color: Colors.black38,
                       ),
                     ),
                   ),
@@ -160,9 +160,9 @@ class _ContentDetailShoppingCartState extends State<ContentDetailShoppingCart> {
                     child: Text(
                       '$count',
                       style: const TextStyle(
-                        fontSize: 18,
+                        fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black45,
+                        color: Colors.black38,
                       ),
                     ),
                   ),
@@ -184,9 +184,9 @@ class _ContentDetailShoppingCartState extends State<ContentDetailShoppingCart> {
                     child: const Text(
                       '+',
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black45,
+                        color: Colors.black38,
                       ),
                     ),
                   ),

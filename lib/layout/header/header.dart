@@ -52,15 +52,15 @@ class _HeaderAppState extends State<HeaderApp> {
                       ),
                     ),
                     position:
-                        badges.BadgePosition.topStart(top: -15, start: 14),
+                        badges.BadgePosition.topStart(top: -12, start: 12),
                     badgeContent: const MyText(
                         text: '3',
-                        fontSize: null,
+                        fontSize: 10,
                         fontWeight: null,
                         color: Colors.white),
                     child: Icon(
                       Icons.message_outlined,
-                      size: 28,
+                      size: 22,
                       color: colorIconHeader(context),
                     ),
                   ),

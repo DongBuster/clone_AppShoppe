@@ -42,12 +42,12 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    // print(productCart.classify[productCart.classify.keys.first]);
+    // print(productCart.classify.isEmpty);
     productCart = CartModel(
       nameProduct: widget.model.name,
       nameShop: widget.model.nameShop,
-      image: widget.model.image,
-      classify: widget.model.classify,
+      image: '',
+      classify: {},
       numberOfProducts: 0,
     );
     return Container(
@@ -71,7 +71,7 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
                       height: 100,
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage(productCart.image[indexImage]),
+                          image: AssetImage(widget.model.image[indexImage]),
                         ),
                       ),
                     ),
@@ -79,7 +79,7 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
                     Column(
                       children: [
                         Text(
-                          'đ${productCart.classify[productCart.classify.keys.first]}',
+                          'đ${widget.model.classify.keys.first}',
                           style: const TextStyle(
                             fontSize: 18,
                             color: GloblalVariable.hex_f94f2f,
@@ -115,7 +115,7 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
             ),
           ),
 
-          productCart.classify.isEmpty
+          widget.model.classify.isEmpty
               ? Container()
               : Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -302,9 +302,10 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
                 setState(() {
                   productCart.numberOfProducts = count;
                   productCart.classify = {
-                    valueSlected: productCart.classify[valueSlected]
+                    valueSlected: widget.model.classify[valueSlected]
                   };
-                  productCart.image = [productCart.image[indexImage]];
+                  print(widget.model.image[indexImage]);
+                  productCart.image = widget.model.image[indexImage];
 
                   Provider.of<ListProductCart>(context, listen: false)
                       .addProductToCart(productCart);

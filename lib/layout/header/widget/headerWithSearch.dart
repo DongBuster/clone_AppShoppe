@@ -58,7 +58,7 @@ class _SearchState extends State<Search> {
           hintText: 'BÀN CHẢI ĐIỆN GIẢM 50%',
           hintStyle: TextStyle(
             color: Colors.red[300],
-            fontSize: 14,
+            fontSize: 12,
             fontWeight: FontWeight.w500,
           ),
 

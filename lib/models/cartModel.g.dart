@@ -9,7 +9,7 @@ part of 'cartModel.dart';
 CartModel _$CartModelFromJson(Map<String, dynamic> json) => CartModel(
       nameProduct: json['nameProduct'] as String,
       nameShop: json['nameShop'] as String,
-      image: json['image'] as List<dynamic>,
+      image: json['image'] as String,
       classify: json['classify'] as Map<String, dynamic>,
       numberOfProducts: json['numberOfProducts'] as int,
     );

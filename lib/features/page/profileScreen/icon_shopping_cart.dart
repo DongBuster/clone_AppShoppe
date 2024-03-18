@@ -35,7 +35,7 @@ class _IconShoppingCartProfileState extends State<IconShoppingCartProfile> {
       ),
       child: const Icon(
         Icons.shopping_cart_outlined,
-        size: 20,
+        size: 22,
         color: Colors.white,
       ),
     );
