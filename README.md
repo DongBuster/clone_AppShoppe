@@ -1,10 +1,10 @@
 
-# clone_shoppe
+## clone_shoppe
 The product uses ui/ux, the idea of the shopee app
 This is not shopee app
-# Link file apk release
+## Link file apk release
 https://drive.google.com/file/d/14Z1CLASfSMu7dWWRcT4g5Lv9hMgANSSS/view?usp=sharing
-# Link Youtube demo app
+## Link Youtube demo app
 
 ## Getting Started
 
