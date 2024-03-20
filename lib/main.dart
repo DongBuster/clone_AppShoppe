@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'provider/bought_product.dart';
 import 'provider/checkboxCartScreen.dart';
 import 'provider/create_accout.dart';
 import 'provider/detailProductModel.dart';
@@ -40,6 +41,9 @@ void main() async {
         ),
         ChangeNotifierProvider(
           create: (_) => ListProductCart(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => BoughtProduct(),
         ),
         ChangeNotifierProvider(
           create: (_) => CheckBoxCartScreen(),

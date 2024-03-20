@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
+import '../../../provider/bought_product.dart';
 import '../../../provider/selectedProductCart.dart';
 import '../profileScreen/feature_link.dart';
+import '../purchaseOrderScreen/purchase_order.dart';
 
 class BuyProductScreen extends StatefulWidget {
   const BuyProductScreen({super.key});
@@ -487,7 +489,14 @@ class _BuyProductScreenState extends State<BuyProductScreen> {
             ),
             const Gap(10),
             GestureDetector(
-              onTap: null,
+              onTap: () {
+                Provider.of<BoughtProduct>(context, listen: false)
+                    .addToListBoughtProduct(listSelected);
+                if (context.mounted) {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => const PurchaseOrder()));
+                }
+              },
               child: Container(
                 width: 100,
                 color: GloblalVariable.hex_f94f2f,

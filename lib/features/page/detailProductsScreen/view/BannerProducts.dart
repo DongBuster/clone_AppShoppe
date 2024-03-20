@@ -39,9 +39,9 @@ class _BannerProductsState extends State<BannerProducts> {
                 ),
                 items: widget.product.image
                     .map(
-                      (e) => ClipRRect(
+                      (image) => ClipRRect(
                         child: Image.asset(
-                          e,
+                          image,
                           fit: BoxFit.fill,
                         ),
                       ),
@@ -100,9 +100,9 @@ class _BannerProductsState extends State<BannerProducts> {
                     Container(
                       alignment: Alignment.topLeft,
                       padding: const EdgeInsets.fromLTRB(8, 8, 0, 8),
-                      child: const Text(
-                        '6 phân loại có sẵn',
-                        style: TextStyle(
+                      child: Text(
+                        '${widget.product.image.length} phân loại có sẵn',
+                        style: const TextStyle(
                             fontSize: 16,
                             color: Colors.black54,
                             decoration: TextDecoration.none),

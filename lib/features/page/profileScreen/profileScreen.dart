@@ -3,16 +3,19 @@ import 'package:clone_shoppe/constants/global_variables.dart';
 import 'package:clone_shoppe/features/page/profileScreen/feature_link.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:badges/badges.dart' as badges;
+
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
-import 'package:badges/badges.dart' as badges;
 
 import '../../../common/widgets/text.dart';
+import '../../../provider/bought_product.dart';
 import '../../auth/services/auth.dart';
+import '../purchaseOrderScreen/purchase_order.dart';
 import 'icon_shopping_cart.dart';
 
 GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
@@ -60,6 +63,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    int quantityBoughtProduct =
+        Provider.of<BoughtProduct>(context, listen: true)
+            .getListBoughtProduct
+            .length;
     return Scaffold(
       body: Stack(
         children: [
@@ -243,7 +250,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         left: 5, right: 5),
                                     width: 1,
                                     height: 10,
-                                    color: Colors.black26,
+                                    color: Colors.black38,
                                   ),
                                   RichText(
                                     text: const TextSpan(
@@ -276,29 +283,133 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Container(
                   padding: const EdgeInsets.all(10),
                   color: Colors.white,
-                  child: const Column(
+                  child: Column(
                     children: [
-                      FeatureLink(
+                      const FeatureLink(
                           icon: Icons.vibration,
                           colorIcon: Colors.green,
                           title: 'Đơn giá và dịch vụ',
                           description: '',
                           isBorderBottom: true,
                           isBorderTop: false),
-                      FeatureLink(
+                      const FeatureLink(
                           icon: Icons.event_note,
                           colorIcon: Colors.indigoAccent,
                           title: 'Đơn mua',
                           description: 'Xem lịch sử mua hàng',
                           isBorderBottom: true,
                           isBorderTop: false),
-                      FeatureLink(
+                      Container(
+                        margin: const EdgeInsets.all(12),
+                        height: 40,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.unarchive_outlined,
+                                  size: 20,
+                                  color: Colors.black54,
+                                ),
+                                Gap(5),
+                                Text(
+                                  'Chờ xác nhận',
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    color: Colors.black38,
+                                  ),
+                                )
+                              ],
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => const PurchaseOrder()));
+                              },
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  badges.Badge(
+                                    badgeStyle: const badges.BadgeStyle(
+                                      borderSide: BorderSide(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    position: badges.BadgePosition.topStart(
+                                        top: -12, start: 12),
+                                    badgeContent: MyText(
+                                      text: '$quantityBoughtProduct',
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.normal,
+                                      color: Colors.white,
+                                    ),
+                                    child: const Icon(
+                                      Icons.card_giftcard_rounded,
+                                      size: 20,
+                                      color: Colors.black54,
+                                    ),
+                                  ),
+                                  const Gap(5),
+                                  const Text(
+                                    'Chờ lấy hàng',
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                      color: Colors.black38,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            const Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.local_shipping_outlined,
+                                  size: 20,
+                                  color: Colors.black54,
+                                ),
+                                Gap(5),
+                                Text(
+                                  'Chờ giao hàng',
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    color: Colors.black38,
+                                  ),
+                                )
+                              ],
+                            ),
+                            const Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.stars_outlined,
+                                  size: 20,
+                                  color: Colors.black54,
+                                ),
+                                Gap(5),
+                                Text(
+                                  'Đánh giá',
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    color: Colors.black38,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      const FeatureLink(
                           icon: Icons.restaurant,
                           colorIcon: Colors.red,
                           title: 'Đơn ShoppeFood',
                           description: '',
                           isBorderBottom: false,
-                          isBorderTop: false),
+                          isBorderTop: true),
                     ],
                   ),
                 ),

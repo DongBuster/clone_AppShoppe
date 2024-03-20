@@ -52,6 +52,7 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
     );
     return Container(
       width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
       color: Colors.white,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,7 +80,7 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
                     Column(
                       children: [
                         Text(
-                          'đ${widget.model.classify.keys.first}',
+                          'đ${widget.model.classify.values.first}',
                           style: const TextStyle(
                             fontSize: 18,
                             color: GloblalVariable.hex_f94f2f,
@@ -131,6 +132,7 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
                       ),
                     ),
                     Wrap(
+                      runSpacing: 8,
                       children: listKeyClassify.asMap().entries.map((entry) {
                         final index = entry.key;
                         final value = entry.value;
@@ -154,8 +156,8 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
                             // print(valueSlected);
                           }),
                           child: Container(
-                            margin: const EdgeInsets.all(12),
-                            height: 30,
+                            margin: const EdgeInsets.all(8),
+                            height: 25,
                             constraints: const BoxConstraints(
                               minWidth: 60,
                               maxWidth: 200,
@@ -175,7 +177,7 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
                               value,
                               textAlign: TextAlign.center,
                               style: const TextStyle(
-                                fontSize: 15,
+                                fontSize: 12,
                                 decoration: TextDecoration.none,
                               ),
                             ),
@@ -304,7 +306,7 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
                   productCart.classify = {
                     valueSlected: widget.model.classify[valueSlected]
                   };
-                  print(widget.model.image[indexImage]);
+                  // print(widget.model.image[indexImage]);
                   productCart.image = widget.model.image[indexImage];
 
                   Provider.of<ListProductCart>(context, listen: false)
