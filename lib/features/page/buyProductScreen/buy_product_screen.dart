@@ -3,6 +3,7 @@ import 'package:clone_shoppe/models/cartModel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../../provider/bought_product.dart';
@@ -78,9 +79,9 @@ class _BuyProductScreenState extends State<BuyProductScreen> {
                               )
                             ],
                           ),
-                          const Gap(5),
+                          Gap(5),
                           Padding(
-                            padding: const EdgeInsets.only(left: 27),
+                            padding: EdgeInsets.only(left: 27),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -114,7 +115,7 @@ class _BuyProductScreenState extends State<BuyProductScreen> {
                                     ),
                                   ],
                                 ),
-                                const Icon(
+                                Icon(
                                   Icons.arrow_forward_ios,
                                   size: 15,
                                   color: Colors.black54,
@@ -267,8 +268,8 @@ class _BuyProductScreenState extends State<BuyProductScreen> {
                                   color: Colors.black,
                                 ),
                               ),
-                              const Gap(8),
-                              const Icon(
+                              Gap(8),
+                              Icon(
                                 Icons.arrow_forward_ios,
                                 size: 15,
                                 color: Colors.black45,
@@ -493,8 +494,7 @@ class _BuyProductScreenState extends State<BuyProductScreen> {
                 Provider.of<BoughtProduct>(context, listen: false)
                     .addToListBoughtProduct(listSelected);
                 if (context.mounted) {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => const PurchaseOrder()));
+                  context.goNamed(GloblalVariable.purchaseOrderScreen);
                 }
               },
               child: Container(

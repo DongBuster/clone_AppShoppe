@@ -250,3 +250,14 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 }
+
+final snackBar = SnackBar(
+  elevation: 0,
+  behavior: SnackBarBehavior.floating,
+  backgroundColor: Colors.transparent,
+  content: AwesomeSnackbarContent(
+    title: 'Success!',
+    message: 'Account successfully created !',
+    contentType: ContentType.success,
+  ),
+);

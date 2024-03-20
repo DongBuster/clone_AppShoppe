@@ -15,6 +15,7 @@ import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../features/page/buyProductScreen/buy_product_screen.dart';
+import '../features/page/purchaseOrderScreen/purchase_order.dart';
 
 final GlobalKey<NavigatorState> _rootNavigator = GlobalKey(debugLabel: 'root');
 // final GlobalKey<NavigatorState> _shellNavigatorLogin =
@@ -46,6 +47,29 @@ class Routes {
           child: RegisterPage(),
         ),
       ),
+      GoRoute(
+        path: '/purchaseOrderScreen',
+        name: GloblalVariable.purchaseOrderScreen,
+        pageBuilder: (context, state) => const NoTransitionPage(
+          child: PurchaseOrder(),
+        ),
+      ),
+      GoRoute(
+        path: '/cartScreen',
+        name: GloblalVariable.cartScreen,
+        pageBuilder: (context, state) => const NoTransitionPage(
+          child: TransitionPage(child: CartScreen()),
+        ),
+        routes: [
+          GoRoute(
+            path: 'buyProductScreen',
+            name: GloblalVariable.buyProductScreen,
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: TransitionPage(child: BuyProductScreen()),
+            ),
+          ),
+        ],
+      ),
       StatefulShellRoute.indexedStack(
         pageBuilder: (context, state, navigationShell) {
           return NoTransitionPage(child: navigationShell);
@@ -66,15 +90,6 @@ class Routes {
                     pageBuilder: (context, state) => const NoTransitionPage(
                       child: TransitionPage(child: DetailProductsScreen()),
                     ),
-                    routes: [
-                      GoRoute(
-                        path: 'cartScreen',
-                        name: GloblalVariable.cartScreen,
-                        pageBuilder: (context, state) => const NoTransitionPage(
-                          child: TransitionPage(child: CartScreen()),
-                        ),
-                      ),
-                    ],
                   ),
                 ],
               ),
@@ -120,17 +135,6 @@ class Routes {
                 name: GloblalVariable.profileScreen,
                 pageBuilder: (context, state) => const NoTransitionPage(
                   child: Mainlayout(child: ProfileScreen()),
-                ),
-              ),
-            ],
-          ),
-          StatefulShellBranch(
-            routes: <RouteBase>[
-              GoRoute(
-                path: '/buyProductScreen',
-                name: GloblalVariable.buyProductScreen,
-                pageBuilder: (context, state) => const NoTransitionPage(
-                  child: BuyProductScreen(),
                 ),
               ),
             ],

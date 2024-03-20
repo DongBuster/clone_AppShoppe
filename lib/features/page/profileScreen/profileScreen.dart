@@ -14,6 +14,7 @@ import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 
 import '../../../common/widgets/text.dart';
 import '../../../provider/bought_product.dart';
+import '../../../provider/create_accout.dart';
 import '../../auth/services/auth.dart';
 import '../purchaseOrderScreen/purchase_order.dart';
 import 'icon_shopping_cart.dart';
@@ -51,15 +52,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
     ),
   );
 
-  String getCurrentUser() {
-    User? user = auth.currentUser;
+  // String getCurrentUser() {
+  //   User? user = auth.currentUser;
 
-    if (user != null) {
-      return user.displayName!;
-    } else {
-      return 'Unknow user';
-    }
-  }
+  //   if (user != null) {
+  //     return user.displayName!;
+  //   } else if (user == null) {
+  //     return 'Unknow user';
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -188,7 +189,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                getCurrentUser(),
+                                auth.currentUser?.displayName ?? 'Unknown user',
                                 style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,

@@ -114,6 +114,9 @@ class AuthController {
       if (e.message ==
           'The email address is already in use by another account.') {
         ScaffoldMessenger.of(context).showSnackBar(snackbarUsedEmail);
+      }
+      if (e.message == 'Password should be at least 6 characters') {
+        ScaffoldMessenger.of(context).showSnackBar(snackbarPassword);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(snackBarErrorOccurred);
       }
@@ -140,6 +143,16 @@ final snackbarUsedEmail = SnackBar(
     title: 'Warning!',
     message:
         'The email address is already in use by another account, please use another email !',
+    contentType: ContentType.warning,
+  ),
+);
+final snackbarPassword = SnackBar(
+  elevation: 0,
+  behavior: SnackBarBehavior.floating,
+  backgroundColor: Colors.transparent,
+  content: AwesomeSnackbarContent(
+    title: 'Warning!',
+    message: 'Password should be at least 6 characters, please !',
     contentType: ContentType.warning,
   ),
 );

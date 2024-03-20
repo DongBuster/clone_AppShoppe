@@ -1,12 +1,9 @@
-import 'dart:ffi';
-
 import 'package:clone_shoppe/constants/global_variables.dart';
 import 'package:clone_shoppe/models/cartModel.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-
 import '../../../provider/bought_product.dart';
 
 class PurchaseOrder extends StatefulWidget {
@@ -31,6 +28,16 @@ class _PurchaseOrderState extends State<PurchaseOrder> {
       length: 4,
       child: Scaffold(
         appBar: AppBar(
+          leading: GestureDetector(
+            onTap: () {
+              context.goNamed(GloblalVariable.profileScreen);
+            },
+            child: const Icon(
+              Icons.arrow_back,
+              size: 18,
+              color: Colors.black,
+            ),
+          ),
           title: const Text(
             'Đơn mua',
             style: TextStyle(

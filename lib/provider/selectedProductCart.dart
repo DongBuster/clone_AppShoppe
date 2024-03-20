@@ -18,14 +18,30 @@ class SelectedProductCart with ChangeNotifier {
     }
     totalPrice = sum.toString().replaceAllMapped(
         RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]}.');
-    // totalPrice = totalPrice.toDouble();
-    // listSelected.map((e) =>
-    //     totalPrice += e.numberOfProducts * (int.parse(e.classify.keys.first)));
+
     notifyListeners();
   }
 
   void setItemsSelected(CartModel cartModel, bool isChecked) {
     isChecked ? listSelected.add(cartModel) : listSelected.remove(cartModel);
+    calculateTotalPrice();
+    notifyListeners();
+  }
+
+  void setQuanityOfItemsSelected(int quantity, CartModel cartModel) {
+    for (var item in listSelected) {
+      if (cartModel.nameProduct == item.nameProduct &&
+          cartModel.classify.keys.first == item.classify.keys.first) {
+        item.numberOfProducts == quantity;
+        // debugPrint('${item.numberOfProducts}');
+      }
+    }
+    calculateTotalPrice();
+    notifyListeners();
+  }
+
+  void removeItemsSelected(CartModel cartModel) {
+    listSelected.remove(cartModel);
     calculateTotalPrice();
     notifyListeners();
   }

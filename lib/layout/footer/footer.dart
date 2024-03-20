@@ -46,7 +46,7 @@ class _FooterAppState extends State<FooterApp> {
             child: const SizedBox(
               width: 80,
               child: IconButtonHome(
-                size: 25,
+                size: 22,
                 pathRoute: '/home',
               ),
             ),

@@ -49,13 +49,13 @@ class _RotationIconFooterState extends State<RotationIconFooter>
           ? Icon(
               key: const ValueKey('iconHome'),
               Icons.home,
-              size: 28,
+              size: 22,
               color: widget.color,
             )
           : Icon(
               key: const ValueKey('iconThumb_up'),
               Icons.thumb_up,
-              size: 28,
+              size: 22,
               color: widget.color,
             ),
     );

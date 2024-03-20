@@ -12,10 +12,11 @@ class GloblalVariable {
   static const String liveScreen = 'liveScreen';
   static const String notificationsScreen = 'notificationsScreen';
   static const String profileScreen = 'profileScreen';
-  static const String buyProductScreen = 'buyProductScreen';
   // define name child route
   static const String detailProducts = 'detailProducts';
   static const String cartScreen = 'cartScreen';
+  static const String buyProductScreen = 'buyProductScreen';
+  static const String purchaseOrderScreen = 'purchaseOrderScreen';
 
   // define background image auth screen
   static const String backgroundImageAuth = 'assets/img/background.jpg';

@@ -5,6 +5,8 @@ import 'package:clone_shoppe/provider/listProductCart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../provider/selectedProductCart.dart';
+
 class ContentDetailShoppingCart extends StatefulWidget {
   final CartModel cartModel;
   final String nameShop;
@@ -137,6 +139,8 @@ class _ContentDetailShoppingCartState extends State<ContentDetailShoppingCart> {
                       });
                       Provider.of<ListProductCart>(context, listen: false)
                           .addQuantityProductCart(count, widget.cartModel);
+                      Provider.of<SelectedProductCart>(context, listen: false)
+                          .setQuanityOfItemsSelected(count, widget.cartModel);
                     }
                   },
                   child: Container(
@@ -174,6 +178,8 @@ class _ContentDetailShoppingCartState extends State<ContentDetailShoppingCart> {
                     });
                     Provider.of<ListProductCart>(context, listen: false)
                         .addQuantityProductCart(count, widget.cartModel);
+                    Provider.of<SelectedProductCart>(context, listen: false)
+                        .setQuanityOfItemsSelected(count, widget.cartModel);
                   },
                   child: Container(
                     width: 30,

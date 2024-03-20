@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../../../../constants/global_variables.dart';
 import '../../../../models/cartModel.dart';
 import '../../../../provider/listProductCart.dart';
+import '../../../../provider/selectedProductCart.dart';
 
 class FixShoppingCart extends StatefulWidget {
   final Widget child;
@@ -35,6 +36,8 @@ class _FixShoppingCartState extends State<FixShoppingCart> {
             onPressed: (context) {
               Provider.of<ListProductCart>(context, listen: false)
                   .removeProductToCart(widget.model);
+              Provider.of<SelectedProductCart>(context, listen: false)
+                  .removeItemsSelected(widget.model);
             },
             backgroundColor: GloblalVariable.hex_f94f2f,
             foregroundColor: Colors.white,

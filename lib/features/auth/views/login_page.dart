@@ -42,12 +42,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<CreateAccout>(context, listen: false).getIsCreate == false
-        ? null
-        : WidgetsBinding.instance.addPostFrameCallback((_) {
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
-          });
-
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(left: 35, right: 35),
