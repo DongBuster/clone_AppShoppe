@@ -41,19 +41,20 @@ class Routes {
         ),
       ),
       GoRoute(
-        path: '/register',
-        name: GloblalVariable.registerScreen,
-        builder: (context, state) => const TransitionPage(
-          child: RegisterPage(),
-        ),
-      ),
-      GoRoute(
-        path: '/purchaseOrderScreen',
-        name: GloblalVariable.purchaseOrderScreen,
-        pageBuilder: (context, state) => const NoTransitionPage(
-          child: PurchaseOrder(),
-        ),
-      ),
+          path: '/register',
+          name: GloblalVariable.registerScreen,
+          builder: (context, state) => const TransitionPage(
+                child: RegisterPage(),
+              ),
+          routes: [
+            GoRoute(
+              path: 'purchaseOrderScreen',
+              name: GloblalVariable.purchaseOrderScreen,
+              pageBuilder: (context, state) => const NoTransitionPage(
+                child: PurchaseOrder(),
+              ),
+            ),
+          ]),
       GoRoute(
         path: '/cartScreen',
         name: GloblalVariable.cartScreen,

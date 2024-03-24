@@ -49,7 +49,7 @@ class _ProductRecommendState extends State<ProductRecommend> {
                 child: Image.asset(
                   widget.productsRecommend.image[0],
                   width: 193,
-                  height: 200,
+                  height: 180,
                   fit: BoxFit.fill,
                 ),
               ),
@@ -130,7 +130,7 @@ class _ProductRecommendState extends State<ProductRecommend> {
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );

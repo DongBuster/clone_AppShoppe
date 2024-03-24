@@ -30,7 +30,7 @@ class _BannerProductsState extends State<BannerProducts> {
                 carouselController: controllerCarousel,
                 options: CarouselOptions(
                   viewportFraction: 1,
-                  height: 400,
+                  height: 320,
                   onPageChanged: (index, reason) {
                     setState(() {
                       pageNumber = index + 1;
@@ -53,11 +53,12 @@ class _BannerProductsState extends State<BannerProducts> {
                 right: 5,
                 bottom: 5,
                 child: Container(
-                  width: 40,
-                  height: 25,
+                  width: 38,
+                  height: 22,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
-                    color: Colors.white54,
+                    color: Colors.white,
+                    border: Border.all(color: Colors.black12),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -66,22 +67,22 @@ class _BannerProductsState extends State<BannerProducts> {
                       Text(
                         '$pageNumber',
                         style: const TextStyle(
-                            fontSize: 16,
-                            color: Colors.black45,
+                            fontSize: 14,
+                            color: Colors.black54,
                             decoration: TextDecoration.none),
                       ),
                       const Text(
                         '/',
                         style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.black45,
+                            fontSize: 14,
+                            color: Colors.black54,
                             decoration: TextDecoration.none),
                       ),
                       Text(
                         '${widget.product.image.length}',
                         style: const TextStyle(
-                          fontSize: 16,
-                          color: Colors.black45,
+                          fontSize: 14,
+                          color: Colors.black54,
                           decoration: TextDecoration.none,
                         ),
                       ),
@@ -103,13 +104,13 @@ class _BannerProductsState extends State<BannerProducts> {
                       child: Text(
                         '${widget.product.image.length} phân loại có sẵn',
                         style: const TextStyle(
-                            fontSize: 16,
+                            fontSize: 14,
                             color: Colors.black54,
                             decoration: TextDecoration.none),
                       ),
                     ),
                     SizedBox(
-                      height: 100,
+                      height: 90,
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
                         padding: const EdgeInsets.only(right: 8),
@@ -121,7 +122,7 @@ class _BannerProductsState extends State<BannerProducts> {
                             },
                             child: Container(
                               margin: const EdgeInsets.only(left: 8),
-                              width: 100,
+                              width: 90,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
                                 border: Border.all(

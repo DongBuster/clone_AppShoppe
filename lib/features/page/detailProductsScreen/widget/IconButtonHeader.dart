@@ -13,8 +13,8 @@ class _IconButtonHeaderState extends State<IconButtonHeader> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 40,
-      height: 40,
+      width: 35,
+      height: 35,
       alignment: Alignment.center,
       decoration: const BoxDecoration(
         color: Colors.black26,

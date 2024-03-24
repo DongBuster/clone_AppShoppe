@@ -8,7 +8,7 @@ class ProductShoppingCart extends StatefulWidget {
   final CartModel model;
   final String nameShop;
   // bool isChecked;
-  ProductShoppingCart({
+  const ProductShoppingCart({
     super.key,
     required this.model,
     // required this.isChecked,
@@ -23,7 +23,7 @@ class _ProductShoppingCartState extends State<ProductShoppingCart> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.fromLTRB(0, 8, 8, 8),
       decoration: const BoxDecoration(
         color: Colors.white,
         border: Border(bottom: BorderSide(color: Colors.black12)),

@@ -11,7 +11,7 @@ class CheckBox extends StatefulWidget {
   final String nameShop;
 
   final CartModel model;
-  CheckBox({
+  const CheckBox({
     super.key,
     // required this.isChecked,
     required this.model,

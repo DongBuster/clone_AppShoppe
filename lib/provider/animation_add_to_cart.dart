@@ -1,5 +1,3 @@
-import 'package:clone_shoppe/models/cartModel.dart';
-import 'package:clone_shoppe/models/detailProduct.dart';
 import 'package:flutter/material.dart';
 
 class AddToCartMannager {
@@ -25,7 +23,6 @@ class AddToCartMannager {
   }
 
   void runAnimation(int index) {
-    // print('here');
     // print(productKeys[index].currentContext ?? 'hsdjfjsdk');
 
     final productContext = productKeys[index].currentContext!;
@@ -36,10 +33,10 @@ class AddToCartMannager {
     final cartPosition =
         (cartKey.currentContext!.findRenderObject() as RenderBox)
             .localToGlobal(Offset.zero);
-    // print('shfj');
+
     final cartPositionTopRight =
         cartKey.currentContext!.size!.topRight(cartPosition);
-    // print('position cart:');
+
     // print(cartPosition.dx);
     // print(cartPosition.dy);
     // get position of the cart
@@ -51,12 +48,12 @@ class AddToCartMannager {
     productsize.value = productContext.size!;
 
     path = Path()
-      ..moveTo(productPosition.value.dx, productPosition.value.dy - 300)
+      ..moveTo(productPosition.value.dx, productPosition.value.dy)
       // ..moveTo(30, 30)
       // ..lineTo(200, 200);
       ..relativeLineTo(-20, -20)
-      ..lineTo(cartPositionTopRight.dx + 80 - productsize.value.width,
-          cartPositionTopRight.dy - 350 - productsize.value.height);
+      ..lineTo(cartPositionTopRight.dx - productsize.value.width,
+          cartPositionTopRight.dy - productsize.value.height);
 
     // trigger animation
     controller.forward();

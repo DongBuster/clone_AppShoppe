@@ -48,11 +48,16 @@ class _ContentDetailShoppingCartState extends State<ContentDetailShoppingCart> {
                 nameShop: widget.nameShop,
               ),
               const SizedBox(width: 5),
-              Image.asset(
-                widget.cartModel.image,
-                width: 90,
-                height: 90,
-                fit: BoxFit.fill,
+              Container(
+                width: 100,
+                height: 100,
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.all(Radius.circular(3)),
+                  image: DecorationImage(
+                    image: AssetImage(widget.cartModel.image),
+                    fit: BoxFit.fill,
+                  ),
+                ),
               ),
               const SizedBox(width: 12),
               Expanded(
@@ -76,7 +81,7 @@ class _ContentDetailShoppingCartState extends State<ContentDetailShoppingCart> {
                             child: Container(
                               padding: const EdgeInsets.all(3),
                               decoration: BoxDecoration(
-                                color: Colors.black12,
+                                color: Colors.grey.shade100,
                                 borderRadius: BorderRadius.circular(3),
                               ),
                               constraints: const BoxConstraints(
@@ -93,8 +98,7 @@ class _ContentDetailShoppingCartState extends State<ContentDetailShoppingCart> {
                                     textAlign: TextAlign.center,
                                     style: const TextStyle(
                                       fontSize: 12,
-                                      color: Colors.black45,
-                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black87,
                                       decoration: TextDecoration.none,
                                     ),
                                   ),
@@ -107,99 +111,107 @@ class _ContentDetailShoppingCartState extends State<ContentDetailShoppingCart> {
                               ),
                             ),
                           ),
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 5),
                     Text(
                       'đ${widget.cartModel.classify.values.first}',
                       style: const TextStyle(
-                        fontSize: 18,
+                        fontSize: 16,
                         color: GloblalVariable.hex_f94f2f,
                         decoration: TextDecoration.none,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 5),
+                    // add quantity of products
+                    Container(
+                      width: 90,
+                      height: 25,
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black12)),
+                      child: Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              if (count != 1) {
+                                setState(() {
+                                  count--;
+                                });
+                                Provider.of<ListProductCart>(context,
+                                        listen: false)
+                                    .addQuantityProductCart(
+                                        count, widget.cartModel);
+                                Provider.of<SelectedProductCart>(context,
+                                        listen: false)
+                                    .setQuanityOfItemsSelected(
+                                        count, widget.cartModel);
+                              }
+                            },
+                            child: Container(
+                              width: 30,
+                              decoration: const BoxDecoration(
+                                  border: Border(
+                                      right:
+                                          BorderSide(color: Colors.black12))),
+                              alignment: Alignment.topCenter,
+                              child: const Text(
+                                '-',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black54,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Center(
+                              child: Text(
+                                '$count',
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.black87,
+                                ),
+                              ),
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                count++;
+                              });
+                              Provider.of<ListProductCart>(context,
+                                      listen: false)
+                                  .addQuantityProductCart(
+                                      count, widget.cartModel);
+                              Provider.of<SelectedProductCart>(context,
+                                      listen: false)
+                                  .setQuanityOfItemsSelected(
+                                      count, widget.cartModel);
+                            },
+                            child: Container(
+                              width: 30,
+                              decoration: const BoxDecoration(
+                                  border: Border(
+                                      left: BorderSide(color: Colors.black12))),
+                              alignment: Alignment.topCenter,
+                              child: const Text(
+                                '+',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black54,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
                   ],
                 ),
               )
             ],
           ),
-          // add quantity of products
-          Container(
-            width: 90,
-            height: 25,
-            decoration:
-                BoxDecoration(border: Border.all(color: Colors.black12)),
-            child: Row(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    if (count != 1) {
-                      setState(() {
-                        count--;
-                      });
-                      Provider.of<ListProductCart>(context, listen: false)
-                          .addQuantityProductCart(count, widget.cartModel);
-                      Provider.of<SelectedProductCart>(context, listen: false)
-                          .setQuanityOfItemsSelected(count, widget.cartModel);
-                    }
-                  },
-                  child: Container(
-                    width: 30,
-                    decoration: const BoxDecoration(
-                        border:
-                            Border(right: BorderSide(color: Colors.black12))),
-                    alignment: Alignment.topCenter,
-                    child: const Text(
-                      '-',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black38,
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Center(
-                    child: Text(
-                      '$count',
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black38,
-                      ),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      count++;
-                    });
-                    Provider.of<ListProductCart>(context, listen: false)
-                        .addQuantityProductCart(count, widget.cartModel);
-                    Provider.of<SelectedProductCart>(context, listen: false)
-                        .setQuanityOfItemsSelected(count, widget.cartModel);
-                  },
-                  child: Container(
-                    width: 30,
-                    decoration: const BoxDecoration(
-                        border:
-                            Border(left: BorderSide(color: Colors.black12))),
-                    alignment: Alignment.topCenter,
-                    child: const Text(
-                      '+',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black38,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          )
         ],
       ),
     );

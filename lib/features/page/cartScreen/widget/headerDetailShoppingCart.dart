@@ -7,11 +7,10 @@ import 'package:provider/provider.dart';
 
 class HeaderDetailShoppingCart extends StatefulWidget {
   final String nameShop;
-  // bool isCheck;
-  HeaderDetailShoppingCart({
+
+  const HeaderDetailShoppingCart({
     super.key,
     required this.nameShop,
-    // required this.isCheck,
   });
   @override
   State<HeaderDetailShoppingCart> createState() =>
@@ -25,7 +24,7 @@ class _HeaderDetailShoppingCartState extends State<HeaderDetailShoppingCart> {
         .listsCheckBoxShop;
     return Container(
       height: 50,
-      padding: const EdgeInsets.only(left: 8, right: 12),
+      padding: const EdgeInsets.only(right: 12),
       margin: const EdgeInsets.only(top: 8),
       decoration: const BoxDecoration(
         color: Colors.white,

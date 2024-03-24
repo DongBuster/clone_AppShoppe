@@ -32,7 +32,7 @@ class _RenderProductRecommendState extends State<RenderProductRecommend> {
           // print(jsonContent!.map((e) => e));
           // return Container();
           return GridView.builder(
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.only(top: 3, left: 10),
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             scrollDirection: Axis.vertical,
@@ -42,7 +42,7 @@ class _RenderProductRecommendState extends State<RenderProductRecommend> {
             ),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              mainAxisExtent: 295,
+              mainAxisExtent: 280,
               mainAxisSpacing: 10,
               crossAxisSpacing: 8,
             ),

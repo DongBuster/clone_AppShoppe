@@ -50,7 +50,7 @@ class _DetailProductsScreenState extends State<DetailProductsScreen> {
                     DesscriptionProducts(
                       detailProduct: productModel.detailProductModel,
                     ),
-                    const SizedBox(height: 62),
+                    const SizedBox(height: 50),
                   ],
                 ),
               ),

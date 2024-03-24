@@ -3,12 +3,9 @@ import 'package:clone_shoppe/constants/global_variables.dart';
 import 'package:clone_shoppe/features/page/detailProductsScreen/widget/IconButtonHeader.dart';
 import 'package:clone_shoppe/provider/headerDetailProduct.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-
-import '../../../../provider/animation_add_to_cart.dart';
 
 class HeaderDetailProducts extends StatefulWidget {
   const HeaderDetailProducts({super.key});
@@ -52,7 +49,7 @@ class _HeaderDetailProductsState extends State<HeaderDetailProducts> {
                   ),
                 ),
                 SizedBox(
-                  width: 170,
+                  width: 140,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -72,7 +69,8 @@ class _HeaderDetailProductsState extends State<HeaderDetailProducts> {
                         onTap: () {
                           context.pushNamed(GloblalVariable.cartScreen);
                         },
-                        child: IconButtonHeader(child: IconShoppingCart()),
+                        child:
+                            const IconButtonHeader(child: IconShoppingCart()),
                       ),
                       //button more
                       GestureDetector(
@@ -114,7 +112,7 @@ class _HeaderDetailProductsState extends State<HeaderDetailProducts> {
                   },
                   child: Container(
                     alignment: Alignment.topLeft,
-                    width: 50,
+                    width: 30,
                     child: const Icon(
                       Icons.arrow_back,
                       size: 22,
@@ -158,7 +156,7 @@ class _HeaderDetailProductsState extends State<HeaderDetailProducts> {
                   ),
                 ),
                 SizedBox(
-                  width: 140,
+                  width: 125,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -176,7 +174,7 @@ class _HeaderDetailProductsState extends State<HeaderDetailProducts> {
                           onTap: () {
                             context.goNamed(GloblalVariable.cartScreen);
                           },
-                          child: IconShoppingCart()),
+                          child: const IconShoppingCart()),
                       //button more
                       GestureDetector(
                         child: const Icon(

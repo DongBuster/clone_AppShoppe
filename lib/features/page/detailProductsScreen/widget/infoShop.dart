@@ -102,8 +102,8 @@ Widget nameShop(String nameShop) {
 Widget buttonInfoShop() {
   return Container(
     alignment: Alignment.center,
-    width: 100,
-    height: 35,
+    width: 90,
+    height: 30,
     decoration: BoxDecoration(
       border: Border.all(color: GloblalVariable.hex_f94f2f, width: 2),
       borderRadius: BorderRadius.circular(3),

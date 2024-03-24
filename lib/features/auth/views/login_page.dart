@@ -1,11 +1,8 @@
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
-import '../../../provider/create_accout.dart';
 import '../controller/auth_controller.dart';
 import 'input_field.dart';
 
@@ -17,17 +14,6 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool isAccout = false;
-
-  final snackBar = SnackBar(
-    elevation: 0,
-    behavior: SnackBarBehavior.floating,
-    backgroundColor: Colors.transparent,
-    content: AwesomeSnackbarContent(
-      title: 'Success!',
-      message: 'Account successfully created !',
-      contentType: ContentType.success,
-    ),
-  );
 
   @override
   void initState() {

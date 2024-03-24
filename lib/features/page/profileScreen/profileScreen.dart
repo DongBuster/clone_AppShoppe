@@ -14,7 +14,6 @@ import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 
 import '../../../common/widgets/text.dart';
 import '../../../provider/bought_product.dart';
-import '../../../provider/create_accout.dart';
 import '../../auth/services/auth.dart';
 import '../purchaseOrderScreen/purchase_order.dart';
 import 'icon_shopping_cart.dart';
@@ -326,10 +325,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                             GestureDetector(
                               onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (_) => const PurchaseOrder()));
+                                context.goNamed(
+                                    GloblalVariable.purchaseOrderScreen);
                               },
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -476,44 +473,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           description: '',
                           isBorderBottom: false,
                           isBorderTop: false),
+                      GestureDetector(
+                          onTap: () async {
+                            final SharedPreferences prefs =
+                                await SharedPreferences.getInstance();
+
+                            Auth.signOut().then((value) {
+                              prefs.setBool('islogin', false);
+                              prefs.setString('email', '');
+                              context.goNamed(GloblalVariable.authScreen);
+                            }).catchError((error) {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
+                            });
+                          },
+                          child: const FeatureLink(
+                            icon: Icons.logout_rounded,
+                            colorIcon: Colors.redAccent,
+                            title: 'Logout',
+                            description: '',
+                            isBorderBottom: false,
+                            isBorderTop: true,
+                          )),
                     ],
-                  ),
-                ),
-                const Gap(8),
-                GestureDetector(
-                  onTap: () async {
-                    final SharedPreferences prefs =
-                        await SharedPreferences.getInstance();
-
-                    Auth.signOut().then((value) {
-                      prefs.setBool('islogin', false);
-                      prefs.setString('email', '');
-                      context.goNamed(GloblalVariable.authScreen);
-                    }).catchError((error) {
-                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                    });
-
-                    // else {
-                    //   showSnackBar(
-                    //       context, 'Something went wrong, please try again');
-                    // }
-                  },
-                  child: Container(
-                    alignment: Alignment.center,
-                    height: 35,
-                    width: 200,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: const Text(
-                      'Sign Out',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: GloblalVariable.hex_f94f2f,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
                   ),
                 ),
                 const Gap(63),

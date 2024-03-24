@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
@@ -41,9 +40,10 @@ class _FooterCartScreenState extends State<FooterCartScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          // check box
           Row(
             children: [
-              const Gap(5),
+              const Gap(15),
               SizedBox(
                 width: 20,
                 child: Checkbox(
@@ -77,6 +77,7 @@ class _FooterCartScreenState extends State<FooterCartScreen> {
               ),
             ],
           ),
+          // ---    ---
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
