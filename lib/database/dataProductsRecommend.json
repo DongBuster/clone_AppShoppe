@@ -10,8 +10,8 @@
                 "assets/products/recommend/sp1-2.jfif",
                 "assets/products/recommend/sp1-3.jfif"
             ],
-            "productPortfolio":"phụ kiện",
-            "productType":"dây cáp",
+            "productPortfolio":"Phụ kiện",
+            "productType":"Dây cáp",
             "quantitySold":"78",
             "percentSale":"2"
         },
@@ -27,8 +27,8 @@
                 "assets/products/recommend/sp2-2.jfif",
                 "assets/products/recommend/sp2-3.jfif"
             ],
-            "productPortfolio":"phụ kiện",
-            "productType":"dây cáp",
+            "productPortfolio":"Máy giặt và sấy",
+            "productType":"Máy sấy", 
             "quantitySold":"11,1k",
             "percentSale":"41"
 
@@ -44,8 +44,8 @@
                 "assets/products/recommend/sp3-2.jfif",
                 "assets/products/recommend/sp3-3.jfif"
             ],
-            "productPortfolio":"phụ kiện",
-            "productType":"dây cáp",
+            "productPortfolio":"Giấy ăn",
+            "productType":"Giấy ăn",
             
             "quantitySold":"5,6k",
             "percentSale":"11"
@@ -63,8 +63,8 @@
                 "assets/products/recommend/sp4-2.jfif",
                 "assets/products/recommend/sp4-3.jfif"
             ],
-            "productPortfolio":"phụ kiện",
-            "productType":"dây cáp",
+            "productPortfolio":"Thiết bị điện tử",
+            "productType":"Điện thoại",
             "quantitySold":"22",
             "percentSale":"9"
         },
@@ -80,8 +80,8 @@
                 "assets/products/recommend/sp5-1.jfif",
                 "assets/products/recommend/sp5-2.jfif"
             ],
-            "productPortfolio":"phụ kiện",
-            "productType":"dây cáp",
+            "productPortfolio":"Dụng cụ trang điểm",
+            "productType":"Tẩy trang",
             "quantitySold":"1,3tr",
             "percentSale":"37"
 
@@ -99,8 +99,8 @@
                 "assets/products/recommend/sp6-2.jfif",
                 "assets/products/recommend/sp6-3.jfif"
             ],
-            "productPortfolio":"phụ kiện",
-            "productType":"dây cáp",
+            "productPortfolio":"Vệ sinh răng miệng",
+            "productType":"Xịt Miệng",
             "quantitySold":"15k",
             "percentSale":"99"
 
@@ -117,8 +117,8 @@
                 "assets/products/recommend/sp7-1.jfif",
                 "assets/products/recommend/sp7-2.jfif"
             ],
-            "productPortfolio":"phụ kiện",
-            "productType":"dây cáp",
+            "productPortfolio":"Bàn phím máy tính",
+            "productType":"Bàn phím cơ",
             "quantitySold":"78k",
             "percentSale":"20"
 
@@ -134,8 +134,8 @@
                 "assets/products/recommend/sp8-2.jfif",
                 "assets/products/recommend/sp8-3.jfif"
             ],
-            "productPortfolio":"phụ kiện",
-            "productType":"dây cáp",
+            "productPortfolio":"Nước hoa",
+            "productType":"Nước hoa nam",
             "quantitySold":"78",
             "percentSale":"31"
 
@@ -154,8 +154,8 @@
                 "assets/products/recommend/sp9-2.jfif",
                 "assets/products/recommend/sp9-3.jfif"
             ],
-            "productPortfolio":"phụ kiện",
-            "productType":"dây cáp",
+            "productPortfolio":"Thiết bị điện tử",
+            "productType":"Hub",
             "quantitySold":"390",
             "percentSale":"22"
         },
@@ -170,8 +170,8 @@
                 "assets/products/recommend/sp10-2.jfif",
                 "assets/products/recommend/sp10-3.jfif"
             ],
-            "productPortfolio":"phụ kiện",
-            "productType":"dây cáp",
+            "productPortfolio":"Dụng cụ và thiết bị tiện ích",
+            "productType":"Vệ sinh móng",
             "quantitySold":"11,6k",
             "percentSale":"27"
 
@@ -188,8 +188,8 @@
                 "assets/products/recommend/sp11-1.jfif",
                 "assets/products/recommend/sp11-2.jfif"
             ],
-            "productPortfolio":"phụ kiện",
-            "productType":"dây cáp",
+            "productPortfolio":"Dụng cụ và thiết bị tiện ích",
+            "productType":"Cân điện tử",
             "quantitySold":"55.5k",
             "percentSale":"19"
 
@@ -206,8 +206,8 @@
                 "assets/products/recommend/sp12-1.jfif",
                 "assets/products/recommend/sp12-2.jfif"
             ],
-            "productPortfolio":"phụ kiện",
-            "productType":"dây cáp",
+            "productPortfolio":"Bàn phím máy tính",
+            "productType":"Bàn phím cơ",
             "quantitySold":"96",
             "percentSale":"35"
 
@@ -220,8 +220,8 @@
             "image":[
                 "assets/products/recommend/sp13.jfif"
             ],
-            "productPortfolio":"phụ kiện",
-            "productType":"dây cáp",
+            "productPortfolio":"Thiết bị điện tử",
+            "productType":"Điện thoại",
             "quantitySold":"22",
             "percentSale":"15"
 
@@ -238,8 +238,8 @@
                 "assets/products/recommend/sp14-1.jfif",
                 "assets/products/recommend/sp14-2.jfif"
             ],
-            "productPortfolio":"phụ kiện",
-            "productType":"dây cáp",
+            "productPortfolio":"Thiết bị điện tử",
+            "productType":"Tai nghe",
             "quantitySold":"16.3k",
             "percentSale":"23"
 
@@ -255,8 +255,8 @@
                 "assets/products/recommend/sp15.jfif",
                 "assets/products/recommend/sp15-2.jfif"
             ],
-            "productPortfolio":"phụ kiện",
-            "productType":"dây cáp",
+            "productPortfolio":"Nhà của đời sống",
+            "productType":"Túi đựng rác",
             "quantitySold":"33,5k",
             "percentSale":"36"
 
@@ -272,8 +272,8 @@
                 "assets/products/recommend/sp16.jfif",
                 "assets/products/recommend/sp16-1.jfif"
             ],
-            "productPortfolio":"phụ kiện",
-            "productType":"dây cáp",
+            "productPortfolio":"Dép",
+            "productType":"Dép nam",
             "quantitySold":"1,3k",
             "percentSale":"11"
 
@@ -291,8 +291,8 @@
                 "assets/products/recommend/sp17-2.jfif",
                 "assets/products/recommend/sp17-3.jfif"
             ],
-            "productPortfolio":"phụ kiện",
-            "productType":"dây cáp",
+            "productPortfolio":"Dụng cụ và thiết bị tiện ích",
+            "productType":"Lược",
             "quantitySold":"5,5k",
             "percentSale":"33"
 
@@ -308,8 +308,8 @@
                 "assets/products/recommend/sp18.jfif",
                 "assets/products/recommend/sp18-2.jfif"
             ],
-            "productPortfolio":"phụ kiện",
-            "productType":"dây cáp",
+            "productPortfolio":"Nhà của đời sống",
+            "productType":"Nước giặt",
             "quantitySold":"2.3k",
             "percentSale":"12"
 
@@ -322,8 +322,8 @@
             "image":[
                 "assets/products/recommend/sp19.jfif"
             ],
-            "productPortfolio":"phụ kiện",
-            "productType":"dây cáp",
+            "productPortfolio":"Thiết bị khác",
+            "productType":"Ốp",
             "quantitySold":"30k",
             "percentSale":"3"
 
@@ -341,8 +341,8 @@
                 "assets/products/recommend/sp20-1.jfif",
                 "assets/products/recommend/sp20-2.jfif"
             ],
-            "productPortfolio":"phụ kiện",
-            "productType":"dây cáp",
+            "productPortfolio":"Phụ kiện thời trang",
+            "productType":"Kính nữ",
             "quantitySold":"34,8k",
             "percentSale":"10"
         }

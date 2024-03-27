@@ -11,7 +11,6 @@ import '../services/auth.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-
 class AuthController {
   static FirebaseFirestore firestore = FirebaseFirestore.instance;
   static User get user => auth.currentUser!;
@@ -36,26 +35,38 @@ class AuthController {
     return await auth.signInWithCredential(credential);
   }
 
-  static Future<void> createUser() async {
-    String nameUser = user.email.toString();
+  static Future<void> createUser(String email, String id) async {
+    String nameUser = email.toString();
     int splitIndex = nameUser.indexOf('@');
     nameUser = nameUser.substring(0, splitIndex);
-    final User = AccoutUser(
-      id: user.uid,
+    final accountUser = AccoutUser(
+      id: id,
       name: nameUser,
       image: user.photoURL.toString(),
-      isOnline: 'true',
       email: user.email.toString(),
-      about: '',
     );
 
-    await firestore.collection('users').doc(user.uid).set(User.toJson());
+    await firestore.collection('users').doc(user.uid).set(accountUser.toJson());
+  }
+
+  static Future<bool> checkUserExists(String userId) async {
+    CollectionReference collectionRef =
+        FirebaseFirestore.instance.collection('users');
+
+    QuerySnapshot querySnapshot =
+        await collectionRef.where('id', isEqualTo: userId).get();
+
+    return querySnapshot.docs.isNotEmpty;
   }
 
   static Future<void> handleGoogleBtnClick(BuildContext context) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-
     _signInWithGoogle().then((userLogin) async {
+      checkUserExists(userLogin.user!.uid).then((isContain) {
+        if (isContain == false) {
+          createUser(userLogin.user!.email!, userLogin.user!.uid);
+        }
+      });
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setBool('islogin', true);
 
       await prefs.setString('email', user.email!);
@@ -94,8 +105,6 @@ class AuthController {
     TextEditingController controllerUsername,
     TextEditingController controllerPassword,
   ) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-
     try {
       await Auth()
           .createUserWithEmailAndPassword(
@@ -104,7 +113,7 @@ class AuthController {
       )
           .then(
         (value) {
-          Provider.of<CreateAccout>(context, listen: false).setIsCreate();
+          createUser(controllerUsername.text, user.uid);
           context.go('/login');
         },
       );

@@ -2,6 +2,7 @@ import 'package:clone_shoppe/database/loadData.dart';
 import 'package:clone_shoppe/features/page/homeScreen/widget/productRecommend.dart';
 import 'package:clone_shoppe/models/productsRecommend.dart';
 import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class RenderProductRecommend extends StatefulWidget {
   const RenderProductRecommend({super.key});
@@ -12,6 +13,21 @@ class RenderProductRecommend extends StatefulWidget {
 
 class _RenderProductRecommendState extends State<RenderProductRecommend> {
   List<ProductsRecommend> listProduct = [];
+  late final _futureSupabase;
+
+  // Future<Map<String, dynamic>> fetchData() async {
+  //   final response =
+  //       await Supabase.instance.client.from('products').select();
+  //   if (response.error != null) {
+  //     throw response.error.message;
+  //   }
+  //   return response.data as Map<String, dynamic>;
+  // }
+  @override
+  void initState() {
+    _futureSupabase = Supabase.instance.client.from('products').select();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +39,7 @@ class _RenderProductRecommendState extends State<RenderProductRecommend> {
           // print(snapshot.data);
           // print('here');
           final jsonContent = snapshot.data;
-          // print(jsonContent);
+          // print(jsonContent.runtimeType);
           var listProduct =
               jsonContent!.map((e) => ProductsRecommend.fromJson(e)).toList();
           // print(listProduct.first);

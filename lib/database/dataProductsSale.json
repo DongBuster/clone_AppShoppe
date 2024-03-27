@@ -1,8 +1,8 @@
 [
         {   "id":"sp001",
             "name":"Dép nữ cute, xinh xắn mới nhất",
-            "productPortfolio":"giày",
-            "productType":"giày nữ",
+            "productPortfolio":"Giày",
+            "productType":"Giày nữ",
             "price":"88.000",
             "image":"assets/products/sale/sp1.jpg",
             "quantitySold":"1,2k",
@@ -15,8 +15,8 @@
             "price":"250.000",
             "image":"assets/products/sale/sp2.jfif",
             "quantitySold":"80",
-            "productPortfolio":"balo",
-            "productType":"balo nữ",
+            "productPortfolio":"Balo",
+            "productType":"Balo nữ",
             "percentSale":"30"
         },
         {
@@ -25,8 +25,8 @@
             "price":"99.000",
             "image":"assets/products/sale/sp3.jfif",
             "quantitySold":"1k",
-            "productPortfolio":"kính mắt",
-            "productType":"kính giả cận",
+            "productPortfolio":"Phụ kiện thời trang",
+            "productType":"Kính giả cận",
             "percentSale":"39"
         },
         {
@@ -35,8 +35,8 @@
             "price":"39.000",
             "image":"assets/products/sale/sp4.jfif",
             "quantitySold":"10,2k",
-            "productPortfolio":"loa",
-            "productType":"loa bluetooth",
+            "productPortfolio":"Thiết bị điện tử",
+            "productType":"Loa bluetooth",
             "percentSale":"33"
         },
         
@@ -46,8 +46,8 @@
             "price":"26.000",
             "image":"assets/products/sale/sp5.jfif",
             "quantitySold":"32,2k",
-            "productPortfolio":"thời trang nam",
-            "productType":"bộ quần áo",
+            "productPortfolio":"Thời trang",
+            "productType":"Quần áo nam",
             "percentSale":"29"
         }, 
 
@@ -57,8 +57,8 @@
             "price":"15.000",
             "image":"assets/products/sale/sp6.jfif",
             "quantitySold":"3,1k",
-            "productPortfolio":"thắt lưng",
-            "productType":"thắt lưng nam",
+            "productPortfolio":"Phụ kiện thời trang",
+            "productType":"Thắt lưng nam",
             "percentSale":"10"
         }, 
         
@@ -68,8 +68,8 @@
             "price":"39.000",
             "image":"assets/products/sale/sp7.jfif",
             "quantitySold":"2k",
-            "productPortfolio":"dép",
-            "productType":"ldép sandal",
+            "productPortfolio":"Dép",
+            "productType":"Dép sandal",
             "percentSale":"9"
         },
         
@@ -79,7 +79,7 @@
             "price":"2.400",
             "image":"assets/products/sale/sp8.jfif",
             "quantitySold":"15,2k",
-            "productPortfolio":"vệ sinh",
+            "productPortfolio":"Vệ sinh răng miệng",
             "productType":"Xịt thơm miệng",
             "percentSale":"9"
         }, 
@@ -90,8 +90,8 @@
             "price":"59.000",
             "image":"assets/products/sale/sp9.jfif",
             "quantitySold":"14,1k",
-            "productPortfolio":"đồ ăn",
-            "productType":"bánh tráng",
+            "productPortfolio":"Đồ ăn",
+            "productType":"Bánh tráng",
             "percentSale":"15"
         },
 
@@ -101,8 +101,8 @@
             "price":"75.000",
             "image":"assets/products/sale/sp10.jfif",
             "quantitySold":"4,1k",
-            "productPortfolio":"dép",
-            "productType":"dép nữ",
+            "productPortfolio":"Dép",
+            "productType":"Dép nữ",
             "percentSale":"20"
         },
         {
@@ -111,8 +111,8 @@
             "price":"10.000",
             "image":"assets/products/sale/sp11.jfif",
             "quantitySold":"3,1k",
-            "productPortfolio":"kẹp tóc",
-            "productType":"dép nữ",
+            "productPortfolio":"Phụ kiện thời trang",
+            "productType":"Kẹp tóc nữ",
             "percentSale":"21"
         },
         {
@@ -121,8 +121,8 @@
             "price":"105.000",
             "image":"assets/products/sale/sp12.jfif",
             "quantitySold":"4,1k",
-            "productPortfolio":"dép",
-            "productType":"dép nữ",
+            "productPortfolio":"Nhà của đời sống",
+            "productType":"Máy Xay",
             "percentSale":"23"
         },
         {
@@ -131,8 +131,8 @@
             "price":"1.000",
             "image":"assets/products/sale/sp13.jfif",
             "quantitySold":"1,1k",
-            "productPortfolio":"dép",
-            "productType":"dép nữ",
+            "productPortfolio":"Phụ kiện thời trang",
+            "productType":"Vòng Tay",
             "percentSale":"70"
         },
         {
@@ -141,8 +141,8 @@
             "price":"152.000",
             "image":"assets/products/sale/sp14.jfif",
             "quantitySold":"7,1k",
-            "productPortfolio":"dép",
-            "productType":"dép nữ",
+            "productPortfolio":"Thời trang",
+            "productType":"Áo khoác nam",
             "percentSale":"34"
         }
         

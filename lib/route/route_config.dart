@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../features/auth/views/introduction_screen.dart';
 import '../features/page/buyProductScreen/buy_product_screen.dart';
 import '../features/page/purchaseOrderScreen/purchase_order.dart';
 
@@ -41,20 +42,28 @@ class Routes {
         ),
       ),
       GoRoute(
-          path: '/register',
-          name: GloblalVariable.registerScreen,
-          builder: (context, state) => const TransitionPage(
-                child: RegisterPage(),
-              ),
-          routes: [
-            GoRoute(
-              path: 'purchaseOrderScreen',
-              name: GloblalVariable.purchaseOrderScreen,
-              pageBuilder: (context, state) => const NoTransitionPage(
-                child: PurchaseOrder(),
-              ),
+        path: '/register',
+        name: GloblalVariable.registerScreen,
+        builder: (context, state) => const TransitionPage(
+          child: RegisterPage(),
+        ),
+        routes: [
+          GoRoute(
+            path: 'purchaseOrderScreen',
+            name: GloblalVariable.purchaseOrderScreen,
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: PurchaseOrder(),
             ),
-          ]),
+          ),
+        ],
+      ),
+      GoRoute(
+        path: '/IntroductionPage',
+        name: GloblalVariable.introductionPage,
+        builder: (context, state) => const TransitionPage(
+          child: IntroductionPage(),
+        ),
+      ),
       GoRoute(
         path: '/cartScreen',
         name: GloblalVariable.cartScreen,

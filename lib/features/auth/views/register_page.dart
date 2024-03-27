@@ -6,7 +6,7 @@ import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:go_router/go_router.dart';
 
 import '../controller/auth_controller.dart';
-import 'input_field.dart';
+import '../widget/input_field.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});

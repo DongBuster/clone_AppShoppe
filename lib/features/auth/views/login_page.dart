@@ -1,10 +1,11 @@
+import 'package:clone_shoppe/constants/global_variables.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:go_router/go_router.dart';
 import '../controller/auth_controller.dart';
-import 'input_field.dart';
+import '../widget/input_field.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -89,7 +90,9 @@ class _LoginPageState extends State<LoginPage> {
                 GestureDetector(
                   onTap: () {
                     AuthController.signInWithEmailAndPassword(
-                        context, _controllerUsername, _controllerPassword);
+                            context, _controllerUsername, _controllerPassword)
+                        .then((value) =>
+                            context.goNamed(GloblalVariable.introductionPage));
                   },
                   child: Container(
                     alignment: Alignment.center,
@@ -186,8 +189,8 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       onPressed: () async {
                         AuthController.handleGoogleBtnClick(context).then(
-                          (_) => context.go('/home'),
-                        );
+                            (value) => context
+                                .goNamed(GloblalVariable.introductionPage));
                       },
                       icon: SvgPicture.asset(
                         'assets/icon_google.svg',

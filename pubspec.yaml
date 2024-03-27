@@ -53,6 +53,12 @@ dependencies:
   local_hero: ^0.3.0
   animated_text_kit: ^4.2.2
   awesome_snackbar_content: ^0.1.3
+  supabase_flutter: ^2.3.4
+  introduction_screen: ^3.1.14
+  camera: ^0.10.5+9
+  image_picker: ^1.0.7
+  path_provider: ^2.1.2
+  path: ^1.9.0
 
 dev_dependencies:
   flutter_test:
@@ -87,6 +93,8 @@ flutter:
     - assets/icon_instagram.svg
     - assets/icon_google.svg
     - assets/img/user_default.jpg
+    - assets/img/intro_welcome.jpg
+    - assets/img/intro_hello.jpg
     - assets/img/background.jpg
     - assets/img/background_category.jpg
     - assets/banner/banner_specialOffer1.png
@@ -132,7 +140,6 @@ flutter:
     - assets/products/sale/sp14.jfif
     ##################################
     - lib/database/dataProductsRecommend.json
-    - lib/database/dataTest.json
     - assets/products/recommend/sp1.jfif
     - assets/products/recommend/sp1-1.jfif
     - assets/products/recommend/sp1-2.jfif

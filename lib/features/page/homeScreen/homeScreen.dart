@@ -11,6 +11,7 @@ import 'package:clone_shoppe/layout/header/widget/headerWithSearch.dart';
 import 'package:clone_shoppe/provider/stateActiveColorIconHeader.dart';
 import 'package:clone_shoppe/provider/stateActiveIconHome.dart';
 import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
