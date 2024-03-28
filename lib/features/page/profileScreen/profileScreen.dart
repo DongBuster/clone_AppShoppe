@@ -47,6 +47,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
     super.initState();
   }
 
+  Future<String> getNameUser(String uid) async {
+    DocumentSnapshot snapshot =
+        await FirebaseFirestore.instance.collection('users').doc(uid).get();
+    Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+    return data['name'];
+  }
+
   Future<String> getImageUrl(String uid) async {
     DocumentSnapshot snapshot =
         await FirebaseFirestore.instance.collection('users').doc(uid).get();
@@ -150,7 +157,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   ),
                                 ),
                               ],
-                            )
+                            ),
                           ],
                         ),
                         const Gap(15),
@@ -166,8 +173,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     borderRadius: BorderRadius.circular(30),
                                     child: Image.asset(
                                       'assets/img/user_default.jpg',
-                                      width: 50,
-                                      height: 50,
+                                      width: 70,
+                                      height: 70,
                                     ),
                                   )
                                 : FutureBuilder(
@@ -182,8 +189,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           ConnectionState.done) {
                                         return ClipOval(
                                           child: CachedNetworkImage(
-                                            width: 50,
-                                            height: 50,
+                                            width: 70,
+                                            height: 70,
                                             imageUrl: snapshot.data ?? '',
                                             errorWidget: (context, url, error) {
                                               return ClipRRect(
@@ -191,8 +198,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                     BorderRadius.circular(30),
                                                 child: Image.asset(
                                                   'assets/img/user_default.jpg',
-                                                  width: 50,
-                                                  height: 50,
+                                                  width: 70,
+                                                  height: 70,
                                                 ),
                                               );
                                             },
@@ -203,8 +210,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         borderRadius: BorderRadius.circular(30),
                                         child: Image.asset(
                                           'assets/img/user_default.jpg',
-                                          width: 50,
-                                          height: 50,
+                                          width: 70,
+                                          height: 70,
                                         ),
                                       );
                                     },
@@ -215,14 +222,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  auth.currentUser?.displayName ??
+                                FutureBuilder(
+                                  future: getNameUser(user!.uid),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.hasError) {
+                                      return const Text("Something went wrong");
+                                    }
+                                    if (snapshot.connectionState ==
+                                        ConnectionState.done) {
+                                      return Text(
+                                        snapshot.data ?? 'Unknown user',
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                        ),
+                                      );
+                                    }
+                                    return const Text(
                                       'Unknown user',
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                    );
+                                  },
                                 ),
                                 const Gap(5),
                                 Container(

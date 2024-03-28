@@ -1,14 +1,12 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:clone_shoppe/features/auth/views/introduction_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../models/user.dart';
-import '../../../provider/create_accout.dart';
 import '../services/auth.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AuthController {
@@ -44,34 +42,46 @@ class AuthController {
       name: nameUser,
       image: user.photoURL.toString(),
       email: user.email.toString(),
+      isNewUser: 'false',
     );
 
     await firestore.collection('users').doc(user.uid).set(accountUser.toJson());
   }
 
-  static Future<bool> checkUserExists(String userId) async {
-    CollectionReference collectionRef =
-        FirebaseFirestore.instance.collection('users');
-
-    QuerySnapshot querySnapshot =
-        await collectionRef.where('id', isEqualTo: userId).get();
-
-    return querySnapshot.docs.isNotEmpty;
+  static Future<String> isNewUser(String userId) async {
+    final DocumentSnapshot snapshot =
+        await FirebaseFirestore.instance.collection('users').doc(userId).get();
+    if (snapshot.exists) {
+      final data = snapshot.data() as Map<String, dynamic>;
+      final isNewUser = data['isNewUser'];
+      return isNewUser;
+    } else {
+      return '';
+    }
   }
 
   static Future<void> handleGoogleBtnClick(BuildContext context) async {
     _signInWithGoogle().then((userLogin) async {
-      checkUserExists(userLogin.user!.uid).then((isContain) {
-        if (isContain == false) {
-          createUser(userLogin.user!.email!, userLogin.user!.uid);
-        }
-      });
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setBool('islogin', true);
 
-      await prefs.setString('email', user.email!);
-
-      // context.go('/login');
+      await prefs.setString('email', userLogin.user!.email!);
+      isNewUser(userLogin.user!.uid).then((isContain) async {
+        if (isContain == 'false') {
+          createUser(userLogin.user!.email!, userLogin.user!.uid);
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  IntroductionPage(userId: userLogin.user!.uid),
+            ),
+          );
+        } else {
+          if (context.mounted) {
+            context.go('/home');
+          }
+        }
+      });
     }).catchError((error) {
       debugPrint('Login accout google error:$error');
       ScaffoldMessenger.of(context).showSnackBar(snackBarErrorOccurred);
@@ -86,13 +96,29 @@ class AuthController {
   ) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     try {
-      await Auth().signInWithEmailAndPassword(
-          email: controllerUsername.text, password: controllerPassword.text);
-      if (context.mounted) {
-        prefs.setBool('islogin', true);
-        prefs.setString('email', controllerUsername.text);
-        context.go('/home');
-      }
+      await Auth()
+          .signInWithEmailAndPassword(
+            email: controllerUsername.text,
+            password: controllerPassword.text,
+          )
+          .then(
+            (user) => isNewUser(user!.uid).then((isNewUser) {
+              prefs.setBool('islogin', true);
+              prefs.setString('email', controllerUsername.text);
+              if (isNewUser == 'false') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => IntroductionPage(userId: user.uid),
+                  ),
+                );
+              } else {
+                if (context.mounted) {
+                  context.go('/home');
+                }
+              }
+            }),
+          );
     } on FirebaseAuthException catch (e) {
       debugPrint('${e.message}');
     }

@@ -58,13 +58,6 @@ class Routes {
         ],
       ),
       GoRoute(
-        path: '/IntroductionPage',
-        name: GloblalVariable.introductionPage,
-        builder: (context, state) => const TransitionPage(
-          child: IntroductionPage(),
-        ),
-      ),
-      GoRoute(
         path: '/cartScreen',
         name: GloblalVariable.cartScreen,
         pageBuilder: (context, state) => const NoTransitionPage(

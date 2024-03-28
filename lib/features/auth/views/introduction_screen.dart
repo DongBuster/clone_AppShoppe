@@ -1,15 +1,20 @@
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:clone_shoppe/constants/global_variables.dart';
 
 class IntroductionPage extends StatefulWidget {
-  const IntroductionPage({super.key});
+  final String userId;
+  const IntroductionPage({
+    super.key,
+    required this.userId,
+  });
 
   @override
   State<IntroductionPage> createState() => _IntroductionPageState();
@@ -19,8 +24,9 @@ class _IntroductionPageState extends State<IntroductionPage> {
   final introKey = GlobalKey<IntroductionScreenState>();
   final controller = TextEditingController();
   final focusNode = FocusNode();
-
-  File? image;
+  String? downloadUrl;
+  // User? user = FirebaseAuth.instance.currentUser;
+  File? imageFile;
   @override
   void dispose() {
     controller.dispose();
@@ -30,30 +36,56 @@ class _IntroductionPageState extends State<IntroductionPage> {
 
   Future pickImage(ImageSource imageSource) async {
     try {
-      final image = await ImagePicker().pickImage(source: imageSource);
-      if (image == null) return;
-      final imageTemporary = File(image.path);
+      final imageFile = await ImagePicker().pickImage(source: imageSource);
+      if (imageFile == null) return;
+      final imageTemporary = File(imageFile.path);
       // final imagePermanent = await saveImagePermanently(image.path);
       setState(() {
-        this.image = imageTemporary;
+        this.imageFile = imageTemporary;
       });
     } on PlatformException catch (e) {
       debugPrint('Failed to pick image: $e');
     }
   }
 
-  // Future<File> saveImagePermanently(String imagePath) async {
-  //   final directory = await getApplicationDocumentsDirectory();
-  //   final name = basename(imagePath);
-  //   final permanentImagePath = '${directory.path}/$name';
+  Future<void> pushUserImage() async {
+    //--- create file name ---
+    final imageName = '${widget.userId}_image_user';
+    // --- create StorageRef ---
+    final firebaseStorageRef = FirebaseStorage.instance
+        .ref()
+        .child('image_users/${widget.userId}/$imageName');
+    // --- upload image ---
+    final metadata = SettableMetadata(
+      contentType: 'image/jpeg',
+    );
 
-  //   File image = File(imagePath);
-  //   File permanentImage = await image.copy(permanentImagePath);
-  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   prefs.setString('imagePath', permanentImage.path);
-  //   // print(permanentImage.path);
-  //   return permanentImage;
-  // }
+    final uploadTask = firebaseStorageRef.putFile(imageFile!, metadata);
+    await uploadTask.then((task) {
+      task.ref.getDownloadURL().then((urlImage) async {
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(widget.userId)
+            .update({'image': urlImage});
+      });
+    });
+    // print(urlImage);
+  }
+
+  Future<void> updateNameUser(String name) async {
+    // print(user.uid??'');
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(widget.userId)
+        .update({'name': name});
+  }
+
+  Future setIsNewUser(String userId) async {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(widget.userId)
+        .update({'isNewUser': 'true'});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,15 +116,16 @@ class _IntroductionPageState extends State<IntroductionPage> {
             decoration: pageDecoration,
           ),
           PageViewModel(
+            useScrollView: true,
             title: "",
-            bodyWidget: Image.asset(
-              'assets/img/intro_hello.jpg',
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height / 2,
-            ),
-            footer: Column(
+            bodyWidget: Column(
               children: [
-                const Gap(30),
+                Image.asset(
+                  'assets/img/intro_hello.jpg',
+                  width: MediaQuery.of(context).size.width,
+                  height: 200,
+                ),
+                const Gap(10),
                 Text(
                   'Can you tell me your name?',
                   style: TextStyle(
@@ -101,19 +134,29 @@ class _IntroductionPageState extends State<IntroductionPage> {
                 ),
                 const Gap(10),
                 SizedBox(
-                  height: 30,
-                  width: 100,
+                  height: 35,
+                  width: 120,
                   child: TextField(
                     controller: controller,
                     focusNode: focusNode,
                     onTapOutside: (event) {
                       focusNode.unfocus();
                     },
+                    style: const TextStyle(
+                      decoration: TextDecoration.none,
+                    ),
+                    onChanged: (value) {},
+                    // onChanged: ,
                     cursorColor: Colors.blue,
                     cursorWidth: 2,
+                    textAlign: TextAlign.center,
                     decoration: const InputDecoration(
                       hintText: 'Type your name',
-                      hintStyle: TextStyle(fontSize: 13, color: Colors.black45),
+                      hintStyle: TextStyle(
+                        fontSize: 15,
+                        color: Colors.black45,
+                        decoration: TextDecoration.none,
+                      ),
                       enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(color: Colors.blue),
                       ),
@@ -123,7 +166,25 @@ class _IntroductionPageState extends State<IntroductionPage> {
                       ),
                     ),
                   ),
-                )
+                ),
+                const Gap(20),
+                TextButton(
+                  onPressed: () {
+                    updateNameUser(controller.text).then((_) =>
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar));
+                  },
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStatePropertyAll(
+                          GloblalVariable.hex_f94f2f.withOpacity(0.8))),
+                  child: const Text(
+                    'Confirm',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
               ],
             ),
             decoration: const PageDecoration(
@@ -135,10 +196,10 @@ class _IntroductionPageState extends State<IntroductionPage> {
             title: "Choose your profile picture",
             bodyWidget: Column(
               children: [
-                image != null
+                imageFile != null
                     ? ClipOval(
                         child: Image.file(
-                        image!,
+                        imageFile!,
                         cacheHeight: 180,
                         cacheWidth: 180,
                       ))
@@ -151,10 +212,12 @@ class _IntroductionPageState extends State<IntroductionPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     TextButton(
-                      onPressed: () => pickImage(ImageSource.camera),
-                      style: const ButtonStyle(
+                      onPressed: () {
+                        pickImage(ImageSource.camera);
+                      },
+                      style: ButtonStyle(
                           backgroundColor: MaterialStatePropertyAll(
-                              GloblalVariable.hex_f94f2f)),
+                              GloblalVariable.hex_f94f2f.withOpacity(0.8))),
                       child: const Text(
                         'Pick from camera',
                         style: TextStyle(
@@ -167,9 +230,9 @@ class _IntroductionPageState extends State<IntroductionPage> {
                     const Gap(15),
                     TextButton(
                       onPressed: () => pickImage(ImageSource.gallery),
-                      style: const ButtonStyle(
+                      style: ButtonStyle(
                           backgroundColor: MaterialStatePropertyAll(
-                              GloblalVariable.hex_f94f2f)),
+                              GloblalVariable.hex_f94f2f.withOpacity(0.8))),
                       child: const Text(
                         'Pick from gallery',
                         style: TextStyle(
@@ -180,10 +243,11 @@ class _IntroductionPageState extends State<IntroductionPage> {
                       ),
                     ),
                   ],
-                )
+                ),
               ],
             ),
             decoration: const PageDecoration(
+              bodyAlignment: Alignment.center,
               titlePadding: EdgeInsets.only(top: 30),
               bodyPadding: EdgeInsets.fromLTRB(12.0, 30.0, 12.0, 12.0),
               pageColor: Colors.white,
@@ -191,10 +255,17 @@ class _IntroductionPageState extends State<IntroductionPage> {
             ),
           ),
         ],
-        onDone: () => context.pushNamed(GloblalVariable.homeScreen),
+        onDone: () {
+          pushUserImage().then((_) {
+            setIsNewUser(widget.userId);
+            context.pushNamed(GloblalVariable.homeScreen);
+          });
+        },
         onSkip: () => context.pushNamed(
           GloblalVariable.homeScreen,
         ),
+
+        resizeToAvoidBottomInset: false,
         showSkipButton: true,
         skipOrBackFlex: 0,
         nextFlex: 0,
@@ -219,6 +290,7 @@ class _IntroductionPageState extends State<IntroductionPage> {
             color: GloblalVariable.hex_f94f2f,
           ),
         ),
+
         curve: Curves.fastLinearToSlowEaseIn,
         controlsMargin: const EdgeInsets.all(16),
 
@@ -235,3 +307,12 @@ class _IntroductionPageState extends State<IntroductionPage> {
     );
   }
 }
+
+final snackBar = SnackBar(
+  backgroundColor: Colors.green.shade400,
+  content: const Text(
+    'Sucessfully',
+    style: TextStyle(color: Colors.white),
+  ),
+  duration: const Duration(milliseconds: 500),
+);
