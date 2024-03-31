@@ -1,7 +1,7 @@
-import 'package:clone_shoppe/features/page/detailProductsScreen/view/BannerProducts.dart';
-import 'package:clone_shoppe/features/page/detailProductsScreen/view/descriptionProducts.dart';
-import 'package:clone_shoppe/features/page/detailProductsScreen/view/footerDetailProducts.dart';
-import 'package:clone_shoppe/features/page/detailProductsScreen/view/headerDetailProducts.dart';
+import 'package:clone_shoppe/features/page/detailProductsPage/view/BannerProducts.dart';
+import 'package:clone_shoppe/features/page/detailProductsPage/view/descriptionProducts.dart';
+import 'package:clone_shoppe/features/page/detailProductsPage/view/footerDetailProducts.dart';
+import 'package:clone_shoppe/features/page/detailProductsPage/view/headerDetailProducts.dart';
 import 'package:clone_shoppe/provider/detailProductModel.dart';
 import 'package:clone_shoppe/provider/headerDetailProduct.dart';
 import 'package:flutter/material.dart';

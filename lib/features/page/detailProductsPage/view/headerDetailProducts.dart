@@ -1,6 +1,6 @@
 import 'package:clone_shoppe/common/widgets/IconShoppingCart.dart';
 import 'package:clone_shoppe/constants/global_variables.dart';
-import 'package:clone_shoppe/features/page/detailProductsScreen/widget/IconButtonHeader.dart';
+import 'package:clone_shoppe/features/page/detailProductsPage/widget/IconButtonHeader.dart';
 import 'package:clone_shoppe/provider/headerDetailProduct.dart';
 import 'package:flutter/material.dart';
 

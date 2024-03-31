@@ -1,5 +1,5 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
-import 'package:clone_shoppe/features/auth/views/introduction_screen.dart';
+import 'package:clone_shoppe/features/page/introductoinPage/introduction_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -42,7 +42,7 @@ class AuthController {
       name: nameUser,
       image: user.photoURL.toString(),
       email: user.email.toString(),
-      isNewUser: 'false',
+      isNewUser: 'true',
     );
 
     await firestore.collection('users').doc(user.uid).set(accountUser.toJson());
@@ -66,8 +66,8 @@ class AuthController {
       await prefs.setBool('islogin', true);
 
       await prefs.setString('email', userLogin.user!.email!);
-      isNewUser(userLogin.user!.uid).then((isContain) async {
-        if (isContain == 'false') {
+      isNewUser(userLogin.user!.uid).then((isNewUser) async {
+        if (isNewUser == 'true') {
           createUser(userLogin.user!.email!, userLogin.user!.uid);
           Navigator.push(
             context,
@@ -105,7 +105,7 @@ class AuthController {
             (user) => isNewUser(user!.uid).then((isNewUser) {
               prefs.setBool('islogin', true);
               prefs.setString('email', controllerUsername.text);
-              if (isNewUser == 'false') {
+              if (isNewUser == 'true') {
                 Navigator.push(
                   context,
                   MaterialPageRoute(

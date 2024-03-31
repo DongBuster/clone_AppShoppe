@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:clone_shoppe/constants/global_variables.dart';
 import 'package:clone_shoppe/models/detailProduct.dart';
 import 'package:flutter/material.dart';
@@ -44,9 +45,14 @@ Widget imageShop(String path) {
         height: 50,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(50),
-          child: Image.asset(
-            path,
+          child: CachedNetworkImage(
+            imageUrl: path,
             fit: BoxFit.fill,
+            errorWidget: (context, url, error) {
+              return Container(
+                color: Colors.black45,
+              );
+            },
           ),
         ),
       ),

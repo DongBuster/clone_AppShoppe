@@ -1,10 +1,10 @@
-import 'package:clone_shoppe/features/page/homeScreen/handles/renderProductRecommend.dart';
-import 'package:clone_shoppe/features/page/homeScreen/handles/renderProductSale.dart';
-import 'package:clone_shoppe/features/page/homeScreen/view/Banner.dart';
-import 'package:clone_shoppe/features/page/homeScreen/view/BannerSpecial.dart';
-import 'package:clone_shoppe/features/page/homeScreen/view/ElectronicWallet.dart';
-import 'package:clone_shoppe/features/page/homeScreen/view/ListItemsCategory.dart';
-import 'package:clone_shoppe/features/page/homeScreen/widget/CoutdowTimer.dart';
+import 'package:clone_shoppe/features/page/homePage/handles/renderProductRecommend.dart';
+import 'package:clone_shoppe/features/page/homePage/handles/renderProductSale.dart';
+import 'package:clone_shoppe/features/page/homePage/view/Banner.dart';
+import 'package:clone_shoppe/features/page/homePage/view/BannerSpecial.dart';
+import 'package:clone_shoppe/features/page/homePage/view/ElectronicWallet.dart';
+import 'package:clone_shoppe/features/page/homePage/view/ListItemsCategory.dart';
+import 'package:clone_shoppe/features/page/homePage/widget/CoutdowTimer.dart';
 import 'package:provider/provider.dart';
 import 'package:clone_shoppe/layout/header/header.dart';
 import 'package:clone_shoppe/layout/header/widget/headerWithSearch.dart';

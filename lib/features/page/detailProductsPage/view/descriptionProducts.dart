@@ -1,6 +1,6 @@
-import 'package:clone_shoppe/features/page/detailProductsScreen/widget/infoProduct.dart';
-import 'package:clone_shoppe/features/page/detailProductsScreen/widget/infoShop.dart';
-import 'package:clone_shoppe/features/page/detailProductsScreen/widget/titleProducts.dart';
+import 'package:clone_shoppe/features/page/detailProductsPage/widget/infoProduct.dart';
+import 'package:clone_shoppe/features/page/detailProductsPage/widget/infoShop.dart';
+import 'package:clone_shoppe/features/page/detailProductsPage/widget/titleProducts.dart';
 import 'package:clone_shoppe/models/detailProduct.dart';
 import 'package:flutter/material.dart';
 

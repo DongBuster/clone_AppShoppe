@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:clone_shoppe/constants/global_variables.dart';
 import 'package:clone_shoppe/models/detailProduct.dart';
@@ -40,9 +41,14 @@ class _BannerProductsState extends State<BannerProducts> {
                 items: widget.product.image
                     .map(
                       (image) => ClipRRect(
-                        child: Image.asset(
-                          image,
+                        child: CachedNetworkImage(
+                          imageUrl: widget.product.image[0],
                           fit: BoxFit.fill,
+                          errorWidget: (context, url, error) {
+                            return Container(
+                              color: Colors.black45,
+                            );
+                          },
                         ),
                       ),
                     )
@@ -128,9 +134,14 @@ class _BannerProductsState extends State<BannerProducts> {
                                 border: Border.all(
                                     color: GloblalVariable.hex_f94f2f),
                               ),
-                              child: Image.asset(
-                                widget.product.image[index],
+                              child: CachedNetworkImage(
+                                imageUrl: widget.product.image[index],
                                 fit: BoxFit.fill,
+                                errorWidget: (context, url, error) {
+                                  return Container(
+                                    color: Colors.black45,
+                                  );
+                                },
                               ),
                             ),
                           );

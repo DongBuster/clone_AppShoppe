@@ -9,6 +9,8 @@ import 'package:introduction_screen/introduction_screen.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:clone_shoppe/constants/global_variables.dart';
 
+import 'controller/controller.dart';
+
 class IntroductionPage extends StatefulWidget {
   final String userId;
   const IntroductionPage({
@@ -22,69 +24,17 @@ class IntroductionPage extends StatefulWidget {
 
 class _IntroductionPageState extends State<IntroductionPage> {
   final introKey = GlobalKey<IntroductionScreenState>();
-  final controller = TextEditingController();
+  final controllerInput = TextEditingController();
   final focusNode = FocusNode();
-  String? downloadUrl;
-  // User? user = FirebaseAuth.instance.currentUser;
-  File? imageFile;
+  final controller = ControllerIntruductionPage();
+
+  File? imageFilePick;
+
   @override
   void dispose() {
-    controller.dispose();
+    controllerInput.dispose();
     focusNode.dispose();
     super.dispose();
-  }
-
-  Future pickImage(ImageSource imageSource) async {
-    try {
-      final imageFile = await ImagePicker().pickImage(source: imageSource);
-      if (imageFile == null) return;
-      final imageTemporary = File(imageFile.path);
-      // final imagePermanent = await saveImagePermanently(image.path);
-      setState(() {
-        this.imageFile = imageTemporary;
-      });
-    } on PlatformException catch (e) {
-      debugPrint('Failed to pick image: $e');
-    }
-  }
-
-  Future<void> pushUserImage() async {
-    //--- create file name ---
-    final imageName = '${widget.userId}_image_user';
-    // --- create StorageRef ---
-    final firebaseStorageRef = FirebaseStorage.instance
-        .ref()
-        .child('image_users/${widget.userId}/$imageName');
-    // --- upload image ---
-    final metadata = SettableMetadata(
-      contentType: 'image/jpeg',
-    );
-
-    final uploadTask = firebaseStorageRef.putFile(imageFile!, metadata);
-    await uploadTask.then((task) {
-      task.ref.getDownloadURL().then((urlImage) async {
-        await FirebaseFirestore.instance
-            .collection('users')
-            .doc(widget.userId)
-            .update({'image': urlImage});
-      });
-    });
-    // print(urlImage);
-  }
-
-  Future<void> updateNameUser(String name) async {
-    // print(user.uid??'');
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(widget.userId)
-        .update({'name': name});
-  }
-
-  Future setIsNewUser(String userId) async {
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(widget.userId)
-        .update({'isNewUser': 'true'});
   }
 
   @override
@@ -137,7 +87,7 @@ class _IntroductionPageState extends State<IntroductionPage> {
                   height: 35,
                   width: 120,
                   child: TextField(
-                    controller: controller,
+                    controller: controllerInput,
                     focusNode: focusNode,
                     onTapOutside: (event) {
                       focusNode.unfocus();
@@ -170,8 +120,10 @@ class _IntroductionPageState extends State<IntroductionPage> {
                 const Gap(20),
                 TextButton(
                   onPressed: () {
-                    updateNameUser(controller.text).then((_) =>
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar));
+                    controller
+                        .updateNameUser(controllerInput.text, widget.userId)
+                        .then((_) => ScaffoldMessenger.of(context)
+                            .showSnackBar(snackBar));
                   },
                   style: ButtonStyle(
                       backgroundColor: MaterialStatePropertyAll(
@@ -196,13 +148,14 @@ class _IntroductionPageState extends State<IntroductionPage> {
             title: "Choose your profile picture",
             bodyWidget: Column(
               children: [
-                imageFile != null
+                imageFilePick != null
                     ? ClipOval(
                         child: Image.file(
-                        imageFile!,
-                        cacheHeight: 180,
-                        cacheWidth: 180,
-                      ))
+                          imageFilePick!,
+                          cacheHeight: 180,
+                          cacheWidth: 180,
+                        ),
+                      )
                     : ClipRRect(
                         child: Image.asset('assets/img/user_default.jpg',
                             width: 180, height: 180),
@@ -213,7 +166,11 @@ class _IntroductionPageState extends State<IntroductionPage> {
                   children: [
                     TextButton(
                       onPressed: () {
-                        pickImage(ImageSource.camera);
+                        controller.pickImage(ImageSource.camera).then(
+                              (value) => setState(() {
+                                imageFilePick = value;
+                              }),
+                            );
                       },
                       style: ButtonStyle(
                           backgroundColor: MaterialStatePropertyAll(
@@ -229,7 +186,8 @@ class _IntroductionPageState extends State<IntroductionPage> {
                     ),
                     const Gap(15),
                     TextButton(
-                      onPressed: () => pickImage(ImageSource.gallery),
+                      onPressed: () =>
+                          controller.pickImage(ImageSource.gallery),
                       style: ButtonStyle(
                           backgroundColor: MaterialStatePropertyAll(
                               GloblalVariable.hex_f94f2f.withOpacity(0.8))),
@@ -256,8 +214,8 @@ class _IntroductionPageState extends State<IntroductionPage> {
           ),
         ],
         onDone: () {
-          pushUserImage().then((_) {
-            setIsNewUser(widget.userId);
+          controller.pushUserImage(widget.userId).then((_) {
+            controller.setIsNewUser(widget.userId);
             context.pushNamed(GloblalVariable.homeScreen);
           });
         },

@@ -1,5 +1,5 @@
-import 'package:clone_shoppe/features/page/homeScreen/widget/ItemCategory.dart';
-import 'package:clone_shoppe/features/page/homeScreen/widget/ScrollBar.dart';
+import 'package:clone_shoppe/features/page/homePage/widget/ItemCategory.dart';
+import 'package:clone_shoppe/features/page/homePage/widget/ScrollBar.dart';
 import 'package:flutter/material.dart';
 
 class ListItemsCategory extends StatefulWidget {

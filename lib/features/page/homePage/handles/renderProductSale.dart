@@ -1,5 +1,5 @@
 import 'package:clone_shoppe/database/loadData.dart';
-import 'package:clone_shoppe/features/page/homeScreen/widget/productSale.dart';
+import 'package:clone_shoppe/features/page/homePage/widget/productSale.dart';
 import 'package:clone_shoppe/models/productSale.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +23,7 @@ class _RenderProductSaleState extends State<RenderProductSale> {
           final jsonContent = snapshot.data;
           // print(jsonContent);
           listProduct =
-              jsonContent!.map((e) => ProductSale.fromJson(e)).toList() ?? [];
+              jsonContent!.map((e) => ProductSale.fromJson(e)).toList();
           // print(listProduct);
 
           return SizedBox(

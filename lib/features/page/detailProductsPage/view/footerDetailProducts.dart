@@ -1,5 +1,5 @@
 import 'package:clone_shoppe/constants/global_variables.dart';
-import 'package:clone_shoppe/features/page/detailProductsScreen/view/modalBottomSheet.dart';
+import 'package:clone_shoppe/features/page/detailProductsPage/view/modalBottomSheet.dart';
 import 'package:clone_shoppe/models/detailProduct.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';

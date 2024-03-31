@@ -1,5 +1,5 @@
 import 'package:clone_shoppe/constants/global_variables.dart';
-import 'package:clone_shoppe/features/page/cartScreen/widget/checkbox.dart';
+import 'package:clone_shoppe/features/page/cartPage/widget/checkbox.dart';
 import 'package:clone_shoppe/models/cartModel.dart';
 import 'package:clone_shoppe/provider/listProductCart.dart';
 import 'package:flutter/material.dart';

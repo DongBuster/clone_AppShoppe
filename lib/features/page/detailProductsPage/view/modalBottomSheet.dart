@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:clone_shoppe/constants/global_variables.dart';
 import 'package:clone_shoppe/models/cartModel.dart';
 import 'package:clone_shoppe/models/detailProduct.dart';
@@ -101,8 +102,6 @@ class _ModalBottomSheetState extends State<ModalBottomSheet>
             // content
             Container(
               width: MediaQuery.of(context).size.width,
-              // constraints: const BoxConstraints(maxHeight: 400),
-              // height: 400,
               decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
@@ -123,15 +122,18 @@ class _ModalBottomSheetState extends State<ModalBottomSheet>
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            Container(
+                            SizedBox(
                               key: manager.productKeys[indexImage],
                               width: 100,
                               height: 100,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage(
-                                      widget.model.image[indexImage]),
-                                ),
+                              child: CachedNetworkImage(
+                                imageUrl: widget.model.image[indexImage],
+                                fit: BoxFit.fill,
+                                errorWidget: (context, url, error) {
+                                  return Container(
+                                    color: Colors.black45,
+                                  );
+                                },
                               ),
                             ),
                             const SizedBox(width: 14),
@@ -448,12 +450,14 @@ class _ModalBottomSheetState extends State<ModalBottomSheet>
               return SizedBox(
                 width: manager.productsize.value.width,
                 height: manager.productsize.value.height,
-                child: Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(widget.model.image[indexImage]),
-                    ),
-                  ),
+                child: CachedNetworkImage(
+                  imageUrl: widget.model.image[indexImage],
+                  fit: BoxFit.fill,
+                  errorWidget: (context, url, error) {
+                    return Container(
+                      color: Colors.black45,
+                    );
+                  },
                 )
                     .animate(
                       autoPlay: false,

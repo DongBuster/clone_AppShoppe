@@ -1,10 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:clone_shoppe/constants/global_variables.dart';
-import 'package:clone_shoppe/features/page/profileScreen/feature_link.dart';
+import 'package:clone_shoppe/features/page/profilePage/feature_link.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
+import 'package:flutter/widgets.dart';
 
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
@@ -14,6 +15,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 
 import '../../../common/widgets/text.dart';
+import '../../../database/loadData.dart';
 import '../../../provider/bought_product.dart';
 import '../../auth/services/auth.dart';
 
@@ -30,24 +32,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Color primaryColor = GloblalVariable.hex_f94f2f;
   User? user = FirebaseAuth.instance.currentUser;
   FirebaseAuth auth = FirebaseAuth.instance;
+  String imageUrl = '';
+  String? nameUser = '';
 
-  final snackBar = SnackBar(
-    elevation: 0,
-    behavior: SnackBarBehavior.floating,
-    backgroundColor: Colors.transparent,
-    content: AwesomeSnackbarContent(
-      title: 'Warning!',
-      message: 'Something error occurred, please try again !',
-      contentType: ContentType.warning,
-    ),
-  );
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  Future<String> getNameUser(String uid) async {
+  Future<String?> getNameUser(String uid) async {
     DocumentSnapshot snapshot =
         await FirebaseFirestore.instance.collection('users').doc(uid).get();
     Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
@@ -59,6 +47,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
         await FirebaseFirestore.instance.collection('users').doc(uid).get();
     Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
     return data['image'];
+  }
+
+  @override
+  void initState() {
+    getImageUrl(user!.uid).then((value) => setState(() {
+          imageUrl = value;
+        }));
+    getNameUser(user!.uid).then((value) => setState(() {
+          nameUser = value;
+        }));
+    super.initState();
   }
 
   @override
@@ -168,86 +167,65 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             //--- avatar ----
                             const Gap(12),
 
-                            user == null
-                                ? ClipRRect(
-                                    borderRadius: BorderRadius.circular(30),
-                                    child: Image.asset(
-                                      'assets/img/user_default.jpg',
+                            GestureDetector(
+                              onTap: () {},
+                              child: Stack(
+                                children: [
+                                  ClipOval(
+                                    child: CachedNetworkImage(
                                       width: 70,
                                       height: 70,
-                                    ),
-                                  )
-                                : FutureBuilder(
-                                    future: getImageUrl(user!.uid),
-                                    builder: (context, snapshot) {
-                                      if (snapshot.hasError) {
-                                        return const Text(
-                                            "Something went wrong");
-                                      }
-
-                                      if (snapshot.connectionState ==
-                                          ConnectionState.done) {
-                                        return ClipOval(
-                                          child: CachedNetworkImage(
+                                      imageUrl: imageUrl,
+                                      errorWidget: (context, url, error) {
+                                        return ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(30),
+                                          child: Image.asset(
+                                            'assets/img/user_default.jpg',
                                             width: 70,
                                             height: 70,
-                                            imageUrl: snapshot.data ?? '',
-                                            errorWidget: (context, url, error) {
-                                              return ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(30),
-                                                child: Image.asset(
-                                                  'assets/img/user_default.jpg',
-                                                  width: 70,
-                                                  height: 70,
-                                                ),
-                                              );
-                                            },
                                           ),
                                         );
-                                      }
-                                      return ClipRRect(
-                                        borderRadius: BorderRadius.circular(30),
-                                        child: Image.asset(
-                                          'assets/img/user_default.jpg',
-                                          width: 70,
-                                          height: 70,
-                                        ),
-                                      );
-                                    },
+                                      },
+                                    ),
                                   ),
+                                  Positioned(
+                                    bottom: 0,
+                                    right: 0,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(50)),
+                                        border: Border.all(
+                                          color: Colors.blue,
+                                        ),
+                                      ),
+                                      width: 22,
+                                      height: 22,
+                                      child: const Icon(
+                                        Icons.edit,
+                                        size: 16,
+                                        color: Colors.blue,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
 
                             //-- user name ---
                             const Gap(12),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                FutureBuilder(
-                                  future: getNameUser(user!.uid),
-                                  builder: (context, snapshot) {
-                                    if (snapshot.hasError) {
-                                      return const Text("Something went wrong");
-                                    }
-                                    if (snapshot.connectionState ==
-                                        ConnectionState.done) {
-                                      return Text(
-                                        snapshot.data ?? 'Unknown user',
-                                        style: const TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
-                                        ),
-                                      );
-                                    }
-                                    return const Text(
-                                      'Unknown user',
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                      ),
-                                    );
-                                  },
+                                Text(
+                                  nameUser ?? 'Unknown user',
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
                                 ),
                                 const Gap(5),
                                 Container(
@@ -471,13 +449,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     color: Colors.white,
                     child: Column(
                       children: [
-                        const FeatureLink(
-                            icon: Icons.workspace_premium,
-                            colorIcon: Colors.green,
-                            title: 'Khách hàng thân thiết',
-                            description: 'Thành viên Bạc',
-                            isBorderBottom: true,
-                            isBorderTop: false),
+                        GestureDetector(
+                          onTap: () {
+                            LoadData.loadStringFromAsset(
+                                'lib/database/dataProductsRecommend.json');
+                          },
+                          child: const FeatureLink(
+                              icon: Icons.workspace_premium,
+                              colorIcon: Colors.green,
+                              title: 'Khách hàng thân thiết',
+                              description: 'Thành viên Bạc',
+                              isBorderBottom: true,
+                              isBorderTop: false),
+                        ),
                         const FeatureLink(
                             icon: Icons.live_tv,
                             colorIcon: Colors.yellow,
@@ -562,3 +546,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 }
+
+final snackBar = SnackBar(
+  elevation: 0,
+  behavior: SnackBarBehavior.floating,
+  backgroundColor: Colors.transparent,
+  content: AwesomeSnackbarContent(
+    title: 'Warning!',
+    message: 'Something error occurred, please try again !',
+    contentType: ContentType.warning,
+  ),
+);

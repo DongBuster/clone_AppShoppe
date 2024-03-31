@@ -2,21 +2,21 @@ import 'package:clone_shoppe/animations/TransitionPage.dart';
 import 'package:clone_shoppe/constants/global_variables.dart';
 import 'package:clone_shoppe/features/auth/views/login_page.dart';
 import 'package:clone_shoppe/features/auth/views/register_page.dart';
-import 'package:clone_shoppe/features/page/cartScreen/cartScreen.dart';
-import 'package:clone_shoppe/features/page/detailProductsScreen/detailProductsScreen.dart';
-import 'package:clone_shoppe/features/page/homeScreen/homeScreen.dart';
-import 'package:clone_shoppe/features/page/liveScreen/liveScreen.dart';
-import 'package:clone_shoppe/features/page/mallScreen/mallScreen.dart';
-import 'package:clone_shoppe/features/page/notificationsScreen/notificationsScreen.dart';
-import 'package:clone_shoppe/features/page/profileScreen/profileScreen.dart';
+import 'package:clone_shoppe/features/page/cartPage/cartScreen.dart';
+import 'package:clone_shoppe/features/page/detailProductsPage/detailProductsScreen.dart';
+import 'package:clone_shoppe/features/page/homePage/homeScreen.dart';
+import 'package:clone_shoppe/features/page/livePage/liveScreen.dart';
+import 'package:clone_shoppe/features/page/mallPage/mallScreen.dart';
+import 'package:clone_shoppe/features/page/notificationsPage/notificationsScreen.dart';
+import 'package:clone_shoppe/features/page/profilePage/profileScreen.dart';
 import 'package:clone_shoppe/layout/mainlayout.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../features/auth/views/introduction_screen.dart';
+import '../features/page/introductoinPage/introduction_screen.dart';
 import '../features/page/buyProductScreen/buy_product_screen.dart';
-import '../features/page/purchaseOrderScreen/purchase_order.dart';
+import '../features/page/purchaseOrderPage/purchase_order.dart';
 
 final GlobalKey<NavigatorState> _rootNavigator = GlobalKey(debugLabel: 'root');
 // final GlobalKey<NavigatorState> _shellNavigatorLogin =

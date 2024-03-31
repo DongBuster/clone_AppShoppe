@@ -1,5 +1,4 @@
-import 'package:clone_shoppe/database/loadData.dart';
-import 'package:clone_shoppe/features/page/homeScreen/widget/productRecommend.dart';
+import 'package:clone_shoppe/features/page/homePage/widget/productRecommend.dart';
 import 'package:clone_shoppe/models/productsRecommend.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -31,20 +30,20 @@ class _RenderProductRecommendState extends State<RenderProductRecommend> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<dynamic>>(
-      future: LoadData.loadStringFromAsset(
-          'lib/database/dataProductsRecommend.json'),
+    return FutureBuilder<List<Map<String, dynamic>>>(
+      future: _futureSupabase,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           // print(snapshot.data);
           // print('here');
           final jsonContent = snapshot.data;
-          // print(jsonContent.runtimeType);
+          // print(jsonContent!.length);
           var listProduct =
               jsonContent!.map((e) => ProductsRecommend.fromJson(e)).toList();
-          // print(listProduct.first);
+          // print(jsonContent.first.runtimeType);
+          // jsonContent.map((e) => print(e.runtimeType));
 
-          // print(listProduct.first.classify);
+          // print(listProduct.length);
           // print(jsonContent!.map((e) => e));
           // return Container();
           return GridView.builder(

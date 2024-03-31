@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 
 import '../../../provider/bought_product.dart';
 import '../../../provider/selectedProductCart.dart';
-import '../profileScreen/feature_link.dart';
+import '../profilePage/feature_link.dart';
 
 class BuyProductScreen extends StatefulWidget {
   const BuyProductScreen({super.key});

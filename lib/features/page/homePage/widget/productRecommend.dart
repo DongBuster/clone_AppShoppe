@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:clone_shoppe/common/widgets/FlagSale.dart';
 import 'package:clone_shoppe/common/widgets/FlagShop.dart';
 import 'package:clone_shoppe/constants/global_variables.dart';
@@ -32,6 +33,7 @@ class _ProductRecommendState extends State<ProductRecommend> {
       percentSale: widget.productsRecommend.percentSale,
       quantitySold: widget.productsRecommend.quantitySold,
     );
+    // print(detailProduct.image.length);
     // print(widget.productsRecommend.classify.runtimeType);
     // print(widget.productsRecommend.classify[0].values.first);
     return GestureDetector(
@@ -46,12 +48,24 @@ class _ProductRecommendState extends State<ProductRecommend> {
             children: [
               Container(
                 alignment: Alignment.topRight,
-                child: Image.asset(
-                  widget.productsRecommend.image[0],
+                child: CachedNetworkImage(
+                  imageUrl: detailProduct.image[0],
                   width: 193,
                   height: 180,
                   fit: BoxFit.fill,
+                  errorWidget: (context, url, error) {
+                    return Container(
+                      width: 193,
+                      height: 180,
+                      color: Colors.black45,
+                    );
+                  },
                 ),
+
+                // Image.asset(
+                //   widget.productsRecommend.image[0],
+
+                // ),
               ),
               Positioned(
                 left: 2,

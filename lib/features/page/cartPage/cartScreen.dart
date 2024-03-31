@@ -1,6 +1,6 @@
-import 'package:clone_shoppe/features/page/cartScreen/handle/renderListProductCart.dart';
-import 'package:clone_shoppe/features/page/cartScreen/view/footerCartScreen.dart';
-import 'package:clone_shoppe/features/page/cartScreen/view/headerCartScreen.dart';
+import 'package:clone_shoppe/features/page/cartPage/handle/renderListProductCart.dart';
+import 'package:clone_shoppe/features/page/cartPage/view/footerCartScreen.dart';
+import 'package:clone_shoppe/features/page/cartPage/view/headerCartScreen.dart';
 import 'package:flutter/material.dart';
 
 class CartScreen extends StatefulWidget {
