@@ -1,13 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'productsRecommend.dart';
+part of 'product.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-ProductsRecommend _$ProductsRecommendFromJson(Map<String, dynamic> json) =>
-    ProductsRecommend(
+Product _$ProductFromJson(Map<String, dynamic> json) => Product(
       name: json['name'] as String,
       nameShop: json['nameShop'] as String,
       classify: json['classify'] as Map<String, dynamic>,
@@ -16,8 +15,7 @@ ProductsRecommend _$ProductsRecommendFromJson(Map<String, dynamic> json) =>
       quantitySold: json['quantitySold'] as String,
     );
 
-Map<String, dynamic> _$ProductsRecommendToJson(ProductsRecommend instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$ProductToJson(Product instance) => <String, dynamic>{
       'name': instance.name,
       'nameShop': instance.nameShop,
       'classify': instance.classify,

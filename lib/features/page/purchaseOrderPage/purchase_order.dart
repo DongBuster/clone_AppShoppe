@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:clone_shoppe/constants/global_variables.dart';
 import 'package:clone_shoppe/models/cartModel.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,7 @@ class _PurchaseOrderState extends State<PurchaseOrder> {
         appBar: AppBar(
           leading: GestureDetector(
             onTap: () {
-              context.goNamed(GloblalVariable.profileScreen);
+              context.pop();
             },
             child: const Icon(
               Icons.arrow_back,
@@ -174,10 +175,18 @@ class ItemProduct extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Image.asset(
-                    model.image,
+                  CachedNetworkImage(
+                    imageUrl: model.image,
+                    fit: BoxFit.fill,
                     width: 70,
                     height: 70,
+                    errorWidget: (context, url, error) {
+                      return Container(
+                        width: 70,
+                        height: 70,
+                        color: Colors.black45,
+                      );
+                    },
                   ),
                   const Gap(8),
                   Column(

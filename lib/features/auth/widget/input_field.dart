@@ -42,6 +42,7 @@ class UsernameFied extends StatelessWidget {
             style: const TextStyle(fontSize: 14),
             //---
             decoration: InputDecoration(
+              contentPadding: const EdgeInsets.symmetric(vertical: 2.0),
               hintText: hintText,
               hintStyle: const TextStyle(fontSize: 14, color: Colors.black38),
               prefixIcon: Padding(
@@ -111,6 +112,8 @@ class _PasswordFieldLoginPageState extends State<PasswordFieldLoginPage> {
             //---
 
             decoration: InputDecoration(
+              contentPadding: const EdgeInsets.symmetric(vertical: 2.0),
+
               hintText: widget.hintText,
               hintStyle: const TextStyle(fontSize: 14, color: Colors.black38),
               prefixIcon: Padding(

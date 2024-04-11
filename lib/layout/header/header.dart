@@ -1,3 +1,4 @@
+import 'package:clone_shoppe/features/page/cartPage/cartScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:go_router/go_router.dart';
@@ -40,7 +41,10 @@ class _HeaderAppState extends State<HeaderApp> {
                 //icon shopping cart
                 GestureDetector(
                     onTap: () {
-                      context.pushNamed(GloblalVariable.cartScreen);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => const CartScreen()));
                     },
                     child: const IconShoppingCart()),
                 // icon message

@@ -2,6 +2,7 @@ import 'package:clone_shoppe/constants/global_variables.dart';
 import 'package:clone_shoppe/provider/checkboxCartScreen.dart';
 import 'package:clone_shoppe/provider/listProductCart.dart';
 import 'package:clone_shoppe/provider/selectedProductCart.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -73,13 +74,16 @@ class _HeaderDetailShoppingCartState extends State<HeaderDetailShoppingCart> {
                 ),
               ),
               const SizedBox(width: 10),
-              Text(
-                widget.nameShop,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  decoration: TextDecoration.none,
+              Container(
+                constraints: const BoxConstraints(maxWidth: 170),
+                child: Text(
+                  widget.nameShop,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    decoration: TextDecoration.none,
+                  ),
                 ),
               ),
               const SizedBox(width: 10),

@@ -1,11 +1,13 @@
+import 'dart:async';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:clone_shoppe/constants/global_variables.dart';
 import 'package:clone_shoppe/features/page/profilePage/feature_link.dart';
+import 'package:clone_shoppe/features/page/purchaseOrderPage/purchase_order.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
-import 'package:flutter/widgets.dart';
 
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
@@ -13,6 +15,7 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+// import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../common/widgets/text.dart';
 import '../../../database/loadData.dart';
@@ -20,6 +23,7 @@ import '../../../provider/bought_product.dart';
 import '../../auth/services/auth.dart';
 
 import 'icon_shopping_cart.dart';
+import 'views/modal_bottom_sheet.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -30,10 +34,12 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   Color primaryColor = GloblalVariable.hex_f94f2f;
-  User? user = FirebaseAuth.instance.currentUser;
+  User? currentUser = FirebaseAuth.instance.currentUser;
   FirebaseAuth auth = FirebaseAuth.instance;
   String imageUrl = '';
   String? nameUser = '';
+
+  Completer<void> completerChangeAvartar = Completer<void>();
 
   Future<String?> getNameUser(String uid) async {
     DocumentSnapshot snapshot =
@@ -42,19 +48,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return data['name'];
   }
 
-  Future<String> getImageUrl(String uid) async {
-    DocumentSnapshot snapshot =
-        await FirebaseFirestore.instance.collection('users').doc(uid).get();
-    Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
-    return data['image'];
+  Stream<String> getImageUrlStream() {
+    return FirebaseFirestore.instance
+        .collection('users')
+        .doc(currentUser!.uid)
+        .snapshots()
+        .map((snapshot) {
+      Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+      return data['image'];
+    });
   }
 
   @override
   void initState() {
-    getImageUrl(user!.uid).then((value) => setState(() {
-          imageUrl = value;
-        }));
-    getNameUser(user!.uid).then((value) => setState(() {
+    getNameUser(currentUser!.uid).then((value) => setState(() {
           nameUser = value;
         }));
     super.initState();
@@ -168,26 +175,49 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             const Gap(12),
 
                             GestureDetector(
-                              onTap: () {},
+                              onTap: () {
+                                showModalBottomSheet(
+                                  context: context,
+                                  builder: (context) =>
+                                      const ChangePictureAvatar(),
+                                ).then((value) => setState(() {
+                                      completerChangeAvartar.complete();
+                                    }));
+                              },
                               child: Stack(
                                 children: [
-                                  ClipOval(
-                                    child: CachedNetworkImage(
-                                      width: 70,
-                                      height: 70,
-                                      imageUrl: imageUrl,
-                                      errorWidget: (context, url, error) {
-                                        return ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(30),
-                                          child: Image.asset(
-                                            'assets/img/user_default.jpg',
+                                  StreamBuilder<String>(
+                                    stream: getImageUrlStream(),
+                                    builder: (BuildContext context,
+                                        AsyncSnapshot<String> snapshot) {
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.waiting) {
+                                        return const CircularProgressIndicator();
+                                      } else if (snapshot.hasError) {
+                                        return Text('Error: ${snapshot.error}');
+                                      } else {
+                                        String imageUrl = snapshot.data ??
+                                            ''; // Lấy giá trị từ snapshot
+                                        return ClipOval(
+                                          child: CachedNetworkImage(
                                             width: 70,
                                             height: 70,
+                                            imageUrl: imageUrl,
+                                            errorWidget: (context, url, error) {
+                                              return ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(30),
+                                                child: Image.asset(
+                                                  'assets/img/user_default.jpg',
+                                                  width: 70,
+                                                  height: 70,
+                                                ),
+                                              );
+                                            },
                                           ),
-                                        );
-                                      },
-                                    ),
+                                        ); // Hiển thị ảnh từ đường dẫn
+                                      }
+                                    },
                                   ),
                                   Positioned(
                                     bottom: 0,
@@ -357,8 +387,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  context.goNamed(
-                                      GloblalVariable.purchaseOrderScreen);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (_) =>
+                                              const PurchaseOrder()));
                                 },
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -450,8 +483,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: Column(
                       children: [
                         GestureDetector(
-                          onTap: () {
-                            LoadData.loadStringFromAsset(
+                          onTap: () async {
+                            await LoadData.loadStringFromAsset(
                                 'lib/database/dataProductsRecommend.json');
                           },
                           child: const FeatureLink(

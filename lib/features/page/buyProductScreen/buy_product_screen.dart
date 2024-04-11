@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:clone_shoppe/constants/global_variables.dart';
 import 'package:clone_shoppe/models/cartModel.dart';
 import 'package:flutter/cupertino.dart';
@@ -7,6 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../../provider/bought_product.dart';
+import '../../../provider/listProductCart.dart';
 import '../../../provider/selectedProductCart.dart';
 import '../profilePage/feature_link.dart';
 
@@ -492,6 +494,10 @@ class _BuyProductScreenState extends State<BuyProductScreen> {
               onTap: () {
                 Provider.of<BoughtProduct>(context, listen: false)
                     .addToListBoughtProduct(listSelected);
+                for (var model in listSelected) {
+                  Provider.of<ListProductCart>(context, listen: false)
+                      .removeProductToCart(model);
+                }
                 if (context.mounted) {
                   context.goNamed(GloblalVariable.purchaseOrderScreen);
                 }
@@ -569,10 +575,18 @@ class ItemProduct extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Image.asset(
-                    model.image,
+                  CachedNetworkImage(
+                    imageUrl: model.image,
+                    fit: BoxFit.fill,
                     width: 70,
                     height: 70,
+                    errorWidget: (context, url, error) {
+                      return Container(
+                        width: 70,
+                        height: 70,
+                        color: Colors.black45,
+                      );
+                    },
                   ),
                   const Gap(8),
                   Column(

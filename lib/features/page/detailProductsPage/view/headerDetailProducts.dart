@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
+import '../../cartPage/cartScreen.dart';
+
 class HeaderDetailProducts extends StatefulWidget {
   const HeaderDetailProducts({super.key});
 
@@ -67,7 +69,10 @@ class _HeaderDetailProductsState extends State<HeaderDetailProducts> {
                       // button cart
                       GestureDetector(
                         onTap: () {
-                          context.pushNamed(GloblalVariable.cartScreen);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => const CartScreen()));
                         },
                         child:
                             const IconButtonHeader(child: IconShoppingCart()),

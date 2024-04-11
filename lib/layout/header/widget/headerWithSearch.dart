@@ -1,4 +1,6 @@
+import 'package:clone_shoppe/features/page/searchPage/search_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
@@ -13,8 +15,6 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
-  final _focusNode = FocusNode();
-
   // handle fillColor textfield header when go route and route location == home
   Color fillColorTextfieldHeader(bool isActiveColorIcon) {
     if (GoRouter.of(context).location == '/mallScreen') {
@@ -27,54 +27,54 @@ class _SearchState extends State<Search> {
   }
 
   @override
-  void dispose() {
-    _focusNode.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     bool isActiveColorIcon =
         Provider.of<StateActiveColorIconHeader>(context, listen: true)
             .isActiveColorIcon;
-    return SizedBox(
-      height: 34,
-      child: TextField(
-        onTapOutside: (event) => _focusNode.unfocus(),
-        focusNode: _focusNode,
-        textAlignVertical: TextAlignVertical.center,
-        cursorColor: const Color(0xff9c9c9c),
-        cursorHeight: 22,
-        style: const TextStyle(color: Colors.black87),
-        decoration: InputDecoration(
-          // center text
-          contentPadding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-          //
-          filled: true,
-          fillColor: fillColorTextfieldHeader(isActiveColorIcon),
-          border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(3),
-              borderSide: BorderSide.none),
-          hintText: 'BÀN CHẢI ĐIỆN GIẢM 50%',
-          hintStyle: TextStyle(
-            color: Colors.red[300],
-            fontSize: 12,
-            fontWeight: FontWeight.w500,
-          ),
-
-          suffixIcon: const IconButton(
-            onPressed: null,
-            icon: Icon(Icons.camera_alt_outlined),
-            iconSize: 20,
-            color: GloblalVariable.hex_9c9c9c,
-          ),
-          prefixIcon: const Icon(
-            Icons.search_outlined,
-            size: 25,
-            color: GloblalVariable.hex_9c9c9c,
-          ),
-        ),
+    return GestureDetector(
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => const SearchPage()),
       ),
+      child: Container(
+          decoration: BoxDecoration(
+            color: fillColorTextfieldHeader(isActiveColorIcon),
+            borderRadius: BorderRadius.circular(6),
+            border: const Border(
+              bottom: BorderSide.none,
+              top: BorderSide.none,
+              left: BorderSide.none,
+              right: BorderSide.none,
+            ),
+          ),
+          height: 34,
+          child: const Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              IconButton(
+                onPressed: null,
+                icon: Icon(
+                  Icons.search_outlined,
+                  size: 20,
+                  color: GloblalVariable.hex_9c9c9c,
+                ),
+              ),
+              Text(
+                'BÀN CHẢI ĐIỆN GIẢM 50%',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12,
+                  color: GloblalVariable.hex_f94f2f,
+                ),
+              ),
+              IconButton(
+                onPressed: null,
+                icon: Icon(Icons.camera_alt_outlined),
+                iconSize: 18,
+                color: GloblalVariable.hex_9c9c9c,
+              ),
+            ],
+          )),
     );
   }
 }

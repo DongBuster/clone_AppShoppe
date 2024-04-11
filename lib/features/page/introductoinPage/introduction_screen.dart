@@ -186,8 +186,13 @@ class _IntroductionPageState extends State<IntroductionPage> {
                     ),
                     const Gap(15),
                     TextButton(
-                      onPressed: () =>
-                          controller.pickImage(ImageSource.gallery),
+                      onPressed: () {
+                        controller.pickImage(ImageSource.gallery).then(
+                              (value) => setState(() {
+                                imageFilePick = value;
+                              }),
+                            );
+                      },
                       style: ButtonStyle(
                           backgroundColor: MaterialStatePropertyAll(
                               GloblalVariable.hex_f94f2f.withOpacity(0.8))),

@@ -57,6 +57,52 @@ class LoadData {
       // final supabase = Supabase.instance.client;
 
       List<dynamic> data = jsonDecode(jsonString);
+
+      Map<String, dynamic> keySearch = {
+        'Dây cáp xoắn': [0],
+        'Custom cable': [0],
+        'Custom cho phím cơ': [0],
+        'Máy sấy tóc': [1],
+        'Làm tóc nhanh khô': [1],
+        'Gói giấy ăn': [2],
+        'Giấy ăn': [2],
+        'Giấy rút': [2],
+        'Điện Thoại Samsung': [3],
+        'Samsung Galaxy Z Fold4': [3],
+        'Bông tẩy trang': [4],
+        'Lameila': [4],
+        'Xịt Thơm MiệngXịt Thơm Miệng': [5],
+        'Vệ sinh răng miệng': [5],
+        'Bàn phím cơ': [6, 11],
+        'Phím cơ không dây': [6, 11],
+        'C068': [6],
+        'Bàn phím máy tính': [6, 11],
+        'Nước Hoa Nam': [7],
+        'Bộ Chuyển Đổi': [8],
+        'Hub': [8],
+        'Bộ dụng cụ bấm móng': [9],
+        'Bấm móng': [9],
+        'Cân': [10],
+        'Cân điện tử': [10],
+        'Cân hình lợn': [10],
+        'cân tiểu ly mini': [10],
+        'Bàn phím Jamesdonkey A3': [11],
+        'Điện thoại': [3, 12],
+        'Iphone': [12],
+        'Iphone 13 pr0 max': [12],
+      };
+      // int id = 0;
+      // for (int i = 0; i < keySearch.length; i++) {
+      //   await Supabase.instance.client
+      //       .from('search')
+      //       .insert({'name_search': keySearch[i], 'products_id': keySearch[i]});
+      // }
+      keySearch.forEach((key, value) async {
+        await Supabase.instance.client
+            .from('search')
+            .insert({'name_search': key, 'products_id': value});
+      });
+
       // if (pathData == 'lib/database/dataProductsRecommend.json') {
       // print('ksk');
       // var listProduct = data.map((e) => Images.fromJson(e)).toList();

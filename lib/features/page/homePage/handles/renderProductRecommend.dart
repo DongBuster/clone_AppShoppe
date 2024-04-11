@@ -1,5 +1,5 @@
 import 'package:clone_shoppe/features/page/homePage/widget/productRecommend.dart';
-import 'package:clone_shoppe/models/productsRecommend.dart';
+import 'package:clone_shoppe/models/product.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -11,7 +11,7 @@ class RenderProductRecommend extends StatefulWidget {
 }
 
 class _RenderProductRecommendState extends State<RenderProductRecommend> {
-  List<ProductsRecommend> listProduct = [];
+  List<Product> listProduct = [];
   late final _futureSupabase;
 
   // Future<Map<String, dynamic>> fetchData() async {
@@ -39,7 +39,7 @@ class _RenderProductRecommendState extends State<RenderProductRecommend> {
           final jsonContent = snapshot.data;
           // print(jsonContent!.length);
           var listProduct =
-              jsonContent!.map((e) => ProductsRecommend.fromJson(e)).toList();
+              jsonContent!.map((e) => Product.fromJson(e)).toList();
           // print(jsonContent.first.runtimeType);
           // jsonContent.map((e) => print(e.runtimeType));
 
@@ -47,7 +47,7 @@ class _RenderProductRecommendState extends State<RenderProductRecommend> {
           // print(jsonContent!.map((e) => e));
           // return Container();
           return GridView.builder(
-            padding: const EdgeInsets.only(top: 3, left: 10),
+            padding: const EdgeInsets.only(top: 5),
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             scrollDirection: Axis.vertical,
@@ -57,9 +57,9 @@ class _RenderProductRecommendState extends State<RenderProductRecommend> {
             ),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              mainAxisExtent: 280,
+              mainAxisExtent: 275,
               mainAxisSpacing: 10,
-              crossAxisSpacing: 8,
+              // crossAxisSpacing: 5,
             ),
           );
         } else if (snapshot.hasError) {

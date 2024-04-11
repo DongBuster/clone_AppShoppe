@@ -50,7 +50,7 @@ class _FooterDetailProductsState extends State<FooterDetailProducts> {
             ),
           ),
           GestureDetector(
-            onTap: () async {
+            onTap: () {
               showModalBottomSheet(
                 backgroundColor: Colors.black.withOpacity(0.1),
                 isScrollControlled: true,

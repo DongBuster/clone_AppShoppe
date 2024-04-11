@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:clone_shoppe/constants/global_variables.dart';
 import 'package:clone_shoppe/features/page/cartPage/widget/checkbox.dart';
 import 'package:clone_shoppe/models/cartModel.dart';
@@ -51,12 +52,17 @@ class _ContentDetailShoppingCartState extends State<ContentDetailShoppingCart> {
               Container(
                 width: 100,
                 height: 100,
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(Radius.circular(3)),
-                  image: DecorationImage(
-                    image: AssetImage(widget.cartModel.image),
-                    fit: BoxFit.fill,
-                  ),
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(3)),
+                ),
+                child: CachedNetworkImage(
+                  imageUrl: widget.cartModel.image,
+                  fit: BoxFit.fill,
+                  errorWidget: (context, url, error) {
+                    return Container(
+                      color: Colors.black45,
+                    );
+                  },
                 ),
               ),
               const SizedBox(width: 12),
@@ -85,21 +91,25 @@ class _ContentDetailShoppingCartState extends State<ContentDetailShoppingCart> {
                                 borderRadius: BorderRadius.circular(3),
                               ),
                               constraints: const BoxConstraints(
-                                minWidth: 100,
                                 maxWidth: 230,
                                 minHeight: 25,
                               ),
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Text(
-                                    ' Phân loại: ${widget.cartModel.classify.keys.first}',
-                                    overflow: TextOverflow.ellipsis,
-                                    textAlign: TextAlign.center,
-                                    style: const TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.black87,
-                                      decoration: TextDecoration.none,
+                                  Container(
+                                    constraints: const BoxConstraints(
+                                      maxWidth: 150,
+                                    ),
+                                    child: Text(
+                                      ' Phân loại: ${widget.cartModel.classify.keys.first}',
+                                      overflow: TextOverflow.ellipsis,
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(
+                                        fontSize: 12,
+                                        color: Colors.black87,
+                                        decoration: TextDecoration.none,
+                                      ),
                                     ),
                                   ),
                                   const Icon(
