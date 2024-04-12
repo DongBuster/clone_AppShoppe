@@ -42,7 +42,7 @@ class _BannerProductsState extends State<BannerProducts> {
                     .map(
                       (image) => ClipRRect(
                         child: CachedNetworkImage(
-                          imageUrl: widget.product.image[0],
+                          imageUrl: image,
                           fit: BoxFit.fill,
                           errorWidget: (context, url, error) {
                             return Container(

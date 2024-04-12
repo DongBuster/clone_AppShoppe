@@ -4,6 +4,7 @@ part 'cartModel.g.dart';
 
 @JsonSerializable()
 class CartModel {
+  late int id;
   late String nameProduct;
   late String nameShop;
   late String image;
@@ -11,6 +12,7 @@ class CartModel {
   late int numberOfProducts;
 
   CartModel({
+    required this.id,
     required this.nameProduct,
     required this.nameShop,
     required this.image,

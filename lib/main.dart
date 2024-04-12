@@ -12,6 +12,7 @@ import 'provider/create_accout.dart';
 import 'provider/detailProductModel.dart';
 import 'provider/headerDetailProduct.dart';
 import 'provider/listProductCart.dart';
+import 'provider/list_purchase_order.dart';
 import 'provider/selectedProductCart.dart';
 import 'provider/stateActiveColorIconHeader.dart';
 import 'provider/stateActiveIconHome.dart';
@@ -53,6 +54,9 @@ Future<void> main() async {
         ),
         ChangeNotifierProvider(
           create: (_) => BoughtProduct(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ListProductPurchureOder(),
         ),
         ChangeNotifierProvider(
           create: (_) => CheckBoxCartScreen(),

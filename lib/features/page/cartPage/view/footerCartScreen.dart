@@ -1,11 +1,14 @@
+import 'package:clone_shoppe/models/cartModel.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../constants/global_variables.dart';
+import '../../../../provider/bought_product.dart';
 import '../../../../provider/checkboxCartScreen.dart';
 import '../../../../provider/listProductCart.dart';
+import '../../../../provider/list_purchase_order.dart';
 import '../../../../provider/selectedProductCart.dart';
 
 class FooterCartScreen extends StatefulWidget {
@@ -25,6 +28,10 @@ class _FooterCartScreenState extends State<FooterCartScreen> {
     productChosed = Provider.of<SelectedProductCart>(context, listen: true)
         .getListSelected
         .length;
+    List<CartModel> listSelected =
+        Provider.of<SelectedProductCart>(context, listen: true).getListSelected;
+    print('cart: $listSelected');
+
     return Container(
       height: 50,
       decoration: BoxDecoration(
@@ -114,6 +121,8 @@ class _FooterCartScreenState extends State<FooterCartScreen> {
                   if (productChosed == 0) {
                     ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   } else {
+                    Provider.of<BoughtProduct>(context, listen: false)
+                        .addToListBoughtProduct(listSelected);
                     context.pushNamed(GloblalVariable.buyProductScreen);
                   }
                 },

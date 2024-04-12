@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 
 import '../../../provider/bought_product.dart';
 import '../../../provider/listProductCart.dart';
+import '../../../provider/list_purchase_order.dart';
 import '../../../provider/selectedProductCart.dart';
 import '../profilePage/feature_link.dart';
 
@@ -492,15 +493,22 @@ class _BuyProductScreenState extends State<BuyProductScreen> {
             const Gap(10),
             GestureDetector(
               onTap: () {
-                Provider.of<BoughtProduct>(context, listen: false)
-                    .addToListBoughtProduct(listSelected);
-                for (var model in listSelected) {
-                  Provider.of<ListProductCart>(context, listen: false)
-                      .removeProductToCart(model);
-                }
-                if (context.mounted) {
-                  context.goNamed(GloblalVariable.purchaseOrderScreen);
-                }
+                context.goNamed(GloblalVariable.purchaseOrderScreen);
+
+                // Provider.of<BoughtProduct>(context, listen: false)
+                //     .removeProducts(listSelected);
+                Provider.of<ListProductPurchureOder>(context, listen: false)
+                    .addToList(listSelected);
+                print(listSelected);
+                print(listSelected.length);
+                // for (var model in listSelected) {
+                Provider.of<ListProductCart>(context, listen: false)
+                    .removeListProductToCart(listSelected);
+                Provider.of<SelectedProductCart>(context, listen: false)
+                    .removeListItemsSelected(listSelected);
+                // }
+                // if (context.mounted) {
+                // }
               },
               child: Container(
                 width: 100,

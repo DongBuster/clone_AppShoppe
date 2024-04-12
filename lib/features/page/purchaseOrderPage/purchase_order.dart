@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import '../../../provider/bought_product.dart';
+import '../../../provider/list_purchase_order.dart';
 
 class PurchaseOrder extends StatefulWidget {
   const PurchaseOrder({super.key});
@@ -18,12 +18,14 @@ class _PurchaseOrderState extends State<PurchaseOrder> {
   @override
   Widget build(BuildContext context) {
     int quantityBoughtProduct =
-        Provider.of<BoughtProduct>(context, listen: true)
-            .getListBoughtProduct
+        Provider.of<ListProductPurchureOder>(context, listen: true)
+            .getListProductPurchureOder
             .length;
 
     List<CartModel> listProducts =
-        Provider.of<BoughtProduct>(context, listen: false).getListBoughtProduct;
+        Provider.of<ListProductPurchureOder>(context, listen: true)
+            .getListProductPurchureOder;
+    // print(listProducts);
     return DefaultTabController(
       initialIndex: 1,
       length: 4,

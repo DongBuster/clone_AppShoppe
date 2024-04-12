@@ -40,8 +40,27 @@ class SelectedProductCart with ChangeNotifier {
     notifyListeners();
   }
 
-  void removeItemsSelected(CartModel cartModel) {
-    listSelected.remove(cartModel);
+  void removeListItemsSelected(List<CartModel> list) {
+    // print('remove: $listSelected');
+
+    for (CartModel model in list) {
+      listSelected.removeWhere(
+        (item) =>
+            item.nameProduct == model.nameProduct &&
+            item.classify.keys.first == model.classify.keys.first,
+      );
+    }
+    // print('remove: $listSelected');
+    calculateTotalPrice();
+    notifyListeners();
+  }
+
+  void removeItemsSelected(CartModel model) {
+    listSelected.removeWhere(
+      (item) =>
+          item.nameProduct == model.nameProduct &&
+          item.classify == model.classify,
+    );
     calculateTotalPrice();
     notifyListeners();
   }

@@ -1,3 +1,4 @@
+import 'package:clone_shoppe/features/page/searchPage/search_page.dart';
 import 'package:clone_shoppe/models/product.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -90,6 +91,13 @@ class _ProductsSearchState extends State<ProductsSearch> {
   void initState() {
     controllerSearchBar.text = widget.nameSearch;
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    controllerSearchBar.dispose();
+    _focusNode.dispose();
+    super.dispose();
   }
 
   @override
@@ -376,6 +384,12 @@ class _ProductsSearchState extends State<ProductsSearch> {
                         Expanded(
                           child: TextField(
                             controller: controllerSearchBar,
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => const SearchPage()));
+                            },
                             onTapOutside: (event) => _focusNode.unfocus(),
                             onChanged: (value) {
                               setState(() {

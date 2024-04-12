@@ -20,23 +20,23 @@ class _RenderProductSaleState extends State<RenderProductSale> {
           LoadData.loadStringFromAsset('lib/database/dataProductsSale.json'),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          // final jsonContent = snapshot.data;
-          // // print(jsonContent);
-          // listProduct =
-          //     jsonContent!.map((e) => ProductSale.fromJson(e)).toList();
+          final jsonContent = snapshot.data;
+          // print(jsonContent);
+          listProduct =
+              jsonContent!.map((e) => ProductSale.fromJson(e)).toList();
           // print(listProduct);
 
-          // return SizedBox(
-          //   height: 500,
-          //   width: MediaQuery.of(context).size.width - 20,
-          //   child: ListView.builder(
-          //     scrollDirection: Axis.horizontal,
-          //     itemCount: listProduct.length,
-          //     itemBuilder: (context, index) => ProductSaleWidget(
-          //       productSale: listProduct[index],
-          //     ),
-          //   ),
-          // );
+          return SizedBox(
+            height: 500,
+            width: MediaQuery.of(context).size.width - 20,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: listProduct.length,
+              itemBuilder: (context, index) => ProductSaleWidget(
+                productSale: listProduct[index],
+              ),
+            ),
+          );
         } else if (snapshot.hasError) {
           final errorMessage = snapshot.error.toString();
           return Text('Error: $errorMessage');

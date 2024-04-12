@@ -31,6 +31,19 @@ class ListProductCart with ChangeNotifier {
     notifyListeners();
   }
 
+  void removeListProductToCart(List<CartModel> list) {
+    for (var model in list) {
+      listItems.removeWhere(
+        (item) =>
+            item.nameProduct == model.nameProduct &&
+            item.classify == model.classify,
+      );
+    }
+    listsGroupsByNameShop =
+        groupBy(listItems, (CartModel model) => model.nameShop);
+    notifyListeners();
+  }
+
   void removeProductToCart(CartModel model) {
     listItems.removeWhere(
       (item) =>

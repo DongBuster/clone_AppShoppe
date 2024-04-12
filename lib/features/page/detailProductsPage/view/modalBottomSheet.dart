@@ -60,6 +60,7 @@ class _ModalBottomSheetState extends State<ModalBottomSheet>
   Widget build(BuildContext context) {
     // print(productCart.classify.isEmpty);
     productCart = CartModel(
+      id: 0,
       nameProduct: widget.model.name,
       nameShop: widget.model.nameShop,
       image: '',
@@ -230,7 +231,7 @@ class _ModalBottomSheetState extends State<ModalBottomSheet>
                                           height: 30,
                                           constraints: const BoxConstraints(
                                             minWidth: 60,
-                                            maxWidth: 90,
+                                            maxWidth: 140,
                                           ),
                                           padding: const EdgeInsets.all(5),
                                           decoration: BoxDecoration(
@@ -248,6 +249,7 @@ class _ModalBottomSheetState extends State<ModalBottomSheet>
                                           child: Center(
                                             child: Text(
                                               value,
+                                              overflow: TextOverflow.ellipsis,
                                               textAlign: TextAlign.center,
                                               style: const TextStyle(
                                                 fontSize: 12,

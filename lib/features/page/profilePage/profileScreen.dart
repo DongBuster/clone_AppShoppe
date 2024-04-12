@@ -20,6 +20,7 @@ import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import '../../../common/widgets/text.dart';
 import '../../../database/loadData.dart';
 import '../../../provider/bought_product.dart';
+import '../../../provider/list_purchase_order.dart';
 import '../../auth/services/auth.dart';
 
 import 'icon_shopping_cart.dart';
@@ -70,8 +71,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     int quantityBoughtProduct =
-        Provider.of<BoughtProduct>(context, listen: true)
-            .getListBoughtProduct
+        Provider.of<ListProductPurchureOder>(context, listen: true)
+            .getListProductPurchureOder
             .length;
     // print('imagefile:$imageFile');
     return Scaffold(
