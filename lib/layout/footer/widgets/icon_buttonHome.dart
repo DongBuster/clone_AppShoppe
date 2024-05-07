@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-
 import '../../../animations/RotationIconFooter.dart';
-import '../../../provider/stateActiveIconHome.dart';
+import '../../../features/page/homePage/provider/home_page_state.dart';
 import '../handles/handleFooter.dart';
 
 class IconButtonHome extends StatelessWidget {
@@ -14,9 +13,10 @@ class IconButtonHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isActiveIconHome =
-        Provider.of<StateActiveIconHome>(context, listen: true)
-            .isActiveIconHome;
+    bool isActiveIconHome = Provider.of<HomePageState>(context, listen: true)
+        .getState
+        .activeIconHomeFooter;
+    // print(isActiveIconHome);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -33,7 +33,7 @@ class IconButtonHome extends StatelessWidget {
                 color: colorCurrentRoute(context, pathRoute),
               ),
         Text(
-          GoRouter.of(context).location == '/home' && isActiveIconHome == false
+          GoRouter.of(context).location == '/home' && isActiveIconHome == true
               ? 'Gợi ý hôm nay'
               : 'Home',
           style: TextStyle(

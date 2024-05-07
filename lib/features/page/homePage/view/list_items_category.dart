@@ -1,5 +1,5 @@
-import 'package:clone_shoppe/features/page/homePage/widget/ItemCategory.dart';
-import 'package:clone_shoppe/features/page/homePage/widget/ScrollBar.dart';
+import 'package:clone_shoppe/features/page/homePage/widgets/item_category.dart';
+import 'package:clone_shoppe/features/page/homePage/widgets/scroll_bar.dart';
 import 'package:flutter/material.dart';
 
 class ListItemsCategory extends StatefulWidget {
@@ -60,7 +60,7 @@ class _ListItemsCategoryState extends State<ListItemsCategory> {
             ),
           ),
         ),
-        ScollBar(isScroll: isScrollListItemsCategory)
+        ScrollBar(isScroll: isScrollListItemsCategory)
       ],
     );
   }

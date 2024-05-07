@@ -97,11 +97,11 @@ class LoadData {
       //       .from('search')
       //       .insert({'name_search': keySearch[i], 'products_id': keySearch[i]});
       // }
-      keySearch.forEach((key, value) async {
-        await Supabase.instance.client
-            .from('search')
-            .insert({'name_search': key, 'products_id': value});
-      });
+      // keySearch.forEach((key, value) async {
+      //   await Supabase.instance.client
+      //       .from('search')
+      //       .insert({'name_search': key, 'products_id': value});
+      // });
 
       // if (pathData == 'lib/database/dataProductsRecommend.json') {
       // print('ksk');

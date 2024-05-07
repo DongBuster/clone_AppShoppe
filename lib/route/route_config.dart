@@ -4,11 +4,11 @@ import 'package:clone_shoppe/features/auth/views/login_page.dart';
 import 'package:clone_shoppe/features/auth/views/register_page.dart';
 import 'package:clone_shoppe/features/page/cartPage/cartScreen.dart';
 import 'package:clone_shoppe/features/page/detailProductsPage/detailProductsScreen.dart';
-import 'package:clone_shoppe/features/page/homePage/homeScreen.dart';
+import 'package:clone_shoppe/features/page/homePage/home_page.dart';
 import 'package:clone_shoppe/features/page/livePage/liveScreen.dart';
 import 'package:clone_shoppe/features/page/mallPage/mallScreen.dart';
 import 'package:clone_shoppe/features/page/notificationsPage/notificationsScreen.dart';
-import 'package:clone_shoppe/features/page/profilePage/profileScreen.dart';
+import 'package:clone_shoppe/features/page/profilePage/profile_page.dart';
 import 'package:clone_shoppe/layout/mainlayout.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -74,7 +74,7 @@ class Routes {
                 path: '/home',
                 name: GloblalVariable.homeScreen,
                 pageBuilder: (context, state) => const NoTransitionPage(
-                  child: Mainlayout(child: HomeScreen()),
+                  child: Mainlayout(child: HomePage()),
                 ),
                 routes: [
                   GoRoute(
@@ -127,7 +127,7 @@ class Routes {
                 path: '/profileScreen',
                 name: GloblalVariable.profileScreen,
                 pageBuilder: (context, state) => const NoTransitionPage(
-                  child: Mainlayout(child: ProfileScreen()),
+                  child: Mainlayout(child: ProfilePage()),
                 ),
                 routes: [
                   GoRoute(

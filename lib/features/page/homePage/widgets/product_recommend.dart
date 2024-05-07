@@ -23,8 +23,6 @@ class ProductRecommend extends StatefulWidget {
 class _ProductRecommendState extends State<ProductRecommend> {
   @override
   Widget build(BuildContext context) {
-    // print('image: ${widget.productsRecommend.image}');
-    // print('classify: ${widget.productsRecommend.classify}');
     final detailProduct = DetailProduct(
       image: widget.productsRecommend.image,
       classify: widget.productsRecommend.classify,
@@ -33,9 +31,7 @@ class _ProductRecommendState extends State<ProductRecommend> {
       percentSale: widget.productsRecommend.percentSale,
       quantitySold: widget.productsRecommend.quantitySold,
     );
-    // print(detailProduct.image.length);
-    // print(widget.productsRecommend.classify.runtimeType);
-    // print(widget.productsRecommend.classify[0].values.first);
+
     return GestureDetector(
         onTap: () {
           Provider.of<DetailProductModel>(context, listen: false)

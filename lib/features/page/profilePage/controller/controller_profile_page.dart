@@ -1,11 +1,14 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ControllerProfilePage {
+  User? currentUser = FirebaseAuth.instance.currentUser;
+
   File? imageFile;
 
   Future<File?> pickImage(ImageSource imageSource) async {
@@ -44,5 +47,25 @@ class ControllerProfilePage {
       });
     });
     // print(urlImage);
+  }
+
+  Future<String?> getNameUser() async {
+    DocumentSnapshot snapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(currentUser!.uid)
+        .get();
+    Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+    return data['name'];
+  }
+
+  Stream<String> getImageUrlStream() {
+    return FirebaseFirestore.instance
+        .collection('users')
+        .doc(currentUser!.uid)
+        .snapshots()
+        .map((snapshot) {
+      Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+      return data['image'];
+    });
   }
 }

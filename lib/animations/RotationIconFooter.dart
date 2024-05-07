@@ -36,7 +36,7 @@ class _RotationIconFooterState extends State<RotationIconFooter>
       duration: const Duration(milliseconds: 700),
       transitionBuilder: (child, animation) {
         return RotationTransition(
-          turns: child.key == const ValueKey('iconHome')
+          turns: child.key == const ValueKey('iconThumb_up')
               ? Tween<double>(begin: 1, end: 0.0).animate(animation)
               : Tween<double>(begin: 0.0, end: 1).animate(animation),
           child: ScaleTransition(
@@ -47,14 +47,14 @@ class _RotationIconFooterState extends State<RotationIconFooter>
       },
       child: widget.isChangeIcon
           ? Icon(
-              key: const ValueKey('iconHome'),
-              Icons.home,
+              key: const ValueKey('iconThumb_up'),
+              Icons.thumb_up,
               size: 22,
               color: widget.color,
             )
           : Icon(
-              key: const ValueKey('iconThumb_up'),
-              Icons.thumb_up,
+              key: const ValueKey('iconHome'),
+              Icons.home,
               size: 22,
               color: widget.color,
             ),

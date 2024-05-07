@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 
 class CountdownTimer extends StatefulWidget {
@@ -10,9 +9,11 @@ class CountdownTimer extends StatefulWidget {
   _CountdownTimerState createState() => _CountdownTimerState();
 }
 
-class _CountdownTimerState extends State<CountdownTimer> {
+class _CountdownTimerState extends State<CountdownTimer>
+    with TickerProviderStateMixin {
   late int secondsRemaining;
   late Timer timer;
+  late final controller = AnimationController(vsync: this);
 
   @override
   void initState() {
@@ -48,6 +49,7 @@ class _CountdownTimerState extends State<CountdownTimer> {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
+        //--- hours
         Container(
           alignment: Alignment.center,
           width: 25,
@@ -68,6 +70,7 @@ class _CountdownTimerState extends State<CountdownTimer> {
                 fontSize: 16, color: Colors.black, fontWeight: FontWeight.bold),
           ),
         ),
+        //--- minutes
         Container(
           alignment: Alignment.center,
           width: 25,
@@ -88,17 +91,18 @@ class _CountdownTimerState extends State<CountdownTimer> {
                 fontSize: 16, color: Colors.black, fontWeight: FontWeight.bold),
           ),
         ),
+        //--- seconds
         Container(
           alignment: Alignment.center,
           width: 25,
           height: 25,
           decoration: BoxDecoration(
               color: Colors.black, borderRadius: BorderRadius.circular(3)),
-          child: Text(secondsStr,
-              style: const TextStyle(
-                  fontSize: 14,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold)),
+          child: Text(
+            secondsStr,
+            style: const TextStyle(
+                fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold),
+          ),
         ),
       ],
     );

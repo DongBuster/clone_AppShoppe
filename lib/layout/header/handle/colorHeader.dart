@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../../provider/headerDetailProduct.dart';
-import '../../../provider/stateActiveColorIconHeader.dart';
+import '../../../features/page/homePage/provider/home_page_state.dart';
 
 // handle colorIconBottomNavBar when go route
 Color colorIconHeader(BuildContext context) {
@@ -18,8 +18,9 @@ Color colorIconHeader(BuildContext context) {
     return Colors.white;
   }
   if (GoRouter.of(context).location != '/home' ||
-      Provider.of<StateActiveColorIconHeader>(context, listen: true)
-              .isActiveColorIcon ==
+      Provider.of<HomePageState>(context, listen: true)
+              .getState
+              .activeIconHeader ==
           true) {
     return Colors.redAccent;
   } else {

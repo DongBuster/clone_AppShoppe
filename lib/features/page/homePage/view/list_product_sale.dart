@@ -1,30 +1,25 @@
-import 'package:clone_shoppe/database/loadData.dart';
-import 'package:clone_shoppe/features/page/homePage/widget/productSale.dart';
+import 'package:clone_shoppe/features/page/homePage/widgets/product_sale.dart';
 import 'package:clone_shoppe/models/productSale.dart';
 import 'package:flutter/material.dart';
+import '../service/home_page_service.dart';
 
-class RenderProductSale extends StatefulWidget {
-  const RenderProductSale({super.key});
+class ListProductSale extends StatefulWidget {
+  const ListProductSale({super.key});
 
   @override
-  State<RenderProductSale> createState() => _RenderProductSaleState();
+  State<ListProductSale> createState() => _ListProductSaleState();
 }
 
-class _RenderProductSaleState extends State<RenderProductSale> {
-  List<ProductSale> listProduct = [];
+class _ListProductSaleState extends State<ListProductSale> {
+  final homePageService = HomePageService();
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<dynamic>>(
-      future:
-          LoadData.loadStringFromAsset('lib/database/dataProductsSale.json'),
+    return FutureBuilder<List<ProductSale>>(
+      future: homePageService.getProductsFromFileJson(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          final jsonContent = snapshot.data;
-          // print(jsonContent);
-          listProduct =
-              jsonContent!.map((e) => ProductSale.fromJson(e)).toList();
-          // print(listProduct);
+          final listProduct = snapshot.data!;
 
           return SizedBox(
             height: 500,

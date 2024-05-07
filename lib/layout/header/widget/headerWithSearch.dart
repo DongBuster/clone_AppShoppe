@@ -1,11 +1,10 @@
 import 'package:clone_shoppe/features/page/searchPage/search_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/global_variables.dart';
-import '../../../provider/stateActiveColorIconHeader.dart';
+import '../../../features/page/homePage/provider/home_page_state.dart';
 
 class Search extends StatefulWidget {
   const Search({super.key});
@@ -28,9 +27,9 @@ class _SearchState extends State<Search> {
 
   @override
   Widget build(BuildContext context) {
-    bool isActiveColorIcon =
-        Provider.of<StateActiveColorIconHeader>(context, listen: true)
-            .isActiveColorIcon;
+    bool isActiveColorIcon = Provider.of<HomePageState>(context, listen: true)
+        .getState
+        .activeIconHeader;
     return GestureDetector(
       onTap: () => Navigator.push(
         context,

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class ScollBar extends StatefulWidget {
+class ScrollBar extends StatefulWidget {
   bool isScroll;
-  ScollBar({super.key, required this.isScroll});
+  ScrollBar({super.key, required this.isScroll});
 
   @override
-  State<ScollBar> createState() => _ScollBarState();
+  State<ScrollBar> createState() => _ScrollBarState();
 }
 
-class _ScollBarState extends State<ScollBar> {
+class _ScrollBarState extends State<ScrollBar> {
   @override
   Widget build(BuildContext context) {
     return Center(

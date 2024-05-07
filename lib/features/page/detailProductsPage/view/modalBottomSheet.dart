@@ -4,14 +4,9 @@ import 'package:clone_shoppe/models/cartModel.dart';
 import 'package:clone_shoppe/models/detailProduct.dart';
 import 'package:clone_shoppe/provider/checkboxCartScreen.dart';
 import 'package:clone_shoppe/provider/listProductCart.dart';
-import 'package:flutter/cupertino.dart';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-
 import 'package:go_router/go_router.dart';
-import 'package:local_hero/local_hero.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../provider/animation_add_to_cart.dart';
@@ -479,7 +474,7 @@ class _ModalBottomSheetState extends State<ModalBottomSheet>
                     onComplete: (controller) {
                       controller.reset();
                       manager.reset();
-                      cartController.forward();
+                      // cartController.forward();
                     },
                   )
                   .followPath(

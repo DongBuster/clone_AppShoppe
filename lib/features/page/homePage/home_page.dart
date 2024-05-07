@@ -1,25 +1,23 @@
-import 'package:clone_shoppe/features/page/homePage/handles/renderProductRecommend.dart';
-import 'package:clone_shoppe/features/page/homePage/handles/renderProductSale.dart';
-import 'package:clone_shoppe/features/page/homePage/view/Banner.dart';
-import 'package:clone_shoppe/features/page/homePage/view/BannerSpecial.dart';
-import 'package:clone_shoppe/features/page/homePage/view/ElectronicWallet.dart';
-import 'package:clone_shoppe/features/page/homePage/view/ListItemsCategory.dart';
-import 'package:clone_shoppe/features/page/homePage/widget/CoutdowTimer.dart';
-import 'package:provider/provider.dart';
-import 'package:clone_shoppe/layout/header/header.dart';
-import 'package:clone_shoppe/layout/header/widget/headerWithSearch.dart';
-import 'package:clone_shoppe/provider/stateActiveColorIconHeader.dart';
-import 'package:clone_shoppe/provider/stateActiveIconHome.dart';
 import 'package:flutter/material.dart';
+import '../../../layout/header/header.dart';
+import '../../../layout/header/widget/headerWithSearch.dart';
+import 'controller/home_page_controller.dart';
+import 'view/banner.dart';
+import 'view/banner_special.dart';
+import 'view/electronic_wallet.dart';
+import 'view/list_items_category.dart';
+import 'view/list_product_sale.dart';
+import 'widgets/coutdow_timer.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomePageState extends State<HomePage> {
+  final homePageController = HomePageController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,21 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
           NotificationListener<ScrollNotification>(
             onNotification: (notification) {
               setState(() {
-                if (notification.metrics.pixels <= 20 &&
-                    notification.metrics.axis == Axis.vertical) {
-                  Provider.of<StateActiveIconHome>(context, listen: false)
-                      .setNotActiveIconHome();
-                  Provider.of<StateActiveColorIconHeader>(context,
-                          listen: false)
-                      .setNotActiveColorIconHeader();
-                } else if (notification.metrics.pixels > 20 &&
-                    notification.metrics.axis == Axis.vertical) {
-                  Provider.of<StateActiveIconHome>(context, listen: false)
-                      .setActiveIconHome();
-                  Provider.of<StateActiveColorIconHeader>(context,
-                          listen: false)
-                      .setActiveColorIconHeader();
-                }
+                homePageController.setHomePageState(notification, context);
               });
               return false;
             },
@@ -70,6 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             left: 0,
                             right: 0,
                             child: Container(
+                              height: 300,
                               padding: const EdgeInsets.only(top: 60),
                               decoration: const BoxDecoration(
                                 gradient: LinearGradient(
@@ -153,7 +138,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             const Expanded(
                               child: Row(
                                 children: [
-                                  RenderProductSale(),
+                                  ListProductSale(),
                                 ],
                               ),
                             ),
@@ -179,7 +164,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     const SizedBox(height: 5),
-                    const RenderProductRecommend(),
+                    // const ListProductRecommend(),
                     const SizedBox(height: 70)
                   ],
                 ),

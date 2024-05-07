@@ -1,11 +1,8 @@
 import 'dart:async';
-
 import 'package:clone_shoppe/firebase/firebase_options.dart';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'provider/bought_product.dart';
 import 'provider/checkboxCartScreen.dart';
 import 'provider/create_accout.dart';
@@ -14,8 +11,7 @@ import 'provider/headerDetailProduct.dart';
 import 'provider/listProductCart.dart';
 import 'provider/list_purchase_order.dart';
 import 'provider/selectedProductCart.dart';
-import 'provider/stateActiveColorIconHeader.dart';
-import 'provider/stateActiveIconHome.dart';
+import 'features/page/homePage/provider/home_page_state.dart';
 import 'route/route_config.dart';
 
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -23,9 +19,9 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Supabase.initialize(
-    url: 'https://jmyuwdevbxyhdroplwek.supabase.co',
+    url: 'https://bckotsxlxlwgfovdxarv.supabase.co',
     anonKey:
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpteXV3ZGV2Ynh5aGRyb3Bsd2VrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTExNzMwMzgsImV4cCI6MjAyNjc0OTAzOH0.xBGddifueY9CoYAV8sKba2bDLvGle_KXXxRqsRfXNlg',
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJja290c3hseGx3Z2ZvdmR4YXJ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTQ5ODYwMzAsImV4cCI6MjAzMDU2MjAzMH0.mQz8604uSy05Yu6pdJHsQ8ypP5znMOa99j9mW41kSrg',
   );
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -38,10 +34,7 @@ Future<void> main() async {
           create: (_) => CreateAccout(),
         ),
         ChangeNotifierProvider(
-          create: (_) => StateActiveIconHome(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => StateActiveColorIconHeader(),
+          create: (_) => HomePageState(),
         ),
         ChangeNotifierProvider(
           create: (_) => DetailProductModel(),
