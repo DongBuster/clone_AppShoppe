@@ -1,6 +1,6 @@
-import 'package:clone_shoppe/common/widgets/FlagSale.dart';
-import 'package:clone_shoppe/common/widgets/FlagShop.dart';
-import 'package:clone_shoppe/models/productSale.dart';
+import 'package:clone_shoppe/common/widgets/flag_sale.dart';
+import 'package:clone_shoppe/common/widgets/flag_shop.dart';
+import 'package:clone_shoppe/models/product_sale.dart';
 import 'package:flutter/material.dart';
 
 class ProductSaleWidget extends StatefulWidget {

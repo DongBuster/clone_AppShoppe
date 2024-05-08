@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
-part 'cartModel.g.dart';
+part 'cart_model.g.dart';
 
 @JsonSerializable()
 class CartModel {

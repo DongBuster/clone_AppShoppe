@@ -1,10 +1,10 @@
 import 'package:clone_shoppe/constants/global_variables.dart';
-import 'package:clone_shoppe/models/cartModel.dart';
-import 'package:clone_shoppe/provider/checkboxCartScreen.dart';
+import 'package:clone_shoppe/models/cart_model.dart';
+import 'package:clone_shoppe/provider/checkbox_cart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../provider/selectedProductCart.dart';
+import '../../../../provider/selected_product_cart.dart';
 
 class CheckBox extends StatefulWidget {
   // bool isChecked;

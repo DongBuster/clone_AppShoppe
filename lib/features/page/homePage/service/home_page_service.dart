@@ -1,8 +1,8 @@
 import 'package:clone_shoppe/models/product.dart';
-import 'package:clone_shoppe/models/productSale.dart';
+import 'package:clone_shoppe/models/product_sale.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../../../../database/loadData.dart';
+import '../../../../database/load_data.dart';
 
 class HomePageService {
   Future<List<Product>> getProducts() async {

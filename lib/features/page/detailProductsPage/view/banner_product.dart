@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:clone_shoppe/constants/global_variables.dart';
-import 'package:clone_shoppe/models/detailProduct.dart';
+import 'package:clone_shoppe/models/detail_product.dart';
 import 'package:flutter/material.dart';
 
 class BannerProducts extends StatefulWidget {
@@ -20,7 +20,7 @@ class _BannerProductsState extends State<BannerProducts> {
     return Container(
       margin: widget.product.image.length == 1
           ? null
-          : const EdgeInsets.only(bottom: 12),
+          : const EdgeInsets.only(bottom: 5),
       color: Colors.white,
       child: Column(
         children: [

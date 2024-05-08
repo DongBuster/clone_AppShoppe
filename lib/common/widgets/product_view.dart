@@ -2,8 +2,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-import 'FlagSale.dart';
-import 'FlagShop.dart';
+import 'flag_sale.dart';
+import 'flag_shop.dart';
 
 class ProductView extends StatelessWidget {
   final String urlImage;

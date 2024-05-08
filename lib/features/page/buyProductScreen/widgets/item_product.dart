@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 import '../../../../constants/global_variables.dart';
-import '../../../../models/cartModel.dart';
+import '../../../../models/cart_model.dart';
 import '../../profilePage/widgets/feature_link.dart';
 
 class ItemProduct extends StatelessWidget {

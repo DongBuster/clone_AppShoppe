@@ -1,4 +1,4 @@
-import 'package:clone_shoppe/models/cartModel.dart';
+import 'package:clone_shoppe/models/cart_model.dart';
 import 'package:flutter/material.dart';
 
 class CheckBoxCartScreen with ChangeNotifier {

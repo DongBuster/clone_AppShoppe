@@ -1,9 +1,9 @@
-import 'package:clone_shoppe/features/page/detailProductsPage/view/BannerProducts.dart';
-import 'package:clone_shoppe/features/page/detailProductsPage/view/descriptionProducts.dart';
-import 'package:clone_shoppe/features/page/detailProductsPage/view/footerDetailProducts.dart';
-import 'package:clone_shoppe/features/page/detailProductsPage/view/headerDetailProducts.dart';
-import 'package:clone_shoppe/provider/detailProductModel.dart';
-import 'package:clone_shoppe/provider/headerDetailProduct.dart';
+import 'package:clone_shoppe/features/page/detailProductsPage/view/banner_product.dart';
+import 'package:clone_shoppe/features/page/detailProductsPage/view/description_product.dart';
+import 'package:clone_shoppe/features/page/detailProductsPage/view/footerdetail_product.dart';
+import 'package:clone_shoppe/features/page/detailProductsPage/view/headerdetail_product.dart';
+import 'package:clone_shoppe/provider/detail_product_model.dart';
+import 'package:clone_shoppe/provider/header_detail_product.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

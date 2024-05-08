@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../animations/TransitionPage.dart';
+import '../animations/transition_page.dart';
 import 'footer/footer.dart';
 
 class Mainlayout extends StatefulWidget {

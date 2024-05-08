@@ -1,7 +1,7 @@
 import 'package:clone_shoppe/constants/global_variables.dart';
-import 'package:clone_shoppe/provider/checkboxCartScreen.dart';
-import 'package:clone_shoppe/provider/listProductCart.dart';
-import 'package:clone_shoppe/provider/selectedProductCart.dart';
+import 'package:clone_shoppe/provider/checkbox_cart_screen.dart';
+import 'package:clone_shoppe/provider/list_product_cart.dart';
+import 'package:clone_shoppe/provider/selected_product_cart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

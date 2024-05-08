@@ -1,7 +1,7 @@
-import 'package:clone_shoppe/features/page/detailProductsPage/widget/infoProduct.dart';
-import 'package:clone_shoppe/features/page/detailProductsPage/widget/infoShop.dart';
-import 'package:clone_shoppe/features/page/detailProductsPage/widget/titleProducts.dart';
-import 'package:clone_shoppe/models/detailProduct.dart';
+import 'package:clone_shoppe/features/page/detailProductsPage/widget/info_product.dart';
+import 'package:clone_shoppe/features/page/detailProductsPage/widget/info_shop.dart';
+import 'package:clone_shoppe/features/page/detailProductsPage/widget/title_product.dart';
+import 'package:clone_shoppe/models/detail_product.dart';
 import 'package:flutter/material.dart';
 
 class DesscriptionProducts extends StatefulWidget {

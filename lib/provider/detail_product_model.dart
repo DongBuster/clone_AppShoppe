@@ -1,4 +1,4 @@
-import 'package:clone_shoppe/models/detailProduct.dart';
+import 'package:clone_shoppe/models/detail_product.dart';
 import 'package:flutter/material.dart';
 
 class DetailProductModel with ChangeNotifier {

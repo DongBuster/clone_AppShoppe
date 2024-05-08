@@ -14,7 +14,7 @@ class _InfoProductState extends State<InfoProduct> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(12),
-      margin: const EdgeInsets.only(bottom: 12),
+      margin: const EdgeInsets.only(bottom: 5),
       color: Colors.white,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

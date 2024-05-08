@@ -2,10 +2,10 @@ import 'package:clone_shoppe/features/page/cartPage/cartScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:provider/provider.dart';
-import '../../common/widgets/IconShoppingCart.dart';
+import '../../common/widgets/icon_shopping_cart.dart';
 import '../../common/widgets/text.dart';
 import '../../features/page/homePage/provider/home_page_state.dart';
-import 'handle/colorHeader.dart';
+import 'handle/color_header.dart';
 
 class HeaderApp extends StatefulWidget {
   final Widget child;

@@ -1,7 +1,7 @@
 import 'package:clone_shoppe/constants/global_variables.dart';
-import 'package:clone_shoppe/models/detailProduct.dart';
+import 'package:clone_shoppe/models/detail_product.dart';
 import 'package:clone_shoppe/models/product.dart';
-import 'package:clone_shoppe/provider/detailProductModel.dart';
+import 'package:clone_shoppe/provider/detail_product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';

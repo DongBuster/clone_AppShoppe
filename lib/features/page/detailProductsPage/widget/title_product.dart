@@ -1,5 +1,5 @@
-import 'package:clone_shoppe/common/widgets/FlagSale.dart';
-import 'package:clone_shoppe/models/detailProduct.dart';
+import 'package:clone_shoppe/common/widgets/flag_sale.dart';
+import 'package:clone_shoppe/models/detail_product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -25,9 +25,9 @@ class _TitleProductsState extends State<TitleProducts> {
 
   void handleTitleTooLong() {
     String title = widget.detailProduct.name;
-    if (title.length > 33) {
+    if (title.length > 30) {
       // when title have a long word
-      int spaceIndexRow1 = title.lastIndexOf(' ', 33);
+      int spaceIndexRow1 = title.lastIndexOf(' ', 30);
       String remainingText = title.substring(spaceIndexRow1);
       // int remainingCharacterCount = remainingText.length;
       // int spaceIndexRow2 = title.lastIndexOf(' ', 33 + remainingCharacterCount);
@@ -55,7 +55,7 @@ class _TitleProductsState extends State<TitleProducts> {
     List<String> words = widget.detailProduct.name.split(' ');
 
     return Container(
-      margin: const EdgeInsets.only(bottom: 12),
+      margin: const EdgeInsets.only(bottom: 5),
       padding: const EdgeInsets.all(10),
       color: Colors.white,
       child: Column(

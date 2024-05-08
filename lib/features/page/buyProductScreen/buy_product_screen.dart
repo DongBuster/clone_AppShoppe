@@ -1,13 +1,13 @@
 import 'package:clone_shoppe/constants/global_variables.dart';
-import 'package:clone_shoppe/models/cartModel.dart';
+import 'package:clone_shoppe/models/cart_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import '../../../provider/listProductCart.dart';
+import '../../../provider/list_product_cart.dart';
 import '../../../provider/list_purchase_order.dart';
-import '../../../provider/selectedProductCart.dart';
+import '../../../provider/selected_product_cart.dart';
 import 'widgets/item_product.dart';
 
 class BuyProductScreen extends StatefulWidget {

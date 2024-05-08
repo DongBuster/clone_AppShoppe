@@ -1,5 +1,5 @@
 import 'package:clone_shoppe/features/page/homePage/widgets/product_sale.dart';
-import 'package:clone_shoppe/models/productSale.dart';
+import 'package:clone_shoppe/models/product_sale.dart';
 import 'package:flutter/material.dart';
 import '../service/home_page_service.dart';
 

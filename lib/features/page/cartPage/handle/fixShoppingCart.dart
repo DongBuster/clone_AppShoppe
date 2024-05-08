@@ -3,9 +3,9 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../constants/global_variables.dart';
-import '../../../../models/cartModel.dart';
-import '../../../../provider/listProductCart.dart';
-import '../../../../provider/selectedProductCart.dart';
+import '../../../../models/cart_model.dart';
+import '../../../../provider/list_product_cart.dart';
+import '../../../../provider/selected_product_cart.dart';
 
 class FixShoppingCart extends StatefulWidget {
   final Widget child;

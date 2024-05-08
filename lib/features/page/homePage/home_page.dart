@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import '../../../layout/header/header.dart';
-import '../../../layout/header/widget/headerWithSearch.dart';
+import '../../../layout/header/widget/header_with_search.dart';
 import 'controller/home_page_controller.dart';
 import 'view/banner.dart';
 import 'view/banner_special.dart';
 import 'view/electronic_wallet.dart';
 import 'view/list_items_category.dart';
+import 'view/list_product_recommend.dart';
 import 'view/list_product_sale.dart';
 import 'widgets/coutdow_timer.dart';
 
@@ -164,7 +165,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     const SizedBox(height: 5),
-                    // const ListProductRecommend(),
+                    const ListProductRecommend(),
                     const SizedBox(height: 70)
                   ],
                 ),

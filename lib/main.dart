@@ -4,13 +4,13 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'provider/bought_product.dart';
-import 'provider/checkboxCartScreen.dart';
+import 'provider/checkbox_cart_screen.dart';
 import 'provider/create_accout.dart';
-import 'provider/detailProductModel.dart';
-import 'provider/headerDetailProduct.dart';
-import 'provider/listProductCart.dart';
+import 'provider/detail_product_model.dart';
+import 'provider/header_detail_product.dart';
+import 'provider/list_product_cart.dart';
 import 'provider/list_purchase_order.dart';
-import 'provider/selectedProductCart.dart';
+import 'provider/selected_product_cart.dart';
 import 'features/page/homePage/provider/home_page_state.dart';
 import 'route/route_config.dart';
 

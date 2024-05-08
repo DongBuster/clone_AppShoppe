@@ -1,13 +1,11 @@
-import 'package:clone_shoppe/common/widgets/IconShoppingCart.dart';
+import 'package:clone_shoppe/common/widgets/icon_shopping_cart.dart';
 import 'package:clone_shoppe/constants/global_variables.dart';
-import 'package:clone_shoppe/features/page/detailProductsPage/widget/IconButtonHeader.dart';
-import 'package:clone_shoppe/provider/headerDetailProduct.dart';
+import 'package:clone_shoppe/features/page/detailProductsPage/widget/icon_button_header.dart';
+import 'package:clone_shoppe/provider/header_detail_product.dart';
 import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-
-import '../../cartPage/cartScreen.dart';
 
 class HeaderDetailProducts extends StatefulWidget {
   const HeaderDetailProducts({super.key});
@@ -69,10 +67,7 @@ class _HeaderDetailProductsState extends State<HeaderDetailProducts> {
                       // button cart
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) => const CartScreen()));
+                          context.pushNamed(GloblalVariable.cartScreen);
                         },
                         child:
                             const IconButtonHeader(child: IconShoppingCart()),

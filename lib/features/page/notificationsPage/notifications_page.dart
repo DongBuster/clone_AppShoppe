@@ -1,15 +1,15 @@
 import 'package:clone_shoppe/layout/header/header.dart';
-import 'package:clone_shoppe/layout/header/widget/headerWithTitleText.dart';
+import 'package:clone_shoppe/layout/header/widget/header_with_title_text.dart';
 import 'package:flutter/material.dart';
 
-class LiveScreen extends StatefulWidget {
-  const LiveScreen({super.key});
+class NotificationsScreen extends StatefulWidget {
+  const NotificationsScreen({super.key});
 
   @override
-  State<LiveScreen> createState() => _LiveScreenState();
+  State<NotificationsScreen> createState() => _NotificationsScreenState();
 }
 
-class _LiveScreenState extends State<LiveScreen> {
+class _NotificationsScreenState extends State<NotificationsScreen> {
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -26,7 +26,7 @@ class _LiveScreenState extends State<LiveScreen> {
           left: 0,
           right: 0,
           child: HeaderApp(
-            child: TitleText(text: 'Shoppe Live'),
+            child: TitleText(text: 'Thông báo'),
           ),
         ),
       ],

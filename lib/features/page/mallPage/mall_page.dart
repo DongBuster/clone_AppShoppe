@@ -1,5 +1,5 @@
 import 'package:clone_shoppe/layout/header/header.dart';
-import 'package:clone_shoppe/layout/header/widget/headerWithSearch.dart';
+import 'package:clone_shoppe/layout/header/widget/header_with_search.dart';
 import 'package:flutter/material.dart';
 
 class MallScreen extends StatefulWidget {

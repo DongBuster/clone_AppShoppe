@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:clone_shoppe/constants/global_variables.dart';
-import 'package:clone_shoppe/models/detailProduct.dart';
+import 'package:clone_shoppe/models/detail_product.dart';
 import 'package:flutter/material.dart';
 
 class InfoShop extends StatelessWidget {
@@ -12,7 +12,7 @@ class InfoShop extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(12),
-      margin: const EdgeInsets.only(bottom: 12),
+      margin: const EdgeInsets.only(bottom: 5),
       color: Colors.white,
       child: Column(
         children: [
@@ -61,8 +61,8 @@ Widget imageShop(String path) {
         bottom: 0,
         child: Container(
           alignment: Alignment.center,
-          width: 68,
-          height: 19,
+          width: 52,
+          height: 16,
           decoration: const BoxDecoration(
             color: Color(0xfff25220),
             borderRadius: BorderRadius.only(
@@ -74,7 +74,7 @@ Widget imageShop(String path) {
             'Yêu thích+',
             style: TextStyle(
               color: Colors.white,
-              fontSize: 13,
+              fontSize: 10,
               decoration: TextDecoration.none,
               fontWeight: FontWeight.bold,
             ),
@@ -111,7 +111,7 @@ Widget buttonInfoShop() {
     width: 90,
     height: 30,
     decoration: BoxDecoration(
-      border: Border.all(color: GloblalVariable.hex_f94f2f, width: 2),
+      border: Border.all(color: GloblalVariable.hex_f94f2f, width: 1),
       borderRadius: BorderRadius.circular(3),
     ),
     child: const Text(

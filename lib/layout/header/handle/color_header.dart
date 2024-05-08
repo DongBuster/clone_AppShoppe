@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import '../../../provider/headerDetailProduct.dart';
+import '../../../provider/header_detail_product.dart';
 import '../../../features/page/homePage/provider/home_page_state.dart';
 
 // handle colorIconBottomNavBar when go route

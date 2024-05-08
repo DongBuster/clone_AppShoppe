@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import '../../../animations/RotationIconFooter.dart';
+import '../../../animations/rotation_icon_footer.dart';
 import '../../../features/page/homePage/provider/home_page_state.dart';
-import '../handles/handleFooter.dart';
+import '../handles/handle_footer.dart';
 
 class IconButtonHome extends StatelessWidget {
   final double size;
