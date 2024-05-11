@@ -2,14 +2,14 @@ import 'package:clone_shoppe/layout/header/header.dart';
 import 'package:clone_shoppe/layout/header/widget/header_with_search.dart';
 import 'package:flutter/material.dart';
 
-class MallScreen extends StatefulWidget {
-  const MallScreen({super.key});
+class MallPage extends StatefulWidget {
+  const MallPage({super.key});
 
   @override
-  State<MallScreen> createState() => _MallScreenState();
+  State<MallPage> createState() => _MallPageState();
 }
 
-class _MallScreenState extends State<MallScreen> {
+class _MallPageState extends State<MallPage> {
   @override
   Widget build(BuildContext context) {
     return Stack(

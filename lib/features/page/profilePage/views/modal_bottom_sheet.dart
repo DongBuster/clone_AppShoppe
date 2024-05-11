@@ -34,9 +34,9 @@ class _ChangePictureAvatarState extends State<ChangePictureAvatar> {
 
   @override
   void initState() {
-    getImageUrl(currentUser.uid).then((value) => setState(() {
-          urlImage = value;
-        }));
+    // getImageUrl(currentUser.uid).then((value) => setState(() {
+    //       urlImage = value;
+    //     }));
     super.initState();
   }
 
@@ -56,22 +56,30 @@ class _ChangePictureAvatarState extends State<ChangePictureAvatar> {
                     cacheWidth: 100,
                   ),
                 )
-              : ClipOval(
-                  child: CachedNetworkImage(
-                    width: 100,
-                    height: 100,
-                    imageUrl: urlImage,
-                    errorWidget: (context, url, error) {
-                      return ClipRRect(
-                        borderRadius: BorderRadius.circular(30),
-                        child: Image.asset(
-                          'assets/img/user_default.jpg',
+              : FutureBuilder<String>(
+                  future: getImageUrl(currentUser.uid),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return ClipOval(
+                        child: CachedNetworkImage(
                           width: 100,
                           height: 100,
+                          imageUrl: snapshot.data!,
+                          errorWidget: (context, url, error) {
+                            return ClipRRect(
+                              borderRadius: BorderRadius.circular(30),
+                              child: Image.asset(
+                                'assets/img/user_default.jpg',
+                                width: 100,
+                                height: 100,
+                              ),
+                            );
+                          },
                         ),
                       );
-                    },
-                  ),
+                    }
+                    return const Center(child: CircularProgressIndicator());
+                  },
                 ),
           const Gap(30),
           Row(

@@ -1,9 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'products.g.dart';
+part 'product.g.dart';
 
 @JsonSerializable()
 class Product {
+  late int id;
   late String name;
   late String nameShop;
   late Map<String, dynamic> classify;
@@ -12,6 +13,7 @@ class Product {
   late String quantitySold;
 
   Product({
+    required this.id,
     required this.name,
     required this.nameShop,
     required this.classify,

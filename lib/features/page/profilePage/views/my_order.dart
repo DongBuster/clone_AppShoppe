@@ -69,7 +69,7 @@ class _MyOrderState extends State<MyOrder> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (_) => const PurchaseOrder()));
+                            builder: (_) => const PurchaseOrderPage()));
                   },
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,

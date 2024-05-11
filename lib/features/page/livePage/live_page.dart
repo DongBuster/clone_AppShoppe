@@ -2,14 +2,14 @@ import 'package:clone_shoppe/layout/header/header.dart';
 import 'package:clone_shoppe/layout/header/widget/header_with_title_text.dart';
 import 'package:flutter/material.dart';
 
-class LiveScreen extends StatefulWidget {
-  const LiveScreen({super.key});
+class LivePage extends StatefulWidget {
+  const LivePage({super.key});
 
   @override
-  State<LiveScreen> createState() => _LiveScreenState();
+  State<LivePage> createState() => _LivePageState();
 }
 
-class _LiveScreenState extends State<LiveScreen> {
+class _LivePageState extends State<LivePage> {
   @override
   Widget build(BuildContext context) {
     return Stack(

@@ -502,6 +502,8 @@ class _BuyProductScreenState extends State<BuyProductScreen> {
                 Provider.of<ListProductCart>(context, listen: false)
                     .removeListProductToCart(listSelected);
                 Provider.of<SelectedProductCart>(context, listen: false)
+                    .setTotalPrice = '0';
+                Provider.of<SelectedProductCart>(context, listen: false)
                     .removeListItemsSelected(listSelected);
                 // }
                 // if (context.mounted) {

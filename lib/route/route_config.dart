@@ -16,6 +16,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../features/page/buyProductScreen/buy_product_screen.dart';
 import '../features/page/purchaseOrderPage/purchase_order.dart';
+import 'custom_transtion_page.dart';
 
 final GlobalKey<NavigatorState> _rootNavigator = GlobalKey(debugLabel: 'root');
 // final GlobalKey<NavigatorState> _shellNavigatorLogin =
@@ -43,22 +44,28 @@ class Routes {
       GoRoute(
         path: '/register',
         name: GloblalVariable.registerScreen,
-        builder: (context, state) => const TransitionPage(
-          child: RegisterPage(),
+        pageBuilder: (context, state) => buildPageWithDefaultTransition(
+          context: context,
+          state: state,
+          child: const ProfilePage(),
         ),
       ),
       GoRoute(
         path: '/cartScreen',
         name: GloblalVariable.cartScreen,
-        pageBuilder: (context, state) => const NoTransitionPage(
-          child: TransitionPage(child: CartScreen()),
+        pageBuilder: (context, state) => buildPageWithDefaultTransition(
+          context: context,
+          state: state,
+          child: const CartScreen(),
         ),
         routes: [
           GoRoute(
             path: 'buyProductScreen',
             name: GloblalVariable.buyProductScreen,
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: TransitionPage(child: BuyProductScreen()),
+            pageBuilder: (context, state) => buildPageWithDefaultTransition(
+              context: context,
+              state: state,
+              child: const BuyProductScreen(),
             ),
           ),
         ],
@@ -73,15 +80,20 @@ class Routes {
               GoRoute(
                 path: '/home',
                 name: GloblalVariable.homeScreen,
-                pageBuilder: (context, state) => const NoTransitionPage(
-                  child: Mainlayout(child: HomePage()),
+                pageBuilder: (context, state) => buildPageWithDefaultTransition(
+                  context: context,
+                  state: state,
+                  child: const HomePage(),
                 ),
                 routes: [
                   GoRoute(
                     path: 'detailProducts',
                     name: GloblalVariable.detailProducts,
-                    pageBuilder: (context, state) => const NoTransitionPage(
-                      child: TransitionPage(child: DetailProductsScreen()),
+                    pageBuilder: (context, state) =>
+                        buildPageWithDefaultTransition(
+                      context: context,
+                      state: state,
+                      child: const DetailProductsPage(),
                     ),
                   ),
                 ],
@@ -93,8 +105,10 @@ class Routes {
               GoRoute(
                 path: '/mallScreen',
                 name: GloblalVariable.mallScreen,
-                pageBuilder: (context, state) => const NoTransitionPage(
-                  child: Mainlayout(child: MallScreen()),
+                pageBuilder: (context, state) => buildPageWithDefaultTransition(
+                  context: context,
+                  state: state,
+                  child: const MallPage(),
                 ),
               ),
             ],
@@ -104,8 +118,10 @@ class Routes {
               GoRoute(
                 path: '/liveScreen',
                 name: GloblalVariable.liveScreen,
-                pageBuilder: (context, state) => const NoTransitionPage(
-                  child: Mainlayout(child: LiveScreen()),
+                pageBuilder: (context, state) => buildPageWithDefaultTransition(
+                  context: context,
+                  state: state,
+                  child: const LivePage(),
                 ),
               ),
             ],
@@ -115,8 +131,10 @@ class Routes {
               GoRoute(
                 path: '/notificationsScreen',
                 name: GloblalVariable.notificationsScreen,
-                pageBuilder: (context, state) => const NoTransitionPage(
-                  child: Mainlayout(child: NotificationsScreen()),
+                pageBuilder: (context, state) => buildPageWithDefaultTransition(
+                  context: context,
+                  state: state,
+                  child: const NotificationsPage(),
                 ),
               ),
             ],
@@ -126,15 +144,20 @@ class Routes {
               GoRoute(
                 path: '/profileScreen',
                 name: GloblalVariable.profileScreen,
-                pageBuilder: (context, state) => const NoTransitionPage(
-                  child: Mainlayout(child: ProfilePage()),
+                pageBuilder: (context, state) => buildPageWithDefaultTransition(
+                  context: context,
+                  state: state,
+                  child: const ProfilePage(),
                 ),
                 routes: [
                   GoRoute(
                     path: 'purchaseOrderScreen',
                     name: GloblalVariable.purchaseOrderScreen,
-                    pageBuilder: (context, state) => const NoTransitionPage(
-                      child: PurchaseOrder(),
+                    pageBuilder: (context, state) =>
+                        buildPageWithDefaultTransition(
+                      context: context,
+                      state: state,
+                      child: const PurchaseOrderPage(),
                     ),
                   ),
                 ],

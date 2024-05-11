@@ -16,6 +16,7 @@ class ControllerIntruductionPage {
       // final imagePermanent = await saveImagePermanently(image.path);
 
       imageFile = imageTemporary;
+      print(imageFile);
       return imageFile;
     } on PlatformException catch (e) {
       debugPrint('Failed to pick image: $e');
@@ -24,6 +25,9 @@ class ControllerIntruductionPage {
   }
 
   Future<void> pushUserImage(String userId) async {
+    // print(imageFile);
+
+    // print(imageFilePick ?? 'file null');
     //--- create file name ---
     final imageName = '${userId}_image_user';
     // --- create StorageRef ---

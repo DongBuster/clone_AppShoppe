@@ -6,6 +6,7 @@ class SelectedProductCart with ChangeNotifier {
   String totalPrice = '0';
 
   String get getTotalPrice => totalPrice;
+  set setTotalPrice(String value) => totalPrice = value;
   List<CartModel> get getListSelected => listSelected;
   void calculateTotalPrice() {
     int sum = 0;
@@ -43,14 +44,7 @@ class SelectedProductCart with ChangeNotifier {
   void removeListItemsSelected(List<CartModel> list) {
     // print('remove: $listSelected');
 
-    for (CartModel model in list) {
-      listSelected.removeWhere(
-        (item) =>
-            item.nameProduct == model.nameProduct &&
-            item.classify.keys.first == model.classify.keys.first,
-      );
-    }
-    // print('remove: $listSelected');
+    listSelected.removeWhere((item) => list.contains(item));
     calculateTotalPrice();
     notifyListeners();
   }

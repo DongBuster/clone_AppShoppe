@@ -14,18 +14,17 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  bool isAccout = false;
+  final _controllerUsername = TextEditingController();
+  final _focusNodeUsername = FocusNode();
+  final _controllerPassword = TextEditingController();
+  final _focusNodePassword = FocusNode();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
     // Future.delayed(const Duration(microseconds: 1000));
   }
-
-  final _controllerUsername = TextEditingController();
-  final _focusNodeUsername = FocusNode();
-  final _controllerPassword = TextEditingController();
-  final _focusNodePassword = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -52,28 +51,35 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                UsernameFied(
-                  title: 'Username',
-                  hintText: 'Type your username or email',
-                  prefixIcon: const Icon(
-                    Icons.person_2_outlined,
-                    size: 20,
-                    color: Colors.black38,
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      UsernameFied(
+                        title: 'Username',
+                        hintText: 'Type your username or email',
+                        prefixIcon: const Icon(
+                          Icons.person_2_outlined,
+                          size: 20,
+                          color: Colors.black38,
+                        ),
+                        controller: _controllerUsername,
+                        focusNode: _focusNodeUsername,
+                      ),
+                      // const Gap(20),
+                      PasswordFieldLoginPage(
+                        title: 'Password',
+                        hintText: 'Type your password',
+                        prefixIcon: const Icon(
+                          Icons.lock_outline,
+                          size: 20,
+                          color: Colors.black38,
+                        ),
+                        controller: _controllerPassword,
+                        focusNode: _focusNodePassword,
+                      ),
+                    ],
                   ),
-                  controller: _controllerUsername,
-                  focusNode: _focusNodeUsername,
-                ),
-                const Gap(20),
-                PasswordFieldLoginPage(
-                  title: 'Password',
-                  hintText: 'Type your password',
-                  prefixIcon: const Icon(
-                    Icons.lock_outline,
-                    size: 20,
-                    color: Colors.black38,
-                  ),
-                  controller: _controllerPassword,
-                  focusNode: _focusNodePassword,
                 ),
                 const Gap(10),
                 Container(
@@ -89,11 +95,23 @@ class _LoginPageState extends State<LoginPage> {
                 const Gap(25),
                 //-- button login
                 GestureDetector(
-                  onTap: () {
-                    AuthController.signInWithEmailAndPassword(
-                            context, _controllerUsername, _controllerPassword)
-                        .then((value) =>
-                            context.goNamed(GloblalVariable.introductionPage));
+                  onTap: () async {
+                    if (_formKey.currentState!.validate()) {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: const Text('Loading...'),
+                        backgroundColor: Colors.black.withOpacity(0.5),
+                        behavior: SnackBarBehavior.floating,
+                        margin: EdgeInsets.only(
+                          bottom: MediaQuery.of(context).size.height / 2,
+                          right: 120,
+                          left: 120,
+                        ),
+                      ));
+                      await AuthController.signInWithEmailAndPassword(
+                              context, _controllerUsername, _controllerPassword)
+                          .then((value) => context
+                              .goNamed(GloblalVariable.introductionPage));
+                    }
                   },
                   child: Container(
                     alignment: Alignment.center,
@@ -189,9 +207,20 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       onPressed: () async {
-                        AuthController.handleGoogleBtnClick(context).then(
-                            (value) => context
-                                .goNamed(GloblalVariable.introductionPage));
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: const Text('Loading...'),
+                          backgroundColor: Colors.black.withOpacity(0.5),
+                          behavior: SnackBarBehavior.floating,
+                          margin: EdgeInsets.only(
+                            bottom: MediaQuery.of(context).size.height / 2,
+                            right: 120,
+                            left: 120,
+                          ),
+                        ));
+                        await AuthController.handleGoogleBtnClick(context);
+                        if (context.mounted) {
+                          ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                        }
                       },
                       icon: SvgPicture.asset(
                         'assets/icon_google.svg',

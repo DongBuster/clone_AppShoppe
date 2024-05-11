@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-
-import '../../../provider/header_detail_product.dart';
+import '../../../features/page/detailProductsPage/provider/detail_product_provider.dart';
 import '../../../features/page/homePage/provider/home_page_state.dart';
 
 // handle colorIconBottomNavBar when go route
 Color colorIconHeader(BuildContext context) {
   bool isChangeHeaderDetailProduct =
-      Provider.of<SateHeaderDetailProduct>(context, listen: false)
-          .getIsChangeHeader;
+      Provider.of<StateDetailProduct>(context, listen: true)
+          .getStateDetailProduct
+          .getisChangeHeader;
   if (isChangeHeaderDetailProduct == true &&
       GoRouter.of(context).location == '/home/detailProducts') {
     return Colors.redAccent;

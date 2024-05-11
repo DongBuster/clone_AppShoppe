@@ -29,8 +29,21 @@ class UsernameFied extends StatelessWidget {
         ),
         SizedBox(
           width: MediaQuery.of(context).size.width - 70,
-          height: 40,
-          child: TextField(
+          height: 60,
+          child: TextFormField(
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter some text';
+              } else {
+                if (RegExp(r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
+                        .hasMatch(value) ==
+                    false) {
+                  return 'This is not an email';
+                }
+              }
+              return null;
+            },
+            //--
             onTapOutside: (event) {
               focusNode.unfocus();
             },
@@ -42,7 +55,8 @@ class UsernameFied extends StatelessWidget {
             style: const TextStyle(fontSize: 14),
             //---
             decoration: InputDecoration(
-              contentPadding: const EdgeInsets.symmetric(vertical: 2.0),
+              contentPadding:
+                  const EdgeInsets.only(top: 18, bottom: 0, left: 0),
               hintText: hintText,
               hintStyle: const TextStyle(fontSize: 14, color: Colors.black38),
               prefixIcon: Padding(
@@ -97,8 +111,15 @@ class _PasswordFieldLoginPageState extends State<PasswordFieldLoginPage> {
         ),
         SizedBox(
           width: MediaQuery.of(context).size.width - 70,
-          height: 40,
-          child: TextField(
+          height: 60,
+          child: TextFormField(
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter some text';
+              }
+              return null;
+            },
+            //---
             obscureText: visibility ? true : false,
             onTapOutside: (event) {
               widget.focusNode.unfocus();
@@ -112,7 +133,8 @@ class _PasswordFieldLoginPageState extends State<PasswordFieldLoginPage> {
             //---
 
             decoration: InputDecoration(
-              contentPadding: const EdgeInsets.symmetric(vertical: 2.0),
+              contentPadding:
+                  const EdgeInsets.only(top: 18, bottom: 0, left: 0),
 
               hintText: widget.hintText,
               hintStyle: const TextStyle(fontSize: 14, color: Colors.black38),

@@ -6,8 +6,6 @@ import 'widgets/icon_button.dart';
 import 'widgets/icon_buttonHome.dart';
 
 class FooterApp extends StatefulWidget {
-  // final StatefulNavigationShell child;
-
   const FooterApp({super.key});
 
   @override
@@ -15,7 +13,6 @@ class FooterApp extends StatefulWidget {
 }
 
 class _FooterAppState extends State<FooterApp> {
-  // final StatefulNavigationShell stfNavigationShell ;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -39,9 +36,7 @@ class _FooterAppState extends State<FooterApp> {
           // home
           GestureDetector(
             onTap: () {
-              context.goNamed(GloblalVariable.homeScreen);
-
-              // onTapIconFooter(context, GloblalVariable.homeScreen);
+              context.pushReplacementNamed(GloblalVariable.homeScreen);
             },
             child: const SizedBox(
               width: 80,
@@ -54,10 +49,7 @@ class _FooterAppState extends State<FooterApp> {
           // mail
           GestureDetector(
             onTap: () {
-              context.goNamed(GloblalVariable.mallScreen);
-              // widget.child.goBranch(1);
-
-              // onTapIconFooter(context, GloblalVariable.mallScreen);
+              context.pushReplacementNamed(GloblalVariable.mallScreen);
             },
             child: const SizedBox(
               width: 70,
@@ -72,10 +64,7 @@ class _FooterAppState extends State<FooterApp> {
           // live
           GestureDetector(
             onTap: () {
-              // widget.child.goBranch(2);
-              context.goNamed(GloblalVariable.liveScreen);
-
-              // onTapIconFooter(context, GloblalVariable.liveScreen);
+              context.pushReplacementNamed(GloblalVariable.liveScreen);
             },
             child: const SizedBox(
               width: 70,
@@ -90,10 +79,7 @@ class _FooterAppState extends State<FooterApp> {
           // notification
           GestureDetector(
             onTap: () {
-              // widget.child.goBranch(3);
-              context.goNamed(GloblalVariable.notificationsScreen);
-
-              // onTapIconFooter(context, GloblalVariable.notificationsScreen);
+              context.pushReplacementNamed(GloblalVariable.notificationsScreen);
             },
             child: SizedBox(
               width: 70,
@@ -130,10 +116,7 @@ class _FooterAppState extends State<FooterApp> {
           // profile
           GestureDetector(
             onTap: () {
-              // widget.child.goBranch(4);
-              context.goNamed(GloblalVariable.profileScreen);
-
-              // onTapIconFooter(context, GloblalVariable.profileScreen);
+              context.pushReplacementNamed(GloblalVariable.profileScreen);
             },
             child: const SizedBox(
               width: 70,

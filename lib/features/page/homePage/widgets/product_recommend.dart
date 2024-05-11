@@ -1,13 +1,11 @@
 import 'package:clone_shoppe/constants/global_variables.dart';
 import 'package:clone_shoppe/models/detail_product.dart';
 import 'package:clone_shoppe/models/product.dart';
-import 'package:clone_shoppe/provider/detail_product_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-
 import '../../../../common/widgets/product_view.dart';
+import '../../detailProductsPage/provider/detail_product_provider.dart';
 
 class ProductRecommend extends StatefulWidget {
   final Product productsRecommend;
@@ -31,12 +29,17 @@ class _ProductRecommendState extends State<ProductRecommend> {
       percentSale: widget.productsRecommend.percentSale,
       quantitySold: widget.productsRecommend.quantitySold,
     );
-
     return GestureDetector(
         onTap: () {
-          Provider.of<DetailProductModel>(context, listen: false)
-              .setValueDetailProductModel(detailProduct);
+          Provider.of<StateDetailProduct>(context, listen: false)
+              .getStateDetailProduct
+              .setIdProduct = widget.productsRecommend.id;
           context.pushNamed(GloblalVariable.detailProducts);
+          // Navigator.push(
+          //     context,
+          //     MaterialPageRoute(
+          //         builder: (_) => DetailProductsScreen(
+          //             idProduct: widget.productsRecommend.id)));
         },
         child: ProductView(
           urlImage: detailProduct.image[0],

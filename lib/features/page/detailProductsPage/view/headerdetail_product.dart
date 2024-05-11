@@ -1,11 +1,12 @@
 import 'package:clone_shoppe/common/widgets/icon_shopping_cart.dart';
 import 'package:clone_shoppe/constants/global_variables.dart';
 import 'package:clone_shoppe/features/page/detailProductsPage/widget/icon_button_header.dart';
-import 'package:clone_shoppe/provider/header_detail_product.dart';
 import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+
+import '../provider/detail_product_provider.dart';
 
 class HeaderDetailProducts extends StatefulWidget {
   const HeaderDetailProducts({super.key});
@@ -24,8 +25,9 @@ class _HeaderDetailProductsState extends State<HeaderDetailProducts> {
 
   @override
   Widget build(BuildContext context) {
-    return Provider.of<SateHeaderDetailProduct>(context, listen: true)
-                .getIsChangeHeader ==
+    return Provider.of<StateDetailProduct>(context, listen: true)
+                .getStateDetailProduct
+                .getisChangeHeader ==
             false
         ? Container(
             padding: const EdgeInsets.fromLTRB(10, 30, 0, 5),
@@ -36,8 +38,8 @@ class _HeaderDetailProductsState extends State<HeaderDetailProducts> {
                 // button back
                 GestureDetector(
                   onTap: () {
-                    Provider.of<SateHeaderDetailProduct>(context, listen: false)
-                        .setNotActiveChangeHeader();
+                    Provider.of<StateDetailProduct>(context, listen: false)
+                        .setIsChangeHeaderFalse();
                     context.pop();
                   },
                   child: const IconButtonHeader(
@@ -107,8 +109,8 @@ class _HeaderDetailProductsState extends State<HeaderDetailProducts> {
                 GestureDetector(
                   onTap: () {
                     context.pop();
-                    Provider.of<SateHeaderDetailProduct>(context, listen: false)
-                        .setNotActiveChangeHeader();
+                    Provider.of<StateDetailProduct>(context, listen: false)
+                        .setIsChangeHeaderFalse();
                   },
                   child: Container(
                     alignment: Alignment.topLeft,
@@ -172,7 +174,7 @@ class _HeaderDetailProductsState extends State<HeaderDetailProducts> {
                       // button cart
                       GestureDetector(
                           onTap: () {
-                            context.goNamed(GloblalVariable.cartScreen);
+                            context.pushNamed(GloblalVariable.cartScreen);
                           },
                           child: const IconShoppingCart()),
                       //button more

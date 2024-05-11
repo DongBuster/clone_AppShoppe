@@ -14,8 +14,6 @@ class IconShoppingCart extends StatefulWidget {
 }
 
 class _IconShoppingCartState extends State<IconShoppingCart> {
-  // final Key animate = AddToCartMannager;
-
   @override
   Widget build(BuildContext context) {
     int numberCart =

@@ -7,14 +7,14 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import '../../../provider/list_purchase_order.dart';
 
-class PurchaseOrder extends StatefulWidget {
-  const PurchaseOrder({super.key});
+class PurchaseOrderPage extends StatefulWidget {
+  const PurchaseOrderPage({super.key});
 
   @override
-  State<PurchaseOrder> createState() => _PurchaseOrderState();
+  State<PurchaseOrderPage> createState() => _PurchaseOrderPageState();
 }
 
-class _PurchaseOrderState extends State<PurchaseOrder> {
+class _PurchaseOrderPageState extends State<PurchaseOrderPage> {
   @override
   Widget build(BuildContext context) {
     int quantityBoughtProduct =

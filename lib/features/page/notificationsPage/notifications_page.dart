@@ -2,14 +2,14 @@ import 'package:clone_shoppe/layout/header/header.dart';
 import 'package:clone_shoppe/layout/header/widget/header_with_title_text.dart';
 import 'package:flutter/material.dart';
 
-class NotificationsScreen extends StatefulWidget {
-  const NotificationsScreen({super.key});
+class NotificationsPage extends StatefulWidget {
+  const NotificationsPage({super.key});
 
   @override
-  State<NotificationsScreen> createState() => _NotificationsScreenState();
+  State<NotificationsPage> createState() => _NotificationsPageState();
 }
 
-class _NotificationsScreenState extends State<NotificationsScreen> {
+class _NotificationsPageState extends State<NotificationsPage> {
   @override
   Widget build(BuildContext context) {
     return Stack(

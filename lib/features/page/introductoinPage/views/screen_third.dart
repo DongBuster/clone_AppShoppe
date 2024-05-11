@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../constants/global_variables.dart';
+import '../InheritedWidget/introduction_inherited_data.dart';
 import '../controller/controller.dart';
 
 class ScreenThird extends StatefulWidget {
-  File? imageFilePick;
-
-  ScreenThird({super.key, required this.imageFilePick});
+  const ScreenThird({super.key});
 
   @override
   State<ScreenThird> createState() => _ScreenThirdState();
@@ -16,15 +15,15 @@ class ScreenThird extends StatefulWidget {
 
 class _ScreenThirdState extends State<ScreenThird> {
   final controller = ControllerIntruductionPage();
-
+  File? imagePick;
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        widget.imageFilePick != null
+        imagePick != null
             ? ClipOval(
                 child: Image.file(
-                  widget.imageFilePick!,
+                  imagePick!,
                   cacheHeight: 180,
                   cacheWidth: 180,
                 ),
@@ -39,11 +38,13 @@ class _ScreenThirdState extends State<ScreenThird> {
           children: [
             TextButton(
               onPressed: () {
-                controller.pickImage(ImageSource.camera).then(
-                      (value) => setState(() {
-                        widget.imageFilePick = value;
-                      }),
-                    );
+                controller
+                    .pickImage(
+                      ImageSource.camera,
+                    )
+                    .then((value) => setState(() {
+                          imagePick = value;
+                        }));
               },
               style: ButtonStyle(
                   backgroundColor: MaterialStatePropertyAll(
@@ -60,11 +61,13 @@ class _ScreenThirdState extends State<ScreenThird> {
             const Gap(15),
             TextButton(
               onPressed: () {
-                controller.pickImage(ImageSource.gallery).then(
-                      (value) => setState(() {
-                        widget.imageFilePick = value;
-                      }),
-                    );
+                controller
+                    .pickImage(
+                      ImageSource.gallery,
+                    )
+                    .then((value) => setState(() {
+                          imagePick = value;
+                        }));
               },
               style: ButtonStyle(
                   backgroundColor: MaterialStatePropertyAll(

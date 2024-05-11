@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:clone_shoppe/features/page/profilePage/views/modal_bottom_sheet.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
 import '../controller/controller_profile_page.dart';
 
@@ -30,50 +31,49 @@ class _UserInfoState extends State<UserInfo> {
       children: [
         //--- avatar ----
         const Gap(12),
-
-        GestureDetector(
-          onTap: () {
-            showModalBottomSheet(
-              context: context,
-              builder: (context) => const ChangePictureAvatar(),
-            );
-          },
-          child: Stack(
-            children: [
-              StreamBuilder<String>(
-                stream: controllerProfilePage.getImageUrlStream(),
-                builder:
-                    (BuildContext context, AsyncSnapshot<String> snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const CircularProgressIndicator();
-                  } else if (snapshot.hasError) {
-                    return Text('Error: ${snapshot.error}');
-                  } else {
-                    String imageUrl =
-                        snapshot.data ?? ''; // Lấy giá trị từ snapshot
-                    return ClipOval(
-                      child: CachedNetworkImage(
-                        width: 70,
-                        height: 70,
-                        imageUrl: imageUrl,
-                        errorWidget: (context, url, error) {
-                          return ClipRRect(
-                            borderRadius: BorderRadius.circular(30),
-                            child: Image.asset(
-                              'assets/img/user_default.jpg',
-                              width: 70,
-                              height: 70,
-                            ),
-                          );
-                        },
-                      ),
-                    ); // Hiển thị ảnh từ đường dẫn
-                  }
+        Stack(
+          children: [
+            const SizedBox(width: 70, height: 70),
+            StreamBuilder<String>(
+              stream: controllerProfilePage.getImageUrlStream(),
+              builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const CircularProgressIndicator();
+                } else if (snapshot.hasError) {
+                  return Text('Error: ${snapshot.error}');
+                } else {
+                  String imageUrl =
+                      snapshot.data ?? ''; // Lấy giá trị từ snapshot
+                  return ClipOval(
+                    child: CachedNetworkImage(
+                      width: 70,
+                      height: 70,
+                      imageUrl: imageUrl,
+                      errorWidget: (context, url, error) {
+                        return ClipRRect(
+                          borderRadius: BorderRadius.circular(30),
+                          child: Image.asset(
+                            'assets/img/user_default.jpg',
+                            width: 70,
+                            height: 70,
+                          ),
+                        );
+                      },
+                    ),
+                  ); // Hiển thị ảnh từ đường dẫn
+                }
+              },
+            ),
+            Positioned(
+              bottom: 0,
+              right: 0,
+              child: GestureDetector(
+                onTap: () {
+                  showModalBottomSheet(
+                    context: context,
+                    builder: (context) => const ChangePictureAvatar(),
+                  );
                 },
-              ),
-              Positioned(
-                bottom: 0,
-                right: 0,
                 child: Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -91,8 +91,8 @@ class _UserInfoState extends State<UserInfo> {
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
 
         //-- user name ---

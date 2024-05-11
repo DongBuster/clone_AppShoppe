@@ -30,7 +30,7 @@ class _FooterCartScreenState extends State<FooterCartScreen> {
         .length;
     List<CartModel> listSelected =
         Provider.of<SelectedProductCart>(context, listen: true).getListSelected;
-    print('cart: $listSelected');
+    // print('cart: $listSelected');
 
     return Container(
       height: 50,

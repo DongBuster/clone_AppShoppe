@@ -3,17 +3,15 @@ import 'package:clone_shoppe/firebase/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'features/page/detailProductsPage/provider/detail_product_provider.dart';
 import 'provider/bought_product.dart';
 import 'provider/checkbox_cart_screen.dart';
 import 'provider/create_accout.dart';
-import 'provider/detail_product_model.dart';
-import 'provider/header_detail_product.dart';
 import 'provider/list_product_cart.dart';
 import 'provider/list_purchase_order.dart';
 import 'provider/selected_product_cart.dart';
 import 'features/page/homePage/provider/home_page_state.dart';
 import 'route/route_config.dart';
-
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 Future<void> main() async {
@@ -37,10 +35,7 @@ Future<void> main() async {
           create: (_) => HomePageState(),
         ),
         ChangeNotifierProvider(
-          create: (_) => DetailProductModel(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => SateHeaderDetailProduct(),
+          create: (_) => StateDetailProduct(),
         ),
         ChangeNotifierProvider(
           create: (_) => ListProductCart(),

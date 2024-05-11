@@ -89,9 +89,13 @@ Widget nameShop(String nameShop) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Text(
-        nameShop,
-        style: const TextStyle(fontSize: 14),
+      SizedBox(
+        width: 170,
+        child: Text(
+          nameShop,
+          overflow: TextOverflow.ellipsis,
+          style: const TextStyle(fontSize: 14),
+        ),
       ),
       const Text(
         'Online 2 phút trước',

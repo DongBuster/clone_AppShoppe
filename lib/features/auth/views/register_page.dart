@@ -22,6 +22,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final _focusNodePassword = FocusNode();
   final _controllerConfirmPassword = TextEditingController();
   final _focusNodeConfirmPassword = FocusNode();
+  final _formKey = GlobalKey<FormState>();
 
   final snackBar = SnackBar(
     elevation: 0,
@@ -103,15 +104,17 @@ class _RegisterPageState extends State<RegisterPage> {
                 // --- register button ---
                 GestureDetector(
                   onTap: () {
-                    if (_controllerConfirmPassword.text.toString() !=
-                        _controllerPassword.text.toString()) {
-                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                    } else {
-                      AuthController.createUserWithEmailAndPassword(
-                        context,
-                        _controllerUsername,
-                        _controllerPassword,
-                      );
+                    if (_formKey.currentState!.validate()) {
+                      if (_controllerConfirmPassword.text.toString() !=
+                          _controllerPassword.text.toString()) {
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      } else {
+                        AuthController.createUserWithEmailAndPassword(
+                          context,
+                          _controllerUsername,
+                          _controllerPassword,
+                        );
+                      }
                     }
                   },
                   child: Container(

@@ -1,7 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:clone_shoppe/constants/snackbar.dart';
 import 'package:clone_shoppe/constants/global_variables.dart';
-import 'package:clone_shoppe/features/auth/views/register_page.dart';
 import 'package:clone_shoppe/models/cart_model.dart';
 import 'package:clone_shoppe/models/detail_product.dart';
 import 'package:clone_shoppe/provider/checkbox_cart_screen.dart';
@@ -10,8 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-
-import '../../../../provider/animation_add_to_cart.dart';
+import '../provider/animation_add_product_tocart.dart';
 
 final productAnimation = 1.seconds;
 

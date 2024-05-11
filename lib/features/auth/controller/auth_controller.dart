@@ -51,7 +51,7 @@ class AuthController {
   static Future<String> isNewUser(String userId) async {
     final DocumentSnapshot snapshot =
         await FirebaseFirestore.instance.collection('users').doc(userId).get();
-    if (snapshot.exists) {
+    if (snapshot.exists && snapshot.data() != null) {
       final data = snapshot.data() as Map<String, dynamic>;
       final isNewUser = data['isNewUser'];
       return isNewUser;
@@ -62,12 +62,25 @@ class AuthController {
 
   static Future<void> handleGoogleBtnClick(BuildContext context) async {
     _signInWithGoogle().then((userLogin) async {
+      // print(userLogin);
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setBool('islogin', true);
 
       await prefs.setString('email', userLogin.user!.email!);
       isNewUser(userLogin.user!.uid).then((isNewUser) async {
         if (isNewUser == 'true') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  IntroductionPage(userId: userLogin.user!.uid),
+            ),
+          );
+        } else if (isNewUser == 'false') {
+          if (context.mounted) {
+            context.go('/home');
+          }
+        } else {
           createUser(userLogin.user!.email!, userLogin.user!.uid);
           Navigator.push(
             context,
@@ -76,10 +89,6 @@ class AuthController {
                   IntroductionPage(userId: userLogin.user!.uid),
             ),
           );
-        } else {
-          if (context.mounted) {
-            context.go('/home');
-          }
         }
       });
     }).catchError((error) {
@@ -98,11 +107,14 @@ class AuthController {
     try {
       await Auth()
           .signInWithEmailAndPassword(
-            email: controllerUsername.text,
-            password: controllerPassword.text,
-          )
+        email: controllerUsername.text,
+        password: controllerPassword.text,
+      )
           .then(
-            (user) => isNewUser(user!.uid).then((isNewUser) {
+        (user) {
+          print('return user fjsd: $user');
+          isNewUser(user!.uid).then(
+            (isNewUser) {
               prefs.setBool('islogin', true);
               prefs.setString('email', controllerUsername.text);
               if (isNewUser == 'true') {
@@ -117,10 +129,16 @@ class AuthController {
                   context.go('/home');
                 }
               }
-            }),
+            },
           );
+        },
+      );
     } on FirebaseAuthException catch (e) {
-      debugPrint('${e.message}');
+      debugPrint('here kk: ${e.message}');
+      if (e.message == 'The email address is badly formatted') {
+        print('asjd');
+        ScaffoldMessenger.of(context).showSnackBar(snackBarErrorFormatEmail);
+      }
     }
   }
 
@@ -157,6 +175,17 @@ class AuthController {
     }
   }
 }
+
+final snackBarErrorFormatEmail = SnackBar(
+  elevation: 0,
+  behavior: SnackBarBehavior.floating,
+  backgroundColor: Colors.transparent,
+  content: AwesomeSnackbarContent(
+    title: 'Warning!',
+    message: 'The email address is badly formatted, please try again !',
+    contentType: ContentType.warning,
+  ),
+);
 
 final snackBarErrorOccurred = SnackBar(
   elevation: 0,

@@ -1,8 +1,11 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:clone_shoppe/constants/global_variables.dart';
+import 'InheritedWidget/introduction_inherited_data.dart';
 import 'controller/controller.dart';
 import 'views/screen_first.dart';
 import 'views/screen_second.dart';
@@ -20,8 +23,6 @@ class IntroductionPage extends StatefulWidget {
 }
 
 class _IntroductionPageState extends State<IntroductionPage> {
-  final introKey = GlobalKey<IntroductionScreenState>();
-
   final controller = ControllerIntruductionPage();
 
   File? imageFilePick;
@@ -39,7 +40,6 @@ class _IntroductionPageState extends State<IntroductionPage> {
     );
     return Scaffold(
       body: IntroductionScreen(
-        key: introKey,
         globalBackgroundColor: Colors.white,
         allowImplicitScrolling: true,
         infiniteAutoScroll: false,
@@ -61,7 +61,73 @@ class _IntroductionPageState extends State<IntroductionPage> {
           ),
           PageViewModel(
             title: "Choose your profile picture",
-            bodyWidget: ScreenThird(imageFilePick: imageFilePick),
+            bodyWidget: Column(
+              children: [
+                imageFilePick != null
+                    ? ClipOval(
+                        child: Image.file(
+                          imageFilePick!,
+                          cacheHeight: 180,
+                          cacheWidth: 180,
+                        ),
+                      )
+                    : ClipRRect(
+                        child: Image.asset('assets/img/user_default.jpg',
+                            width: 180, height: 180),
+                      ),
+                const Gap(30),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        controller
+                            .pickImage(
+                              ImageSource.camera,
+                            )
+                            .then((value) => setState(() {
+                                  imageFilePick = value;
+                                }));
+                      },
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStatePropertyAll(
+                              GloblalVariable.hex_f94f2f.withOpacity(0.8))),
+                      child: const Text(
+                        'Pick from camera',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    const Gap(15),
+                    TextButton(
+                      onPressed: () {
+                        controller
+                            .pickImage(
+                              ImageSource.gallery,
+                            )
+                            .then((value) => setState(() {
+                                  imageFilePick = value;
+                                }));
+                      },
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStatePropertyAll(
+                              GloblalVariable.hex_f94f2f.withOpacity(0.8))),
+                      child: const Text(
+                        'Pick from gallery',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
             decoration: const PageDecoration(
               bodyAlignment: Alignment.center,
               titlePadding: EdgeInsets.only(top: 30),
@@ -71,8 +137,8 @@ class _IntroductionPageState extends State<IntroductionPage> {
             ),
           ),
         ],
-        onDone: () {
-          controller.pushUserImage(widget.userId).then((_) {
+        onDone: () async {
+          await controller.pushUserImage(widget.userId).then((_) {
             controller.setIsNewUser(widget.userId);
             context.pushNamed(GloblalVariable.homeScreen);
           });
