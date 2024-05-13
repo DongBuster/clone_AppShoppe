@@ -1,11 +1,16 @@
 import 'dart:io';
+import 'package:clone_shoppe/features/page/introductoinPage/provider/state_introduction_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 class ControllerIntruductionPage {
+  User? currentUser = FirebaseAuth.instance.currentUser;
+
   File? imageFile;
 
   Future<File?> pickImage(ImageSource imageSource) async {
@@ -16,7 +21,7 @@ class ControllerIntruductionPage {
       // final imagePermanent = await saveImagePermanently(image.path);
 
       imageFile = imageTemporary;
-      print(imageFile);
+      // print(imageFile);
       return imageFile;
     } on PlatformException catch (e) {
       debugPrint('Failed to pick image: $e');
@@ -24,10 +29,11 @@ class ControllerIntruductionPage {
     return null;
   }
 
-  Future<void> pushUserImage(String userId) async {
+  Future<void> pushUserImage(String userId, BuildContext context) async {
+    File imageFile = Provider.of<StateIntroductionPage>(context, listen: false)
+        .introductionPageModel
+        .getImageFile;
     // print(imageFile);
-
-    // print(imageFilePick ?? 'file null');
     //--- create file name ---
     final imageName = '${userId}_image_user';
     // --- create StorageRef ---
@@ -38,7 +44,7 @@ class ControllerIntruductionPage {
       contentType: 'image/jpeg',
     );
 
-    final uploadTask = firebaseStorageRef.putFile(imageFile!, metadata);
+    final uploadTask = firebaseStorageRef.putFile(imageFile, metadata);
     await uploadTask.then((task) {
       task.ref.getDownloadURL().then((urlImage) async {
         await FirebaseFirestore.instance
@@ -63,5 +69,20 @@ class ControllerIntruductionPage {
         .collection('users')
         .doc(userId)
         .update({'isNewUser': 'false'});
+  }
+
+  Stream<String> getImageUrlStream() {
+    return FirebaseFirestore.instance
+        .collection('users')
+        .doc(currentUser!.uid)
+        .snapshots()
+        .map((snapshot) {
+      if (snapshot.data() == null) {
+        return '';
+      } else {
+        Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+        return data['image'];
+      }
+    });
   }
 }

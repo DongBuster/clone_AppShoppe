@@ -59,6 +59,7 @@ class _UserInfoState extends State<UserInfo> {
                           ),
                         );
                       },
+                      placeholderFadeInDuration: const Duration(seconds: 1),
                     ),
                   ); // Hiển thị ảnh từ đường dẫn
                 }
@@ -101,7 +102,7 @@ class _UserInfoState extends State<UserInfo> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              nameUser ?? 'Unknown user',
+              nameUser == '' ? 'Unknown user' : nameUser!,
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,

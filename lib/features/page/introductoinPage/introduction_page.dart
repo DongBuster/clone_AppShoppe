@@ -1,21 +1,17 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:clone_shoppe/constants/global_variables.dart';
-import 'InheritedWidget/introduction_inherited_data.dart';
+import 'package:provider/provider.dart';
 import 'controller/controller.dart';
+import 'provider/state_introduction_page.dart';
 import 'views/screen_first.dart';
 import 'views/screen_second.dart';
 import 'views/screen_third.dart';
 
 class IntroductionPage extends StatefulWidget {
-  final String userId;
   const IntroductionPage({
     super.key,
-    required this.userId,
   });
 
   @override
@@ -24,8 +20,6 @@ class IntroductionPage extends StatefulWidget {
 
 class _IntroductionPageState extends State<IntroductionPage> {
   final controller = ControllerIntruductionPage();
-
-  File? imageFilePick;
 
   @override
   Widget build(BuildContext context) {
@@ -38,12 +32,16 @@ class _IntroductionPageState extends State<IntroductionPage> {
       pageColor: Colors.white,
       imagePadding: EdgeInsets.zero,
     );
+
+    String userId = Provider.of<StateIntroductionPage>(context, listen: false)
+        .introductionPageModel
+        .getUserId;
+
     return Scaffold(
       body: IntroductionScreen(
         globalBackgroundColor: Colors.white,
         allowImplicitScrolling: true,
         infiniteAutoScroll: false,
-
         pages: [
           PageViewModel(
             title: '',
@@ -53,7 +51,7 @@ class _IntroductionPageState extends State<IntroductionPage> {
           PageViewModel(
             useScrollView: true,
             title: "",
-            bodyWidget: ScreenSecond(userId: widget.userId),
+            bodyWidget: ScreenSecond(userId: userId),
             decoration: const PageDecoration(
               pageColor: Colors.white,
               imagePadding: EdgeInsets.zero,
@@ -61,73 +59,7 @@ class _IntroductionPageState extends State<IntroductionPage> {
           ),
           PageViewModel(
             title: "Choose your profile picture",
-            bodyWidget: Column(
-              children: [
-                imageFilePick != null
-                    ? ClipOval(
-                        child: Image.file(
-                          imageFilePick!,
-                          cacheHeight: 180,
-                          cacheWidth: 180,
-                        ),
-                      )
-                    : ClipRRect(
-                        child: Image.asset('assets/img/user_default.jpg',
-                            width: 180, height: 180),
-                      ),
-                const Gap(30),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    TextButton(
-                      onPressed: () {
-                        controller
-                            .pickImage(
-                              ImageSource.camera,
-                            )
-                            .then((value) => setState(() {
-                                  imageFilePick = value;
-                                }));
-                      },
-                      style: ButtonStyle(
-                          backgroundColor: MaterialStatePropertyAll(
-                              GloblalVariable.hex_f94f2f.withOpacity(0.8))),
-                      child: const Text(
-                        'Pick from camera',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    const Gap(15),
-                    TextButton(
-                      onPressed: () {
-                        controller
-                            .pickImage(
-                              ImageSource.gallery,
-                            )
-                            .then((value) => setState(() {
-                                  imageFilePick = value;
-                                }));
-                      },
-                      style: ButtonStyle(
-                          backgroundColor: MaterialStatePropertyAll(
-                              GloblalVariable.hex_f94f2f.withOpacity(0.8))),
-                      child: const Text(
-                        'Pick from gallery',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+            bodyWidget: const ScreenThird(),
             decoration: const PageDecoration(
               bodyAlignment: Alignment.center,
               titlePadding: EdgeInsets.only(top: 30),
@@ -138,19 +70,17 @@ class _IntroductionPageState extends State<IntroductionPage> {
           ),
         ],
         onDone: () async {
-          await controller.pushUserImage(widget.userId).then((_) {
-            controller.setIsNewUser(widget.userId);
-            context.pushNamed(GloblalVariable.homeScreen);
+          await controller.pushUserImage(userId, context).then((_) {
+            controller.setIsNewUser(userId);
+            context.pushReplacementNamed(GloblalVariable.homeScreen);
           });
         },
-        onSkip: () => context.pushNamed(GloblalVariable.homeScreen),
-
+        onSkip: () => context.pushReplacementNamed(GloblalVariable.homeScreen),
         resizeToAvoidBottomInset: false,
         showSkipButton: true,
         skipOrBackFlex: 0,
         nextFlex: 0,
         showBackButton: false,
-        //rtl: true, // Display as right-to-left
         back: const Icon(Icons.arrow_back),
         skip: const Text(
           'Skip',
@@ -170,10 +100,8 @@ class _IntroductionPageState extends State<IntroductionPage> {
             color: GloblalVariable.hex_f94f2f,
           ),
         ),
-
         curve: Curves.fastLinearToSlowEaseIn,
         controlsMargin: const EdgeInsets.all(16),
-
         dotsDecorator: const DotsDecorator(
           size: Size(8.0, 8.0),
           color: GloblalVariable.hex_9c9c9c,

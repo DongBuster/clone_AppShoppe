@@ -207,20 +207,20 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       onPressed: () async {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: const Text('Loading...'),
-                          backgroundColor: Colors.black.withOpacity(0.5),
-                          behavior: SnackBarBehavior.floating,
-                          margin: EdgeInsets.only(
-                            bottom: MediaQuery.of(context).size.height / 2,
-                            right: 120,
-                            left: 120,
-                          ),
-                        ));
+                        // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        //   content: const Text('Loading...'),
+                        //   backgroundColor: Colors.black.withOpacity(0.5),
+                        //   behavior: SnackBarBehavior.floating,
+                        //   margin: EdgeInsets.only(
+                        //     bottom: MediaQuery.of(context).size.height / 2,
+                        //     right: 120,
+                        //     left: 120,
+                        //   ),
+                        // ));
                         await AuthController.handleGoogleBtnClick(context);
-                        if (context.mounted) {
-                          ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                        }
+                        // if (context.mounted) {
+                        //   ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                        // }
                       },
                       icon: SvgPicture.asset(
                         'assets/icon_google.svg',
@@ -253,7 +253,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ],
                 onTap: () {
-                  context.go('/register');
+                  context.pushNamed(GloblalVariable.registerScreen);
                 },
                 repeatForever: true,
                 pause: const Duration(milliseconds: 500),

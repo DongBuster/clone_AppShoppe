@@ -48,7 +48,7 @@ class _ListItemsCategoryState extends State<ListItemsCategory> {
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 childAspectRatio: 1.2,
-                mainAxisSpacing: 10,
+                mainAxisSpacing: 0,
               ),
               itemCount: listItemsCategory.keys.length,
               itemBuilder: (context, index) {

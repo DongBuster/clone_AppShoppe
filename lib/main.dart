@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'features/page/detailProductsPage/provider/detail_product_provider.dart';
+import 'features/page/introductoinPage/provider/state_introduction_page.dart';
 import 'provider/bought_product.dart';
 import 'provider/checkbox_cart_screen.dart';
 import 'provider/create_accout.dart';
@@ -36,6 +37,9 @@ Future<void> main() async {
         ),
         ChangeNotifierProvider(
           create: (_) => StateDetailProduct(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => StateIntroductionPage(),
         ),
         ChangeNotifierProvider(
           create: (_) => ListProductCart(),

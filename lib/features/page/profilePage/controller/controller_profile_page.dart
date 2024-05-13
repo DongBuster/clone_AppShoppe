@@ -54,6 +54,7 @@ class ControllerProfilePage {
         .collection('users')
         .doc(currentUser!.uid)
         .get();
+
     Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
     return data['name'];
   }
@@ -64,8 +65,12 @@ class ControllerProfilePage {
         .doc(currentUser!.uid)
         .snapshots()
         .map((snapshot) {
-      Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
-      return data['image'];
+      if (snapshot.data() == null) {
+        return '';
+      } else {
+        Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+        return data['image'];
+      }
     });
   }
 }

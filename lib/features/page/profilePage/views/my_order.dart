@@ -1,6 +1,8 @@
+import 'package:clone_shoppe/constants/global_variables.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:badges/badges.dart' as badges;
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import '../../../../common/widgets/text.dart';
 import '../../../../provider/list_purchase_order.dart';
@@ -66,10 +68,7 @@ class _MyOrderState extends State<MyOrder> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => const PurchaseOrderPage()));
+                    context.pushNamed(GloblalVariable.purchaseOrderScreen);
                   },
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,

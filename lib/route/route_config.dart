@@ -5,6 +5,7 @@ import 'package:clone_shoppe/features/auth/views/register_page.dart';
 import 'package:clone_shoppe/features/page/cartPage/cartScreen.dart';
 import 'package:clone_shoppe/features/page/detailProductsPage/detail_products_page.dart';
 import 'package:clone_shoppe/features/page/homePage/home_page.dart';
+import 'package:clone_shoppe/features/page/introductoinPage/introduction_page.dart';
 import 'package:clone_shoppe/features/page/livePage/live_page.dart';
 import 'package:clone_shoppe/features/page/mallPage/mall_page.dart';
 import 'package:clone_shoppe/features/page/notificationsPage/notifications_page.dart';
@@ -37,17 +38,28 @@ class Routes {
               : router.go('/login');
           return null;
         },
-        builder: (context, state) => const TransitionPage(
-          child: LoginPage(),
+        pageBuilder: (context, state) => buildPageWithDefaultTransition(
+          context: context,
+          state: state,
+          child: const LoginPage(),
         ),
       ),
       GoRoute(
-        path: '/register',
+        path: '/registerPage',
         name: GloblalVariable.registerScreen,
         pageBuilder: (context, state) => buildPageWithDefaultTransition(
           context: context,
           state: state,
-          child: const ProfilePage(),
+          child: const RegisterPage(),
+        ),
+      ),
+      GoRoute(
+        path: '/introductionPage',
+        name: GloblalVariable.introductionPage,
+        pageBuilder: (context, state) => buildPageWithDefaultTransition(
+          context: context,
+          state: state,
+          child: const IntroductionPage(),
         ),
       ),
       GoRoute(
@@ -83,7 +95,7 @@ class Routes {
                 pageBuilder: (context, state) => buildPageWithDefaultTransition(
                   context: context,
                   state: state,
-                  child: const HomePage(),
+                  child: const Mainlayout(child: HomePage()),
                 ),
                 routes: [
                   GoRoute(
@@ -108,7 +120,7 @@ class Routes {
                 pageBuilder: (context, state) => buildPageWithDefaultTransition(
                   context: context,
                   state: state,
-                  child: const MallPage(),
+                  child: const Mainlayout(child: MallPage()),
                 ),
               ),
             ],
@@ -121,7 +133,7 @@ class Routes {
                 pageBuilder: (context, state) => buildPageWithDefaultTransition(
                   context: context,
                   state: state,
-                  child: const LivePage(),
+                  child: const Mainlayout(child: LivePage()),
                 ),
               ),
             ],
@@ -134,7 +146,7 @@ class Routes {
                 pageBuilder: (context, state) => buildPageWithDefaultTransition(
                   context: context,
                   state: state,
-                  child: const NotificationsPage(),
+                  child: const Mainlayout(child: NotificationsPage()),
                 ),
               ),
             ],
@@ -147,7 +159,7 @@ class Routes {
                 pageBuilder: (context, state) => buildPageWithDefaultTransition(
                   context: context,
                   state: state,
-                  child: const ProfilePage(),
+                  child: const Mainlayout(child: ProfilePage()),
                 ),
                 routes: [
                   GoRoute(

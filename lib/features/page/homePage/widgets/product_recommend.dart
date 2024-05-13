@@ -35,11 +35,6 @@ class _ProductRecommendState extends State<ProductRecommend> {
               .getStateDetailProduct
               .setIdProduct = widget.productsRecommend.id;
           context.pushNamed(GloblalVariable.detailProducts);
-          // Navigator.push(
-          //     context,
-          //     MaterialPageRoute(
-          //         builder: (_) => DetailProductsScreen(
-          //             idProduct: widget.productsRecommend.id)));
         },
         child: ProductView(
           urlImage: detailProduct.image[0],

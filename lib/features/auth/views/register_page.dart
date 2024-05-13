@@ -5,6 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../constants/global_variables.dart';
 import '../controller/auth_controller.dart';
 import '../widget/input_field.dart';
 
@@ -242,7 +243,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ],
                 onTap: () {
-                  context.go('/login');
+                  context.pop(GloblalVariable.loginScreen);
                 },
                 repeatForever: true,
                 pause: const Duration(milliseconds: 500),

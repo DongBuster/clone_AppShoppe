@@ -17,7 +17,7 @@ class GloblalVariable {
   static const String cartScreen = 'cartScreen';
   static const String buyProductScreen = 'buyProductScreen';
   static const String purchaseOrderScreen = 'purchaseOrderScreen';
-  static const String introductionPage = 'IntroductionPage';
+  static const String introductionPage = 'introductionPage';
 
   // define background image auth screen
   static const String backgroundImageAuth = 'assets/img/background.jpg';

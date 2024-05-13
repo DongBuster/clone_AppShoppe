@@ -1,10 +1,12 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../constants/global_variables.dart';
 import '../../../auth/services/auth.dart';
+import '../../introductoinPage/provider/state_introduction_page.dart';
 import '../widgets/feature_link.dart';
 
 class ListFeatureProfilePage extends StatelessWidget {
@@ -85,9 +87,11 @@ class ListFeatureProfilePage extends StatelessWidget {
                     await SharedPreferences.getInstance();
 
                 await Auth.signOut().then((value) {
-                  context.goNamed(GloblalVariable.authScreen);
                   prefs.setBool('islogin', false);
                   prefs.setString('email', '');
+                  Provider.of<StateIntroductionPage>(context, listen: false)
+                      .setImageFile(null);
+                  context.goNamed(GloblalVariable.authScreen);
                 }).catchError((error) {
                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 });
