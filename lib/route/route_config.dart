@@ -2,7 +2,7 @@ import 'package:clone_shoppe/animations/transition_page.dart';
 import 'package:clone_shoppe/constants/global_variables.dart';
 import 'package:clone_shoppe/features/auth/views/login_page.dart';
 import 'package:clone_shoppe/features/auth/views/register_page.dart';
-import 'package:clone_shoppe/features/page/cartPage/cartScreen.dart';
+import 'package:clone_shoppe/features/page/shoppingCartPage/shopping_cart_page.dart';
 import 'package:clone_shoppe/features/page/detailProductsPage/detail_products_page.dart';
 import 'package:clone_shoppe/features/page/homePage/home_page.dart';
 import 'package:clone_shoppe/features/page/introductoinPage/introduction_page.dart';
@@ -68,7 +68,7 @@ class Routes {
         pageBuilder: (context, state) => buildPageWithDefaultTransition(
           context: context,
           state: state,
-          child: const CartScreen(),
+          child: const ShoppingCartPage(),
         ),
         routes: [
           GoRoute(

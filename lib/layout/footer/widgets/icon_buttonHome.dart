@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import '../../../animations/rotation_icon_footer.dart';
-import '../../../features/page/homePage/provider/home_page_state.dart';
+import '../../../features/page/homePage/view_models/home_page_view_model.dart';
 import '../handles/handle_footer.dart';
 
 class IconButtonHome extends StatelessWidget {
@@ -13,9 +13,10 @@ class IconButtonHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isActiveIconHome = Provider.of<HomePageState>(context, listen: true)
-        .getState
-        .activeIconHomeFooter;
+    bool isActiveIconHome =
+        Provider.of<HomePageViewModel>(context, listen: true)
+            .state
+            .activeIconHomeFooter;
     // print(isActiveIconHome);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,

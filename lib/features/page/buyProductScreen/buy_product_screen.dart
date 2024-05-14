@@ -1,5 +1,5 @@
 import 'package:clone_shoppe/constants/global_variables.dart';
-import 'package:clone_shoppe/models/cart_model.dart';
+import 'package:clone_shoppe/features/page/shoppingCartPage/models/product_shopping_cart_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -21,7 +21,7 @@ class _BuyProductScreenState extends State<BuyProductScreen> {
   bool isUseCoin = false;
   @override
   Widget build(BuildContext context) {
-    List<CartModel> listSelected =
+    List<ProductShoppingCartModel> listSelected =
         Provider.of<SelectedProductCart>(context, listen: false)
             .getListSelected;
     String totalPrice =

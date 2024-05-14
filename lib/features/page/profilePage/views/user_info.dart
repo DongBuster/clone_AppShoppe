@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:clone_shoppe/features/page/profilePage/view_models/profile_page_view_model.dart';
 import 'package:clone_shoppe/features/page/profilePage/views/modal_bottom_sheet.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
-import '../controller/controller_profile_page.dart';
+import 'package:provider/provider.dart';
 
 class UserInfo extends StatefulWidget {
   const UserInfo({super.key});
@@ -13,19 +13,15 @@ class UserInfo extends StatefulWidget {
 }
 
 class _UserInfoState extends State<UserInfo> {
-  final controllerProfilePage = ControllerProfilePage();
-  String? nameUser = '';
-
   @override
   void initState() {
-    controllerProfilePage.getNameUser().then((value) => setState(() {
-          nameUser = value;
-        }));
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    ProfilePageViewModel viewModel =
+        Provider.of<ProfilePageViewModel>(context, listen: false);
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -33,22 +29,18 @@ class _UserInfoState extends State<UserInfo> {
         const Gap(12),
         Stack(
           children: [
-            const SizedBox(width: 70, height: 70),
             StreamBuilder<String>(
-              stream: controllerProfilePage.getImageUrlStream(),
+              stream: viewModel.getImageUrlStream(),
               builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const CircularProgressIndicator();
-                } else if (snapshot.hasError) {
+                if (snapshot.hasError) {
                   return Text('Error: ${snapshot.error}');
-                } else {
-                  String imageUrl =
-                      snapshot.data ?? ''; // Lấy giá trị từ snapshot
+                }
+                if (snapshot.hasData) {
                   return ClipOval(
                     child: CachedNetworkImage(
                       width: 70,
                       height: 70,
-                      imageUrl: imageUrl,
+                      imageUrl: snapshot.data!,
                       errorWidget: (context, url, error) {
                         return ClipRRect(
                           borderRadius: BorderRadius.circular(30),
@@ -63,6 +55,7 @@ class _UserInfoState extends State<UserInfo> {
                     ),
                   ); // Hiển thị ảnh từ đường dẫn
                 }
+                return const SizedBox();
               },
             ),
             Positioned(
@@ -101,13 +94,24 @@ class _UserInfoState extends State<UserInfo> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              nameUser == '' ? 'Unknown user' : nameUser!,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
+            FutureBuilder(
+              future: viewModel.getNameUser(),
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return const Text('Unknown user');
+                }
+                if (snapshot.hasData) {
+                  return Text(
+                    snapshot.data! == '' ? 'Unknown user' : snapshot.data!,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ); // Hiển thị ảnh từ đường dẫn
+                }
+                return const SizedBox();
+              },
             ),
             const Gap(5),
             Container(

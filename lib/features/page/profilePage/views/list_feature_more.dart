@@ -6,8 +6,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../constants/global_variables.dart';
 import '../../../auth/services/auth.dart';
-import '../../introductoinPage/provider/state_introduction_page.dart';
-import '../widgets/feature_link.dart';
+import '../../introductoinPage/view_models/introduction_page_view_model.dart';
+import '../resources/widgets/feature_link.dart';
 
 class ListFeatureProfilePage extends StatelessWidget {
   const ListFeatureProfilePage({super.key});
@@ -89,7 +89,7 @@ class ListFeatureProfilePage extends StatelessWidget {
                 await Auth.signOut().then((value) {
                   prefs.setBool('islogin', false);
                   prefs.setString('email', '');
-                  Provider.of<StateIntroductionPage>(context, listen: false)
+                  Provider.of<IntroductionPageViewModel>(context, listen: false)
                       .setImageFile(null);
                   context.goNamed(GloblalVariable.authScreen);
                 }).catchError((error) {

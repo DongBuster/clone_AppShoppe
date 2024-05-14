@@ -8,7 +8,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../models/user.dart';
-import '../../page/introductoinPage/provider/state_introduction_page.dart';
+import '../../page/introductoinPage/view_models/introduction_page_view_model.dart';
 import '../services/auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -72,7 +72,7 @@ class AuthController {
       await prefs.setString('email', userLogin.user!.email!);
       isNewUser(userLogin.user!.uid).then((isNewUser) async {
         if (isNewUser == 'true') {
-          Provider.of<StateIntroductionPage>(context, listen: false)
+          Provider.of<IntroductionPageViewModel>(context, listen: false)
               .setUserId(userLogin.user!.uid);
           context.goNamed(GloblalVariable.introductionPage);
         } else if (isNewUser == 'false') {
@@ -81,7 +81,7 @@ class AuthController {
           }
         } else {
           createUser(userLogin.user!.email!, userLogin.user!.uid);
-          Provider.of<StateIntroductionPage>(context, listen: false)
+          Provider.of<IntroductionPageViewModel>(context, listen: false)
               .setUserId(userLogin.user!.uid);
           context.goNamed(GloblalVariable.introductionPage);
         }
@@ -113,7 +113,7 @@ class AuthController {
               prefs.setBool('islogin', true);
               prefs.setString('email', controllerUsername.text);
               if (isNewUser == 'true') {
-                Provider.of<StateIntroductionPage>(context, listen: false)
+                Provider.of<IntroductionPageViewModel>(context, listen: false)
                     .setUserId(user.uid);
                 context.goNamed(GloblalVariable.introductionPage);
               } else {

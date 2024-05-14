@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import '../../../features/page/detailProductsPage/provider/detail_product_provider.dart';
-import '../../../features/page/homePage/provider/home_page_state.dart';
+import '../../../features/page/detailProductsPage/view_models/detail_product_provider.dart';
+import '../../../features/page/homePage/view_models/home_page_view_model.dart';
 
 // handle colorIconBottomNavBar when go route
 Color colorIconHeader(BuildContext context) {
   bool isChangeHeaderDetailProduct =
-      Provider.of<StateDetailProduct>(context, listen: true)
-          .getStateDetailProduct
+      Provider.of<DetailProductViewModel>(context, listen: true)
+          .state
           .getisChangeHeader;
   if (isChangeHeaderDetailProduct == true &&
       GoRouter.of(context).location == '/home/detailProducts') {
@@ -18,8 +18,8 @@ Color colorIconHeader(BuildContext context) {
     return Colors.white;
   }
   if (GoRouter.of(context).location != '/home' ||
-      Provider.of<HomePageState>(context, listen: true)
-              .getState
+      Provider.of<HomePageViewModel>(context, listen: true)
+              .state
               .activeIconHeader ==
           true) {
     return Colors.redAccent;

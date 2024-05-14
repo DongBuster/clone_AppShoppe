@@ -1,13 +1,13 @@
-import 'package:clone_shoppe/models/cart_model.dart';
+import 'package:clone_shoppe/features/page/shoppingCartPage/models/product_shopping_cart_model.dart';
 import 'package:flutter/material.dart';
 
 class SelectedProductCart with ChangeNotifier {
-  List<CartModel> listSelected = [];
+  List<ProductShoppingCartModel> listSelected = [];
   String totalPrice = '0';
 
   String get getTotalPrice => totalPrice;
   set setTotalPrice(String value) => totalPrice = value;
-  List<CartModel> get getListSelected => listSelected;
+  List<ProductShoppingCartModel> get getListSelected => listSelected;
   void calculateTotalPrice() {
     int sum = 0;
 
@@ -23,13 +23,14 @@ class SelectedProductCart with ChangeNotifier {
     notifyListeners();
   }
 
-  void setItemsSelected(CartModel cartModel, bool isChecked) {
+  void setItemsSelected(ProductShoppingCartModel cartModel, bool isChecked) {
     isChecked ? listSelected.add(cartModel) : listSelected.remove(cartModel);
     calculateTotalPrice();
     notifyListeners();
   }
 
-  void setQuanityOfItemsSelected(int quantity, CartModel cartModel) {
+  void setQuanityOfItemsSelected(
+      int quantity, ProductShoppingCartModel cartModel) {
     for (var item in listSelected) {
       if (cartModel.nameProduct == item.nameProduct &&
           cartModel.classify.keys.first == item.classify.keys.first) {
@@ -41,7 +42,7 @@ class SelectedProductCart with ChangeNotifier {
     notifyListeners();
   }
 
-  void removeListItemsSelected(List<CartModel> list) {
+  void removeListItemsSelected(List<ProductShoppingCartModel> list) {
     // print('remove: $listSelected');
 
     listSelected.removeWhere((item) => list.contains(item));
@@ -49,7 +50,7 @@ class SelectedProductCart with ChangeNotifier {
     notifyListeners();
   }
 
-  void removeItemsSelected(CartModel model) {
+  void removeItemsSelected(ProductShoppingCartModel model) {
     listSelected.removeWhere(
       (item) =>
           item.nameProduct == model.nameProduct &&
@@ -59,7 +60,8 @@ class SelectedProductCart with ChangeNotifier {
     notifyListeners();
   }
 
-  void setListItemsSelected(List<CartModel> listcartModel, bool isChecked) {
+  void setListItemsSelected(
+      List<ProductShoppingCartModel> listcartModel, bool isChecked) {
     for (var cartModel in listcartModel) {
       if (isChecked && listSelected.contains(cartModel) == false) {
         listSelected.add(cartModel);
@@ -71,7 +73,8 @@ class SelectedProductCart with ChangeNotifier {
     notifyListeners();
   }
 
-  void setAllListItemsSelected(List<CartModel> listcartModel, bool isChecked) {
+  void setAllListItemsSelected(
+      List<ProductShoppingCartModel> listcartModel, bool isChecked) {
     for (var cartModel in listcartModel) {
       if (isChecked && listSelected.contains(cartModel) == false) {
         listSelected.add(cartModel);

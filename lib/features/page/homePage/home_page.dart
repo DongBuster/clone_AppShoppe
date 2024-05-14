@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../layout/header/header.dart';
 import '../../../layout/header/widget/header_with_search.dart';
-import 'controller/home_page_controller.dart';
-import 'view/banner.dart';
-import 'view/banner_special.dart';
-import 'view/electronic_wallet.dart';
-import 'view/list_items_category.dart';
-import 'view/list_product_recommend.dart';
-import 'view/list_product_sale.dart';
-import 'widgets/coutdow_timer.dart';
+import 'views/banner.dart';
+import 'views/banner_special.dart';
+import 'views/electronic_wallet.dart';
+import 'views/list_items_category.dart';
+import 'views/list_product_recommend.dart';
+import 'views/list_product_sale.dart';
+import 'resources/widgets/coutdow_timer.dart';
+import 'view_models/home_page_view_model.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -18,7 +19,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final homePageController = HomePageController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,9 +30,9 @@ class _HomePageState extends State<HomePage> {
           ),
           NotificationListener<ScrollNotification>(
             onNotification: (notification) {
-              setState(() {
-                homePageController.setHomePageState(notification, context);
-              });
+              Provider.of<HomePageViewModel>(context, listen: false)
+                  .setStateHomePage(notification);
+
               return false;
             },
             child: ScrollConfiguration(

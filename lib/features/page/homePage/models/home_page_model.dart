@@ -9,8 +9,4 @@ class HomePageModel {
     activeIconHeader = false;
     activeIconHomeFooter = false;
   }
-  bool get getActiveIconHomeFooter => activeIconHomeFooter;
-  bool get getActiveIconHeader => activeIconHeader;
-  set setActiveIconHomeFooter(bool value) => activeIconHomeFooter = value;
-  set setActiveIconHeader(bool value) => activeIconHeader = value;
 }

@@ -1,11 +1,12 @@
-import 'package:clone_shoppe/models/cart_model.dart';
+import 'package:clone_shoppe/features/page/shoppingCartPage/models/product_shopping_cart_model.dart';
 import 'package:flutter/material.dart';
 
 class CheckBoxCartScreen with ChangeNotifier {
   Map<String, bool> listsCheckBoxShop = {};
   Map<String, Map<String, bool>> listsCheckBoxByShop = {};
 
-  void addItemsCheckbox(Map<String, List<CartModel>> listsGroupsByNameShop) {
+  void addItemsCheckbox(
+      Map<String, List<ProductShoppingCartModel>> listsGroupsByNameShop) {
     listsGroupsByNameShop.forEach(
       (shop, listProduct) {
         listsCheckBoxShop[shop] = false;

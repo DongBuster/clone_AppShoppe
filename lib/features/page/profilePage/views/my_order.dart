@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 import '../../../../common/widgets/text.dart';
 import '../../../../provider/list_purchase_order.dart';
 import '../../purchaseOrderPage/purchase_order.dart';
-import '../widgets/feature_link.dart';
+import '../resources/widgets/feature_link.dart';
 
 class MyOrder extends StatefulWidget {
   const MyOrder({super.key});

@@ -3,15 +3,16 @@ import 'package:clone_shoppe/firebase/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'features/page/detailProductsPage/provider/detail_product_provider.dart';
-import 'features/page/introductoinPage/provider/state_introduction_page.dart';
+import 'features/page/detailProductsPage/view_models/detail_product_provider.dart';
+import 'features/page/introductoinPage/view_models/introduction_page_view_model.dart';
+import 'features/page/profilePage/view_models/profile_page_view_model.dart';
+import 'features/page/shoppingCartPage/view_models/state_cart_page.dart';
 import 'provider/bought_product.dart';
 import 'provider/checkbox_cart_screen.dart';
-import 'provider/create_accout.dart';
 import 'provider/list_product_cart.dart';
 import 'provider/list_purchase_order.dart';
 import 'provider/selected_product_cart.dart';
-import 'features/page/homePage/provider/home_page_state.dart';
+import 'features/page/homePage/view_models/home_page_view_model.dart';
 import 'route/route_config.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -30,16 +31,19 @@ Future<void> main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => CreateAccout(),
+          create: (_) => HomePageViewModel(),
         ),
         ChangeNotifierProvider(
-          create: (_) => HomePageState(),
+          create: (_) => DetailProductViewModel(),
         ),
         ChangeNotifierProvider(
-          create: (_) => StateDetailProduct(),
+          create: (_) => IntroductionPageViewModel(),
         ),
         ChangeNotifierProvider(
-          create: (_) => StateIntroductionPage(),
+          create: (_) => ProfilePageViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => CartPageViewModel(),
         ),
         ChangeNotifierProvider(
           create: (_) => ListProductCart(),

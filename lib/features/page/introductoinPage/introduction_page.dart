@@ -3,8 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:clone_shoppe/constants/global_variables.dart';
 import 'package:provider/provider.dart';
-import 'controller/controller.dart';
-import 'provider/state_introduction_page.dart';
+import 'view_models/introduction_page_view_model.dart';
 import 'views/screen_first.dart';
 import 'views/screen_second.dart';
 import 'views/screen_third.dart';
@@ -19,8 +18,6 @@ class IntroductionPage extends StatefulWidget {
 }
 
 class _IntroductionPageState extends State<IntroductionPage> {
-  final controller = ControllerIntruductionPage();
-
   @override
   Widget build(BuildContext context) {
     const bodyStyle = TextStyle(fontSize: 19.0);
@@ -33,9 +30,10 @@ class _IntroductionPageState extends State<IntroductionPage> {
       imagePadding: EdgeInsets.zero,
     );
 
-    String userId = Provider.of<StateIntroductionPage>(context, listen: false)
-        .introductionPageModel
-        .getUserId;
+    String? userId =
+        Provider.of<IntroductionPageViewModel>(context, listen: false)
+            .stateIntroductionPage
+            .userId;
 
     return Scaffold(
       body: IntroductionScreen(
@@ -51,7 +49,7 @@ class _IntroductionPageState extends State<IntroductionPage> {
           PageViewModel(
             useScrollView: true,
             title: "",
-            bodyWidget: ScreenSecond(userId: userId),
+            bodyWidget: ScreenSecond(userId: userId!),
             decoration: const PageDecoration(
               pageColor: Colors.white,
               imagePadding: EdgeInsets.zero,
@@ -70,8 +68,10 @@ class _IntroductionPageState extends State<IntroductionPage> {
           ),
         ],
         onDone: () async {
-          await controller.pushUserImage(userId, context).then((_) {
-            controller.setIsNewUser(userId);
+          IntroductionPageViewModel viewModel =
+              Provider.of<IntroductionPageViewModel>(context, listen: false);
+          await viewModel.pushUserImage(userId, context).then((_) {
+            viewModel.setIsNewUser(userId);
             context.pushReplacementNamed(GloblalVariable.homeScreen);
           });
         },

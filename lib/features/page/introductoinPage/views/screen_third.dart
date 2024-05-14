@@ -5,8 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import '../../../../constants/global_variables.dart';
-import '../controller/controller.dart';
-import '../provider/state_introduction_page.dart';
+import '../view_models/introduction_page_view_model.dart';
 
 class ScreenThird extends StatefulWidget {
   const ScreenThird({super.key});
@@ -16,13 +15,11 @@ class ScreenThird extends StatefulWidget {
 }
 
 class _ScreenThirdState extends State<ScreenThird> {
-  final controller = ControllerIntruductionPage();
-
   @override
   Widget build(BuildContext context) {
-    return Consumer<StateIntroductionPage>(
-      builder: (context, state, child) {
-        File? imagePick = state.introductionPageModel.getImageFile;
+    return Consumer<IntroductionPageViewModel>(
+      builder: (context, viewModel, child) {
+        File? imagePick = viewModel.stateIntroductionPage.imageFile;
         return Column(
           children: [
             imagePick != null
@@ -33,26 +30,36 @@ class _ScreenThirdState extends State<ScreenThird> {
                       cacheWidth: 180,
                     ),
                   )
-                : StreamBuilder(
-                    stream: controller.getImageUrlStream(),
+                : FutureBuilder(
+                    future: viewModel.getImageUrlStream(),
                     builder: (context, snapshot) {
+                      // print(snapshot.data);
                       if (snapshot.hasError) {
-                        return ClipOval(
-                          child: Image.file(
-                            imagePick!,
-                            cacheHeight: 180,
-                            cacheWidth: 180,
+                        return ClipRRect(
+                          borderRadius: BorderRadius.circular(30),
+                          child: Image.asset(
+                            'assets/img/user_default.jpg',
+                            width: 180,
+                            height: 180,
                           ),
                         );
                       }
                       if (snapshot.hasData) {
                         return ClipOval(
                           child: CachedNetworkImage(
-                            imageUrl: snapshot.data!,
+                            imageUrl: snapshot.data ?? '',
                             height: 180,
                             width: 180,
                             placeholderFadeInDuration:
                                 const Duration(seconds: 1),
+                            errorWidget: (context, url, error) => ClipRRect(
+                              borderRadius: BorderRadius.circular(30),
+                              child: Image.asset(
+                                'assets/img/user_default.jpg',
+                                width: 180,
+                                height: 180,
+                              ),
+                            ),
                           ),
                         );
                       }
@@ -65,11 +72,7 @@ class _ScreenThirdState extends State<ScreenThird> {
               children: [
                 TextButton(
                   onPressed: () async {
-                    await controller
-                        .pickImage(ImageSource.camera)
-                        .then((value) {
-                      state.setImageFile(value!);
-                    });
+                    await viewModel.pickImage(ImageSource.camera);
                   },
                   style: ButtonStyle(
                       backgroundColor: MaterialStatePropertyAll(
@@ -86,11 +89,7 @@ class _ScreenThirdState extends State<ScreenThird> {
                 const Gap(15),
                 TextButton(
                   onPressed: () async {
-                    await controller
-                        .pickImage(ImageSource.gallery)
-                        .then((value) {
-                      state.setImageFile(value!);
-                    });
+                    await viewModel.pickImage(ImageSource.gallery);
                   },
                   style: ButtonStyle(
                       backgroundColor: MaterialStatePropertyAll(

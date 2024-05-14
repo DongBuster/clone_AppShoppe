@@ -7,11 +7,11 @@ class IntroductionPageModel {
     required this.imageFile,
     required this.userId,
   });
-  get getUserId => userId;
-  set setUserId(String id) => userId = id;
 
-  get getImageFile => imageFile;
-  set setImageFile(File? file) => imageFile = file;
+  IntroductionPageModel.itinial() {
+    imageFile = null;
+    userId = null;
+  }
 
   @override
   bool operator ==(covariant IntroductionPageModel other) {

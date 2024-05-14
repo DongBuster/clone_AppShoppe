@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-
+import 'package:provider/provider.dart';
 import '../../../../constants/global_variables.dart';
-import '../controller/controller.dart';
+import '../view_models/introduction_page_view_model.dart';
 
 class ScreenSecond extends StatefulWidget {
   final String userId;
@@ -16,7 +16,6 @@ class ScreenSecond extends StatefulWidget {
 class _ScreenSecondState extends State<ScreenSecond> {
   final controllerInput = TextEditingController();
   final focusNode = FocusNode();
-  final controller = ControllerIntruductionPage();
   @override
   void dispose() {
     controllerInput.dispose();
@@ -76,7 +75,9 @@ class _ScreenSecondState extends State<ScreenSecond> {
         const Gap(20),
         TextButton(
           onPressed: () {
-            controller.updateNameUser(controllerInput.text, widget.userId).then(
+            IntroductionPageViewModel viewModel =
+                Provider.of<IntroductionPageViewModel>(context, listen: false);
+            viewModel.updateNameUser(controllerInput.text, widget.userId).then(
                 (_) => ScaffoldMessenger.of(context).showSnackBar(snackBar));
           },
           style: ButtonStyle(

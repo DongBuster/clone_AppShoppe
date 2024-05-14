@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:badges/badges.dart' as badges;
 import '../../../../common/widgets/text.dart';
 import '../../../../constants/global_variables.dart';
-import '../widgets/icon_shopping_cart.dart';
+import '../resources/widgets/icon_shopping_cart.dart';
 
 Color primaryColor = GloblalVariable.hex_f94f2f;
 

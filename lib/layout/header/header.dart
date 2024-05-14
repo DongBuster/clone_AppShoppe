@@ -1,12 +1,12 @@
 import 'package:clone_shoppe/constants/global_variables.dart';
-import 'package:clone_shoppe/features/page/cartPage/cartScreen.dart';
+import 'package:clone_shoppe/features/page/shoppingCartPage/shopping_cart_page.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import '../../common/widgets/icon_shopping_cart.dart';
 import '../../common/widgets/text.dart';
-import '../../features/page/homePage/provider/home_page_state.dart';
+import '../../features/page/homePage/view_models/home_page_view_model.dart';
 import 'handle/color_header.dart';
 
 class HeaderApp extends StatefulWidget {
@@ -20,9 +20,10 @@ class HeaderApp extends StatefulWidget {
 class _HeaderAppState extends State<HeaderApp> {
   @override
   Widget build(BuildContext context) {
-    bool isActiveColorIcon = Provider.of<HomePageState>(context, listen: true)
-        .getState
-        .activeIconHeader;
+    bool isActiveColorIcon =
+        Provider.of<HomePageViewModel>(context, listen: true)
+            .state
+            .activeIconHeader;
     return Container(
       padding: const EdgeInsets.fromLTRB(10, 30, 0, 5),
       // height: 65,

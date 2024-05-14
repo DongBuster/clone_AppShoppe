@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import '../../../constants/global_variables.dart';
-import 'controller/controller_profile_page.dart';
 import 'views/header.dart';
 import 'views/list_feature_more.dart';
 import 'views/my_order.dart';
@@ -17,8 +16,6 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  final controllerProfilePage = ControllerProfilePage();
-
   @override
   void initState() {
     super.initState();
@@ -26,7 +23,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    // print('imagefile:$imageFile');
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -39,13 +35,12 @@ class _ProfilePageState extends State<ProfilePage> {
                   //-----  ------
                   Container(
                     padding: const EdgeInsets.fromLTRB(0, 24, 10, 10),
-                    height: 150,
                     color: primaryColor,
                     child: const Column(
                       children: [
                         //--- header ---
                         HeaderProfilePage(),
-                        Gap(15),
+                        Gap(20),
                         //---- user info ----
                         UserInfo()
                       ],

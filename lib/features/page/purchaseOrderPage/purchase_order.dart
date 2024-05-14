@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:clone_shoppe/constants/global_variables.dart';
-import 'package:clone_shoppe/models/cart_model.dart';
+import 'package:clone_shoppe/features/page/shoppingCartPage/models/product_shopping_cart_model.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
@@ -22,7 +22,7 @@ class _PurchaseOrderPageState extends State<PurchaseOrderPage> {
             .getListProductPurchureOder
             .length;
 
-    List<CartModel> listProducts =
+    List<ProductShoppingCartModel> listProducts =
         Provider.of<ListProductPurchureOder>(context, listen: true)
             .getListProductPurchureOder;
     // print(listProducts);
@@ -115,7 +115,7 @@ class _PurchaseOrderPageState extends State<PurchaseOrderPage> {
 }
 
 class ItemProduct extends StatelessWidget {
-  final CartModel model;
+  final ProductShoppingCartModel model;
   const ItemProduct({super.key, required this.model});
 
   @override

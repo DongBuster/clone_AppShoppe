@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 import '../../../../constants/global_variables.dart';
-import '../../../../models/cart_model.dart';
-import '../../profilePage/widgets/feature_link.dart';
+import '../../shoppingCartPage/models/product_shopping_cart_model.dart';
+import '../../profilePage/resources/widgets/feature_link.dart';
 
 class ItemProduct extends StatelessWidget {
-  final CartModel model;
+  final ProductShoppingCartModel model;
   const ItemProduct({super.key, required this.model});
 
   @override

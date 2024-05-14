@@ -1,16 +1,16 @@
-import 'package:clone_shoppe/models/cart_model.dart';
+import 'package:clone_shoppe/features/page/shoppingCartPage/models/product_shopping_cart_model.dart';
 import 'package:flutter/material.dart';
 import "package:collection/collection.dart";
 
 class ListProductCart with ChangeNotifier {
-  List<CartModel> listItems = [];
-  Map<String, List<CartModel>> listsGroupsByNameShop = {};
+  List<ProductShoppingCartModel> listItems = [];
+  Map<String, List<ProductShoppingCartModel>> listsGroupsByNameShop = {};
 
-  List<CartModel> get getListItems => listItems;
-  Map<String, List<CartModel>> get getlistsGroupsByNameShop =>
+  List<ProductShoppingCartModel> get getListItems => listItems;
+  Map<String, List<ProductShoppingCartModel>> get getlistsGroupsByNameShop =>
       listsGroupsByNameShop;
 
-  void addProductToCart(CartModel model) {
+  void addProductToCart(ProductShoppingCartModel model) {
     bool itemExists = false;
 
     for (var cartModel in listItems) {
@@ -24,14 +24,14 @@ class ListProductCart with ChangeNotifier {
 
     if (!itemExists) {
       listItems.add(model);
-      listsGroupsByNameShop =
-          groupBy(listItems, (CartModel model) => model.nameShop);
+      listsGroupsByNameShop = groupBy(
+          listItems, (ProductShoppingCartModel model) => model.nameShop);
     }
 
     notifyListeners();
   }
 
-  void removeListProductToCart(List<CartModel> list) {
+  void removeListProductToCart(List<ProductShoppingCartModel> list) {
     for (var model in list) {
       listItems.removeWhere(
         (item) =>
@@ -40,22 +40,22 @@ class ListProductCart with ChangeNotifier {
       );
     }
     listsGroupsByNameShop =
-        groupBy(listItems, (CartModel model) => model.nameShop);
+        groupBy(listItems, (ProductShoppingCartModel model) => model.nameShop);
     notifyListeners();
   }
 
-  void removeProductToCart(CartModel model) {
+  void removeProductToCart(ProductShoppingCartModel model) {
     listItems.removeWhere(
       (item) =>
           item.nameProduct == model.nameProduct &&
           item.classify == model.classify,
     );
     listsGroupsByNameShop =
-        groupBy(listItems, (CartModel model) => model.nameShop);
+        groupBy(listItems, (ProductShoppingCartModel model) => model.nameShop);
     notifyListeners();
   }
 
-  void addQuantityProductCart(int quantity, CartModel model) {
+  void addQuantityProductCart(int quantity, ProductShoppingCartModel model) {
     for (var cartModel in listItems) {
       if (cartModel.nameProduct == model.nameProduct &&
           cartModel.classify.keys.first == model.classify.keys.first) {
