@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import '../../../provider/list_product_cart.dart';
 import '../../../provider/list_purchase_order.dart';
 import '../../../provider/selected_product_cart.dart';
+import '../shoppingCartPage/view_models/state_cart_page.dart';
 import 'widgets/item_product.dart';
 
 class BuyProductScreen extends StatefulWidget {
@@ -22,10 +23,12 @@ class _BuyProductScreenState extends State<BuyProductScreen> {
   @override
   Widget build(BuildContext context) {
     List<ProductShoppingCartModel> listSelected =
-        Provider.of<SelectedProductCart>(context, listen: false)
-            .getListSelected;
-    String totalPrice =
-        Provider.of<SelectedProductCart>(context, listen: false).getTotalPrice;
+        Provider.of<CartPageViewModel>(context, listen: false)
+            .stateCartPage
+            .listSelectedProductShoppingCart;
+    String totalPrice = Provider.of<CartPageViewModel>(context, listen: false)
+        .stateCartPage
+        .totalPayment;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -499,12 +502,13 @@ class _BuyProductScreenState extends State<BuyProductScreen> {
                 // print(listSelected);
                 // print(listSelected.length);
                 // for (var model in listSelected) {
-                Provider.of<ListProductCart>(context, listen: false)
-                    .removeListProductToCart(listSelected);
-                Provider.of<SelectedProductCart>(context, listen: false)
-                    .setTotalPrice = '0';
-                Provider.of<SelectedProductCart>(context, listen: false)
-                    .removeListItemsSelected(listSelected);
+                Provider.of<CartPageViewModel>(context, listen: false)
+                    .removeListProductToCart();
+                Provider.of<CartPageViewModel>(context, listen: false)
+                    .stateCartPage
+                    .totalPayment = '0';
+                // Provider.of<SelectedProductCart>(context, listen: false)
+                //     .removeListItemsSelected(listSelected);
                 // }
                 // if (context.mounted) {
                 // }

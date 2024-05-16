@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:provider/provider.dart';
 
+import '../../features/page/shoppingCartPage/view_models/state_cart_page.dart';
 import '../../layout/header/handle/color_header.dart';
-import '../../provider/list_product_cart.dart';
 import 'text.dart';
 
 class IconShoppingCart extends StatefulWidget {
@@ -16,8 +16,10 @@ class IconShoppingCart extends StatefulWidget {
 class _IconShoppingCartState extends State<IconShoppingCart> {
   @override
   Widget build(BuildContext context) {
-    int numberCart =
-        Provider.of<ListProductCart>(context, listen: true).getListItems.length;
+    int numberCart = Provider.of<CartPageViewModel>(context, listen: true)
+        .stateCartPage
+        .listProductShoppingCart
+        .length;
     return badges.Badge(
       badgeStyle: const badges.BadgeStyle(
         borderSide: BorderSide(

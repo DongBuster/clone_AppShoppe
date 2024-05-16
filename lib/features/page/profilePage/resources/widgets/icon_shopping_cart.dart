@@ -2,8 +2,7 @@ import 'package:clone_shoppe/common/widgets/text.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:provider/provider.dart';
-
-import '../../../../../provider/list_product_cart.dart';
+import '../../../shoppingCartPage/view_models/state_cart_page.dart';
 
 class IconShoppingCartProfile extends StatefulWidget {
   const IconShoppingCartProfile({super.key});
@@ -14,12 +13,12 @@ class IconShoppingCartProfile extends StatefulWidget {
 }
 
 class _IconShoppingCartProfileState extends State<IconShoppingCartProfile> {
-  // final Key animate = AddToCartMannager;
-
   @override
   Widget build(BuildContext context) {
-    int numberCart =
-        Provider.of<ListProductCart>(context, listen: true).getListItems.length;
+    int numberCart = Provider.of<CartPageViewModel>(context, listen: true)
+        .stateCartPage
+        .listProductShoppingCart
+        .length;
     return badges.Badge(
       badgeStyle: const badges.BadgeStyle(
         borderSide: BorderSide(

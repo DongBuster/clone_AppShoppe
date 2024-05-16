@@ -1,4 +1,3 @@
-import 'package:clone_shoppe/animations/transition_page.dart';
 import 'package:clone_shoppe/constants/global_variables.dart';
 import 'package:clone_shoppe/features/auth/views/login_page.dart';
 import 'package:clone_shoppe/features/auth/views/register_page.dart';
@@ -26,16 +25,16 @@ final GlobalKey<NavigatorState> _rootNavigator = GlobalKey(debugLabel: 'root');
 class Routes {
   static GoRouter router = GoRouter(
     navigatorKey: _rootNavigator,
-    initialLocation: '/login',
+    initialLocation: '/loginPage',
     routes: [
       GoRoute(
-        path: '/login',
-        name: GloblalVariable.authScreen,
+        path: '/loginPage',
+        name: GloblalVariable.loginScreen,
         redirect: (context, state) async {
           final SharedPreferences prefs = await SharedPreferences.getInstance();
           prefs.getBool('islogin') == true
               ? router.go('/home')
-              : router.go('/login');
+              : router.go('/loginPage');
           return null;
         },
         pageBuilder: (context, state) => buildPageWithDefaultTransition(

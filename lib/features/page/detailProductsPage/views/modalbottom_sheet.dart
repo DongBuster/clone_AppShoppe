@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import '../../shoppingCartPage/view_models/state_cart_page.dart';
 import '../view_models/animation_add_product_tocart.dart';
 
 final productAnimation = 1.seconds;
@@ -404,16 +405,9 @@ class _ModalBottomSheetState extends State<ModalBottomSheet>
                               productCart.image =
                                   widget.model.image[indexImage];
 
-                              Provider.of<ListProductCart>(context,
+                              Provider.of<CartPageViewModel>(context,
                                       listen: false)
                                   .addProductToCart(productCart);
-                              var listsGroupsByNameShop =
-                                  Provider.of<ListProductCart>(context,
-                                          listen: false)
-                                      .listsGroupsByNameShop;
-                              Provider.of<CheckBoxCartScreen>(context,
-                                      listen: false)
-                                  .addItemsCheckbox(listsGroupsByNameShop);
                             });
                           }
                         },

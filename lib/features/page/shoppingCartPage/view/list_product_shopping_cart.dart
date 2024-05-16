@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../provider/list_product_cart.dart';
+import '../view_models/state_cart_page.dart';
 import 'product_shopping_cart.dart';
 import '../resources/widgets/header_detail_shopping_cart.dart';
 
@@ -17,8 +18,9 @@ class _ListProductShoppingCartState extends State<ListProductShoppingCart> {
   @override
   Widget build(BuildContext context) {
     var listsGroupsByNameShop =
-        Provider.of<ListProductCart>(context, listen: true)
-            .listsGroupsByNameShop;
+        Provider.of<CartPageViewModel>(context, listen: true)
+            .stateCartPage
+            .listProductShoppingCartByNameShop;
 
     return listsGroupsByNameShop.isEmpty
         ? Container(

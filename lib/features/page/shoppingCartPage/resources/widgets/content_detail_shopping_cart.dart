@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../provider/selected_product_cart.dart';
+import '../../view_models/state_cart_page.dart';
 
 class ContentDetailShoppingCart extends StatefulWidget {
   final ProductShoppingCartModel cartModel;
@@ -146,11 +147,11 @@ class _ContentDetailShoppingCartState extends State<ContentDetailShoppingCart> {
                                 setState(() {
                                   count--;
                                 });
-                                Provider.of<ListProductCart>(context,
+                                Provider.of<CartPageViewModel>(context,
                                         listen: false)
-                                    .addQuantityProductCart(
+                                    .setQuantityProductCart(
                                         count, widget.cartModel);
-                                Provider.of<SelectedProductCart>(context,
+                                Provider.of<CartPageViewModel>(context,
                                         listen: false)
                                     .setQuanityOfItemsSelected(
                                         count, widget.cartModel);
@@ -189,11 +190,11 @@ class _ContentDetailShoppingCartState extends State<ContentDetailShoppingCart> {
                               setState(() {
                                 count++;
                               });
-                              Provider.of<ListProductCart>(context,
+                              Provider.of<CartPageViewModel>(context,
                                       listen: false)
-                                  .addQuantityProductCart(
+                                  .setQuantityProductCart(
                                       count, widget.cartModel);
-                              Provider.of<SelectedProductCart>(context,
+                              Provider.of<CartPageViewModel>(context,
                                       listen: false)
                                   .setQuanityOfItemsSelected(
                                       count, widget.cartModel);

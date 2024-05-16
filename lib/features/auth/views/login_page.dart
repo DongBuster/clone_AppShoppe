@@ -1,5 +1,6 @@
 import 'package:clone_shoppe/constants/global_variables.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
@@ -36,14 +37,16 @@ class _LoginPageState extends State<LoginPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Padding(
-              padding: EdgeInsets.only(top: 50),
-              child: Text(
-                'Login',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 24,
-                  color: Colors.black,
+            const Expanded(
+              child: Center(
+                // padding: EdgeInsets.only(top: 50),
+                child: Text(
+                  'Login',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 24,
+                    color: Colors.black,
+                  ),
                 ),
               ),
             ),
@@ -56,8 +59,8 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(
                     children: [
                       UsernameFied(
-                        title: 'Username',
-                        hintText: 'Type your username or email',
+                        title: 'Email',
+                        hintText: 'Type your email',
                         prefixIcon: const Icon(
                           Icons.person_2_outlined,
                           size: 20,
@@ -109,8 +112,10 @@ class _LoginPageState extends State<LoginPage> {
                       ));
                       await AuthController.signInWithEmailAndPassword(
                               context, _controllerUsername, _controllerPassword)
-                          .then((value) => context
-                              .goNamed(GloblalVariable.introductionPage));
+                          .then((value) {
+                        context.goNamed(GloblalVariable.introductionPage);
+                        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                      });
                     }
                   },
                   child: Container(
@@ -207,19 +212,21 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       onPressed: () async {
-                        // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        //   content: const Text('Loading...'),
-                        //   backgroundColor: Colors.black.withOpacity(0.5),
-                        //   behavior: SnackBarBehavior.floating,
-                        //   margin: EdgeInsets.only(
-                        //     bottom: MediaQuery.of(context).size.height / 2,
-                        //     right: 120,
-                        //     left: 120,
-                        //   ),
-                        // ));
-                        await AuthController.handleGoogleBtnClick(context);
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: const Text('Loading...'),
+                          backgroundColor: Colors.black.withOpacity(0.5),
+                          behavior: SnackBarBehavior.floating,
+                          margin: EdgeInsets.only(
+                            bottom: MediaQuery.of(context).size.height / 2,
+                            right: 120,
+                            left: 120,
+                          ),
+                        ));
+                        await AuthController.handleGoogleBtnClick(context)
+                            .whenComplete(() => ScaffoldMessenger.of(context)
+                                .hideCurrentSnackBar());
                         // if (context.mounted) {
-                        //   ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                        //
                         // }
                       },
                       icon: SvgPicture.asset(
@@ -230,7 +237,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ],
                 ),
-                const Gap(40),
+                const Gap(80),
               ],
             ),
             Padding(
@@ -240,7 +247,7 @@ class _LoginPageState extends State<LoginPage> {
                   ColorizeAnimatedText(
                     '👉 Or Go to Register!',
                     textStyle: const TextStyle(
-                      fontSize: 14,
+                      fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
                     colors: [
@@ -253,7 +260,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ],
                 onTap: () {
-                  context.pushNamed(GloblalVariable.registerScreen);
+                  context.goNamed(GloblalVariable.registerScreen);
                 },
                 repeatForever: true,
                 pause: const Duration(milliseconds: 500),

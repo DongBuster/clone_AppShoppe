@@ -5,8 +5,8 @@ String uri = 'http://192.168.1.2:3000';
 class GloblalVariable {
   // define name route
   static const String authScreen = 'authscreen';
-  static const String loginScreen = 'loginscreen';
-  static const String registerScreen = 'registerscreen';
+  static const String loginScreen = 'loginPage';
+  static const String registerScreen = 'registerPage';
   static const String homeScreen = 'homescreen';
   static const String mallScreen = 'mallScreen';
   static const String liveScreen = 'liveScreen';

@@ -128,7 +128,7 @@ class AuthController {
     } on FirebaseAuthException catch (e) {
       debugPrint('here kk: ${e.message}');
       if (e.message == 'The email address is badly formatted') {
-        print('asjd');
+        // print('asjd');
         ScaffoldMessenger.of(context).showSnackBar(snackBarErrorFormatEmail);
       }
     }
@@ -150,7 +150,7 @@ class AuthController {
           .then(
         (value) {
           createUser(controllerUsername.text, user.uid);
-          context.go('/login');
+          context.goNamed(GloblalVariable.loginScreen);
         },
       );
     } on FirebaseAuthException catch (e) {

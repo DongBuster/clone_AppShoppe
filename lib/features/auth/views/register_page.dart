@@ -1,5 +1,6 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
@@ -23,19 +24,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final _focusNodePassword = FocusNode();
   final _controllerConfirmPassword = TextEditingController();
   final _focusNodeConfirmPassword = FocusNode();
-  final _formKey = GlobalKey<FormState>();
-
-  final snackBar = SnackBar(
-    elevation: 0,
-    behavior: SnackBarBehavior.floating,
-    backgroundColor: Colors.transparent,
-    content: AwesomeSnackbarContent(
-      title: 'Warning!',
-      message:
-          'Passwords do not match! Please check your password and your confirmed password !',
-      contentType: ContentType.warning,
-    ),
-  );
+  final _formKeyRegister = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,14 +36,16 @@ class _RegisterPageState extends State<RegisterPage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             // --- title page ---
-            const Padding(
-              padding: EdgeInsets.only(top: 50),
-              child: Text(
-                'Register',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 24,
-                  color: Colors.black,
+            const Expanded(
+              child: Center(
+                // padding: EdgeInsets.only(top: 50),
+                child: Text(
+                  'Register',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 24,
+                    color: Colors.black,
+                  ),
                 ),
               ),
             ),
@@ -63,49 +54,53 @@ class _RegisterPageState extends State<RegisterPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                UsernameFied(
-                  title: 'Username',
-                  hintText: 'Type your username or email',
-                  prefixIcon: const Icon(
-                    Icons.person_2_outlined,
-                    size: 20,
-                    color: Colors.black38,
+                Form(
+                  key: _formKeyRegister,
+                  child: Column(
+                    children: [
+                      UsernameFied(
+                        title: 'Email',
+                        hintText: 'Type your email',
+                        prefixIcon: const Icon(
+                          Icons.person_2_outlined,
+                          size: 20,
+                          color: Colors.black38,
+                        ),
+                        controller: _controllerUsername,
+                        focusNode: _focusNodeUsername,
+                      ),
+                      PasswordFieldRegistterPage(
+                        title: 'Password',
+                        hintText: 'Type your password',
+                        prefixIcon: const Icon(
+                          Icons.lock_outline,
+                          size: 20,
+                          color: Colors.black38,
+                        ),
+                        controllerPassword: _controllerPassword,
+                        controllerConfirmPassword: _controllerConfirmPassword,
+                        focusNode: _focusNodePassword,
+                      ),
+                      ConfirmPasswordFieldRegistterPage(
+                        title: 'Confirm Password',
+                        hintText: 'Re-enter the password',
+                        prefixIcon: const Icon(
+                          Icons.lock_outline,
+                          size: 20,
+                          color: Colors.black38,
+                        ),
+                        controllerPassword: _controllerPassword,
+                        controllerConfirmPassword: _controllerConfirmPassword,
+                        focusNode: _focusNodeConfirmPassword,
+                      ),
+                    ],
                   ),
-                  controller: _controllerUsername,
-                  focusNode: _focusNodeUsername,
                 ),
-                const Gap(20),
-                PasswordFieldRegistterPage(
-                  title: 'Password',
-                  hintText: 'Type your password',
-                  prefixIcon: const Icon(
-                    Icons.lock_outline,
-                    size: 20,
-                    color: Colors.black38,
-                  ),
-                  controllerPassword: _controllerPassword,
-                  controllerConfirmPassword: _controllerConfirmPassword,
-                  focusNode: _focusNodePassword,
-                ),
-                const Gap(10),
-                ConfirmPasswordFieldRegistterPage(
-                  title: 'Confirm Password',
-                  hintText: 'Re-enter the password',
-                  prefixIcon: const Icon(
-                    Icons.lock_outline,
-                    size: 20,
-                    color: Colors.black38,
-                  ),
-                  controllerPassword: _controllerPassword,
-                  controllerConfirmPassword: _controllerConfirmPassword,
-                  focusNode: _focusNodeConfirmPassword,
-                ),
-
                 const Gap(25),
                 // --- register button ---
                 GestureDetector(
                   onTap: () {
-                    if (_formKey.currentState!.validate()) {
+                    if (_formKeyRegister.currentState!.validate()) {
                       if (_controllerConfirmPassword.text.toString() !=
                           _controllerPassword.text.toString()) {
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -220,6 +215,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ],
                 ),
+                const Gap(50),
               ],
             ),
             // --- back login page ----
@@ -230,7 +226,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ColorizeAnimatedText(
                     '👉 Or Go to Login!',
                     textStyle: const TextStyle(
-                      fontSize: 14,
+                      fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
                     colors: [
@@ -243,7 +239,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ],
                 onTap: () {
-                  context.pop(GloblalVariable.loginScreen);
+                  context.goNamed(GloblalVariable.loginScreen);
                 },
                 repeatForever: true,
                 pause: const Duration(milliseconds: 500),
@@ -256,13 +252,25 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 }
 
+// final snackBar = SnackBar(
+//   elevation: 0,
+//   behavior: SnackBarBehavior.floating,
+//   backgroundColor: Colors.transparent,
+//   content: AwesomeSnackbarContent(
+//     title: 'Success!',
+//     message: 'Account successfully created !',
+//     contentType: ContentType.success,
+//   ),
+// );
+
 final snackBar = SnackBar(
   elevation: 0,
   behavior: SnackBarBehavior.floating,
   backgroundColor: Colors.transparent,
   content: AwesomeSnackbarContent(
-    title: 'Success!',
-    message: 'Account successfully created !',
-    contentType: ContentType.success,
+    title: 'Warning!',
+    message:
+        'Passwords do not match! Please check your password and your confirmed password !',
+    contentType: ContentType.warning,
   ),
 );

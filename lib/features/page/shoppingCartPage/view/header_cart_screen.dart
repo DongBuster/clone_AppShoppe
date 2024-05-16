@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../../common/widgets/text.dart';
 import '../../../../constants/global_variables.dart';
 import '../../../../provider/list_product_cart.dart';
+import '../view_models/state_cart_page.dart';
 
 class HeaderCartScreen extends StatefulWidget {
   const HeaderCartScreen({super.key});
@@ -17,8 +18,10 @@ class HeaderCartScreen extends StatefulWidget {
 class _HeaderCartScreenState extends State<HeaderCartScreen> {
   @override
   Widget build(BuildContext context) {
-    int coutCart =
-        Provider.of<ListProductCart>(context, listen: true).getListItems.length;
+    int coutCart = Provider.of<CartPageViewModel>(context, listen: true)
+        .stateCartPage
+        .listProductShoppingCart
+        .length;
     return Container(
       height: 70,
       padding: const EdgeInsets.fromLTRB(10, 30, 0, 5),

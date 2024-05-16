@@ -6,6 +6,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../view_models/state_cart_page.dart';
+
 class HeaderDetailShoppingCart extends StatefulWidget {
   final String nameShop;
 
@@ -21,8 +23,11 @@ class HeaderDetailShoppingCart extends StatefulWidget {
 class _HeaderDetailShoppingCartState extends State<HeaderDetailShoppingCart> {
   @override
   Widget build(BuildContext context) {
-    var isCheckShop = Provider.of<CheckBoxCartScreen>(context, listen: true)
+    var isCheckShop = Provider.of<CartPageViewModel>(context, listen: true)
+        .stateCartPage
         .listsCheckBoxShop;
+    // print(isCheckShop[widget.nameShop]);
+
     return Container(
       height: 50,
       padding: const EdgeInsets.only(right: 12),
@@ -41,19 +46,17 @@ class _HeaderDetailShoppingCartState extends State<HeaderDetailShoppingCart> {
                 activeColor: GloblalVariable.hex_f94f2f,
                 value: isCheckShop[widget.nameShop]!,
                 onChanged: (bool? value) {
-                  setState(() {
-                    Provider.of<CheckBoxCartScreen>(context, listen: false)
-                        .setCheckBoxShop(widget.nameShop);
-                    Provider.of<CheckBoxCartScreen>(context, listen: false)
-                        .setCheckBoxByShop(widget.nameShop);
-                    var listsGroupsByNameShop =
-                        Provider.of<ListProductCart>(context, listen: false)
-                            .getlistsGroupsByNameShop;
-                    Provider.of<SelectedProductCart>(context, listen: false)
-                        .setListItemsSelected(
-                            listsGroupsByNameShop[widget.nameShop]!,
-                            isCheckShop[widget.nameShop]!);
-                  });
+                  Provider.of<CartPageViewModel>(context, listen: false)
+                      .setCheckBoxShop(widget.nameShop);
+                  Provider.of<CartPageViewModel>(context, listen: false)
+                      .setCheckBoxByShop(widget.nameShop);
+                  // var listsGroupsByNameShop =
+                  //     Provider.of<ListProductCart>(context, listen: false)
+                  //         .getlistsGroupsByNameShop;
+                  // Provider.of<SelectedProductCart>(context, listen: false)
+                  //     .setListItemsSelected(
+                  //         listsGroupsByNameShop[widget.nameShop]!,
+                  //         isCheckShop[widget.nameShop]!);
                 },
               ),
               const SizedBox(width: 10),

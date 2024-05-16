@@ -10,6 +10,7 @@ import '../../../../provider/checkbox_cart_screen.dart';
 import '../../../../provider/list_product_cart.dart';
 import '../../../../provider/list_purchase_order.dart';
 import '../../../../provider/selected_product_cart.dart';
+import '../view_models/state_cart_page.dart';
 
 class FooterCartScreen extends StatefulWidget {
   const FooterCartScreen({super.key});
@@ -23,13 +24,17 @@ class _FooterCartScreenState extends State<FooterCartScreen> {
   int productChosed = 0;
   @override
   Widget build(BuildContext context) {
-    String totalPayment =
-        Provider.of<SelectedProductCart>(context, listen: true).getTotalPrice;
-    productChosed = Provider.of<SelectedProductCart>(context, listen: true)
-        .getListSelected
+    String totalPayment = Provider.of<CartPageViewModel>(context, listen: true)
+        .stateCartPage
+        .totalPayment;
+    productChosed = Provider.of<CartPageViewModel>(context, listen: true)
+        .stateCartPage
+        .listSelectedProductShoppingCart
         .length;
     List<ProductShoppingCartModel> listSelected =
-        Provider.of<SelectedProductCart>(context, listen: true).getListSelected;
+        Provider.of<CartPageViewModel>(context, listen: true)
+            .stateCartPage
+            .listSelectedProductShoppingCart;
     // print('cart: $listSelected');
 
     return Container(
@@ -61,15 +66,8 @@ class _FooterCartScreenState extends State<FooterCartScreen> {
                     setState(() {
                       isChecked = value!;
                     });
-                    Provider.of<CheckBoxCartScreen>(context, listen: false)
+                    Provider.of<CartPageViewModel>(context, listen: false)
                         .setAllCheckBoxShop(isChecked);
-                    //---
-                    var listItems =
-                        Provider.of<ListProductCart>(context, listen: false)
-                            .getListItems;
-
-                    Provider.of<SelectedProductCart>(context, listen: false)
-                        .setListItemsSelected(listItems, isChecked);
                   },
                 ),
               ),

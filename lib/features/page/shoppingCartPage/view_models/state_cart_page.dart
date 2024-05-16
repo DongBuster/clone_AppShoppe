@@ -9,12 +9,12 @@ class CartPageViewModel extends ChangeNotifier {
 
   //--- state list product shopping cart ---
   void addProductToCart(ProductShoppingCartModel model) {
-    var listItems = stateCartPage.listProductShoppingCart;
-    var listProductShoppingCartByNameShop =
-        stateCartPage.listProductShoppingCartByNameShop;
+    // var listItems = stateCartPage.listProductShoppingCart;
+    // var listProductShoppingCartByNameShop =
+    //     stateCartPage.listProductShoppingCartByNameShop;
     bool itemExists = false;
 
-    for (var cartModel in listItems) {
+    for (var cartModel in stateCartPage.listProductShoppingCart) {
       if (cartModel.nameProduct == model.nameProduct &&
           cartModel.classify.keys.first == model.classify.keys.first) {
         cartModel.numberOfProducts++;
@@ -24,26 +24,32 @@ class CartPageViewModel extends ChangeNotifier {
     }
 
     if (!itemExists) {
-      listItems.add(model);
-      listProductShoppingCartByNameShop = groupBy(
-          listItems, (ProductShoppingCartModel model) => model.nameShop);
+      stateCartPage.listProductShoppingCart.add(model);
+      stateCartPage.listProductShoppingCartByNameShop = groupBy(
+          stateCartPage.listProductShoppingCart,
+          (ProductShoppingCartModel model) => model.nameShop);
     }
 
-    addItemsCheckbox(listProductShoppingCartByNameShop);
+    addItemsCheckbox(stateCartPage.listProductShoppingCartByNameShop);
+    // print(stateCartPage.listsCheckBoxShop.length);
 
+    // print(stateCartPage.listProductShoppingCart.length);
+
+    // print(stateCartPage.listProductShoppingCartByNameShop.length);
     notifyListeners();
   }
 
-  void removeListProductToCart(List<ProductShoppingCartModel> list) {
+  void removeListProductToCart() {
     var listItems = stateCartPage.listProductShoppingCart;
 
-    for (var model in list) {
+    for (var model in stateCartPage.listSelectedProductShoppingCart) {
       listItems.removeWhere(
         (item) =>
             item.nameProduct == model.nameProduct &&
             item.classify == model.classify,
       );
     }
+    stateCartPage.listSelectedProductShoppingCart = [];
     stateCartPage.listProductShoppingCartByNameShop =
         groupBy(listItems, (ProductShoppingCartModel model) => model.nameShop);
     notifyListeners();
@@ -62,7 +68,7 @@ class CartPageViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addQuantityProductCart(int quantity, ProductShoppingCartModel model) {
+  void setQuantityProductCart(int quantity, ProductShoppingCartModel model) {
     var listItems = stateCartPage.listProductShoppingCart;
 
     for (var cartModel in listItems) {
@@ -71,6 +77,7 @@ class CartPageViewModel extends ChangeNotifier {
         cartModel.numberOfProducts = quantity;
       }
     }
+    // setQuanityOfItemsSelected(quantity, model);/////
     notifyListeners();
   }
 
@@ -94,10 +101,13 @@ class CartPageViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setCheckBox(String nameShop, String classify) {
+  void setCheckBox(
+      ProductShoppingCartModel model, String nameShop, String classify) {
     stateCartPage.listsCheckBoxByNameShop[nameShop]!.forEach((key, value) {
       stateCartPage.listsCheckBoxByNameShop[nameShop]![classify] =
           !stateCartPage.listsCheckBoxByNameShop[nameShop]![classify]!;
+      setItemsSelected(
+          model, stateCartPage.listsCheckBoxByNameShop[nameShop]![classify]!);
     });
     notifyListeners();
   }
@@ -106,6 +116,8 @@ class CartPageViewModel extends ChangeNotifier {
     stateCartPage.listsCheckBoxByNameShop[nameShop]!.forEach((key, value) {
       stateCartPage.listsCheckBoxByNameShop[nameShop]![key] =
           stateCartPage.listsCheckBoxShop[nameShop]!;
+      setListItemsSelected(
+          nameShop, stateCartPage.listsCheckBoxByNameShop[nameShop]![key]!);
     });
     notifyListeners();
   }
@@ -118,13 +130,14 @@ class CartPageViewModel extends ChangeNotifier {
         values.updateAll((key, value) => value = isChecked);
       },
     );
-
+    setAllListItemsSelected(isChecked);
+    // setListItemsSelected(nameShop, isChecked);
     notifyListeners();
   }
 
   void setCheckBoxShop(String nameShop) {
     stateCartPage.listsCheckBoxShop[nameShop] =
-        stateCartPage.listsCheckBoxShop[nameShop]!;
+        !stateCartPage.listsCheckBoxShop[nameShop]!;
     notifyListeners();
   }
 
@@ -144,11 +157,75 @@ class CartPageViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void setItemsSelected(ProductShoppingCartModel cartModel, bool isChecked) {
+    isChecked
+        ? stateCartPage.listSelectedProductShoppingCart.add(cartModel)
+        : stateCartPage.listSelectedProductShoppingCart.remove(cartModel);
+    // print(stateCartPage.listSelectedProductShoppingCart);
+
+    calculateTotalPrice();
+    notifyListeners();
+  }
+
   void removeListItemsSelected(List<ProductShoppingCartModel> list) {
     // print('remove: $listSelected');
 
     stateCartPage.listSelectedProductShoppingCart
         .removeWhere((item) => list.contains(item));
+    calculateTotalPrice();
+    notifyListeners();
+  }
+
+  void setQuanityOfItemsSelected(
+      int quantity, ProductShoppingCartModel cartModel) {
+    // print('heere');
+    // print(stateCartPage.listSelectedProductShoppingCart);
+    for (var item in stateCartPage.listSelectedProductShoppingCart) {
+      if (cartModel.nameProduct == item.nameProduct &&
+          cartModel.classify.keys.first == item.classify.keys.first) {
+        item.numberOfProducts == quantity;
+        // debugPrint('quanity${item.numberOfProducts}');
+      }
+    }
+    calculateTotalPrice();
+    notifyListeners();
+  }
+
+  void removeItemsSelected(ProductShoppingCartModel model) {
+    stateCartPage.listSelectedProductShoppingCart.removeWhere(
+      (item) =>
+          item.nameProduct == model.nameProduct &&
+          item.classify == model.classify,
+    );
+    calculateTotalPrice();
+    notifyListeners();
+  }
+
+  void setListItemsSelected(String nameShop, bool isChecked) {
+    for (var cartModel
+        in stateCartPage.listProductShoppingCartByNameShop[nameShop]!) {
+      if (isChecked &&
+          stateCartPage.listSelectedProductShoppingCart.contains(cartModel) ==
+              false) {
+        stateCartPage.listSelectedProductShoppingCart.add(cartModel);
+      } else if (isChecked == false) {
+        stateCartPage.listSelectedProductShoppingCart.remove(cartModel);
+      }
+    }
+    calculateTotalPrice();
+    notifyListeners();
+  }
+
+  void setAllListItemsSelected(bool isChecked) {
+    for (var cartModel in stateCartPage.listProductShoppingCart) {
+      if (isChecked &&
+          stateCartPage.listSelectedProductShoppingCart.contains(cartModel) ==
+              false) {
+        stateCartPage.listSelectedProductShoppingCart.add(cartModel);
+      } else if (isChecked == false) {
+        stateCartPage.listSelectedProductShoppingCart.remove(cartModel);
+      }
+    }
     calculateTotalPrice();
     notifyListeners();
   }

@@ -31,6 +31,8 @@ class UsernameFied extends StatelessWidget {
           width: MediaQuery.of(context).size.width - 70,
           height: 60,
           child: TextFormField(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Please enter some text';
@@ -113,6 +115,8 @@ class _PasswordFieldLoginPageState extends State<PasswordFieldLoginPage> {
           width: MediaQuery.of(context).size.width - 70,
           height: 60,
           child: TextFormField(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Please enter some text';
@@ -225,8 +229,15 @@ class _PasswordFieldRegistterPageState
         ),
         SizedBox(
           width: MediaQuery.of(context).size.width - 70,
-          height: 40,
-          child: TextField(
+          height: 60,
+          child: TextFormField(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter some text';
+              }
+              return null;
+            },
             obscureText: visibility ? true : false,
             onTapOutside: (event) {
               widget.focusNode.unfocus();
@@ -246,6 +257,8 @@ class _PasswordFieldRegistterPageState
             //---
 
             decoration: InputDecoration(
+              contentPadding:
+                  const EdgeInsets.only(top: 18, bottom: 0, left: 0),
               hintText: widget.hintText,
               hintStyle: const TextStyle(fontSize: 14, color: Colors.black38),
               prefixIcon: Padding(
@@ -338,8 +351,16 @@ class _ConfirmPasswordFieldRegistterPageState
         ),
         SizedBox(
           width: MediaQuery.of(context).size.width - 70,
-          height: 40,
-          child: TextField(
+          height: 60,
+          child: TextFormField(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter some text';
+              }
+              return null;
+            },
             obscureText: visibility ? true : false,
             onTapOutside: (event) {
               widget.focusNode.unfocus();
@@ -360,6 +381,8 @@ class _ConfirmPasswordFieldRegistterPageState
             //---
 
             decoration: InputDecoration(
+              contentPadding:
+                  const EdgeInsets.only(top: 18, bottom: 0, left: 0),
               hintText: widget.hintText,
               hintStyle: const TextStyle(fontSize: 14, color: Colors.black38),
               prefixIcon: Padding(

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../provider/selected_product_cart.dart';
+import '../../view_models/state_cart_page.dart';
 
 class CheckBox extends StatefulWidget {
   final String nameShop;
@@ -24,8 +25,9 @@ class _CheckBoxState extends State<CheckBox> {
   @override
   Widget build(BuildContext context) {
     var listsCheckBoxByShop =
-        Provider.of<CheckBoxCartScreen>(context, listen: true)
-            .listsCheckBoxByShop;
+        Provider.of<CartPageViewModel>(context, listen: true)
+            .stateCartPage
+            .listsCheckBoxByNameShop;
     Map<String, bool> childCheckBox = listsCheckBoxByShop[widget.nameShop]!;
 
     // if (widget.isChecked && widget.model.classify.isNotEmpty) {
@@ -53,7 +55,7 @@ class _CheckBoxState extends State<CheckBox> {
       onChanged: (bool? value) {
         setState(() {
           childCheckBox[widget.model.classify.keys.first] = value!;
-          Provider.of<SelectedProductCart>(context, listen: false)
+          Provider.of<CartPageViewModel>(context, listen: false)
               .setItemsSelected(widget.model,
                   childCheckBox[widget.model.classify.keys.first]!);
         });

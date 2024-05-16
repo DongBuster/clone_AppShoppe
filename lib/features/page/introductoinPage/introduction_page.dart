@@ -31,7 +31,7 @@ class _IntroductionPageState extends State<IntroductionPage> {
     );
 
     String? userId =
-        Provider.of<IntroductionPageViewModel>(context, listen: false)
+        Provider.of<IntroductionPageViewModel>(context, listen: true)
             .stateIntroductionPage
             .userId;
 
@@ -70,10 +70,29 @@ class _IntroductionPageState extends State<IntroductionPage> {
         onDone: () async {
           IntroductionPageViewModel viewModel =
               Provider.of<IntroductionPageViewModel>(context, listen: false);
-          await viewModel.pushUserImage(userId, context).then((_) {
+          //--- loading ----
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: const Text('Loading...'),
+            backgroundColor: Colors.black.withOpacity(0.5),
+            behavior: SnackBarBehavior.floating,
+            margin: EdgeInsets.only(
+              bottom: MediaQuery.of(context).size.height / 2,
+              right: 120,
+              left: 120,
+            ),
+          ));
+          //---- ----
+          if (viewModel.stateIntroductionPage.imageFile != null) {
+            await viewModel.pushUserImage(userId, context).then((_) {
+              viewModel.setIsNewUser(userId);
+              ScaffoldMessenger.of(context).hideCurrentSnackBar();
+              context.pushReplacementNamed(GloblalVariable.homeScreen);
+            });
+          } else {
             viewModel.setIsNewUser(userId);
+            ScaffoldMessenger.of(context).hideCurrentSnackBar();
             context.pushReplacementNamed(GloblalVariable.homeScreen);
-          });
+          }
         },
         onSkip: () => context.pushReplacementNamed(GloblalVariable.homeScreen),
         resizeToAvoidBottomInset: false,

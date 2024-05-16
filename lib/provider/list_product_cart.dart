@@ -41,6 +41,7 @@ class ListProductCart with ChangeNotifier {
     }
     listsGroupsByNameShop =
         groupBy(listItems, (ProductShoppingCartModel model) => model.nameShop);
+
     notifyListeners();
   }
 

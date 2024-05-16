@@ -44,10 +44,20 @@ class _ScreenThirdState extends State<ScreenThird> {
                           ),
                         );
                       }
+                      if (snapshot.data == null) {
+                        return ClipRRect(
+                          borderRadius: BorderRadius.circular(30),
+                          child: Image.asset(
+                            'assets/img/user_default.jpg',
+                            width: 180,
+                            height: 180,
+                          ),
+                        );
+                      }
                       if (snapshot.hasData) {
                         return ClipOval(
                           child: CachedNetworkImage(
-                            imageUrl: snapshot.data ?? '',
+                            imageUrl: snapshot.data!,
                             height: 180,
                             width: 180,
                             placeholderFadeInDuration:
