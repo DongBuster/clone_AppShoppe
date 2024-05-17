@@ -1,8 +1,7 @@
 import 'package:clone_shoppe/features/page/productsSearchPage/products_search.dart';
 import 'package:flutter/material.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
-
 import '../../../constants/global_variables.dart';
+import 'view_models/search_page_model.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -14,42 +13,12 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   final controllerSearchBar = TextEditingController();
   final _focusNode = FocusNode();
-  late final Future future;
-
   List<dynamic> listIdProductSearch = [];
 
-  Future<Map<String, dynamic>> getdata() async {
-    Map<String, dynamic> listData = {};
-    await Supabase.instance.client
-        .from('search')
-        .select('name_search,products_id')
-        .then((value) {
-      for (var e in value) {
-        listData.addAll({e['name_search']: e['products_id']});
-      }
-    });
-    return listData;
-  }
-
-  Future<List<Map<String, dynamic>>> search(String query) async {
-    List<Map<String, dynamic>> result = [];
-    if (query == '') return List.empty();
-    await getdata().then((list) {
-      list.forEach((key, value) {
-        // print('$key:$value');
-
-        if (key.toLowerCase().startsWith(query.toLowerCase())) {
-          result.add({key: value});
-        }
-        // print(result);
-      });
-    });
-    return result;
-  }
+  final SearchPageViewModel _viewModel = SearchPageViewModel();
 
   @override
   void dispose() {
-    future = getdata();
     _focusNode.dispose();
     super.dispose();
   }
@@ -61,6 +30,7 @@ class _SearchPageState extends State<SearchPage> {
       body: SafeArea(
         child: Column(
           children: [
+            //--- header ---
             SizedBox(
               height: 35,
               child: Row(
@@ -156,6 +126,7 @@ class _SearchPageState extends State<SearchPage> {
                 ],
               ),
             ),
+            //--- list search ---
             Container(
               height: 300,
               width: MediaQuery.of(context).size.width,
@@ -168,58 +139,60 @@ class _SearchPageState extends State<SearchPage> {
                 )
               ]),
               child: SingleChildScrollView(
-                  padding: const EdgeInsets.only(left: 12, right: 12),
-                  child: FutureBuilder(
-                    future: search(controllerSearchBar.text),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        return Column(
-                          children:
-                              List.generate(snapshot.data!.length, (index) {
-                            List<List<dynamic>> list = [];
-                            for (int i = 0; i < snapshot.data!.length; i++) {
-                              if (list.contains(
-                                      snapshot.data![i].values.first) ==
-                                  false) {
-                                list.add(snapshot.data![i].values.first);
-                              }
+                padding: const EdgeInsets.only(left: 12, right: 12),
+                child: FutureBuilder(
+                  future: _viewModel.search(controllerSearchBar.text),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return Column(
+                        children: List.generate(snapshot.data!.length, (index) {
+                          List<List<dynamic>> list = [];
+                          for (int i = 0; i < snapshot.data!.length; i++) {
+                            if (list.contains(snapshot.data![i].values.first) ==
+                                false) {
+                              list.add(snapshot.data![i].values.first);
                             }
-
-                            listIdProductSearch = list
-                                .expand((element) => element)
-                                .toSet()
-                                .toList();
-                            // print(listIdProductSearch);
-                            return GestureDetector(
-                              onTap: () {
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: (_) {
-                                  List<dynamic> idSelected =
-                                      snapshot.data![index].values.first;
-                                  for (int i = 0; i < idSelected.length; i++) {
-                                    listIdProductSearch.remove(idSelected[i]);
-                                  }
-                                  return ProductsSearch(
-                                    listIdProductSelected:
-                                        snapshot.data![index].values.first,
-                                    otherSearch: listIdProductSearch,
-                                    nameSearch:
-                                        snapshot.data![index].keys.first,
-                                  );
-                                }));
-                              },
-                              child: ListTile(
-                                title: Text(snapshot.data![index].keys.first),
-                              ),
-                            );
-                          }),
-                        );
-                      }
-                      return const Center(
-                        child: CircularProgressIndicator(),
+                          }
+                          listIdProductSearch = list
+                              .expand((element) => element)
+                              .toSet()
+                              .toList();
+                          // print(listIdProductSearch);
+                          return GestureDetector(
+                            onTap: () {
+                              List<dynamic> idSelected =
+                                  snapshot.data![index].values.first;
+                              for (int i = 0; i < idSelected.length; i++) {
+                                listIdProductSearch.remove(idSelected[i]);
+                              }
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) {
+                                    return ProductsSearch(
+                                      listIdProductSelected:
+                                          snapshot.data![index].values.first,
+                                      otherSearch: listIdProductSearch,
+                                      nameSearch:
+                                          snapshot.data![index].keys.first,
+                                    );
+                                  },
+                                ),
+                              );
+                            },
+                            child: ListTile(
+                              title: Text(snapshot.data![index].keys.first),
+                            ),
+                          );
+                        }),
                       );
-                    },
-                  )),
+                    }
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  },
+                ),
+              ),
             ),
           ],
         ),

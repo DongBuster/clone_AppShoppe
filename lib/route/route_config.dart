@@ -1,6 +1,8 @@
 import 'package:clone_shoppe/constants/global_variables.dart';
 import 'package:clone_shoppe/features/auth/views/login_page.dart';
 import 'package:clone_shoppe/features/auth/views/register_page.dart';
+import 'package:clone_shoppe/features/page/productsSearchPage/products_search.dart';
+import 'package:clone_shoppe/features/page/searchPage/search_page.dart';
 import 'package:clone_shoppe/features/page/shoppingCartPage/shopping_cart_page.dart';
 import 'package:clone_shoppe/features/page/detailProductsPage/detail_products_page.dart';
 import 'package:clone_shoppe/features/page/homePage/home_page.dart';
@@ -107,6 +109,27 @@ class Routes {
                       child: const DetailProductsPage(),
                     ),
                   ),
+                  GoRoute(
+                      path: 'searchPage',
+                      name: GloblalVariable.searchPage,
+                      pageBuilder: (context, state) =>
+                          buildPageWithDefaultTransition(
+                            context: context,
+                            state: state,
+                            child: const SearchPage(),
+                          ),
+                      routes: [
+                        GoRoute(
+                          path: 'productsSearchPage',
+                          name: GloblalVariable.productsSearchPage,
+                          pageBuilder: (context, state) =>
+                              buildPageWithDefaultTransition(
+                            context: context,
+                            state: state,
+                            child: const ProductsSearch(),
+                          ),
+                        ),
+                      ]),
                 ],
               ),
             ],

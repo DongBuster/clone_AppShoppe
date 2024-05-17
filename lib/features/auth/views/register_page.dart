@@ -99,17 +99,28 @@ class _RegisterPageState extends State<RegisterPage> {
                 const Gap(25),
                 // --- register button ---
                 GestureDetector(
-                  onTap: () {
+                  onTap: () async {
                     if (_formKeyRegister.currentState!.validate()) {
                       if (_controllerConfirmPassword.text.toString() !=
                           _controllerPassword.text.toString()) {
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       } else {
-                        AuthController.createUserWithEmailAndPassword(
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: const Text('Loading...'),
+                          backgroundColor: Colors.black.withOpacity(0.5),
+                          behavior: SnackBarBehavior.floating,
+                          margin: EdgeInsets.only(
+                            bottom: MediaQuery.of(context).size.height / 2,
+                            right: 120,
+                            left: 120,
+                          ),
+                        ));
+                        await AuthController.createUserWithEmailAndPassword(
                           context,
                           _controllerUsername,
                           _controllerPassword,
-                        );
+                        ).whenComplete(() => ScaffoldMessenger.of(context)
+                            .hideCurrentSnackBar());
                       }
                     }
                   },

@@ -117,7 +117,18 @@ class _ChangePictureAvatarState extends State<ChangePictureAvatar> {
               ),
               TextButton(
                 onPressed: () {
-                  viewModel.pushUserImage().then((_) {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: const Text('Loading...'),
+                    backgroundColor: Colors.black.withOpacity(0.5),
+                    behavior: SnackBarBehavior.floating,
+                    margin: EdgeInsets.only(
+                      bottom: MediaQuery.of(context).size.height / 2,
+                      right: 120,
+                      left: 120,
+                    ),
+                  ));
+                  viewModel.pushUserImage().whenComplete(() {
+                    ScaffoldMessenger.of(context).hideCurrentSnackBar();
                     context.pop();
                   });
                 },

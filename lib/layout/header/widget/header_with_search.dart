@@ -1,3 +1,4 @@
+import 'package:clone_shoppe/features/page/searchPage/resources/animations/transition_search_page.dart';
 import 'package:clone_shoppe/features/page/searchPage/search_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -32,10 +33,7 @@ class _SearchState extends State<Search> {
             .state
             .activeIconHeader;
     return GestureDetector(
-      onTap: () => Navigator.push(
-        context,
-        MaterialPageRoute(builder: (_) => const SearchPage()),
-      ),
+      onTap: () => context.pushNamed(GloblalVariable.searchPage),
       child: Container(
           decoration: BoxDecoration(
             color: fillColorTextfieldHeader(isActiveColorIcon),
