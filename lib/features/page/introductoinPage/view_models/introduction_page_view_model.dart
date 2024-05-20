@@ -37,11 +37,13 @@ class IntroductionPageViewModel extends ChangeNotifier {
     // print(urlImage);
   }
 
-  Future<void> updateNameUser(String name, String userId) async {
+  Future<void> updateNameUser(String name) async {
+    User? currentUser = FirebaseAuth.instance.currentUser;
+
     // print(user.uid??'');
     await FirebaseFirestore.instance
         .collection('users')
-        .doc(userId)
+        .doc(currentUser!.uid)
         .update({'name': name});
   }
 
@@ -54,16 +56,18 @@ class IntroductionPageViewModel extends ChangeNotifier {
 
   Future<String> getImageUrlStream() {
     User? currentUser = FirebaseAuth.instance.currentUser;
-
+    if (currentUser == null) {
+      return Future.value('');
+    }
     return FirebaseFirestore.instance
         .collection('users')
-        .doc(currentUser!.uid)
+        .doc(currentUser.uid)
         .get()
         .then((result) {
-      if (result.data() == null) {
+      Map<String, dynamic> data = result.data() as Map<String, dynamic>;
+      if (data['image'] == 'null') {
         return '';
       } else {
-        Map<String, dynamic> data = result.data() as Map<String, dynamic>;
         return data['image'];
       }
     });

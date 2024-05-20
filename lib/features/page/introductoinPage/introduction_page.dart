@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:clone_shoppe/constants/global_variables.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'view_models/introduction_page_view_model.dart';
 import 'views/screen_first.dart';
 import 'views/screen_second.dart';
@@ -34,6 +35,7 @@ class _IntroductionPageState extends State<IntroductionPage> {
         Provider.of<IntroductionPageViewModel>(context, listen: true)
             .stateIntroductionPage
             .userId;
+    print('state $userId');
 
     return Scaffold(
       body: IntroductionScreen(
@@ -49,7 +51,7 @@ class _IntroductionPageState extends State<IntroductionPage> {
           PageViewModel(
             useScrollView: true,
             title: "",
-            bodyWidget: ScreenSecond(userId: userId!),
+            bodyWidget: const ScreenSecond(),
             decoration: const PageDecoration(
               pageColor: Colors.white,
               imagePadding: EdgeInsets.zero,
@@ -83,18 +85,27 @@ class _IntroductionPageState extends State<IntroductionPage> {
           ));
           //---- ----
           if (viewModel.stateIntroductionPage.imageFile != null) {
-            await viewModel.pushUserImage(userId, context).then((_) {
+            await viewModel.pushUserImage(userId!, context).then((_) {
               viewModel.setIsNewUser(userId);
               ScaffoldMessenger.of(context).hideCurrentSnackBar();
               context.pushReplacementNamed(GloblalVariable.homeScreen);
             });
           } else {
-            viewModel.setIsNewUser(userId);
+            final SharedPreferences prefs =
+                await SharedPreferences.getInstance();
+
+            viewModel.setIsNewUser(userId!);
             ScaffoldMessenger.of(context).hideCurrentSnackBar();
             context.pushReplacementNamed(GloblalVariable.homeScreen);
+            prefs.setBool('islogin', true);
+            // prefs.setString('email', controllerUsername.text);
           }
         },
-        onSkip: () => context.pushReplacementNamed(GloblalVariable.homeScreen),
+        onSkip: () async {
+          final SharedPreferences prefs = await SharedPreferences.getInstance();
+          context.pushReplacementNamed(GloblalVariable.homeScreen);
+          prefs.setBool('islogin', true);
+        },
         resizeToAvoidBottomInset: false,
         showSkipButton: true,
         skipOrBackFlex: 0,

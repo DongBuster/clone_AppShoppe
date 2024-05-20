@@ -32,8 +32,15 @@ class _UserInfoState extends State<UserInfo> {
             StreamBuilder<String>(
               stream: viewModel.getImageUrlStream(),
               builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-                if (snapshot.hasError) {
-                  return Text('Error: ${snapshot.error}');
+                if (snapshot.data == '') {
+                  return ClipRRect(
+                    borderRadius: BorderRadius.circular(30),
+                    child: Image.asset(
+                      'assets/img/user_default.jpg',
+                      width: 70,
+                      height: 70,
+                    ),
+                  );
                 }
                 if (snapshot.hasData) {
                   return ClipOval(
@@ -55,7 +62,14 @@ class _UserInfoState extends State<UserInfo> {
                     ),
                   ); // Hiển thị ảnh từ đường dẫn
                 }
-                return const SizedBox();
+                return ClipRRect(
+                  borderRadius: BorderRadius.circular(30),
+                  child: Image.asset(
+                    'assets/img/user_default.jpg',
+                    width: 70,
+                    height: 70,
+                  ),
+                );
               },
             ),
             Positioned(

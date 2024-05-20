@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import '../../../../common/widgets/text.dart';
 import '../../../../provider/list_purchase_order.dart';
-import '../../purchaseOrderPage/purchase_order.dart';
+import '../../deliveryAddress/delivery_address.dart';
 import '../resources/widgets/feature_link.dart';
 
 class MyOrder extends StatefulWidget {
@@ -28,6 +28,20 @@ class _MyOrderState extends State<MyOrder> {
       color: Colors.white,
       child: Column(
         children: [
+          GestureDetector(
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => const DeliveryAddress()));
+            },
+            child: const FeatureLink(
+              icon: Icons.location_on_outlined,
+              colorIcon: Colors.red,
+              title: 'Địa chỉ nhận hàng',
+              description: '',
+              isBorderBottom: true,
+              isBorderTop: false,
+            ),
+          ),
           const FeatureLink(
               icon: Icons.vibration,
               colorIcon: Colors.green,

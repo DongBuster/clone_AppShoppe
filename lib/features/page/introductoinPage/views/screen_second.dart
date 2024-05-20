@@ -5,9 +5,7 @@ import '../../../../constants/global_variables.dart';
 import '../view_models/introduction_page_view_model.dart';
 
 class ScreenSecond extends StatefulWidget {
-  final String userId;
-
-  const ScreenSecond({super.key, required this.userId});
+  const ScreenSecond({super.key});
 
   @override
   State<ScreenSecond> createState() => _ScreenSecondState();
@@ -77,7 +75,7 @@ class _ScreenSecondState extends State<ScreenSecond> {
           onPressed: () {
             IntroductionPageViewModel viewModel =
                 Provider.of<IntroductionPageViewModel>(context, listen: false);
-            viewModel.updateNameUser(controllerInput.text, widget.userId).then(
+            viewModel.updateNameUser(controllerInput.text).then(
                 (_) => ScaffoldMessenger.of(context).showSnackBar(snackBar));
           },
           style: ButtonStyle(

@@ -21,8 +21,6 @@ import '../features/page/purchaseOrderPage/purchase_order.dart';
 import 'custom_transtion_page.dart';
 
 final GlobalKey<NavigatorState> _rootNavigator = GlobalKey(debugLabel: 'root');
-// final GlobalKey<NavigatorState> _shellNavigatorLogin =
-//     GlobalKey(debugLabel: 'shell');
 
 class Routes {
   static GoRouter router = GoRouter(

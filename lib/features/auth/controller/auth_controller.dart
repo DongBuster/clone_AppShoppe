@@ -108,18 +108,18 @@ class AuthController {
           .then(
         (user) {
           // print('return user fjsd: $user');
-          isNewUser(user!.uid).then(
+          Provider.of<IntroductionPageViewModel>(context, listen: false)
+              .setUserId(user!.uid);
+          isNewUser(user.uid).then(
             (isNewUser) {
-              prefs.setBool('islogin', true);
-              prefs.setString('email', controllerUsername.text);
+              // print(isNewUser);
+              // print('auth ${user.uid}');
               if (isNewUser == 'true') {
-                Provider.of<IntroductionPageViewModel>(context, listen: false)
-                    .setUserId(user.uid);
                 context.goNamed(GloblalVariable.introductionPage);
               } else {
-                if (context.mounted) {
-                  context.goNamed(GloblalVariable.homeScreen);
-                }
+                context.goNamed(GloblalVariable.homeScreen);
+                prefs.setBool('islogin', true);
+                prefs.setString('email', controllerUsername.text);
               }
             },
           );

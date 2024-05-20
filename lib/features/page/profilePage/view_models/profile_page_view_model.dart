@@ -75,16 +75,18 @@ class ProfilePageViewModel extends ChangeNotifier {
 
   Future<String> getImageUrlFuture() {
     User? currentUser = FirebaseAuth.instance.currentUser;
-
+    if (currentUser == null) {
+      return Future.value('');
+    }
     return FirebaseFirestore.instance
         .collection('users')
-        .doc(currentUser!.uid)
+        .doc(currentUser.uid)
         .get()
         .then((result) {
-      if (result.data() == null) {
+      Map<String, dynamic> data = result.data() as Map<String, dynamic>;
+      if (data['image'] == 'null') {
         return '';
       } else {
-        Map<String, dynamic> data = result.data() as Map<String, dynamic>;
         return data['image'];
       }
     });
@@ -92,15 +94,18 @@ class ProfilePageViewModel extends ChangeNotifier {
 
   Stream<String> getImageUrlStream() {
     User? currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser == null) {
+      return Stream.value('');
+    }
     return FirebaseFirestore.instance
         .collection('users')
-        .doc(currentUser!.uid)
+        .doc(currentUser.uid)
         .snapshots()
         .map((snapshot) {
-      if (snapshot.data() == null) {
+      Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+      if (data['image'] == 'null') {
         return '';
       } else {
-        Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
         return data['image'];
       }
     });

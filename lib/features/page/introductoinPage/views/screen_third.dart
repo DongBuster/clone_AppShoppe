@@ -44,7 +44,7 @@ class _ScreenThirdState extends State<ScreenThird> {
                           ),
                         );
                       }
-                      if (snapshot.data == null) {
+                      if (snapshot.data == '') {
                         return ClipRRect(
                           borderRadius: BorderRadius.circular(30),
                           child: Image.asset(

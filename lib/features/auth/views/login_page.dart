@@ -113,7 +113,6 @@ class _LoginPageState extends State<LoginPage> {
                       await AuthController.signInWithEmailAndPassword(
                               context, _controllerUsername, _controllerPassword)
                           .then((value) {
-                        context.goNamed(GloblalVariable.introductionPage);
                         ScaffoldMessenger.of(context).hideCurrentSnackBar();
                       });
                     }

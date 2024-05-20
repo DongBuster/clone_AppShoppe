@@ -5,9 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import '../../../provider/list_product_cart.dart';
 import '../../../provider/list_purchase_order.dart';
-import '../../../provider/selected_product_cart.dart';
+import '../deliveryAddress/delivery_address.dart';
 import '../shoppingCartPage/view_models/state_cart_page.dart';
 import 'widgets/item_product.dart';
 
@@ -54,83 +53,93 @@ class _BuyProductScreenState extends State<BuyProductScreen> {
               children: [
                 const Gap(5),
                 //--- pickup address ---
-                Column(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.fromLTRB(12, 8, 8, 12),
-                      // height: 90,
-                      width: MediaQuery.of(context).size.width,
-                      color: Colors.white,
-                      child: const Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Icon(
-                                Icons.location_on_outlined,
-                                size: 18,
-                                color: GloblalVariable.hex_f94f2f,
-                              ),
-                              Gap(10),
-                              Text(
-                                'Địa chỉ nhận hàng',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.black,
-                                ),
-                              )
-                            ],
-                          ),
-                          Gap(5),
-                          Padding(
-                            padding: EdgeInsets.only(left: 27),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => const DeliveryAddress()));
+                  },
+                  child: Column(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.fromLTRB(12, 8, 8, 12),
+                        // height: 90,
+                        width: MediaQuery.of(context).size.width,
+                        color: Colors.white,
+                        child: const Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Trịnh Đông | 84 393924128',
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        color: Colors.black,
-                                      ),
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                    Text(
-                                      '11 Ngách 66 Ngõ 112 Nguyên Xá ',
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        color: Colors.black,
-                                      ),
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                    Text(
-                                      'Phường Minh Khai, Quận Bắc Từ Liêm, Hà Nội',
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        color: Colors.black,
-                                      ),
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ],
-                                ),
                                 Icon(
-                                  Icons.arrow_forward_ios,
-                                  size: 15,
-                                  color: Colors.black54,
+                                  Icons.location_on_outlined,
+                                  size: 18,
+                                  color: GloblalVariable.hex_f94f2f,
                                 ),
+                                Gap(10),
+                                Text(
+                                  'Địa chỉ nhận hàng',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.black,
+                                  ),
+                                )
                               ],
                             ),
-                          )
-                        ],
+                            Gap(5),
+                            Padding(
+                              padding: EdgeInsets.only(left: 27),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Trịnh Đông | 84 393924128',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Colors.black,
+                                        ),
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      Text(
+                                        '11 Ngách 66 Ngõ 112 Nguyên Xá ',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Colors.black,
+                                        ),
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      Text(
+                                        'Phường Minh Khai, Quận Bắc Từ Liêm, Hà Nội',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Colors.black,
+                                        ),
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ],
+                                  ),
+                                  Icon(
+                                    Icons.arrow_forward_ios,
+                                    size: 15,
+                                    color: Colors.black54,
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                    Image.asset('assets/border.png',
-                        width: MediaQuery.of(context).size.width)
-                  ],
+                      Image.asset('assets/border.png',
+                          width: MediaQuery.of(context).size.width)
+                    ],
+                  ),
                 ),
                 //--- list product ---
                 Column(

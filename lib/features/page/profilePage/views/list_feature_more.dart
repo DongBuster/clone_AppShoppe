@@ -87,11 +87,11 @@ class ListFeatureProfilePage extends StatelessWidget {
                     await SharedPreferences.getInstance();
 
                 await Auth.signOut().then((value) {
+                  context.goNamed(GloblalVariable.loginScreen);
                   prefs.setBool('islogin', false);
                   prefs.setString('email', '');
                   Provider.of<IntroductionPageViewModel>(context, listen: false)
                       .setImageFile(null);
-                  context.goNamed(GloblalVariable.authScreen);
                 }).catchError((error) {
                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 });

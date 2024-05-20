@@ -54,7 +54,6 @@ class _HeaderProfilePageState extends State<HeaderProfilePage> {
         Row(
           children: [
             GestureDetector(
-              onTap: null,
               child: const Icon(
                 Icons.settings,
                 size: 20,
