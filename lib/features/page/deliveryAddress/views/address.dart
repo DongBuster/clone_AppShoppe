@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:clone_shoppe/features/page/deliveryAddress/models/address_model.dart';
 import 'package:flutter/material.dart';
 
 import 'edit_address.dart';
@@ -18,12 +19,20 @@ class Address extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final editAddress = AddressModel(
+        name: name,
+        phoneNumber: phoneNumber,
+        address: address,
+        detailAddress: detailAddress);
     return GestureDetector(
       onTap: () {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (_) => EditDeliveryAddress(isChange: true)));
+                builder: (_) => EditDeliveryAddress(
+                      isChange: true,
+                      model: editAddress,
+                    )));
       },
       child: Container(
         padding: const EdgeInsets.fromLTRB(15, 20, 15, 0),

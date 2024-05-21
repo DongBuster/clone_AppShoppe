@@ -1,6 +1,8 @@
 import 'package:clone_shoppe/constants/global_variables.dart';
 import 'package:clone_shoppe/features/auth/views/login_page.dart';
 import 'package:clone_shoppe/features/auth/views/register_page.dart';
+import 'package:clone_shoppe/features/page/deliveryAddress/delivery_address.dart';
+import 'package:clone_shoppe/features/page/deliveryAddress/views/edit_address.dart';
 import 'package:clone_shoppe/features/page/productsSearchPage/products_search.dart';
 import 'package:clone_shoppe/features/page/searchPage/search_page.dart';
 import 'package:clone_shoppe/features/page/shoppingCartPage/shopping_cart_page.dart';
@@ -80,6 +82,15 @@ class Routes {
             ),
           ),
         ],
+      ),
+      GoRoute(
+        path: '/deliveryAddress',
+        name: GloblalVariable.cartScreen,
+        pageBuilder: (context, state) => buildPageWithDefaultTransition(
+          context: context,
+          state: state,
+          child: const DeliveryAddress(),
+        ),
       ),
       StatefulShellRoute.indexedStack(
         pageBuilder: (context, state, navigationShell) {

@@ -3,6 +3,7 @@ import 'package:clone_shoppe/firebase/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'features/page/deliveryAddress/view_models/delivery_address_view_model.dart';
 import 'features/page/detailProductsPage/view_models/detail_product_provider.dart';
 import 'features/page/introductoinPage/view_models/introduction_page_view_model.dart';
 import 'features/page/profilePage/view_models/profile_page_view_model.dart';
@@ -46,19 +47,10 @@ Future<void> main() async {
           create: (_) => CartPageViewModel(),
         ),
         ChangeNotifierProvider(
-          create: (_) => ListProductCart(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => BoughtProduct(),
+          create: (_) => DeliveryAddressViewModel(),
         ),
         ChangeNotifierProvider(
           create: (_) => ListProductPurchureOder(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => CheckBoxCartScreen(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => SelectedProductCart(),
         ),
       ],
       child: const MyApp(),

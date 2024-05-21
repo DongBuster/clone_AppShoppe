@@ -1,55 +1,28 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+import 'package:json_annotation/json_annotation.dart';
+
+@JsonSerializable()
 class AddressModel {
-  String name;
-  String phoneNumber;
-  String address;
-  String detailAddress;
+  late String name;
+  late String phoneNumber;
+  late String address;
+  late String detailAddress;
+  // String id;
   AddressModel({
     required this.name,
     required this.phoneNumber,
     required this.address,
     required this.detailAddress,
+    // required this.id,
   });
 
-  @override
-  bool operator ==(covariant AddressModel other) {
-    if (identical(this, other)) return true;
-
-    return other.name == name &&
-        other.phoneNumber == phoneNumber &&
-        other.address == address &&
-        other.detailAddress == detailAddress;
+  AddressModel.fromJson(Map<String, dynamic> json) {
+    phoneNumber = json['phoneNumber'] ?? '';
+    name = json['name'] ?? '';
+    // id = json['id'] ?? '';
+    address = json['address'] ?? '';
+    detailAddress = json['detailAddress'] ?? '';
   }
-
-  @override
-  int get hashCode {
-    return name.hashCode ^
-        phoneNumber.hashCode ^
-        address.hashCode ^
-        detailAddress.hashCode;
-  }
-
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'name': name,
-      'phoneNumber': phoneNumber,
-      'address': address,
-      'detailAddress': detailAddress,
-    };
-  }
-
-  factory AddressModel.fromMap(Map<String, dynamic> map) {
-    return AddressModel(
-      name: map['name'] as String,
-      phoneNumber: map['phoneNumber'] as String,
-      address: map['address'] as String,
-      detailAddress: map['detailAddress'] as String,
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory AddressModel.fromJson(String source) =>
-      AddressModel.fromMap(json.decode(source) as Map<String, dynamic>);
 }
