@@ -1,18 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:provider/provider.dart';
-
 import 'package:clone_shoppe/features/page/deliveryAddress/delivery_address.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:clone_shoppe/features/page/deliveryAddress/models/address_model.dart';
-
 import '../../../../constants/global_variables.dart';
 import '../data_source/service_api.dart';
 import '../resources/widgets/input_field.dart';
 import '../view_models/delivery_address_view_model.dart';
-import 'select_address.dart';
+import 'selectAddress/select_address.dart';
 
 class EditDeliveryAddress extends StatefulWidget {
   bool isChange;
@@ -39,17 +35,24 @@ class _EditDeliveryAddressState extends State<EditDeliveryAddress> {
   bool isSelected2 = false;
 
   bool isDefaultAddress = false;
+  String defaultAddress = 'Tỉnh/Thành phố, Quận/Huyện, Phường/Xã';
+  @override
+  void initState() {
+    if (widget.model != null) {
+      controllerName.text = widget.model!.name;
+      controllerPhoneNumber.text = widget.model!.phoneNumber;
+      controllerDetailAddress.text = widget.model!.detailAddress;
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     String address =
         Provider.of<DeliveryAddressViewModel>(context, listen: true)
             .stateDeliveryAddress
             .address;
-    if (widget.model != null) {
-      controllerName.text = widget.model!.name;
-      controllerPhoneNumber.text = widget.model!.phoneNumber;
-      controllerDetailAddress.text = widget.model!.detailAddress;
-    }
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -132,7 +135,9 @@ class _EditDeliveryAddressState extends State<EditDeliveryAddress> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  viewModel.stateDeliveryAddress.address,
+                                  widget.model != null
+                                      ? widget.model!.address
+                                      : viewModel.stateDeliveryAddress.address,
                                   style: const TextStyle(
                                     fontSize: 14,
                                     color: Colors.black38,
@@ -291,42 +296,48 @@ class _EditDeliveryAddressState extends State<EditDeliveryAddress> {
               const SizedBox(height: 30),
               Center(
                 child: FilledButton.tonal(
-                  onPressed: () async {
+                  onPressed: () {
                     // DeliveryAddressViewModel viewModel =
                     DeliveryAddressServiceAPI API = DeliveryAddressServiceAPI();
                     User? currentUser = FirebaseAuth.instance.currentUser;
-                    // if (formKey.currentState!.validate()) {
-                    Provider.of<DeliveryAddressViewModel>(context,
-                            listen: false)
-                        .setAddress('Tỉnh/Thành phố, Quận/Huyện, Phường/Xã');
-
-                    // viewModel
-                    //     .setAddress('Tỉnh/Thành phố, Quận/Huyện, Phường/Xã');
-                    AddressModel model = AddressModel(
+                    AddressModel newModel = AddressModel(
                       name: controllerName.text,
                       phoneNumber: controllerPhoneNumber.text,
-                      address: address,
+                      address:
+                          widget.isChange ? widget.model!.address : address,
                       detailAddress: controllerDetailAddress.text,
-                      // id: '',
+                      id: widget.isChange ? widget.model!.id : -1,
                     );
-                    await API.pushAddress(model, currentUser!.uid);
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => const DeliveryAddress()));
-                    // }
+                    //
+                    if (formKey.currentState!.validate()) {
+                      if (widget.model != null &&
+                          newModel.address != defaultAddress) {
+                        API.updateAddress(newModel, currentUser!.uid);
+                        Provider.of<DeliveryAddressViewModel>(context,
+                                listen: false)
+                            .setAddress(defaultAddress);
+                        Navigator.pop(context);
+                      } else if (newModel.address != defaultAddress) {
+                        API.pushAddress(newModel, currentUser!.uid);
+                        Provider.of<DeliveryAddressViewModel>(context,
+                                listen: false)
+                            .setAddress(defaultAddress);
+                        Navigator.pop(context);
+                      }
+                    }
                   },
                   style: ButtonStyle(
                     fixedSize: MaterialStatePropertyAll(
                         Size(MediaQuery.of(context).size.width - 20, 50)),
                     backgroundColor: MaterialStatePropertyAll(
                       formKey.currentState?.validate() == true &&
-                              Provider.of<DeliveryAddressViewModel>(context,
-                                          listen: true)
-                                      .stateDeliveryAddress
-                                      .address !=
-                                  'Tỉnh/Thành phố, Quận/Huyện, Phường/Xã' &&
-                              formKey.currentState?.validate() != null
+                                  Provider.of<DeliveryAddressViewModel>(context,
+                                              listen: true)
+                                          .stateDeliveryAddress
+                                          .address !=
+                                      defaultAddress &&
+                                  formKey.currentState?.validate() != null ||
+                              widget.isChange == true
                           ? Colors.red
                           : Colors.grey.shade400,
                     ),
@@ -336,12 +347,13 @@ class _EditDeliveryAddressState extends State<EditDeliveryAddress> {
                     style: TextStyle(
                       fontSize: 18,
                       color: formKey.currentState?.validate() == true &&
-                              Provider.of<DeliveryAddressViewModel>(context,
-                                          listen: true)
-                                      .stateDeliveryAddress
-                                      .address !=
-                                  'Tỉnh/Thành phố, Quận/Huyện, Phường/Xã' &&
-                              formKey.currentState?.validate() != null
+                                  Provider.of<DeliveryAddressViewModel>(context,
+                                              listen: true)
+                                          .stateDeliveryAddress
+                                          .address !=
+                                      defaultAddress &&
+                                  formKey.currentState?.validate() != null ||
+                              widget.isChange == true
                           ? Colors.white
                           : Colors.black54,
                     ),

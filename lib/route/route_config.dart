@@ -85,7 +85,6 @@ class Routes {
       ),
       GoRoute(
         path: '/deliveryAddress',
-        name: GloblalVariable.cartScreen,
         pageBuilder: (context, state) => buildPageWithDefaultTransition(
           context: context,
           state: state,

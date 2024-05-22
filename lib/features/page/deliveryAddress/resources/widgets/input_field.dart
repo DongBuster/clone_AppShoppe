@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class InputField extends StatefulWidget {
-  final TextEditingController controller;
+  TextEditingController controller;
   final FocusNode focusNode;
   final String hintText;
-  const InputField({
+  InputField({
     Key? key,
     required this.controller,
     required this.focusNode,

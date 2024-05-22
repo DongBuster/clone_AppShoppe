@@ -3,6 +3,7 @@ import 'package:clone_shoppe/features/page/deliveryAddress/models/address_model.
 import 'package:clone_shoppe/features/page/deliveryAddress/views/address.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
 import 'data_source/service_api.dart';
@@ -18,6 +19,7 @@ class DeliveryAddress extends StatefulWidget {
 class _DeliveryAddressState extends State<DeliveryAddress> {
   final DeliveryAddressServiceAPI API = DeliveryAddressServiceAPI();
   User? currentUser = FirebaseAuth.instance.currentUser;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,8 +47,8 @@ class _DeliveryAddressState extends State<DeliveryAddress> {
                 height: MediaQuery.of(context).size.height,
                 color: Colors.grey.shade200,
               ),
-              FutureBuilder(
-                future: API.getListAddress(currentUser!.uid),
+              StreamBuilder(
+                stream: API.getListAddress(currentUser!.uid),
                 builder: (context, snapshot) {
                   // print(snapshot.data);
                   if (snapshot.hasError) {
@@ -60,14 +62,15 @@ class _DeliveryAddressState extends State<DeliveryAddress> {
                           child: Text('Bạn chưa thêm địa chỉ nào !'));
                     }
                     List<AddressModel> listAddress = snapshot.data!;
-                    return Column(
+                    return SizedBox(
+                      height: MediaQuery.of(context).size.height,
+                      child: ListView(
                         children: listAddress
-                            .map((addressModel) => Address(
-                                name: addressModel.name,
-                                phoneNumber: addressModel.phoneNumber,
-                                address: addressModel.address,
-                                detailAddress: addressModel.detailAddress))
-                            .toList());
+                            .map((addressModel) =>
+                                Address(addressModel: addressModel))
+                            .toList(),
+                      ),
+                    );
                   }
                   return Container(
                       width: MediaQuery.of(context).size.width,
@@ -102,7 +105,7 @@ class _DeliveryAddressState extends State<DeliveryAddress> {
                 },
               ),
               Positioned(
-                bottom: 90,
+                bottom: 80,
                 left: 0,
                 right: 0,
                 child: GestureDetector(

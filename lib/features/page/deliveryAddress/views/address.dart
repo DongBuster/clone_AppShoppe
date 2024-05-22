@@ -5,25 +5,14 @@ import 'package:flutter/material.dart';
 import 'edit_address.dart';
 
 class Address extends StatelessWidget {
-  String name;
-  String phoneNumber;
-  String address;
-  String detailAddress;
+  AddressModel addressModel;
   Address({
     Key? key,
-    required this.name,
-    required this.phoneNumber,
-    required this.address,
-    required this.detailAddress,
+    required this.addressModel,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final editAddress = AddressModel(
-        name: name,
-        phoneNumber: phoneNumber,
-        address: address,
-        detailAddress: detailAddress);
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -31,7 +20,7 @@ class Address extends StatelessWidget {
             MaterialPageRoute(
                 builder: (_) => EditDeliveryAddress(
                       isChange: true,
-                      model: editAddress,
+                      model: addressModel,
                     )));
       },
       child: Container(
@@ -49,7 +38,7 @@ class Address extends StatelessWidget {
                 ),
                 children: <TextSpan>[
                   TextSpan(
-                    text: name,
+                    text: addressModel.name,
                   ),
                   const TextSpan(
                     text: ' | ',
@@ -59,7 +48,7 @@ class Address extends StatelessWidget {
                     ),
                   ),
                   TextSpan(
-                    text: phoneNumber,
+                    text: addressModel.phoneNumber,
                     style: const TextStyle(
                       color: Colors.black45,
                       fontSize: 18,
@@ -69,14 +58,14 @@ class Address extends StatelessWidget {
               ),
             ),
             Text(
-              detailAddress,
+              addressModel.detailAddress,
               style: const TextStyle(
                 color: Colors.black45,
                 fontSize: 15,
               ),
             ),
             Text(
-              address,
+              addressModel.address,
               style: const TextStyle(
                 color: Colors.black45,
                 fontSize: 15,

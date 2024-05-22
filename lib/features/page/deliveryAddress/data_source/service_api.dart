@@ -2,26 +2,32 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../models/address_model.dart';
 
 class DeliveryAddressServiceAPI {
-  Future<List<AddressModel>> getListAddress(String uid) async {
-    List<AddressModel> listAddress = [];
-    await Supabase.instance.client
+  Stream<List<AddressModel>> getListAddress(String uid) async* {
+    final supabaseClient = Supabase.instance.client;
+    final addressStream = supabaseClient
         .from('delivery_address')
-        .select()
-        .match({'id': uid}).then((listData) {
-      // print(listData);
-      listAddress = listData.map((e) => AddressModel.fromJson(e)).toList();
-      // print(listAddress.length);
-    });
-    return listAddress;
+        .stream(primaryKey: ['id']).map((listData) =>
+            listData.map((e) => AddressModel.fromJson(e)).toList());
+
+    yield* addressStream;
   }
 
   Future<void> pushAddress(AddressModel model, String uid) async {
     await Supabase.instance.client.from('delivery_address').insert({
-      'id': uid,
+      'userId': uid,
       'name': model.name,
       'phoneNumber': model.phoneNumber,
       'address': model.address,
       'detailAddress': model.detailAddress
     });
+  }
+
+  Future<void> updateAddress(AddressModel model, String uid) async {
+    await Supabase.instance.client.from('delivery_address').update({
+      'name': model.name,
+      'phoneNumber': model.phoneNumber,
+      'address': model.address,
+      'detailAddress': model.detailAddress
+    }).match({'userId': uid, 'id': model.id});
   }
 }

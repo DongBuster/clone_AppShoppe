@@ -127,73 +127,73 @@ class _SearchPageState extends State<SearchPage> {
               ),
             ),
             //--- list search ---
-            Container(
-              height: 300,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(color: Colors.white, boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.2),
-                  spreadRadius: 2,
-                  blurRadius: 1,
-                  offset: const Offset(0, 3),
-                )
-              ]),
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.only(left: 12, right: 12),
-                child: FutureBuilder(
-                  future: _viewModel.search(controllerSearchBar.text),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      return Column(
-                        children: List.generate(snapshot.data!.length, (index) {
-                          List<List<dynamic>> list = [];
-                          for (int i = 0; i < snapshot.data!.length; i++) {
-                            if (list.contains(snapshot.data![i].values.first) ==
-                                false) {
-                              list.add(snapshot.data![i].values.first);
-                            }
-                          }
-                          listIdProductSearch = list
-                              .expand((element) => element)
-                              .toSet()
-                              .toList();
-                          // print(listIdProductSearch);
-                          return GestureDetector(
-                            onTap: () {
-                              List<dynamic> idSelected =
-                                  snapshot.data![index].values.first;
-                              for (int i = 0; i < idSelected.length; i++) {
-                                listIdProductSearch.remove(idSelected[i]);
-                              }
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) {
-                                    return ProductsSearch(
-                                      listIdProductSelected:
-                                          snapshot.data![index].values.first,
-                                      otherSearch: listIdProductSearch,
-                                      nameSearch:
-                                          snapshot.data![index].keys.first,
-                                    );
-                                  },
-                                ),
-                              );
-                            },
-                            child: ListTile(
-                              title: Text(snapshot.data![index].keys.first),
-                            ),
-                          );
-                        }),
-                      );
-                    }
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  },
-                ),
-              ),
-            ),
+            // Container(
+            //   height: 300,
+            //   width: MediaQuery.of(context).size.width,
+            //   decoration: BoxDecoration(color: Colors.white, boxShadow: [
+            //     BoxShadow(
+            //       color: Colors.grey.withOpacity(0.2),
+            //       spreadRadius: 2,
+            //       blurRadius: 1,
+            //       offset: const Offset(0, 3),
+            //     )
+            //   ]),
+            //   child: SingleChildScrollView(
+            //     padding: const EdgeInsets.only(left: 12, right: 12),
+            //     child: FutureBuilder(
+            //       future: _viewModel.search(controllerSearchBar.text),
+            //       builder: (context, snapshot) {
+            //         if (snapshot.hasData) {
+            //           return Column(
+            //             children: List.generate(snapshot.data!.length, (index) {
+            //               List<List<dynamic>> list = [];
+            //               for (int i = 0; i < snapshot.data!.length; i++) {
+            //                 if (list.contains(snapshot.data![i].values.first) ==
+            //                     false) {
+            //                   list.add(snapshot.data![i].values.first);
+            //                 }
+            //               }
+            //               listIdProductSearch = list
+            //                   .expand((element) => element)
+            //                   .toSet()
+            //                   .toList();
+            //               // print(listIdProductSearch);
+            //               return GestureDetector(
+            //                 onTap: () {
+            //                   List<dynamic> idSelected =
+            //                       snapshot.data![index].values.first;
+            //                   for (int i = 0; i < idSelected.length; i++) {
+            //                     listIdProductSearch.remove(idSelected[i]);
+            //                   }
+            //                   Navigator.push(
+            //                     context,
+            //                     MaterialPageRoute(
+            //                       builder: (_) {
+            //                         return ProductsSearch(
+            //                           listIdProductSelected:
+            //                               snapshot.data![index].values.first,
+            //                           otherSearch: listIdProductSearch,
+            //                           nameSearch:
+            //                               snapshot.data![index].keys.first,
+            //                         );
+            //                       },
+            //                     ),
+            //                   );
+            //                 },
+            //                 child: ListTile(
+            //                   title: Text(snapshot.data![index].keys.first),
+            //                 ),
+            //               );
+            //             }),
+            //           );
+            //         }
+            //         return const Center(
+            //           child: CircularProgressIndicator(),
+            //         );
+            //       },
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),

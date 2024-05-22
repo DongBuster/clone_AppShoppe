@@ -6,6 +6,7 @@ import '../../../../../constants/global_variables.dart';
 import '../../models/product_shopping_cart_model.dart';
 import '../../../../../provider/list_product_cart.dart';
 import '../../../../../provider/selected_product_cart.dart';
+import '../../view_models/state_cart_page.dart';
 
 class FixShoppingCart extends StatefulWidget {
   final Widget child;
@@ -33,10 +34,8 @@ class _FixShoppingCartState extends State<FixShoppingCart> {
           ),
           SlidableAction(
             onPressed: (context) {
-              Provider.of<ListProductCart>(context, listen: false)
+              Provider.of<CartPageViewModel>(context, listen: false)
                   .removeProductToCart(widget.model);
-              Provider.of<SelectedProductCart>(context, listen: false)
-                  .removeItemsSelected(widget.model);
             },
             backgroundColor: GloblalVariable.hex_f94f2f,
             foregroundColor: Colors.white,
