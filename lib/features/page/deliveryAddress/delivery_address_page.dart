@@ -61,13 +61,13 @@ class _DeliveryAddressState extends State<DeliveryAddress> {
                       return const Center(
                           child: Text('Bạn chưa thêm địa chỉ nào !'));
                     }
-                    List<AddressModel> listAddress = snapshot.data!;
+                    List<DeliveyAddressModel> listAddress = snapshot.data!;
                     return SizedBox(
                       height: MediaQuery.of(context).size.height,
                       child: ListView(
                         children: listAddress
-                            .map((addressModel) =>
-                                Address(addressModel: addressModel))
+                            .map((addressModel) => DeliveyAddress(
+                                deliveyaddressModel: addressModel))
                             .toList(),
                       ),
                     );

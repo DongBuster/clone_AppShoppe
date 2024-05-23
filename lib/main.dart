@@ -47,7 +47,7 @@ Future<void> main() async {
           create: (_) => CartPageViewModel(),
         ),
         ChangeNotifierProvider(
-          create: (_) => DeliveryAddressViewModel(),
+          create: (_) => DeliveryAddressPageViewModel(),
         ),
         ChangeNotifierProvider(
           create: (_) => ListProductPurchureOder(),

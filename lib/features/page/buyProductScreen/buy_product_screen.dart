@@ -6,7 +6,7 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import '../../../provider/list_purchase_order.dart';
-import '../deliveryAddress/delivery_address.dart';
+import '../deliveryAddress/delivery_address_page.dart';
 import '../shoppingCartPage/view_models/state_cart_page.dart';
 import 'widgets/item_product.dart';
 

@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import '../../../../common/widgets/text.dart';
 import '../../../../provider/list_purchase_order.dart';
-import '../../deliveryAddress/delivery_address.dart';
+import '../../deliveryAddress/delivery_address_page.dart';
 import '../resources/widgets/feature_link.dart';
 
 class MyOrder extends StatefulWidget {

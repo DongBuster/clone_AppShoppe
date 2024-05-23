@@ -1,5 +1,3 @@
-import 'package:camera/camera.dart';
-import 'package:clone_shoppe/common/screens/loading_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../../constants/global_variables.dart';
@@ -35,6 +33,7 @@ class _SelectAddressState extends State<SelectAddress> {
   int _indexStep = 0;
   @override
   Widget build(BuildContext context) {
+    // print(int.parse(idSelectProvinces));
     // print('isSelectProvinces :$isSelectProvinces');
     // print('idSelectDistrict :$isSelectDistrict');
     // print('idSelectWards :$isSelectWards');
@@ -62,6 +61,7 @@ class _SelectAddressState extends State<SelectAddress> {
             color: Colors.grey.shade300,
           ),
           Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               //--- select current location ---
 
@@ -69,8 +69,8 @@ class _SelectAddressState extends State<SelectAddress> {
                   ? Center(
                       child: GestureDetector(
                         onTap: () async {
-                          DeliveryAddressViewModel viewModel =
-                              Provider.of<DeliveryAddressViewModel>(context,
+                          DeliveryAddressPageViewModel viewModel =
+                              Provider.of<DeliveryAddressPageViewModel>(context,
                                   listen: false);
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: const Text('Loading...'),
@@ -96,8 +96,8 @@ class _SelectAddressState extends State<SelectAddress> {
                         },
                         child: Container(
                           margin: const EdgeInsets.fromLTRB(0, 20, 0, 25),
-                          width: MediaQuery.of(context).size.width - 40,
-                          height: 50,
+                          width: MediaQuery.of(context).size.width - 60,
+                          height: 45,
                           decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(3),
@@ -135,109 +135,149 @@ class _SelectAddressState extends State<SelectAddress> {
                       ),
                     )
                   : const SizedBox(),
-              //--- list select location ---
 
-              isSelectProvinces == true ||
-                      isSelectDistrict == true ||
-                      isSelectWards == true
-                  ? Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Column(
-                        children: [
-                          const Row(
+              //--- Stepper complete ---
+              isSelectLocation == true
+                  ? Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: 20, right: 20, top: 10),
+                          child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
                                 'Khu vực được chọn',
                                 style: TextStyle(
                                   fontSize: 16,
-                                  color: Colors.black45,
+                                  color: Colors.grey.shade600,
                                 ),
                               ),
-                              Text(
-                                'Thiết lập lại',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.red,
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    isSelectLocation = false;
+                                    isSelectProvinces = false;
+                                    isSelectDistrict = false;
+                                    isSelectWards = false;
+                                    nameSelectProvinces = '';
+                                    idSelectProvinces = '';
+                                  });
+                                },
+                                child: const Text(
+                                  'Thiết lập lại',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.red,
+                                  ),
                                 ),
                               )
                             ],
                           ),
-                          //---- -----
-                          Theme(
-                            data: ThemeData(
-                              colorScheme: Theme.of(context)
-                                  .colorScheme
-                                  .copyWith(
-                                      primary: GloblalVariable.hex_f94f2f
-                                          .withOpacity(0.8)),
-                            ),
-                            child: Stepper(
-                              currentStep: 0,
-                              margin: EdgeInsets.zero,
-                              physics: const ClampingScrollPhysics(),
-                              onStepTapped: (index) {
-                                setState(() {
-                                  _indexStep = index;
-                                });
-                              },
-                              connectorThickness: 3,
-                              controlsBuilder: (context, details) {
-                                return const Row();
-                              },
-                              steps: [
-                                Step(
-                                  isActive: true,
-                                  state: StepState.complete,
-                                  title: Text(
-                                    nameSelectProvinces,
-                                    style: const TextStyle(
-                                      fontSize: 16,
-                                      color: Colors.black87,
-                                    ),
-                                  ),
-                                  content: const SizedBox(),
-                                ),
-                                Step(
-                                  isActive: _indexStep >= 1 ? true : false,
-                                  state: _indexStep >= 1
-                                      ? StepState.complete
-                                      : StepState.indexed,
-                                  title: Text(
-                                    nameSelectDistrict != ''
-                                        ? nameSelectDistrict
-                                        : 'Quận/Huyện',
-                                    style: const TextStyle(
-                                      fontSize: 16,
-                                      color: Colors.black87,
-                                    ),
-                                  ),
-                                  content: const SizedBox(),
-                                ),
-                                Step(
-                                  isActive: _indexStep >= 2 ? true : false,
-                                  state: _indexStep >= 2
-                                      ? StepState.complete
-                                      : StepState.indexed,
-                                  title: Text(
-                                    nameSelectWards != ''
-                                        ? nameSelectWards
-                                        : 'Phường Xã',
-                                    style: const TextStyle(
-                                      fontSize: 16,
-                                      color: Colors.black87,
-                                    ),
-                                  ),
-                                  content: const SizedBox(),
-                                ),
-                              ],
-                            ),
+                        ),
+                        //----- ----
+                        Theme(
+                          data: ThemeData(
+                            colorScheme: Theme.of(context).colorScheme.copyWith(
+                                primary: GloblalVariable.hex_f94f2f
+                                    .withOpacity(0.8)),
                           ),
-                        ],
-                      ),
+                          child: Stepper(
+                            currentStep: 0,
+                            margin: EdgeInsets.zero,
+                            physics: const ClampingScrollPhysics(),
+                            onStepTapped: (index) {
+                              setState(() {
+                                _indexStep = index;
+                                if (_indexStep == 0) {
+                                  isSelectDistrict = false;
+                                  nameSelectDistrict = '';
+                                  idSelectDistrict = '';
+                                } else if (_indexStep == 1) {
+                                  isSelectDistrict = true;
+                                  isSelectWards = false;
+                                  nameSelectWards = '';
+                                  idSelectWards = '';
+                                } else {
+                                  isSelectDistrict = false;
+                                  isSelectWards = true;
+                                }
+                              });
+                            },
+                            connectorThickness: 2,
+                            controlsBuilder: (context, details) {
+                              return const Row();
+                            },
+                            steps: [
+                              Step(
+                                isActive: true,
+                                state: StepState.complete,
+                                title: Text(
+                                  nameSelectProvinces,
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.black87,
+                                  ),
+                                ),
+                                content: const SizedBox(),
+                              ),
+                              Step(
+                                isActive: _indexStep >= 1 ? true : false,
+                                state: _indexStep >= 1
+                                    ? StepState.complete
+                                    : StepState.indexed,
+                                title: Text(
+                                  nameSelectDistrict != ''
+                                      ? nameSelectDistrict
+                                      : 'Quận/Huyện',
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.black87,
+                                  ),
+                                ),
+                                content: const SizedBox(),
+                              ),
+                              Step(
+                                isActive: _indexStep >= 2 ? true : false,
+                                state: _indexStep >= 2
+                                    ? StepState.complete
+                                    : StepState.indexed,
+                                title: Text(
+                                  nameSelectWards != ''
+                                      ? nameSelectWards
+                                      : 'Phường Xã',
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.black87,
+                                  ),
+                                ),
+                                content: const SizedBox(),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     )
                   : const SizedBox(),
+              //--- title list select location ---
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10, left: 20),
+                child: Text(
+                  isSelectProvinces == false &&
+                          isSelectDistrict == false &&
+                          isSelectWards == false
+                      ? 'Tỉnh/Thành phố'
+                      : isSelectDistrict == true
+                          ? 'Quận/Huyện/Thành phố'
+                          : 'Phường/Xã',
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.grey.shade600,
+                  ),
+                ),
+              ),
 
+              //--- list select location ---
               isSelectProvinces == false &&
                       isSelectDistrict == false &&
                       isSelectWards == false
@@ -257,7 +297,6 @@ class _SelectAddressState extends State<SelectAddress> {
                                     setState(() {
                                       isSelectLocation = true;
                                       isSelectDistrict = true;
-                                      // isSelectProvinces = true;
                                       idSelectProvinces = provinces[index].id;
                                       nameSelectProvinces =
                                           provinces[index].name;
@@ -271,15 +310,36 @@ class _SelectAddressState extends State<SelectAddress> {
                                     decoration: BoxDecoration(
                                       color: Colors.white,
                                       border: Border(
-                                          bottom: BorderSide(
-                                              color: Colors.grey.shade300)),
-                                    ),
-                                    child: Text(
-                                      provinces[index].name,
-                                      style: const TextStyle(
-                                        fontSize: 18,
-                                        color: Colors.black,
+                                        bottom: BorderSide(
+                                            color: Colors.grey.shade300),
                                       ),
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          provinces[index].name,
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            color: provinces[index].id ==
+                                                    idSelectProvinces
+                                                ? Colors.red
+                                                : Colors.black,
+                                          ),
+                                        ),
+                                        provinces[index].id == idSelectProvinces
+                                            ? const Padding(
+                                                padding:
+                                                    EdgeInsets.only(right: 15),
+                                                child: Icon(
+                                                  Icons.check,
+                                                  size: 22,
+                                                  color: Colors.red,
+                                                ),
+                                              )
+                                            : const SizedBox(),
+                                      ],
                                     ),
                                   ),
                                 );
@@ -325,12 +385,32 @@ class _SelectAddressState extends State<SelectAddress> {
                                           bottom: BorderSide(
                                               color: Colors.grey.shade300)),
                                     ),
-                                    child: Text(
-                                      districts[index].name,
-                                      style: const TextStyle(
-                                        fontSize: 18,
-                                        color: Colors.black,
-                                      ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          districts[index].name,
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            color: districts[index].id ==
+                                                    idSelectDistrict
+                                                ? Colors.red
+                                                : Colors.black,
+                                          ),
+                                        ),
+                                        districts[index].id == idSelectDistrict
+                                            ? const Padding(
+                                                padding:
+                                                    EdgeInsets.only(right: 15),
+                                                child: Icon(
+                                                  Icons.check,
+                                                  size: 22,
+                                                  color: Colors.red,
+                                                ),
+                                              )
+                                            : const SizedBox(),
+                                      ],
                                     ),
                                   ),
                                 );
@@ -364,7 +444,7 @@ class _SelectAddressState extends State<SelectAddress> {
                                       nameSelectWards = wards[index].name!;
                                       _indexStep = 2;
                                     });
-                                    Provider.of<DeliveryAddressViewModel>(
+                                    Provider.of<DeliveryAddressPageViewModel>(
                                             context,
                                             listen: false)
                                         .setAddress(
@@ -382,12 +462,32 @@ class _SelectAddressState extends State<SelectAddress> {
                                           bottom: BorderSide(
                                               color: Colors.grey.shade300)),
                                     ),
-                                    child: Text(
-                                      wards[index].name!,
-                                      style: const TextStyle(
-                                        fontSize: 18,
-                                        color: Colors.black,
-                                      ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          wards[index].name!,
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            color:
+                                                wards[index].id == idSelectWards
+                                                    ? Colors.red
+                                                    : Colors.black,
+                                          ),
+                                        ),
+                                        wards[index].id == idSelectWards
+                                            ? const Padding(
+                                                padding:
+                                                    EdgeInsets.only(right: 15),
+                                                child: Icon(
+                                                  Icons.check,
+                                                  size: 22,
+                                                  color: Colors.red,
+                                                ),
+                                              )
+                                            : const SizedBox(),
+                                      ],
                                     ),
                                   ),
                                 );

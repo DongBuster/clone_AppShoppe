@@ -1,18 +1,27 @@
+import 'package:clone_shoppe/features/page/deliveryAddress/models/address_model.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 
 import '../models/delivery_address_model.dart';
 
-class DeliveryAddressViewModel extends ChangeNotifier {
+class DeliveryAddressPageViewModel extends ChangeNotifier {
   DeliveryAddressModel stateDeliveryAddress = DeliveryAddressModel.itinial();
 
+  //--- state ----
   setAddress(String address) {
     stateDeliveryAddress.address = address;
     // print( stateDeliveryAddress.address);
     notifyListeners();
   }
 
+  setDeliveryAddress(DeliveyAddressModel addressModel) {
+    stateDeliveryAddress.defaultDeliveryAddressModel = addressModel;
+    // print( stateDeliveryAddress.address);
+    notifyListeners();
+  }
+
+  //--- logic  ---
   Future<Placemark> getAddress(Position currentPosition) async {
     List<Placemark> placemarks =
         // await placemarkFromCoordinates(21.0528585, 105.7397059);

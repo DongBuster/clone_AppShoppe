@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 
 import 'edit_address.dart';
 
-class Address extends StatelessWidget {
-  AddressModel addressModel;
-  Address({
+class DeliveyAddress extends StatelessWidget {
+  DeliveyAddressModel deliveyaddressModel;
+  DeliveyAddress({
     Key? key,
-    required this.addressModel,
+    required this.deliveyaddressModel,
   }) : super(key: key);
 
   @override
@@ -16,12 +16,14 @@ class Address extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (_) => EditDeliveryAddress(
-                      isChange: true,
-                      model: addressModel,
-                    )));
+          context,
+          MaterialPageRoute(
+            builder: (_) => EditDeliveryAddress(
+              isChange: true,
+              model: deliveyaddressModel,
+            ),
+          ),
+        );
       },
       child: Container(
         padding: const EdgeInsets.fromLTRB(15, 20, 15, 0),
@@ -38,7 +40,7 @@ class Address extends StatelessWidget {
                 ),
                 children: <TextSpan>[
                   TextSpan(
-                    text: addressModel.name,
+                    text: deliveyaddressModel.name,
                   ),
                   const TextSpan(
                     text: ' | ',
@@ -48,7 +50,7 @@ class Address extends StatelessWidget {
                     ),
                   ),
                   TextSpan(
-                    text: addressModel.phoneNumber,
+                    text: deliveyaddressModel.phoneNumber,
                     style: const TextStyle(
                       color: Colors.black45,
                       fontSize: 18,
@@ -58,20 +60,77 @@ class Address extends StatelessWidget {
               ),
             ),
             Text(
-              addressModel.detailAddress,
+              deliveyaddressModel.detailAddress,
               style: const TextStyle(
                 color: Colors.black45,
                 fontSize: 15,
               ),
             ),
             Text(
-              addressModel.address,
+              deliveyaddressModel.address,
               style: const TextStyle(
                 color: Colors.black45,
                 fontSize: 15,
               ),
             ),
+            const SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                deliveyaddressModel.isDefaultDeliveryAddress
+                    ? Container(
+                        height: 25,
+                        width: 85,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          border: Border.all(
+                            color: Colors.red,
+                            width: 1,
+                          ),
+                          color: Colors.white,
+                        ),
+                        child: const Center(
+                          child: Text(
+                            'Mặc định',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.red,
+                            ),
+                          ),
+                        ),
+                      )
+                    : const SizedBox(),
+                deliveyaddressModel.isDefaultDeliveryAddress
+                    ? const SizedBox(width: 10)
+                    : const SizedBox(),
+                deliveyaddressModel.typeDeliveyAddress != ''
+                    ? Container(
+                        height: 25,
+                        width: 90,
+                        margin: const EdgeInsets.only(),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          border: Border.all(
+                            color: Colors.black45,
+                            width: 1,
+                          ),
+                          color: Colors.white,
+                        ),
+                        child: Center(
+                          child: Text(
+                            deliveyaddressModel.typeDeliveyAddress,
+                            style: const TextStyle(
+                              fontSize: 14,
+                              color: Colors.black45,
+                            ),
+                          ),
+                        ),
+                      )
+                    : const SizedBox(),
+              ],
+            ),
             const SizedBox(height: 25),
+            //--- border bottom ---
             Container(
               padding: const EdgeInsets.only(left: 10, right: 10),
               decoration: BoxDecoration(

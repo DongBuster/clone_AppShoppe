@@ -42,7 +42,7 @@ class _InputFieldState extends State<InputField> {
         controller: widget.controller,
         cursorColor: Colors.blue,
         cursorWidth: 1,
-        style: const TextStyle(fontSize: 14),
+        style: TextStyle(fontSize: 16, color: Colors.black.withOpacity(0.7)),
 
         //--- ---
         decoration: InputDecoration(
@@ -52,7 +52,7 @@ class _InputFieldState extends State<InputField> {
           ),
           contentPadding: const EdgeInsets.only(top: 18, bottom: 0, left: 20),
           hintText: widget.hintText,
-          hintStyle: const TextStyle(fontSize: 14, color: Colors.black38),
+          hintStyle: const TextStyle(fontSize: 16, color: Colors.black38),
           filled: true,
           fillColor: Colors.white,
         ),
