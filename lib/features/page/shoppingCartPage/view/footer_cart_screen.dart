@@ -119,8 +119,6 @@ class _FooterCartScreenState extends State<FooterCartScreen> {
                   if (productChosed == 0) {
                     ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   } else {
-                    Provider.of<BoughtProduct>(context, listen: false)
-                        .addToListBoughtProduct(listSelected);
                     context.pushNamed(GloblalVariable.buyProductScreen);
                   }
                 },

@@ -1,12 +1,11 @@
-import 'package:clone_shoppe/features/page/deliveryAddress/models/address_model.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
-
-import '../models/delivery_address_model.dart';
+import '../models/delivery_address_page_model.dart';
 
 class DeliveryAddressPageViewModel extends ChangeNotifier {
-  DeliveryAddressModel stateDeliveryAddress = DeliveryAddressModel.itinial();
+  DeliveryAddressPageModel stateDeliveryAddress =
+      DeliveryAddressPageModel.itinial();
 
   //--- state ----
   setAddress(String address) {
@@ -15,9 +14,8 @@ class DeliveryAddressPageViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  setDeliveryAddress(DeliveyAddressModel addressModel) {
+  setDefaultDeliveryAddress(Map<String, dynamic> addressModel) {
     stateDeliveryAddress.defaultDeliveryAddressModel = addressModel;
-    // print( stateDeliveryAddress.address);
     notifyListeners();
   }
 

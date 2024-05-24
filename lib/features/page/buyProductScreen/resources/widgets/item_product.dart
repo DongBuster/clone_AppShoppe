@@ -2,9 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
-import '../../../../constants/global_variables.dart';
-import '../../shoppingCartPage/models/product_shopping_cart_model.dart';
-import '../../profilePage/resources/widgets/feature_link.dart';
+import '../../../../../constants/global_variables.dart';
+import '../../../shoppingCartPage/models/product_shopping_cart_model.dart';
+import '../../../profilePage/resources/widgets/feature_link.dart';
 
 class ItemProduct extends StatelessWidget {
   final ProductShoppingCartModel model;

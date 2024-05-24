@@ -3,6 +3,7 @@ import 'package:clone_shoppe/firebase/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'features/page/buyProductScreen/view_models/buy_product_view_model.dart';
 import 'features/page/deliveryAddress/view_models/delivery_address_view_model.dart';
 import 'features/page/detailProductsPage/view_models/detail_product_provider.dart';
 import 'features/page/introductoinPage/view_models/introduction_page_view_model.dart';
@@ -45,6 +46,9 @@ Future<void> main() async {
         ),
         ChangeNotifierProvider(
           create: (_) => CartPageViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => BuyProductPageViewModel(),
         ),
         ChangeNotifierProvider(
           create: (_) => DeliveryAddressPageViewModel(),

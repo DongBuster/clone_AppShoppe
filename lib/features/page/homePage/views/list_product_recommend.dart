@@ -20,38 +20,39 @@ class _ListProductRecommendState extends State<ListProductRecommend> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return
+        // Container();
 
-    //  FutureBuilder<List<Product>>(
-    //   future: homePageService.getProducts(),
-    //   builder: (context, snapshot) {
-    //     if (snapshot.hasData) {
-    //       final listProduct = snapshot.data;
+        FutureBuilder<List<Product>>(
+      future: homePageService.getProducts(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          final listProduct = snapshot.data;
 
-    //       return GridView.builder(
-    //         padding: const EdgeInsets.only(top: 5),
-    //         shrinkWrap: true,
-    //         physics: const NeverScrollableScrollPhysics(),
-    //         scrollDirection: Axis.vertical,
-    //         itemCount: listProduct!.length,
-    //         itemBuilder: (context, index) => ProductRecommend(
-    //           productsRecommend: listProduct[index],
-    //         ),
-    //         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-    //           crossAxisCount: 2,
-    //           mainAxisExtent: 275,
-    //           mainAxisSpacing: 10,
-    //           // crossAxisSpacing: 5,
-    //         ),
-    //       );
-    //     } else if (snapshot.hasError) {
-    //       // print('no data');
-    //       // print(snapshot.data);
-    //       final errorMessage = snapshot.error.toString();
-    //       return Text('Error: $errorMessage');
-    //     }
-    //     return const CircularProgressIndicator();
-    //   },
-    // );
+          return GridView.builder(
+            padding: const EdgeInsets.only(top: 5),
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            scrollDirection: Axis.vertical,
+            itemCount: listProduct!.length,
+            itemBuilder: (context, index) => ProductRecommend(
+              productsRecommend: listProduct[index],
+            ),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisExtent: 275,
+              mainAxisSpacing: 10,
+              // crossAxisSpacing: 5,
+            ),
+          );
+        } else if (snapshot.hasError) {
+          // print('no data');
+          // print(snapshot.data);
+          final errorMessage = snapshot.error.toString();
+          return Text('Error: $errorMessage');
+        }
+        return const CircularProgressIndicator();
+      },
+    );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:clone_shoppe/constants/global_variables.dart';
+import 'package:clone_shoppe/features/page/deliveryAddress/delivery_address_page.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:badges/badges.dart' as badges;
@@ -6,7 +7,6 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import '../../../../common/widgets/text.dart';
 import '../../../../provider/list_purchase_order.dart';
-import '../../deliveryAddress/delivery_address_page.dart';
 import '../resources/widgets/feature_link.dart';
 
 class MyOrder extends StatefulWidget {
@@ -30,8 +30,12 @@ class _MyOrderState extends State<MyOrder> {
         children: [
           GestureDetector(
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (_) => const DeliveryAddress()));
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => DeliveryAddressPage(),
+                ),
+              );
             },
             child: const FeatureLink(
               icon: Icons.location_on_outlined,

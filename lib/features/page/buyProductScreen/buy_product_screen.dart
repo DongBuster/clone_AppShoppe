@@ -1,14 +1,19 @@
 import 'package:clone_shoppe/constants/global_variables.dart';
 import 'package:clone_shoppe/features/page/shoppingCartPage/models/product_shopping_cart_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import '../../../provider/list_purchase_order.dart';
 import '../deliveryAddress/delivery_address_page.dart';
+import '../deliveryAddress/models/delivery_address_model.dart';
+import '../deliveryAddress/view_models/delivery_address_view_model.dart';
 import '../shoppingCartPage/view_models/state_cart_page.dart';
-import 'widgets/item_product.dart';
+import 'resources/widgets/item_product.dart';
+import 'view_models/buy_product_view_model.dart';
 
 class BuyProductScreen extends StatefulWidget {
   const BuyProductScreen({super.key});
@@ -18,7 +23,10 @@ class BuyProductScreen extends StatefulWidget {
 }
 
 class _BuyProductScreenState extends State<BuyProductScreen> {
+  User? currentUser = FirebaseAuth.instance.currentUser;
   bool isUseCoin = false;
+
+  BuyProductPageViewModel viewModel = BuyProductPageViewModel();
   @override
   Widget build(BuildContext context) {
     List<ProductShoppingCartModel> listSelected =
@@ -28,6 +36,7 @@ class _BuyProductScreenState extends State<BuyProductScreen> {
     String totalPrice = Provider.of<CartPageViewModel>(context, listen: false)
         .stateCartPage
         .totalPayment;
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -56,20 +65,23 @@ class _BuyProductScreenState extends State<BuyProductScreen> {
                 GestureDetector(
                   onTap: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => const DeliveryAddress()));
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) =>
+                            DeliveryAddressPage(fromToPage: 'buyProductPage'),
+                      ),
+                    );
                   },
                   child: Column(
                     children: [
                       Container(
                         padding: const EdgeInsets.fromLTRB(12, 8, 8, 12),
-                        // height: 90,
                         width: MediaQuery.of(context).size.width,
                         color: Colors.white,
-                        child: const Column(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Row(
+                            const Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Icon(
@@ -87,57 +99,127 @@ class _BuyProductScreenState extends State<BuyProductScreen> {
                                 )
                               ],
                             ),
-                            Gap(5),
-                            Padding(
-                              padding: EdgeInsets.only(left: 27),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                            const Gap(5),
+                            FutureBuilder(
+                              future: viewModel
+                                  .getDefaultDeliveryAddress(currentUser!.uid),
+                              builder: (context, snapshot) {
+                                var deliveyAddressModel = snapshot.data;
+                                if (snapshot.hasData) {
+                                  return deliveyAddressModel!.id != -1
+                                      ? Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 27),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    '${deliveyAddressModel.name} | ${deliveyAddressModel.phoneNumber}',
+                                                    style: const TextStyle(
+                                                      fontSize: 12,
+                                                      color: Colors.black,
+                                                    ),
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                  ),
+                                                  Text(
+                                                    deliveyAddressModel
+                                                        .detailAddress,
+                                                    style: const TextStyle(
+                                                      fontSize: 12,
+                                                      color: Colors.black,
+                                                    ),
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                  ),
+                                                  Container(
+                                                    constraints:
+                                                        const BoxConstraints(
+                                                      minHeight: 15,
+                                                      maxHeight: 40,
+                                                      maxWidth: 300,
+                                                    ),
+                                                    child: Text(
+                                                      deliveyAddressModel
+                                                          .address,
+                                                      style: const TextStyle(
+                                                        fontSize: 12,
+                                                        color: Colors.black,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              const Icon(
+                                                Icons.arrow_forward_ios,
+                                                size: 15,
+                                                color: Colors.black54,
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                      : Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 27, top: 10, bottom: 10),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                'Nhấn để chọn địa chỉ',
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: Colors.red
+                                                      .withOpacity(0.8),
+                                                ),
+                                              ),
+                                              const Icon(
+                                                Icons.arrow_forward_ios,
+                                                size: 15,
+                                                color: Colors.black54,
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                }
+                                return Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 27, top: 10, bottom: 10),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        'Trịnh Đông | 84 393924128',
+                                        'Nhấn để chọn địa chỉ',
                                         style: TextStyle(
-                                          fontSize: 12,
-                                          color: Colors.black,
+                                          fontSize: 14,
+                                          color: Colors.red.withOpacity(0.8),
                                         ),
-                                        overflow: TextOverflow.ellipsis,
                                       ),
-                                      Text(
-                                        '11 Ngách 66 Ngõ 112 Nguyên Xá ',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          color: Colors.black,
-                                        ),
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                      Text(
-                                        'Phường Minh Khai, Quận Bắc Từ Liêm, Hà Nội',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          color: Colors.black,
-                                        ),
-                                        overflow: TextOverflow.ellipsis,
+                                      const Icon(
+                                        Icons.arrow_forward_ios,
+                                        size: 15,
+                                        color: Colors.black54,
                                       ),
                                     ],
                                   ),
-                                  Icon(
-                                    Icons.arrow_forward_ios,
-                                    size: 15,
-                                    color: Colors.black54,
-                                  ),
-                                ],
-                              ),
-                            )
+                                );
+                              },
+                            ),
                           ],
                         ),
                       ),
-                      Image.asset('assets/border.png',
-                          width: MediaQuery.of(context).size.width)
+                      Image.asset(
+                        'assets/border.png',
+                        width: MediaQuery.of(context).size.width,
+                      ),
                     ],
                   ),
                 ),
@@ -503,24 +585,13 @@ class _BuyProductScreenState extends State<BuyProductScreen> {
             GestureDetector(
               onTap: () {
                 context.goNamed(GloblalVariable.purchaseOrderScreen);
-
-                // Provider.of<BoughtProduct>(context, listen: false)
-                //     .removeProducts(listSelected);
                 Provider.of<ListProductPurchureOder>(context, listen: false)
                     .addToList(listSelected);
-                // print(listSelected);
-                // print(listSelected.length);
-                // for (var model in listSelected) {
                 Provider.of<CartPageViewModel>(context, listen: false)
                     .removeListProductToCart();
                 Provider.of<CartPageViewModel>(context, listen: false)
                     .stateCartPage
                     .totalPayment = '0';
-                // Provider.of<SelectedProductCart>(context, listen: false)
-                //     .removeListItemsSelected(listSelected);
-                // }
-                // if (context.mounted) {
-                // }
               },
               child: Container(
                 width: 100,

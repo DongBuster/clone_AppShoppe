@@ -88,7 +88,7 @@ class Routes {
         pageBuilder: (context, state) => buildPageWithDefaultTransition(
           context: context,
           state: state,
-          child: const DeliveryAddress(),
+          child: DeliveryAddressPage(),
         ),
       ),
       StatefulShellRoute.indexedStack(

@@ -1,20 +1,17 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:clone_shoppe/features/page/deliveryAddress/delivery_address_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
-import 'package:clone_shoppe/features/page/deliveryAddress/models/address_model.dart';
 import '../../../../constants/global_variables.dart';
+import '../../buyProductScreen/view_models/buy_product_view_model.dart';
 import '../data_source/service_api.dart';
+import '../models/delivery_address_model.dart';
 import '../resources/widgets/input_field.dart';
 import '../view_models/delivery_address_view_model.dart';
 import 'selectAddress/select_address.dart';
 
 class EditDeliveryAddress extends StatefulWidget {
   bool isChange;
-  final DeliveyAddressModel? model;
+  final DeliveryAddressModel? model;
   EditDeliveryAddress({
     Key? key,
     required this.isChange,
@@ -327,7 +324,7 @@ class _EditDeliveryAddressState extends State<EditDeliveryAddress> {
                       DeliveryAddressServiceAPI API =
                           DeliveryAddressServiceAPI();
                       User? currentUser = FirebaseAuth.instance.currentUser;
-                      DeliveyAddressModel newModel = DeliveyAddressModel(
+                      DeliveryAddressModel newModel = DeliveryAddressModel(
                         name: controllerName.text,
                         phoneNumber: controllerPhoneNumber.text,
                         address:
@@ -347,7 +344,12 @@ class _EditDeliveryAddressState extends State<EditDeliveryAddress> {
                         if (widget.model == null &&
                             newModel.address != defaultAddress) {
                           API.pushDeliveryAddress(newModel, currentUser!.uid);
-
+                          // if (_isDefaultDeliveryAddress) {
+                          //   Provider.of<BuyProductPageViewModel>(context,
+                          //           listen: false)
+                          //       .setdeliveyAddress(newModel);
+                          //   print('here1');
+                          // }
                           Provider.of<DeliveryAddressPageViewModel>(context,
                                   listen: false)
                               .setAddress(defaultAddress);
@@ -355,6 +357,12 @@ class _EditDeliveryAddressState extends State<EditDeliveryAddress> {
                         } else if (widget.model != null &&
                             newModel.address != defaultAddress) {
                           API.updateDeliveryAddress(newModel, currentUser!.uid);
+                          // if (_isDefaultDeliveryAddress) {
+                          //   Provider.of<BuyProductPageViewModel>(context,
+                          //           listen: false)
+                          //       .setdeliveyAddress(newModel);
+                          //   print('here2');
+                          // }
                           Provider.of<DeliveryAddressPageViewModel>(context,
                                   listen: false)
                               .setAddress(defaultAddress);
