@@ -296,22 +296,25 @@ class _ProductsSearchState extends State<ProductsSearch> {
                   const Gap(8),
                   FutureBuilder<List<Product>>(
                     future: _viewModel.loadProductSearch(
-                        widget.listIdProductSelected, widget.otherSearch),
+                      widget.listIdProductSelected,
+                      widget.otherSearch,
+                    ),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
                         var listProduct = snapshot.data;
                         return Wrap(
-                            runSpacing: 10,
-                            spacing: 0,
-                            children: listProduct!
-                                .map((product) => ProductView(
-                                      name: product.name,
-                                      urlImage: product.image[0],
-                                      percentSale: product.percentSale,
-                                      price: product.classify.values.first,
-                                      quantitySold: product.quantitySold,
-                                    ))
-                                .toList());
+                          runSpacing: 10,
+                          spacing: 0,
+                          children: listProduct!
+                              .map((product) => ProductView(
+                                    name: product.name,
+                                    urlImage: product.image[0],
+                                    percentSale: product.percentSale,
+                                    price: product.classify.values.first,
+                                    quantitySold: product.quantitySold,
+                                  ))
+                              .toList(),
+                        );
                       }
                       return const LoadingScreen();
                     },

@@ -104,113 +104,162 @@ class _BuyProductScreenState extends State<BuyProductScreen> {
                               future: viewModel
                                   .getDefaultDeliveryAddress(currentUser!.uid),
                               builder: (context, snapshot) {
-                                var deliveyAddressModel = snapshot.data;
-                                if (snapshot.hasData) {
-                                  return deliveyAddressModel!.id != -1
-                                      ? Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 27),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Column(
+                                // print(snapshot.data);
+                                if (snapshot.hasError) {
+                                  return Consumer<BuyProductPageViewModel>(
+                                    builder: (context, viewModel, child) {
+                                      var deliveyAddressModel =
+                                          viewModel.deliveyAddressModel;
+                                      // print(deliveyAddressModel.id);
+                                      return viewModel.deliveyAddressModel.id !=
+                                              -1
+                                          ? Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 27),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
                                                 crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                                    CrossAxisAlignment.center,
                                                 children: [
-                                                  Text(
-                                                    '${deliveyAddressModel.name} | ${deliveyAddressModel.phoneNumber}',
-                                                    style: const TextStyle(
-                                                      fontSize: 12,
-                                                      color: Colors.black,
-                                                    ),
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                  ),
-                                                  Text(
-                                                    deliveyAddressModel
-                                                        .detailAddress,
-                                                    style: const TextStyle(
-                                                      fontSize: 12,
-                                                      color: Colors.black,
-                                                    ),
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                  ),
-                                                  Container(
-                                                    constraints:
-                                                        const BoxConstraints(
-                                                      minHeight: 15,
-                                                      maxHeight: 40,
-                                                      maxWidth: 300,
-                                                    ),
-                                                    child: Text(
-                                                      deliveyAddressModel
-                                                          .address,
-                                                      style: const TextStyle(
-                                                        fontSize: 12,
-                                                        color: Colors.black,
+                                                  Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        '${deliveyAddressModel.name} | ${deliveyAddressModel.phoneNumber}',
+                                                        style: const TextStyle(
+                                                          fontSize: 12,
+                                                          color: Colors.black,
+                                                        ),
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
                                                       ),
-                                                    ),
+                                                      Text(
+                                                        deliveyAddressModel
+                                                            .detailAddress,
+                                                        style: const TextStyle(
+                                                          fontSize: 12,
+                                                          color: Colors.black,
+                                                        ),
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                      ),
+                                                      Container(
+                                                        constraints:
+                                                            const BoxConstraints(
+                                                          minHeight: 15,
+                                                          maxHeight: 40,
+                                                          maxWidth: 300,
+                                                        ),
+                                                        child: Text(
+                                                          deliveyAddressModel
+                                                              .address,
+                                                          style:
+                                                              const TextStyle(
+                                                            fontSize: 12,
+                                                            color: Colors.black,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  const Icon(
+                                                    Icons.arrow_forward_ios,
+                                                    size: 15,
+                                                    color: Colors.black54,
                                                   ),
                                                 ],
                                               ),
-                                              const Icon(
-                                                Icons.arrow_forward_ios,
-                                                size: 15,
-                                                color: Colors.black54,
+                                            )
+                                          : Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 27,
+                                                  top: 10,
+                                                  bottom: 10),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    'Nhấn để chọn địa chỉ',
+                                                    style: TextStyle(
+                                                      fontSize: 14,
+                                                      color: Colors.red
+                                                          .withOpacity(0.8),
+                                                    ),
+                                                  ),
+                                                  const Icon(
+                                                    Icons.arrow_forward_ios,
+                                                    size: 15,
+                                                    color: Colors.black54,
+                                                  ),
+                                                ],
                                               ),
-                                            ],
-                                          ),
-                                        )
-                                      : Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 27, top: 10, bottom: 10),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                'Nhấn để chọn địa chỉ',
-                                                style: TextStyle(
-                                                  fontSize: 14,
-                                                  color: Colors.red
-                                                      .withOpacity(0.8),
+                                            );
+                                    },
+                                  );
+                                }
+                                var deliveyAddressModel = snapshot.data;
+                                if (snapshot.hasData) {
+                                  return Padding(
+                                    padding: const EdgeInsets.only(left: 27),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              '${deliveyAddressModel!.name} | ${deliveyAddressModel.phoneNumber}',
+                                              style: const TextStyle(
+                                                fontSize: 12,
+                                                color: Colors.black,
+                                              ),
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                            Text(
+                                              deliveyAddressModel.detailAddress,
+                                              style: const TextStyle(
+                                                fontSize: 12,
+                                                color: Colors.black,
+                                              ),
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                            Container(
+                                              constraints: const BoxConstraints(
+                                                minHeight: 15,
+                                                maxHeight: 40,
+                                                maxWidth: 300,
+                                              ),
+                                              child: Text(
+                                                deliveyAddressModel.address,
+                                                style: const TextStyle(
+                                                  fontSize: 12,
+                                                  color: Colors.black,
                                                 ),
                                               ),
-                                              const Icon(
-                                                Icons.arrow_forward_ios,
-                                                size: 15,
-                                                color: Colors.black54,
-                                              ),
-                                            ],
-                                          ),
-                                        );
-                                }
-                                return Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 27, top: 10, bottom: 10),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        'Nhấn để chọn địa chỉ',
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          color: Colors.red.withOpacity(0.8),
+                                            ),
+                                          ],
                                         ),
-                                      ),
-                                      const Icon(
-                                        Icons.arrow_forward_ios,
-                                        size: 15,
-                                        color: Colors.black54,
-                                      ),
-                                    ],
-                                  ),
-                                );
+                                        const Icon(
+                                          Icons.arrow_forward_ios,
+                                          size: 15,
+                                          color: Colors.black54,
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                }
+
+                                return const SizedBox();
                               },
                             ),
                           ],

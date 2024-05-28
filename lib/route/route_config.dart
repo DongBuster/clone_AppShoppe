@@ -8,7 +8,7 @@ import 'package:clone_shoppe/features/page/searchPage/search_page.dart';
 import 'package:clone_shoppe/features/page/shoppingCartPage/shopping_cart_page.dart';
 import 'package:clone_shoppe/features/page/detailProductsPage/detail_products_page.dart';
 import 'package:clone_shoppe/features/page/homePage/home_page.dart';
-import 'package:clone_shoppe/features/page/introductoinPage/introduction_page.dart';
+import 'package:clone_shoppe/features/page/introductionPage/introduction_page.dart';
 import 'package:clone_shoppe/features/page/livePage/live_page.dart';
 import 'package:clone_shoppe/features/page/mallPage/mall_page.dart';
 import 'package:clone_shoppe/features/page/notificationsPage/notifications_page.dart';

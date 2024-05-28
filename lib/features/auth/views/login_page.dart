@@ -5,8 +5,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:go_router/go_router.dart';
+import '../../../common/widgets/loading.dart';
 import '../controller/auth_controller.dart';
-import '../widget/input_field.dart';
+import '../widgets/input_field.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -99,21 +100,18 @@ class _LoginPageState extends State<LoginPage> {
                 //-- button login
                 GestureDetector(
                   onTap: () async {
+                    OverlayState overlayState = Overlay.of(context);
+                    OverlayEntry overlayEntry = OverlayEntry(
+                      builder: (context) {
+                        return const Loading();
+                      },
+                    );
                     if (_formKey.currentState!.validate()) {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: const Text('Loading...'),
-                        backgroundColor: Colors.black.withOpacity(0.5),
-                        behavior: SnackBarBehavior.floating,
-                        margin: EdgeInsets.only(
-                          bottom: MediaQuery.of(context).size.height / 2,
-                          right: 120,
-                          left: 120,
-                        ),
-                      ));
+                      overlayState.insert(overlayEntry);
                       await AuthController.signInWithEmailAndPassword(
                               context, _controllerUsername, _controllerPassword)
                           .then((value) {
-                        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                        overlayEntry.remove();
                       });
                     }
                   },

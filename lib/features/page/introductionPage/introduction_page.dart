@@ -4,6 +4,7 @@ import 'package:introduction_screen/introduction_screen.dart';
 import 'package:clone_shoppe/constants/global_variables.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../../common/widgets/loading.dart';
 import 'view_models/introduction_page_view_model.dart';
 import 'views/screen_first.dart';
 import 'views/screen_second.dart';
@@ -35,7 +36,7 @@ class _IntroductionPageState extends State<IntroductionPage> {
         Provider.of<IntroductionPageViewModel>(context, listen: true)
             .stateIntroductionPage
             .userId;
-    print('state $userId');
+    // print('state $userId');
 
     return Scaffold(
       body: IntroductionScreen(
@@ -73,21 +74,20 @@ class _IntroductionPageState extends State<IntroductionPage> {
           IntroductionPageViewModel viewModel =
               Provider.of<IntroductionPageViewModel>(context, listen: false);
           //--- loading ----
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: const Text('Loading...'),
-            backgroundColor: Colors.black.withOpacity(0.5),
-            behavior: SnackBarBehavior.floating,
-            margin: EdgeInsets.only(
-              bottom: MediaQuery.of(context).size.height / 2,
-              right: 120,
-              left: 120,
-            ),
-          ));
+          OverlayState overlayState = Overlay.of(context);
+          OverlayEntry overlayEntry = OverlayEntry(
+            builder: (context) {
+              return const Loading();
+            },
+          );
+          overlayState.insert(overlayEntry);
+
           //---- ----
           if (viewModel.stateIntroductionPage.imageFile != null) {
             await viewModel.pushUserImage(userId!, context).then((_) {
               viewModel.setIsNewUser(userId);
-              ScaffoldMessenger.of(context).hideCurrentSnackBar();
+              overlayEntry.remove();
+
               context.pushReplacementNamed(GloblalVariable.homeScreen);
             });
           } else {
@@ -95,15 +95,20 @@ class _IntroductionPageState extends State<IntroductionPage> {
                 await SharedPreferences.getInstance();
 
             viewModel.setIsNewUser(userId!);
-            ScaffoldMessenger.of(context).hideCurrentSnackBar();
-            context.pushReplacementNamed(GloblalVariable.homeScreen);
+            overlayEntry.remove();
+
+            if (context.mounted) {
+              context.pushReplacementNamed(GloblalVariable.homeScreen);
+            }
             prefs.setBool('islogin', true);
             // prefs.setString('email', controllerUsername.text);
           }
         },
         onSkip: () async {
           final SharedPreferences prefs = await SharedPreferences.getInstance();
-          context.pushReplacementNamed(GloblalVariable.homeScreen);
+          if (context.mounted) {
+            context.pushReplacementNamed(GloblalVariable.homeScreen);
+          }
           prefs.setBool('islogin', true);
         },
         resizeToAvoidBottomInset: false,

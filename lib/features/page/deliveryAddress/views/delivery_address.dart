@@ -178,14 +178,16 @@ class _DeliveryAddressForBuyProductPageState
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
         setState(() {
           _isCheckBox = true;
         });
-        Future.delayed(const Duration(milliseconds: 500));
-        Provider.of<BuyProductPageViewModel>(context, listen: false)
-            .setdeliveyAddress(widget.deliveyaddressModel);
-        Navigator.pop(context);
+        await Future.delayed(const Duration(milliseconds: 300));
+        if (context.mounted) {
+          Provider.of<BuyProductPageViewModel>(context, listen: false)
+              .setdeliveyAddress(widget.deliveyaddressModel);
+          Navigator.pop(context);
+        }
       },
       child: DeleteDeliveyAddress(
         deliveyaddressModel: widget.deliveyaddressModel,

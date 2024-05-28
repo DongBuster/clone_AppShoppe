@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../constants/global_variables.dart';
 import '../../../auth/services/auth.dart';
-import '../../introductoinPage/view_models/introduction_page_view_model.dart';
+import '../../introductionPage/view_models/introduction_page_view_model.dart';
 import '../resources/widgets/feature_link.dart';
 
 class ListFeatureProfilePage extends StatelessWidget {

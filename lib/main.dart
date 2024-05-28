@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'features/page/buyProductScreen/view_models/buy_product_view_model.dart';
 import 'features/page/deliveryAddress/view_models/delivery_address_view_model.dart';
 import 'features/page/detailProductsPage/view_models/detail_product_provider.dart';
-import 'features/page/introductoinPage/view_models/introduction_page_view_model.dart';
+import 'features/page/introductionPage/view_models/introduction_page_view_model.dart';
 import 'features/page/profilePage/view_models/profile_page_view_model.dart';
 import 'features/page/shoppingCartPage/view_models/state_cart_page.dart';
 import 'provider/bought_product.dart';

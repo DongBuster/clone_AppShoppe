@@ -5,8 +5,9 @@ import '../../../../models/product.dart';
 class ProductsSearchPageViewModel {
   Future<List<Product>> loadProductSearch(
       List<dynamic>? listIdProductSelected, List? otherSearch) async {
+    // print(listIdProductSelected);
     List<Product> products = [];
-
+    List remainingList = [];
     listIdProductSelected != null
         ? await Supabase.instance.client
             .from('products')
@@ -18,17 +19,21 @@ class ProductsSearchPageViewModel {
           })
         : null;
     //---- ------
-    await Supabase.instance.client
-        .from('products')
-        .select()
-        .inFilter('id', otherSearch!)
-        .then((list) {
-      List<Product> listId = list.map((e) => Product.fromJson(e)).toList();
+    if (otherSearch != null) {
+      Supabase.instance.client
+          .from('products')
+          .select()
+          .inFilter('id', otherSearch)
+          .then((list) {
+        List<Product> listId = list.map((e) => Product.fromJson(e)).toList();
 
-      products.addAll(listId);
-    });
+        products.addAll(listId);
+      });
+      remainingList = [...otherSearch];
+    }
+
     //---- ------
-    List remainingList = [...otherSearch];
+
     if (listIdProductSelected != null) {
       remainingList.addAll(listIdProductSelected);
     }

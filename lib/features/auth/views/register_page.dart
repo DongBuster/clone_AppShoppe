@@ -6,9 +6,10 @@ import 'package:gap/gap.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../common/widgets/loading.dart';
 import '../../../constants/global_variables.dart';
 import '../controller/auth_controller.dart';
-import '../widget/input_field.dart';
+import '../widgets/input_field.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -100,27 +101,23 @@ class _RegisterPageState extends State<RegisterPage> {
                 // --- register button ---
                 GestureDetector(
                   onTap: () async {
+                    OverlayState overlayState = Overlay.of(context);
+                    OverlayEntry overlayEntry = OverlayEntry(
+                      builder: (context) {
+                        return const Loading();
+                      },
+                    );
                     if (_formKeyRegister.currentState!.validate()) {
                       if (_controllerConfirmPassword.text.toString() !=
                           _controllerPassword.text.toString()) {
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       } else {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: const Text('Loading...'),
-                          backgroundColor: Colors.black.withOpacity(0.5),
-                          behavior: SnackBarBehavior.floating,
-                          margin: EdgeInsets.only(
-                            bottom: MediaQuery.of(context).size.height / 2,
-                            right: 120,
-                            left: 120,
-                          ),
-                        ));
+                        overlayState.insert(overlayEntry);
                         await AuthController.createUserWithEmailAndPassword(
                           context,
                           _controllerUsername,
                           _controllerPassword,
-                        ).whenComplete(() => ScaffoldMessenger.of(context)
-                            .hideCurrentSnackBar());
+                        ).whenComplete(() => overlayEntry.remove());
                       }
                     }
                   },
@@ -262,17 +259,6 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 }
-
-// final snackBar = SnackBar(
-//   elevation: 0,
-//   behavior: SnackBarBehavior.floating,
-//   backgroundColor: Colors.transparent,
-//   content: AwesomeSnackbarContent(
-//     title: 'Success!',
-//     message: 'Account successfully created !',
-//     contentType: ContentType.success,
-//   ),
-// );
 
 final snackBar = SnackBar(
   elevation: 0,

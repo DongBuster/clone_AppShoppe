@@ -1,6 +1,6 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:clone_shoppe/constants/global_variables.dart';
-import 'package:clone_shoppe/features/page/introductoinPage/introduction_page.dart';
+import 'package:clone_shoppe/features/page/introductionPage/introduction_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -8,7 +8,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../models/user.dart';
-import '../../page/introductoinPage/view_models/introduction_page_view_model.dart';
+import '../../page/introductionPage/view_models/introduction_page_view_model.dart';
 import '../services/auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 

@@ -52,6 +52,55 @@ class _EditDeliveryAddressState extends State<EditDeliveryAddress> {
     super.initState();
   }
 
+  Future<bool?> _showBackDialog() {
+    return showDialog<bool>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          surfaceTintColor: Colors.transparent,
+          actionsPadding: const EdgeInsets.only(left: 20, right: 20, bottom: 5),
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(5))),
+          content: const Text(
+            'Cập nhật chưa được lưu. Bạn có chắc muốn hủy thay đổi ?',
+            style: TextStyle(
+              fontSize: 18,
+              color: Colors.black,
+            ),
+          ),
+          actionsAlignment: MainAxisAlignment.spaceBetween,
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context, true);
+              },
+              child: const Text(
+                'Thoát',
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+            TextButton(
+              child: const Text(
+                'Tiếp tục',
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.red,
+                ),
+              ),
+              onPressed: () {
+                Navigator.pop(context, false);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     String address =
@@ -63,10 +112,14 @@ class _EditDeliveryAddressState extends State<EditDeliveryAddress> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         leading: GestureDetector(
-          onTap: () {
-            Navigator.pop(context);
-            Provider.of<DeliveryAddressPageViewModel>(context, listen: false)
-                .setAddress(defaultAddress);
+          onTap: () async {
+            final bool shouldPop = await _showBackDialog() ?? false;
+            if (context.mounted && shouldPop) {
+              Navigator.pop(context);
+
+              Provider.of<DeliveryAddressPageViewModel>(context, listen: false)
+                  .setAddress(defaultAddress);
+            }
           },
           child: const Icon(
             Icons.arrow_back,
@@ -87,6 +140,19 @@ class _EditDeliveryAddressState extends State<EditDeliveryAddress> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                PopScope(
+                  canPop: false,
+                  onPopInvoked: (bool didPop) async {
+                    if (didPop) {
+                      return;
+                    }
+                    final bool shouldPop = await _showBackDialog() ?? false;
+                    if (context.mounted && shouldPop) {
+                      Navigator.pop(context);
+                    }
+                  },
+                  child: const SizedBox(),
+                ),
                 //--- ----
                 Form(
                   key: formKey,

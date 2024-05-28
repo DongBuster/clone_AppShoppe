@@ -2,6 +2,7 @@ import 'package:clone_shoppe/features/page/homePage/resources/widgets/product_re
 import 'package:clone_shoppe/models/product.dart';
 import 'package:flutter/material.dart';
 import '../data_source/service.dart';
+import '../resources/widgets/loading.dart';
 
 class ListProductRecommend extends StatefulWidget {
   const ListProductRecommend({super.key});
@@ -20,10 +21,7 @@ class _ListProductRecommendState extends State<ListProductRecommend> {
 
   @override
   Widget build(BuildContext context) {
-    return
-        // Container();
-
-        FutureBuilder<List<Product>>(
+    return FutureBuilder<List<Product>>(
       future: homePageService.getProducts(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
@@ -51,7 +49,7 @@ class _ListProductRecommendState extends State<ListProductRecommend> {
           final errorMessage = snapshot.error.toString();
           return Text('Error: $errorMessage');
         }
-        return const CircularProgressIndicator();
+        return const Loading();
       },
     );
   }
